@@ -28,5 +28,8 @@
 2. [汉化教程（二）：祝姫字库分析](https://tieba.baidu.com/p/6700367093?red_tag=1683363378)
 3. [个人的Galgame引擎分析笔记](https://github.com/crskycode/GalgameCoding)
 
+# 杂类
+1. [编译优化](article/编译优化.md)
+
 # 关于我
 cs本科在读，喜欢计算机图形学和ACG作品
