@@ -7,14 +7,18 @@
 
 # 计算机科学
 * [计算机图形学](#计算机图形学)
+* [面向数据编程](https://www.cnblogs.com/KillerAery/p/11746639.html)
 
 # 在线工具
 1. [技术导航网](http://www.jishu5.com/)
 2. [菜鸟教程](https://www.runoob.com/)
 3. [在线工具](https://tool.oschina.net/)
 4. [C/C++转汇编](https://godbolt.org/)
+5. [分享代码](https://paste.ubuntu.com/)
 
 # galgame
+
+[galgame常用名词中日对照小辞典](https://zhuanlan.zhihu.com/p/345573921)
 
 ### 网站
 
@@ -56,6 +60,7 @@
 
 ## 四元数
 * [Understanding Quaternions 中文翻译《理解四元数》](https://www.qiujiawei.com/understanding-quaternions/)
+* [Visualizing quaternions](https://eater.net/quaternions)
 
 # 未分类
 * [3d模型获取](https://sketchfab.com/)
