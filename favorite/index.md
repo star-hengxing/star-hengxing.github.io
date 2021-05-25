@@ -6,8 +6,10 @@
 * [四元数](##四元数)
 
 # 计算机科学
-* [计算机图形学](#计算机图形学)
+* [计算机图形学](##计算机图形学)
+* [刷题(~~锻炼思维~~)](##刷题)
 * [面向数据编程](https://www.cnblogs.com/KillerAery/p/11746639.html)
+* [Learn Regular Expressions with simple, interactive exercises](https://regexone.com/)
 
 # 在线工具
 1. [技术导航网](http://www.jishu5.com/)
@@ -49,12 +51,18 @@
 # 做小游戏
 * [用Rust写一个斗兽棋游戏](https://netcan.github.io/2020/06/07/%E7%94%A8Rust%E5%86%99%E4%B8%80%E4%B8%AA%E6%96%97%E5%85%BD%E6%A3%8B%E6%B8%B8%E6%88%8F/)
 
-# 计算机图形学
+# 计算机科学
+
+## 计算机图形学
 
 1. [什么是计算机图形学?](http://staff.ustc.edu.cn/~lgliu/Resources/CG/What_is_CG.htm)
 2. [Rendering soft shadows](http://raytracerchallenge.com/bonus/area-light.html)
 3. [SmallPT —— 99 行代码光线追踪解析](https://xieguanglei.github.io/blog/post/ray-tracing-99-lines-code.html)
 4. [Light Transport Simulation with Vertex Connection and Merging](https://cgg.mff.cuni.cz/~jaroslav/papers/2012-vcm/)
+
+## 刷题
+* [codewars](https://www.codewars.com/)
+* leetcode
 
 # 数学
 
