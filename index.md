@@ -11,6 +11,7 @@
 ## 杂类
 1. [小知识](favorite/小知识.md)
 2. [编译优化](article/编译优化.md)
+3. [cs缩写名词](article/cs缩写名词.md)
 
 # 关于我
 cs本科在读，喜欢计算机图形学和ACG作品
