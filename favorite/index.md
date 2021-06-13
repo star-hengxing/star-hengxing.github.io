@@ -3,7 +3,11 @@
 * [做小游戏](#做小游戏)
 
 # 数学
-* [四元数](##四元数)
+* 四元数
+    1. [Understanding Quaternions 中文翻译《理解四元数》](https://www.qiujiawei.com/understanding-quaternions/)
+    2. [Visualizing quaternions](https://eater.net/quaternions)
+* [GeoGebra](https://www.geogebra.org/)-数学可视化
+* [WolframAlpha](https://www.wolframalpha.com/)-科学计算
 
 # 计算机科学
 * [计算机图形学](##计算机图形学)
@@ -64,11 +68,5 @@
 * [codewars](https://www.codewars.com/)
 * leetcode
 
-# 数学
-
-## 四元数
-* [Understanding Quaternions 中文翻译《理解四元数》](https://www.qiujiawei.com/understanding-quaternions/)
-* [Visualizing quaternions](https://eater.net/quaternions)
-
-# 未分类
+# misc
 * [3d模型获取](https://sketchfab.com/)
