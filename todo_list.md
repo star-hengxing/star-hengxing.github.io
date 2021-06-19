@@ -26,3 +26,9 @@
 # DAILy
 1. codewars
 2. KMP and fsm
+
+# todo
+1. 找书：https://graphicscodex.com/
+2. galgame：
+   1. https://vndb.org/v14934
+   2. https://vndb.org/v24702
