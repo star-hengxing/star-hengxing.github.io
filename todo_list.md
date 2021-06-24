@@ -32,3 +32,8 @@
 2. galgame：
    1. https://vndb.org/v14934
    2. https://vndb.org/v24702
+
+# 2021 Summer Holiday
+1. play raw(comic or galgame)
+2. develope a demo with any game engine
+3. draw a beautiful girl
