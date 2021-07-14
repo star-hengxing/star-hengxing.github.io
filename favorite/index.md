@@ -1,28 +1,6 @@
 # 游戏
-* [galgame](#galgame)
-* [做小游戏](#做小游戏)
 
-# 数学
-* 四元数
-    1. [Understanding Quaternions 中文翻译《理解四元数》](https://www.qiujiawei.com/understanding-quaternions/)
-    2. [Visualizing quaternions](https://eater.net/quaternions)
-* [GeoGebra](https://www.geogebra.org/)-数学可视化
-* [WolframAlpha](https://www.wolframalpha.com/)-科学计算
-
-# 计算机科学
-* [计算机图形学](##计算机图形学)
-* [刷题(~~锻炼思维~~)](##刷题)
-* [面向数据编程](https://www.cnblogs.com/KillerAery/p/11746639.html)
-* [Learn Regular Expressions with simple, interactive exercises](https://regexone.com/)
-
-# 在线工具
-1. [技术导航网](http://www.jishu5.com/)
-2. [菜鸟教程](https://www.runoob.com/)
-3. [在线工具](https://tool.oschina.net/)
-4. [C/C++转汇编](https://godbolt.org/)
-5. [分享代码](https://paste.ubuntu.com/)
-
-# galgame
+## galgame
 
 [galgame常用名词中日对照小辞典](https://zhuanlan.zhihu.com/p/345573921)
 
@@ -52,8 +30,16 @@
     * [汉化教程（二）：祝姫字库分析](https://tieba.baidu.com/p/6700367093?red_tag=1683363378)
     * [个人的Galgame引擎分析笔记](https://github.com/crskycode/GalgameCoding)
 
-# 做小游戏
+
+## 做小游戏
 * [用Rust写一个斗兽棋游戏](https://netcan.github.io/2020/06/07/%E7%94%A8Rust%E5%86%99%E4%B8%80%E4%B8%AA%E6%96%97%E5%85%BD%E6%A3%8B%E6%B8%B8%E6%88%8F/)
+
+# 数学
+* 四元数
+    1. [Understanding Quaternions 中文翻译《理解四元数》](https://www.qiujiawei.com/understanding-quaternions/)
+    2. [Visualizing quaternions](https://eater.net/quaternions)
+* [GeoGebra](https://www.geogebra.org/)-数学可视化
+* [WolframAlpha](https://www.wolframalpha.com/)-科学计算
 
 # 计算机科学
 
@@ -67,6 +53,27 @@
 ## 刷题
 * [codewars](https://www.codewars.com/)
 * leetcode
+
+## SIMD
+1. [SSE 簡介](https://www.csie.ntu.edu.tw/~r89004/hive/sse/page_1.html)
+2. [SIMD简介](https://zhuanlan.zhihu.com/p/55327037)
+3. [如何写一个软渲染(5)-SIMD](https://zhuanlan.zhihu.com/p/44406709)
+4. [Fast 4x4 Matrix Inverse with SSE SIMD, Explained](https://lxjk.github.io/2017/09/03/Fast-4x4-Matrix-Inverse-with-SSE-SIMD-Explained.html)
+
+## misc
+* [面向数据编程](https://www.cnblogs.com/KillerAery/p/11746639.html)
+* [Learn Regular Expressions with simple, interactive exercises](https://regexone.com/)
+
+# 在线工具
+1. [技术导航网](http://www.jishu5.com/)
+2. [菜鸟教程](https://www.runoob.com/)
+3. [在线工具](https://tool.oschina.net/)
+4. [C/C++转汇编](https://godbolt.org/)
+5. [分享代码](https://paste.ubuntu.com/)
+
+# blog
+1. [AirGuanZ](https://airguanz.github.io/archive.html)
+2. [YangWC](https://yangwc.com/about/)
 
 # misc
 * [3d模型获取](https://sketchfab.com/)

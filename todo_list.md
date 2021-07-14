@@ -1,4 +1,4 @@
-# TODO
+# PROJECT
 - [ ] vndb_chinese_translation
 - [ ] Android 至简音乐播放器
 - [ ] 字符动画
@@ -8,13 +8,8 @@
 - [ ] Markdown parser
 - [ ] galgame引擎
 
-# TOSTUDY
-* SIMD
-* mathlib
-* nand2tetris
+# STUDY
 * learnopengl
-* SDF Ray Tracing
-* 2D Ray Tracing
 * games系列
 * 编译原理
 * 操作系统
@@ -25,15 +20,22 @@
 
 # DAILy
 1. codewars
-2. KMP and fsm
+2. nand2tetris
 
-# todo
+# SEARCH
 1. 找书：https://graphicscodex.com/
 2. galgame：
    1. https://vndb.org/v14934
    2. https://vndb.org/v24702
 
 # 2021 Summer Holiday
-1. play raw(comic or galgame)
-2. develope a demo with any game engine
-3. draw a beautiful girl
+- [ ] play raw(comic or galgame)
+- [ ] develope a demo with any game engine
+- [ ] draw a beautiful girl
+- [ ] Alpha–beta pruning Algorithm(java, cpp, etc..)
+- [ ] implement firework with java(a classmate todo)
+- [ ] reconstruct raytracer/rasterizer software render
+- [ ] mathlib
+- [ ] SIMD and SIMD mathlib
+- [ ] SDF Ray Tracing
+- [ ] 2D Ray Tracing
