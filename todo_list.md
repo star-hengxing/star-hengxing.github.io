@@ -35,7 +35,7 @@
 - [ ] Alpha–beta pruning Algorithm(java, cpp, etc..)
 - [ ] implement firework with java(a classmate todo)
 - [ ] reconstruct raytracer/rasterizer software render
-- [ ] mathlib
-- [ ] SIMD and SIMD mathlib
+- [x] mathlib
+- [x] SIMD and SIMD mathlib
 - [ ] SDF Ray Tracing
 - [ ] 2D Ray Tracing
