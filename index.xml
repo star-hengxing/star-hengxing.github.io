@@ -1,0 +1,1505 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>恒星的小站</title>
+        <link>https://star-hengxing.github.io/</link>
+        <description>Recent content on 恒星的小站</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <lastBuildDate>Mon, 09 May 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://star-hengxing.github.io/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>如何在Linux和Windows上优雅地玩galgame</title>
+        <link>https://star-hengxing.github.io/p/%E5%A6%82%E4%BD%95%E5%9C%A8linux%E5%92%8Cwindows%E4%B8%8A%E4%BC%98%E9%9B%85%E5%9C%B0%E7%8E%A9galgame/</link>
+        <pubDate>Mon, 09 May 2022 00:00:00 +0000</pubDate>
+        
+        <guid>https://star-hengxing.github.io/p/%E5%A6%82%E4%BD%95%E5%9C%A8linux%E5%92%8Cwindows%E4%B8%8A%E4%BC%98%E9%9B%85%E5%9C%B0%E7%8E%A9galgame/</guid>
+        <description>&lt;h2 id=&#34;windows10&#34;&gt;Windows10&lt;/h2&gt;
+&lt;p&gt;提高游戏分辨率 -&amp;gt; &lt;a class=&#34;link&#34; href=&#34;https://github.com/Blinue/Magpie&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Magpie&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;统计游戏时长兼启动器 -&amp;gt; &lt;a class=&#34;link&#34; href=&#34;https://github.com/Aixile/Etupirka&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Etupirka&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;用手柄玩galgame -&amp;gt; &lt;a class=&#34;link&#34; href=&#34;https://store.steampowered.com/app/353370/Steam_Controller/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Steam Controller&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;现在你获得了一个很好的体验，启动&lt;code&gt;Etupirka&lt;/code&gt;，然后选中想玩的galgame，绑定&lt;code&gt;Magpie&lt;/code&gt;的快捷键到手柄上，对游戏全屏，我一个Quick load，可以继续用手柄摇杆推线咯&lt;/p&gt;
+&lt;h2 id=&#34;linux&#34;&gt;Linux&lt;/h2&gt;
+&lt;p&gt;一个坏消息，大部分黄油开发者根本没想过Linux平台&lt;/p&gt;
+&lt;p&gt;一个好消息，steam的&lt;code&gt;Proton&lt;/code&gt;可以帮助我们玩到Windows上的galgame(感谢V社)&lt;/p&gt;
+&lt;p&gt;首先在Linux上下载steam，然后添加非steam游戏，游戏设置使用Proton，然后你就可以&lt;del&gt;启动游戏啦&lt;/del&gt;&lt;/p&gt;
+&lt;p&gt;但实际上只有少部分黄油能打开，就算能打开还一定会伴随bug&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;能打开的游戏没见过能播放op&lt;/li&gt;
+&lt;li&gt;传言有些游戏要对应Proton版本才能打开&lt;/li&gt;
+&lt;li&gt;游戏能打开，但bug太致命完全打不了&lt;/li&gt;
+&lt;li&gt;我超，汉化补丁能打开生肉却打不开，但我想全都要怎么办&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;游戏打不开怎么办，乱试一下吧&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;游戏路径全ascii且不留空格(游戏目录也算路径)&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://blacksand.top/2021/08/25/%E8%AE%A9Galgame%E5%9C%A8ArchLinux%E9%80%9A%E8%BF%87Wine%E6%AD%A3%E7%A1%AE%E8%BF%90%E8%A1%8C&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;参考这篇文章&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;能用Proton直接打开基本无bug游玩是最好的，如果要折腾很久才能玩我觉得真的没必要，不如用回Windows或者虚拟机(两台以上电脑是Linux用户的最优解)&lt;/p&gt;
+&lt;p&gt;先列个能打开的黄油名单在这吧，排排坑&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;名字&lt;/th&gt;
+&lt;th&gt;Pronton版本&lt;/th&gt;
+&lt;th&gt;体验&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;放課後シンデレラ&lt;/td&gt;
+&lt;td&gt;7.0&lt;/td&gt;
+&lt;td&gt;非常好，没遇到坑&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;はつゆきさくら&lt;/td&gt;
+&lt;td&gt;7.0&lt;/td&gt;
+&lt;td&gt;播放序章op闪退了一次，再打开会提示你要不要播放op，暂时体验良好&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;いきなりサキュバス ～いちゃらぶ搾精ライフ～&lt;/td&gt;
+&lt;td&gt;7.0&lt;/td&gt;
+&lt;td&gt;没完整打完，暂时无bug&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;白昼夢の青写真&lt;/td&gt;
+&lt;td&gt;7.0&lt;/td&gt;
+&lt;td&gt;黑屏bug，如果不是一直渲染的画面就会黑屏，比如显示文字的时候，文字外的全黑&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;有群友推荐&lt;code&gt;lutris&lt;/code&gt;和&lt;code&gt;proton-ge&lt;/code&gt;，还未研究&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>Chinagraph2020会前课程 真实感图形渲染科研入门 随手记录</title>
+        <link>https://star-hengxing.github.io/p/chinagraph2020%E4%BC%9A%E5%89%8D%E8%AF%BE%E7%A8%8B-%E7%9C%9F%E5%AE%9E%E6%84%9F%E5%9B%BE%E5%BD%A2%E6%B8%B2%E6%9F%93%E7%A7%91%E7%A0%94%E5%85%A5%E9%97%A8-%E9%9A%8F%E6%89%8B%E8%AE%B0%E5%BD%95/</link>
+        <pubDate>Wed, 04 May 2022 00:00:00 +0000</pubDate>
+        
+        <guid>https://star-hengxing.github.io/p/chinagraph2020%E4%BC%9A%E5%89%8D%E8%AF%BE%E7%A8%8B-%E7%9C%9F%E5%AE%9E%E6%84%9F%E5%9B%BE%E5%BD%A2%E6%B8%B2%E6%9F%93%E7%A7%91%E7%A0%94%E5%85%A5%E9%97%A8-%E9%9A%8F%E6%89%8B%E8%AE%B0%E5%BD%95/</guid>
+        <description>&lt;p&gt;录播：&lt;a class=&#34;link&#34; href=&#34;https://www.bilibili.com/video/BV1my4y1z76s&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Chinagraph2020&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;论文推荐&#34;&gt;论文推荐&lt;/h2&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://zhuanlan.zhihu.com/p/267368385&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;真实感图形渲染科研入门笔记（一）：论文推荐&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;工具链与参考资料&#34;&gt;工具链与参考资料&lt;/h2&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://zhuanlan.zhihu.com/p/268902385&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;真实感图形渲染科研入门笔记（二）：工具链与参考资料&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;迈向科研的训练&#34;&gt;迈向科研的训练&lt;/h2&gt;
+&lt;h3 id=&#34;离线&#34;&gt;离线&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;用Intel的Embree写一个光线追踪器&lt;/li&gt;
+&lt;li&gt;使用多重重要性采样&lt;/li&gt;
+&lt;li&gt;支持微表面材质&lt;/li&gt;
+&lt;li&gt;实现一个正确的BDPT&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;95%做渲染的科研人员都没写对BDPT(太难了)&lt;/p&gt;
+&lt;p&gt;检验：和PT的结果比较&lt;/p&gt;
+&lt;h3 id=&#34;实时&#34;&gt;实时&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;用C++封装OpenGL&lt;/li&gt;
+&lt;li&gt;支持arcball(能用鼠标拖拽的一个球，里面的物体一起动起来)，写一个VSSM&lt;/li&gt;
+&lt;li&gt;使用Optix和OpenGL实现RTRT&lt;/li&gt;
+&lt;li&gt;使用SVGF降噪&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;未来&#34;&gt;未来&lt;/h2&gt;
+&lt;p&gt;材质外观的研究才刚刚开始&lt;/p&gt;
+&lt;p&gt;现在用的基本这两种&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;diffuse + microfacet&lt;/li&gt;
+&lt;li&gt;迪士尼原则BRDF&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;尽管实现很简单，但第一种对真实感渲染错的离谱&lt;/p&gt;
+&lt;p&gt;人脸的渲染也没有好的正向模型&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>AUR打包记录</title>
+        <link>https://star-hengxing.github.io/p/aur%E6%89%93%E5%8C%85%E8%AE%B0%E5%BD%95/</link>
+        <pubDate>Wed, 02 Mar 2022 10:03:35 +0800</pubDate>
+        
+        <guid>https://star-hengxing.github.io/p/aur%E6%89%93%E5%8C%85%E8%AE%B0%E5%BD%95/</guid>
+        <description>&lt;p&gt;当发现了一个好软件，但aur上没有人打包，这很难受，所以不如自己来为社区做贡献&lt;/p&gt;
+&lt;p&gt;这次我打的包是一个appimage，理所当然去参考一些现有的appimage打包PKGBUILD&lt;/p&gt;
+&lt;p&gt;所以先&lt;del&gt;设计再编码&lt;/del&gt;&lt;/p&gt;
+&lt;h2 id=&#34;pkgbulid编写&#34;&gt;PKGBULID编写&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;下载最新版本的软件到本地&lt;/li&gt;
+&lt;li&gt;提取appimage，把软件icon放到/usr/share/icons&lt;/li&gt;
+&lt;li&gt;制作Desktop Entry，放到/usr/share/applications&lt;/li&gt;
+&lt;li&gt;最后将软件去掉版本号，安装到常见目录（我选择了放在/opt/appimages）&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;是不是看起来很简单，但由于不熟悉linux和一些常用工具，一顿操作下来，花了半天才写好PKGBUILD。&lt;/p&gt;
+&lt;p&gt;首先是学会用sed，因为appimage里自带了一个Desktop Entry，所以要进行修改。&lt;/p&gt;
+&lt;p&gt;其次就是安装到目录的时候需要给权限目录权限，不然复制不进去。&lt;/p&gt;
+&lt;p&gt;当上游的包没有checksum的时候，还要自己download到本地生成然后加上PKGBULID。当然makepkg然后给了个便利的命令。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt; &lt;span style=&#34;color:#6272a4&#34;&gt;# 如果有上一个版本的checksum,先用sed删除再执行该命令&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt; sed -i &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;$d&lt;/span&gt;&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;&lt;/span&gt; PKGBULID
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt; makepkg -g &amp;gt;&amp;gt; PKGBULID
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;测试&#34;&gt;测试&lt;/h2&gt;
+&lt;p&gt;写好PKGBULID，就要检查能不能用。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#6272a4&#34;&gt;# 检查PKGBUILD格式&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;namcap PKGBUILD
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#6272a4&#34;&gt;# 生成包&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;makepkg -s
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#6272a4&#34;&gt;# 检查包是否缺少依赖等等&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;namcap xxx.pkg.tar.zst
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;检查包的时候我弹了许多报错，不知道怎么修。然后我去用namcap检查一下我参考的那个appimage包，好家伙，他的报错跟我一样。既然他没修那我也就算了吧。&lt;/p&gt;
+&lt;p&gt;然后尝试安装&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#6272a4&#34;&gt;# 生成.SRCINFO给aur仓库的页面展示，如果第一次提交没有生成，aur仓库会拒绝你的包&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;makepkg -i &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; makepkg --printsrcinfo &amp;gt; .SRCINFO
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;上传&#34;&gt;上传&lt;/h2&gt;
+&lt;p&gt;如果一切没问题，那就可以用git上传aur了（需要一个aur帐号）。&lt;/p&gt;
+&lt;p&gt;如果会基本的git操作，下面应该都明白怎么操作。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#6272a4&#34;&gt;# 为aur创建ssh key&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;touch ~/.ssh/config
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#6272a4&#34;&gt;# 写入这些&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Host aur.archlinux.org
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    IdentityFile ~/.ssh/aur
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    User aur
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#6272a4&#34;&gt;# 生成&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;ssh-keygen -f ~/.ssh/aur
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#6272a4&#34;&gt;# 首先创建一个aur项目&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;git clone ssh://aur@aur.archlinux.org/&amp;lt;你的包名字&amp;gt;.git
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;git add PKGBUILD .SRCINFO
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;git commit -m &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;init v1.x.x&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;git push
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;成功之后呢，你就可以尝试用&lt;code&gt;paru&lt;/code&gt;/&lt;code&gt;yay&lt;/code&gt;来下载了。&lt;/p&gt;
+&lt;h2 id=&#34;reference&#34;&gt;Reference&lt;/h2&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://junyussh.github.io/p/arch-linux-package-quick-start/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Arch Linux 第一次打包就上手&lt;/a&gt;&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>色彩搭配的基础知识</title>
+        <link>https://star-hengxing.github.io/p/%E8%89%B2%E5%BD%A9%E6%90%AD%E9%85%8D%E7%9A%84%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/</link>
+        <pubDate>Mon, 07 Feb 2022 15:25:20 +0800</pubDate>
+        
+        <guid>https://star-hengxing.github.io/p/%E8%89%B2%E5%BD%A9%E6%90%AD%E9%85%8D%E7%9A%84%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/</guid>
+        <description>&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.bilibili.com/video/BV1t7411o79q/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;至今看过最棒的关于基础色彩理论的视频&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;常识&#34;&gt;常识&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;红色和黄色可以变成橙色;黄色和蓝色变成绿色;而蓝色和红色变成紫色。如果我们将这些颜色混合在一起，我们得到更多的色调，如红橙色和黄绿色。总之，它们形成了所谓的色轮。&lt;/li&gt;
+&lt;li&gt;色调是最简单的，它基本上就是我们所说的“颜色”。&lt;/li&gt;
+&lt;li&gt;饱和度是指强度，换句话说，颜色是否重叠更微妙，或者更具活力。&lt;/li&gt;
+&lt;li&gt;色值与深浅的颜色相关，从黑到白。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;专业配色方案&#34;&gt;专业配色方案&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;最简单的方法是单色因为它仅使用一个颜色或色调，选择在色轮上挑选一个点，并使用饱和度和色值的知识，能够保证匹配。&lt;/li&gt;
+&lt;li&gt;相似色搭配是使用色轮中彼此相邻的色彩样式，如红色和橙色、蓝色和绿色······&lt;/li&gt;
+&lt;li&gt;互补色彼此相对，例如，蓝色和橙色&amp;hellip;或经典的红色和绿色。为了避免互补配色方案过于简单化可以增加更轻，更深，或者一些不同饱和度的颜色。&lt;/li&gt;
+&lt;li&gt;分裂互补配色方案使用的相对颜色的双重配色，能够提升对比之外，更有趣的结果。&lt;/li&gt;
+&lt;li&gt;三元配色方案采用三种均匀分布的颜色，在色轮上形成一个完美的三角形。这些组合的效果醒目，特别是与主色或辅色的运用。&lt;/li&gt;
+&lt;li&gt;四元色搭配在色轮上形成了一个矩形，可以通过将其中的一个颜色用于主色，其余为辅色。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;解决方法&#34;&gt;解决方法&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;色彩扎眼——选择一种颜色，并尝试调整其亮度，暗度或饱和度。&lt;/li&gt;
+&lt;li&gt;色彩过多——也许一点点色彩就可以满足你的画面需要。&lt;/li&gt;
+&lt;li&gt;色不平衡——中性颜色，如黑色，白色和灰色可以帮助您平衡画面。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;实际经验&#34;&gt;实际经验&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;每种颜色都会发出一个信息。考虑到项目的色调，并选择一个合理的配色方案。
+&lt;ul&gt;
+&lt;li&gt;明亮的颜色往往能够带来有趣或现代感的效果。&lt;/li&gt;
+&lt;li&gt;低饱和度的色彩搭配经常会受到商业公司的喜爱。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;你可以在各种有趣的地方找到配色方案，比如某些广告、艺术品、配色网站、周围世界，颜色无处不在。&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        </item>
+        <item>
+        <title>御宅族与ChaosChild症候群</title>
+        <link>https://star-hengxing.github.io/p/%E5%BE%A1%E5%AE%85%E6%97%8F%E4%B8%8Echaoschild%E7%97%87%E5%80%99%E7%BE%A4/</link>
+        <pubDate>Mon, 07 Feb 2022 13:08:04 +0800</pubDate>
+        
+        <guid>https://star-hengxing.github.io/p/%E5%BE%A1%E5%AE%85%E6%97%8F%E4%B8%8Echaoschild%E7%97%87%E5%80%99%E7%BE%A4/</guid>
+        <description>&lt;p&gt;重新排版了一下&lt;/p&gt;
+&lt;p&gt;出处：
+御宅族与ChaosChild症候群 - 历久弥新的文章 - 知乎
+&lt;a class=&#34;link&#34; href=&#34;https://zhuanlan.zhihu.com/p/44592537&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://zhuanlan.zhihu.com/p/44592537&lt;/a&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;御宅族已死。&lt;br&gt;
+&amp;ndash;冈田斗司夫&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;真正的御宅族如今是否已经消亡了？我没有相关的数据情报，所以无法作出回答。然而，在我的臆测中，真正的御宅族还存在着，但不过只是很少的一部分，并且这部分人中并没有关联。
+所以，在新世代宅的急速涌入下不断被稀释着。&lt;/p&gt;
+&lt;p&gt;我也自认为真正的御宅族，然而在我全通了CHAOS;CHILD后，发觉我也不过是“ChaosChild症候群”的一员罢了。&lt;/p&gt;
+&lt;h2 id=&#34;逃避性&#34;&gt;逃避性&lt;/h2&gt;
+&lt;p&gt;无论是真正御宅族们，还是新世代的御宅族们，虽然是不同的个体，但是却进行着妄想同步。得益于网络的普及，御宅们把本我至于同一个巨大的名为御宅文化的妄想之中（网络未普及之前已经开始，不过那时候只是小型的妄想体，朋友、学校的讨论，电视活动之类）。
+美好的妄想，它与严酷的现实有着天壤之别，为了生存不得不经历人世，但是，本我还有御宅文化这个桃花源，经过学习、工作的洗礼后，坐到电脑或是沙发前，打开动画亦或是游戏，全身心的投入。&lt;/p&gt;
+&lt;p&gt;大部分的人玩游戏的时候有个特点，对于外界置若罔闻，仿佛所有感官都集中在了游戏上，而这在做其他事情的时候是很少出现的，而且并不是可以人为控制的现象。
+全身心的投入妄想之中，大脑分泌刺激性神经递质，所有其他事情烦恼都被抛在脑后，此时，仿佛就是游戏中的人物。
+放松，就像是在逃避，而这并没有错，我们无时无刻不想着逃避，而超我却告诉我们不行，现在并不是共产主义社会。最后，我们只得在苦劳与逃避之间无限循环。&lt;/p&gt;
+&lt;p&gt;有的人为自己创造虚伪的现实妄想，沉溺其中，彻底的利己主义，而这你又得到了什么呢？也许你可能得到你想要的，而这个世界却更加崩坏。当然，利己主义者不会考虑这些，只会考虑自己能否享乐。&lt;/p&gt;
+&lt;h2 id=&#34;优越性&#34;&gt;优越性&lt;/h2&gt;
+&lt;p&gt;宅文化的一些特性加上事件误导，使得它天生作为一种非主流道德亚文化，被一般人所不适，因为历史原因在我国更是如此。&lt;/p&gt;
+&lt;p&gt;所以宅这个ChaosChild症候群群体，天生是活在一个被一般人所蔑视的妄想中，因主流文化使得宅文化变成了自卑性的妄想，而对此宅们当然要作出应激反应。
+以前，所谓的真正御宅族，用各式各样，各个门类的创作证明着自身的能力性，并与社会相关联，这样，不仅在宅圈收获了虚荣并且证明给社会人自己比他们还要强。
+如果是什么都不会且自控力低下不去学的人，通常情况类似宫代拓留，自诩为情报强者，在宅圈混迹获得大量情报，自以为看透了世界的真实，看不起周围的普通人，甚至包括父母，认为他们的情报量太少，包括我也是此类。&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;你们这些人天天就是看这些无脑电视剧，追星，看着无聊的花边新闻，全是萌二的B站，一遍遍刷着全是垃圾信息的微博，呵，这个人还在煞有其事地看知乎啊，知乎早就和微博没区别了，哈哈，你们这些情报弱者。&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;而我不同，我刚通了CHAOS；CHILD，你们这些人一辈子也接触不到这个神作吧，呵呵，通过这个游戏，我知道了……而你们就这样浑浑噩噩地活着吧，我早已看穿一切。&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;而新世代宅更加常用的是自嘲的手法，死宅真恶心、肥宅快乐……在疯狂地传播下无形间降低这些词的伤害力，并成为一种调侃娱乐。
+真是可笑的手法呢，本身含着自卑的群体夺取外部人的武器抢先自行使用，而造成外部人无枪可打，同时加深内部的归属感使原本那些刺耳的话也只成为了笑料……&lt;/p&gt;
+&lt;p&gt;我与宫代拓留有着许多相似之处，不健全的家庭环境，把自己放入妄想中，吸收大量情报，在学校，身为班级下层的我却看不起班级上层的学生，找的理由和宫代差不多，进入工作后依然是如此状态，在公司，交际能力极差导致也没有人愿意主动交谈，每天中午在食堂都是一个人吃午餐，而我，却觉得这样很轻松。&lt;/p&gt;
+&lt;p&gt;看着周围有说有笑的人们，情报强者这个武器还真是好用呢，每天使用它来填补自己的自尊心，回到家再次沉溺在妄想之中。&lt;/p&gt;
+&lt;h2 id=&#34;矛盾性&#34;&gt;矛盾性&lt;/h2&gt;
+&lt;p&gt;几个人的御宅妄想无法抵抗这个社会的压力与反对，而一大群人妄想就可以做到。作为这个妄想的每个终端，每个人把自己置于其中就可以感受到整体的包容，从而抵抗外部的侵犯。
+回到家，打开电脑，进入一些网站或者社交软件，看着御宅相关的东西，购买周边，放置手办，感觉安心了，此刻，我作为子体感受到了母体的包容性。即使外面的人反对御宅文化本身，因为这个妄想内部人的数量足够庞大，个体也不会慌乱，因为我们人数众多。
+矛盾的是，作为处于同一个妄想下的我们，也如One World Order实验一样，自个划分起阶级。我们共同构建起名为御宅文化的妄想，然后并不是同伴，我们只是都在汲取它而已。
+具体表现之一，讽刺B站，看不惯B站小学生，认为B站已经变质，却还总是上B站。其原因在于只有B站能提供足够的妄想力。
+其实所谓的真正御宅也在享受着新世代宅的恩惠，新世代宅的急流涌入增大着妄想圈，不过这样也伴随着大量的副作用。这些副作用改变了御宅妄想的形态，与真正御宅一直一来所容纳自己的妄想形态产生了变异，真正御宅因妄想的变异而发生不适，所以必须要嘲讽新世代来缓解。
+并且，嘲讽新世代宅还能使用优越感这个武器填补自己的自尊心。
+御宅妄想的变异越严重，对于真正御宅的压力就愈发高涨，这种压力会转变为各种行为，但这些行为基本脱离不了对于新世代御宅的嘲讽与虚荣，并且企图能有另外一些真正御宅，不，不管什么人，只要能回复支持自己就行了，这样妄想不同步产生的压力就能减轻。&lt;/p&gt;
+&lt;p&gt;而御宅文化妄想的变异是不可逆的，如今只有两种选择：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;适应不断变化的妄想，仍然沉溺其中。&lt;/li&gt;
+&lt;li&gt;脱离妄想。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;而这点不只是本人的抉择，而是和每个人的经历相关，有时候轮不到你自由选择，生活会主动帮你进行选择。&lt;/p&gt;
+&lt;p&gt;一般来说，第二种选择脱离妄想符合绝大部分人的现实情况，也符合社会主流文化的诉求，被社会所绑架的所有人也会觉得这是合理的，应该的，是一种必经阶段。&lt;/p&gt;
+&lt;p&gt;而我可能不会这样，如同沉迷游戏的孩子不是教训孩子而是需要从家庭与父母入手解决一样，我明白我作出这样的选择是因为我家庭的不健全所导致的，并没有、也无法像正常家庭的孩子一般，按流程走人生，所以我可能会一直停留在妄想之中。&lt;/p&gt;
+&lt;p&gt;哪个选项比较好？从社会来说，必然是第二种：&lt;/p&gt;
+&lt;p&gt;第一种选项意味着逃避、自卑、矛盾。而第二种意味着面对、自信、成长。&lt;/p&gt;
+&lt;p&gt;这是对于社会人来说，显而易见的答案。&lt;/p&gt;
+&lt;p&gt;我难道不明白吗？怎么可能？但是我为什么不选第二种，是因为懦弱？逃避？也许是这样吧。&lt;/p&gt;
+&lt;p&gt;但是我啊，总是有一种感觉，选了第二种答案就会失去一些什么……&lt;/p&gt;
+&lt;p&gt;你们会如何选择呢？&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>ARK Survival Evolved 开启活动的命令行参数</title>
+        <link>https://star-hengxing.github.io/p/ark-survival-evolved-%E5%BC%80%E5%90%AF%E6%B4%BB%E5%8A%A8%E7%9A%84%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%8F%82%E6%95%B0/</link>
+        <pubDate>Fri, 04 Feb 2022 13:33:27 +0800</pubDate>
+        
+        <guid>https://star-hengxing.github.io/p/ark-survival-evolved-%E5%BC%80%E5%90%AF%E6%B4%BB%E5%8A%A8%E7%9A%84%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%8F%82%E6%95%B0/</guid>
+        <description>&lt;h2 id=&#34;enable-ark-survival-evolved-events&#34;&gt;Enable ARK: Survival Evolved Events&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    -activeevent&lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt;EventName
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;list-of-ark-events&#34;&gt;List of ARK Events&lt;/h3&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style=&#34;text-align:left&#34;&gt;Active event&lt;/th&gt;
+&lt;th style=&#34;text-align:left&#34;&gt;Command&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;Love Evolved&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;-activeevent=vday&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;Eggcelect Adventure&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;-activeevent=Easter&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;Anniversary&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;-activeevent=birthday&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;Summer Bash&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;-activeevent=Summer&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;Fear Evolved&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;-activeevent=FearEvolved&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;Turkey Trial&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;-activeevent=TurkeyTrial&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;Winter Wonderland&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;-activeevent=WinterWonderland&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+</description>
+        </item>
+        <item>
+        <title>当你第一次和日本人交流</title>
+        <link>https://star-hengxing.github.io/p/%E5%BD%93%E4%BD%A0%E7%AC%AC%E4%B8%80%E6%AC%A1%E5%92%8C%E6%97%A5%E6%9C%AC%E4%BA%BA%E4%BA%A4%E6%B5%81/</link>
+        <pubDate>Sun, 30 Jan 2022 14:26:50 +0800</pubDate>
+        
+        <guid>https://star-hengxing.github.io/p/%E5%BD%93%E4%BD%A0%E7%AC%AC%E4%B8%80%E6%AC%A1%E5%92%8C%E6%97%A5%E6%9C%AC%E4%BA%BA%E4%BA%A4%E6%B5%81/</guid>
+        <description>&lt;p&gt;务必以下三连&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;大変申し訳ございません&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;突然フォローで失礼ですが&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;この度は,大変ご迷惑をおかけして誠に申し訳ございませんでした。ご無礼のありました段、重ねて謹んでお詫び申し上げます。今後このようなことのありませんよう誠心誠意努力して参りますので、これからもご贔屓賜りますよう重ねて宜しくお願い申し上げます&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+</description>
+        </item>
+        <item>
+        <title>随手记的乐理知识</title>
+        <link>https://star-hengxing.github.io/p/%E9%9A%8F%E6%89%8B%E8%AE%B0%E7%9A%84%E4%B9%90%E7%90%86%E7%9F%A5%E8%AF%86/</link>
+        <pubDate>Sun, 30 Jan 2022 11:25:23 +0800</pubDate>
+        
+        <guid>https://star-hengxing.github.io/p/%E9%9A%8F%E6%89%8B%E8%AE%B0%E7%9A%84%E4%B9%90%E7%90%86%E7%9F%A5%E8%AF%86/</guid>
+        <description>&lt;h2 id=&#34;音程interval&#34;&gt;音程（Interval）&lt;/h2&gt;
+&lt;p&gt;两个音高不同的音在一起会形成音程。一个音到下一个&lt;strong&gt;相邻&lt;/strong&gt;的音的距离叫&lt;strong&gt;二度（second）&lt;/strong&gt;。如果距离是半音，音程叫小二度（m2）；全音就叫大二度（M2）&lt;/p&gt;
+&lt;p&gt;单位&lt;strong&gt;度&lt;/strong&gt;作为音程的冲量单位&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;旋律（Melodic） -&amp;gt; 两个音一前一后发声&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;和声（Harmonic） -&amp;gt; 多个音同时发声&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;和弦chord&#34;&gt;和弦（chord）&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;同时发声的音&lt;/strong&gt; &amp;gt;= 3 就叫&lt;strong&gt;和弦&lt;/strong&gt;&lt;/p&gt;
+&lt;h1 id=&#34;reference&#34;&gt;Reference&lt;/h1&gt;
+&lt;ol&gt;
+&lt;li&gt;精通乐理不是梦：超简单的乐理学习图解版&lt;/li&gt;
+&lt;li&gt;认识乐理：视唱练耳同步学&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        </item>
+        <item>
+        <title>AppImage的使用</title>
+        <link>https://star-hengxing.github.io/p/appimage%E7%9A%84%E4%BD%BF%E7%94%A8/</link>
+        <pubDate>Sat, 29 Jan 2022 00:00:00 +0000</pubDate>
+        
+        <guid>https://star-hengxing.github.io/p/appimage%E7%9A%84%E4%BD%BF%E7%94%A8/</guid>
+        <description>&lt;h2 id=&#34;run&#34;&gt;Run&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;cd&lt;/span&gt; /path/to/AppImage
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    chmod +x xxx.AppImage
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    ./xxx.AppImage
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;extra-icon&#34;&gt;Extra icon&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    ./xxx.AppImage --appimage-extract
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;desktop-entry&#34;&gt;Desktop Entry&lt;/h2&gt;
+&lt;p&gt;For example:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;[&lt;/span&gt;Desktop Entry&lt;span style=&#34;color:#ff79c6&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;Version&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt;1.0
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;Type&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt;Application
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;Name&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt;xxx
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;Comment&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt;A cross platform comic client.
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;Exec&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt;/home/&amp;lt;user&amp;gt;/Desktop/AppImages/xxx.AppImage
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;Icon&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt;/home/&amp;lt;user&amp;gt;/Desktop/AppImages/icons/xxx.png
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;Terminal&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;false&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;tags&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt;Game
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    X-AppImage-Version&lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt;1.0.0
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#6272a4&#34;&gt;# Copy the content to xxx.desktop&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    mkdir -p ~/.local/share/applications
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    touch ~/.local/share/applications/xxx.desktop
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+        </item>
+        <item>
+        <title>Linux配置</title>
+        <link>https://star-hengxing.github.io/p/linux%E9%85%8D%E7%BD%AE/</link>
+        <pubDate>Sat, 29 Jan 2022 00:00:00 +0000</pubDate>
+        
+        <guid>https://star-hengxing.github.io/p/linux%E9%85%8D%E7%BD%AE/</guid>
+        <description>&lt;h2 id=&#34;基本软件&#34;&gt;基本软件&lt;/h2&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;工具&lt;/th&gt;
+&lt;th&gt;名字&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;display manager&lt;/td&gt;
+&lt;td&gt;lightdm&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;desktop environment&lt;/td&gt;
+&lt;td&gt;xfce4&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;文本编辑器&lt;/td&gt;
+&lt;td&gt;vscode/vim/emacs&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;程序启动器&lt;/td&gt;
+&lt;td&gt;rofi&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;输入法&lt;/td&gt;
+&lt;td&gt;fcitx5&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;browser&lt;/td&gt;
+&lt;td&gt;microsoft-edge-dev(AUR)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;多线程下载&lt;/td&gt;
+&lt;td&gt;aria2&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;压缩包解压/查看&lt;/td&gt;
+&lt;td&gt;ark&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;proxy&lt;/td&gt;
+&lt;td&gt;clash for window(AUR)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;RSS&lt;/td&gt;
+&lt;td&gt;fluent-reader&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;shell&lt;/td&gt;
+&lt;td&gt;zsh&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;PDF&lt;/td&gt;
+&lt;td&gt;zathura&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;命令行软件&#34;&gt;命令行软件&lt;/h2&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;描述&lt;/th&gt;
+&lt;th&gt;名字&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;显示目录大小&lt;/td&gt;
+&lt;td&gt;ncdu&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;高级版top&lt;/td&gt;
+&lt;td&gt;htop&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;打印彩色的十六进制&lt;/td&gt;
+&lt;td&gt;hexyl&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;语法高亮和行号的cat+less&lt;/td&gt;
+&lt;td&gt;bat&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;统计目录代码量&lt;/td&gt;
+&lt;td&gt;loc&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;文件浏览器&lt;/td&gt;
+&lt;td&gt;ranger&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;新建用户&#34;&gt;新建用户&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    useradd -m -G wheel username
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    passwd username
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    ln -s /usr/bin/vim /usr/bin/vi
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    visudo
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;找到&lt;code&gt;# %wheel ALL=(ALL)ALL&lt;/code&gt;取消注释&lt;/p&gt;
+&lt;h2 id=&#34;硬件&#34;&gt;硬件&lt;/h2&gt;
+&lt;h3 id=&#34;网卡&#34;&gt;网卡&lt;/h3&gt;
+&lt;p&gt;万物起源先上网，但有些网卡需要手动装驱动(比如我笔记本的博通网卡)&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    sudo pacman -S linux-headers broadcom-wl-dkms
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    reboot
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    dkms status
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;声卡&#34;&gt;声卡&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    sudo pacman -S alsa-utils pulseaudio-alsa
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;蓝牙&#34;&gt;蓝牙&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    sudo pacman -S bluez bluez-utils
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    /etc/bluetooth/main.conf
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;[&lt;/span&gt;Policy&lt;span style=&#34;color:#ff79c6&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;AutoEnable&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;true&lt;/span&gt; &lt;span style=&#34;color:#6272a4&#34;&gt;# 开机自启&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;联网&#34;&gt;联网&lt;/h2&gt;
+&lt;p&gt;启动之前安装的&lt;a class=&#34;link&#34; href=&#34;https://wiki.archlinux.org/title/NetworkManager&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;NetworkManager&lt;/a&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    systemctl &lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;enable&lt;/span&gt; NetworkManager
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;图形界面&#34;&gt;图形界面&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    sudo pacman -S xf86-video-intel
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    sudo pacman -S xorg
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    sudo pacman -S xfce4 xfce4-goodies
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    sudo pacman -S lightdm lightdm-gtk-greeter
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    sudo systemctl &lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;enable&lt;/span&gt; lightdm
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;aur&#34;&gt;AUR&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    sudo pacman -S yay
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;bash&#34;&gt;bash&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    sudo pacman -S zsh
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    sudo chsh -s /bin/zsh username
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;中文字体输入法&#34;&gt;中文字体/输入法&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    sudo pacman -S fcitx5-im fcitx5-chinese-addons fcitx5-rime
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;下载&#34;&gt;下载&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    sudo pacman -S aria2
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#6272a4&#34;&gt;# web前端(还有很多前端可供挑选)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    yay -S ariang-allinone
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#6272a4&#34;&gt;# copy 大佬的配置&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    git clone https://github.com/P3TERX/aria2.conf
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    mkdir ~/.aria2
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    mv aria2.conf ~/.aria2/
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    touch ~/.aria2/aria2.session
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;看aria2.conf注释配置路径&lt;/li&gt;
+&lt;li&gt;看&lt;a class=&#34;link&#34; href=&#34;https://wiki.archlinux.org/title/Aria2&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;wiki&lt;/a&gt;配置开机自启&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;reference&#34;&gt;Reference&lt;/h1&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://archlinuxstudio.github.io/ArchLinuxTutorial/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Arch Linux 安装使用教程 - ArchTutorial - Arch Linux Studio &lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        </item>
+        <item>
+        <title>Todo list</title>
+        <link>https://star-hengxing.github.io/p/todo-list/</link>
+        <pubDate>Sat, 29 Jan 2022 00:00:00 +0000</pubDate>
+        
+        <guid>https://star-hengxing.github.io/p/todo-list/</guid>
+        <description>&lt;h2 id=&#34;daily&#34;&gt;DAILy&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;codewars&lt;/li&gt;
+&lt;li&gt;nand2tetris&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;project&#34;&gt;PROJECT&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 复现Ski Safari&lt;/li&gt;
+&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 复现4399造梦西游3&lt;/li&gt;
+&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; Markdown parser&lt;/li&gt;
+&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 类似galgame阅读方式的跨平台图文阅读工具&lt;/li&gt;
+&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 基于oicq/mirai的第三方qq跨平台客户端&lt;/li&gt;
+&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; Android本地音乐播放器，可接入网易云web api&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;study&#34;&gt;STUDY&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;learnopengl&lt;/li&gt;
+&lt;li&gt;games系列&lt;/li&gt;
+&lt;li&gt;编译原理&lt;/li&gt;
+&lt;li&gt;操作系统&lt;/li&gt;
+&lt;li&gt;计算机网络(&lt;a class=&#34;link&#34; href=&#34;https://zhuanlan.zhihu.com/p/376391937&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;网络包分析器&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;信号处理&lt;/li&gt;
+&lt;li&gt;日语&lt;/li&gt;
+&lt;li&gt;美术(素描？)&lt;/li&gt;
+&lt;li&gt;音乐
+&lt;ol&gt;
+&lt;li&gt;基础乐理&lt;/li&gt;
+&lt;li&gt;架子鼓/贝斯/吉他&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;哲学(马哲？)&lt;/li&gt;
+&lt;li&gt;物理(几大力学？)&lt;/li&gt;
+&lt;li&gt;数学
+&lt;ol&gt;
+&lt;li&gt;数学分析&lt;/li&gt;
+&lt;li&gt;测度学&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;wota艺&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;2021-summer-holiday&#34;&gt;2021 Summer Holiday&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; play raw(comic or galgame)&lt;/li&gt;
+&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; develope a demo with any game engine&lt;/li&gt;
+&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; draw a beautiful girl&lt;/li&gt;
+&lt;li&gt;&lt;input checked=&#34;&#34; disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; Alpha–beta pruning Algorithm(java, cpp, etc..)&lt;/li&gt;
+&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; implement firework with java(a classmate todo)&lt;/li&gt;
+&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; reconstruct raytracer/rasterizer software render&lt;/li&gt;
+&lt;li&gt;&lt;input checked=&#34;&#34; disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; mathlib&lt;/li&gt;
+&lt;li&gt;&lt;input checked=&#34;&#34; disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; SIMD and SIMD mathlib&lt;/li&gt;
+&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; SDF Ray Tracing&lt;/li&gt;
+&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 2D Ray Tracing&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
+        <title>编译器优化</title>
+        <link>https://star-hengxing.github.io/p/%E7%BC%96%E8%AF%91%E5%99%A8%E4%BC%98%E5%8C%96/</link>
+        <pubDate>Sat, 29 Jan 2022 00:00:00 +0000</pubDate>
+        
+        <guid>https://star-hengxing.github.io/p/%E7%BC%96%E8%AF%91%E5%99%A8%E4%BC%98%E5%8C%96/</guid>
+        <description>&lt;p&gt;在书中2.14节 [1]，看到一个循环遍历的编译器优化，书中给出了用指针和for循环遍历的C代码和对应汇编代码&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-C&#34; data-lang=&#34;C&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;clear1(&lt;span style=&#34;color:#8be9fd&#34;&gt;int&lt;/span&gt; array[], &lt;span style=&#34;color:#8be9fd&#34;&gt;int&lt;/span&gt; size)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#8be9fd&#34;&gt;int&lt;/span&gt; i;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;for&lt;/span&gt; (&lt;span style=&#34;color:#8be9fd&#34;&gt;int&lt;/span&gt; i &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#bd93f9&#34;&gt;0&lt;/span&gt;; i &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&lt;/span&gt; size; i &lt;span style=&#34;color:#ff79c6&#34;&gt;+=&lt;/span&gt; &lt;span style=&#34;color:#bd93f9&#34;&gt;1&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        array[i] &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#bd93f9&#34;&gt;0&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;clear2(&lt;span style=&#34;color:#8be9fd&#34;&gt;int&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;*&lt;/span&gt; array, &lt;span style=&#34;color:#8be9fd&#34;&gt;int&lt;/span&gt; size)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#8be9fd&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;*&lt;/span&gt;p;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;for&lt;/span&gt; (p &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;amp;&lt;/span&gt;array[&lt;span style=&#34;color:#bd93f9&#34;&gt;0&lt;/span&gt;]; p &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;amp;&lt;/span&gt;array[size]; p &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; p &lt;span style=&#34;color:#ff79c6&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#bd93f9&#34;&gt;1&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#ff79c6&#34;&gt;*&lt;/span&gt;p &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#bd93f9&#34;&gt;0&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#6272a4&#34;&gt;// 书中并无clear3代码
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#6272a4&#34;&gt;&lt;/span&gt;clear3(&lt;span style=&#34;color:#8be9fd&#34;&gt;int&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;*&lt;/span&gt; array, &lt;span style=&#34;color:#8be9fd&#34;&gt;int&lt;/span&gt; size)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;const&lt;/span&gt; &lt;span style=&#34;color:#8be9fd&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;*&lt;/span&gt;end &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;amp;&lt;/span&gt;array[size]; &lt;span style=&#34;color:#6272a4&#34;&gt;// 避免在循环里重复计算
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#6272a4&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;for&lt;/span&gt; (&lt;span style=&#34;color:#8be9fd&#34;&gt;int&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;*&lt;/span&gt; p &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;amp;&lt;/span&gt;array[&lt;span style=&#34;color:#bd93f9&#34;&gt;0&lt;/span&gt;]; p &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&lt;/span&gt; end; p&lt;span style=&#34;color:#ff79c6&#34;&gt;++&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#ff79c6&#34;&gt;*&lt;/span&gt;p &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#bd93f9&#34;&gt;0&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;ps: int array[]和int* array在编译器看来都一样；&amp;amp;array[0]和array一样(数组名就是地址)&lt;/p&gt;
+&lt;p&gt;clear1代码，每次都要根据数组下标进行偏移计算，int是4字节，下标乘于4偏移，整数x4可以优化成左移2位&lt;/p&gt;
+&lt;p&gt;如果使用指针，循环里的指令就可以减少(不需要根据下标计算偏移量，直接对指针偏移)&lt;/p&gt;
+&lt;p&gt;用指针实现，虽然效率快，但可读性差，所以这个繁重的工作应该交给编译器&lt;/p&gt;
+&lt;h1 id=&#34;reference&#34;&gt;Reference&lt;/h1&gt;
+&lt;ol&gt;
+&lt;li&gt;计算机组成与设计：硬件软件接口 第五版&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        </item>
+        <item>
+        <title>基于SDF的Raymarching</title>
+        <link>https://star-hengxing.github.io/p/%E5%9F%BA%E4%BA%8Esdf%E7%9A%84raymarching/</link>
+        <pubDate>Sat, 29 Jan 2022 00:00:00 +0000</pubDate>
+        
+        <guid>https://star-hengxing.github.io/p/%E5%9F%BA%E4%BA%8Esdf%E7%9A%84raymarching/</guid>
+        <description>&lt;p&gt;其实大部分情况下和raytracing类似&lt;/p&gt;
+&lt;p&gt;不同:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;几何物体的描述&lt;/li&gt;
+&lt;li&gt;光线与几何物体求交&lt;/li&gt;
+&lt;li&gt;法线的获取&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;reference&#34;&gt;Reference&lt;/h1&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.iquilezles.org/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;iq大佬的网站&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        </item>
+        <item>
+        <title>逆向工程</title>
+        <link>https://star-hengxing.github.io/p/%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B/</link>
+        <pubDate>Sat, 29 Jan 2022 00:00:00 +0000</pubDate>
+        
+        <guid>https://star-hengxing.github.io/p/%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B/</guid>
+        <description>&lt;p&gt;自学怎么说呢，我也在摸索，不过我认为先做一下CSAPP的bomb lab比较好&lt;/p&gt;
+&lt;h2 id=&#34;bomb-lab&#34;&gt;bomb lab&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;逆向汇编破解程序&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;这个作业怎么下载还有工具自己找吧，都很容易获取&lt;/p&gt;
+&lt;p&gt;可能要用到的东西&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;gdb&lt;/li&gt;
+&lt;li&gt;x86指令文档&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;我研究的时候是边做边学，打断点，单步看汇编，不懂的指令/寄存器现场查&lt;/p&gt;
+&lt;h2 id=&#34;tools&#34;&gt;tools&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;强大的工具
+&lt;ul&gt;
+&lt;li&gt;ghidra&lt;/li&gt;
+&lt;li&gt;ida&lt;/li&gt;
+&lt;li&gt;gdb&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;十六进制编辑器
+&lt;ul&gt;
+&lt;li&gt;bless&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;十六进制查看
+&lt;ul&gt;
+&lt;li&gt;hexyl(跨平台/终端彩色输出)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;解包
+&lt;ul&gt;
+&lt;li&gt;arc_unpacker&lt;/li&gt;
+&lt;li&gt;crass&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;reference&#34;&gt;Reference&lt;/h1&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://jay-dh.github.io/blog/reverse-engineering-summary&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;逆向工程入门简述&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://jay-dh.github.io/blog/reverse-engineering-asm&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;汇编语言简述(逆向工程)&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        </item>
+        <item>
+        <title>使用Synapse自建聊天服务器</title>
+        <link>https://star-hengxing.github.io/p/%E4%BD%BF%E7%94%A8synapse%E8%87%AA%E5%BB%BA%E8%81%8A%E5%A4%A9%E6%9C%8D%E5%8A%A1%E5%99%A8/</link>
+        <pubDate>Sat, 29 Jan 2022 00:00:00 +0000</pubDate>
+        
+        <guid>https://star-hengxing.github.io/p/%E4%BD%BF%E7%94%A8synapse%E8%87%AA%E5%BB%BA%E8%81%8A%E5%A4%A9%E6%9C%8D%E5%8A%A1%E5%99%A8/</guid>
+        <description>&lt;p&gt;我的系统是ArchLinux，所以看着archwiki一路配置比较舒服&lt;/p&gt;
+&lt;p&gt;其他系统请看&lt;a class=&#34;link&#34; href=&#34;https://matrix-org.github.io/synapse/latest/setup/installation.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;官方文档&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&#34;从安装到启动&#34;&gt;从安装到启动&lt;/h1&gt;
+&lt;p&gt;&lt;strong&gt;my.domain.name&lt;/strong&gt;替换成自己的域名就行&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    sudo &lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;cd&lt;/span&gt; /var/lib/synapse
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    sudo -u synapse python -m synapse.app.homeserver &lt;span style=&#34;color:#f1fa8c&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f1fa8c&#34;&gt;&lt;/span&gt;    --server-name my.domain.name &lt;span style=&#34;color:#f1fa8c&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f1fa8c&#34;&gt;&lt;/span&gt;    --config-path /etc/synapse/homeserver.yaml &lt;span style=&#34;color:#f1fa8c&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f1fa8c&#34;&gt;&lt;/span&gt;    --generate-config &lt;span style=&#34;color:#f1fa8c&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f1fa8c&#34;&gt;&lt;/span&gt;    --report-stats&lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt;yes
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    sudo systemctl start synapse.service
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#6272a4&#34;&gt;# 服务器至少要有一个用户&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    register_new_matrix_user -c /etc/synapse/homeserver.yaml http://127.0.0.1:8008
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;这时候应该就可以用一个matrix client来连接了，这里选择element&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>使用命令行工具下载在线视频</title>
+        <link>https://star-hengxing.github.io/p/%E4%BD%BF%E7%94%A8%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%B7%A5%E5%85%B7%E4%B8%8B%E8%BD%BD%E5%9C%A8%E7%BA%BF%E8%A7%86%E9%A2%91/</link>
+        <pubDate>Sat, 29 Jan 2022 00:00:00 +0000</pubDate>
+        
+        <guid>https://star-hengxing.github.io/p/%E4%BD%BF%E7%94%A8%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%B7%A5%E5%85%B7%E4%B8%8B%E8%BD%BD%E5%9C%A8%E7%BA%BF%E8%A7%86%E9%A2%91/</guid>
+        <description>&lt;h2 id=&#34;yt-dlp&#34;&gt;yt-dlp&lt;/h2&gt;
+&lt;p&gt;一个命令行下载youtube视频软件，目前来说就他下载速度还行，其他同类工具被限速了&lt;/p&gt;
+&lt;p&gt;TL;DR&lt;/p&gt;
+&lt;p&gt;下载一个视频&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    yt-dlp URL
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;不下载，查看视频下载的信息(选择画质)&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    yt-dlp -F URL
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;[&lt;/span&gt;BiliBili&lt;span style=&#34;color:#ff79c6&#34;&gt;]&lt;/span&gt; 12Q4y1S73g: Downloading webpage
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;[&lt;/span&gt;BiliBili&lt;span style=&#34;color:#ff79c6&#34;&gt;]&lt;/span&gt; 12Q4y1S73g: Downloading video info page
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;[&lt;/span&gt;info&lt;span style=&#34;color:#ff79c6&#34;&gt;]&lt;/span&gt; Available formats &lt;span style=&#34;color:#ff79c6&#34;&gt;for&lt;/span&gt; 12Q4y1S73g:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    format code  extension  resolution note
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#bd93f9&#34;&gt;0&lt;/span&gt;            flv        unknown    
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#bd93f9&#34;&gt;1&lt;/span&gt;            flv        unknown    
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#bd93f9&#34;&gt;2&lt;/span&gt;            flv        unknown    295.77MiB &lt;span style=&#34;color:#ff79c6&#34;&gt;(&lt;/span&gt;best&lt;span style=&#34;color:#ff79c6&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;下载bilibili视频&#34;&gt;下载bilibili视频&lt;/h2&gt;
+&lt;p&gt;Bilibili Evolved + aria2 下载视频&lt;/p&gt;
+&lt;p&gt;Bilibili Evolved提供了几种视频下载方式，我这里选择aria2&lt;/p&gt;
+&lt;p&gt;启动aria2后，在插件里选择aria2 rpc就可以自动下载视频了&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>小知识</title>
+        <link>https://star-hengxing.github.io/p/%E5%B0%8F%E7%9F%A5%E8%AF%86/</link>
+        <pubDate>Sat, 29 Jan 2022 00:00:00 +0000</pubDate>
+        
+        <guid>https://star-hengxing.github.io/p/%E5%B0%8F%E7%9F%A5%E8%AF%86/</guid>
+        <description>&lt;h2 id=&#34;编年史和纪传体&#34;&gt;编年史和纪传体&lt;/h2&gt;
+&lt;p&gt;编年史:&lt;/p&gt;
+&lt;p&gt;15年你，你表哥，你表妹做了哪些事情&lt;/p&gt;
+&lt;p&gt;16年你，你表哥，你表妹做了哪些事情&lt;/p&gt;
+&lt;p&gt;。。。。。&lt;/p&gt;
+&lt;p&gt;N年你，你表哥，你表妹做了哪些事情&lt;/p&gt;
+&lt;p&gt;记传使：&lt;/p&gt;
+&lt;p&gt;15-N年，你做了什么事情&lt;/p&gt;
+&lt;p&gt;15-N年，你表哥做了什么事情&lt;/p&gt;
+&lt;p&gt;15-N年，你表妹做了什么事情&lt;/p&gt;
+&lt;p&gt;小结，比喻不准确。&lt;/p&gt;
+&lt;h2 id=&#34;断网时谷歌浏览器小游戏&#34;&gt;断网时谷歌浏览器小游戏&lt;/h2&gt;
+&lt;p&gt;谷歌浏览器输入&lt;strong&gt;chrome://dino/&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Enter&lt;/strong&gt;后按&lt;strong&gt;空格&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;就有个小游戏玩了&lt;/p&gt;
+&lt;p&gt;甚至还有人用js写了个外挂&lt;/p&gt;
+&lt;h2 id=&#34;乱数假文&#34;&gt;乱数假文&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;Lorem ipsum，中文又称“乱数假文”，是指一篇常用于排版设计领域的拉丁文文章，主要的目的为测试文章或文字在不同字型、版型下看起来的效果，通常网站还没建设好时会出现这段字
+-来自百度&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;科普&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.bilibili.com/video/BV1GK411J7YL?t=553&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;【木鱼说129】如果你网龄够长，一定看过这张图——从「乱数假文」到「互联网第一夫人」知识科学科普&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;sex-english-words&#34;&gt;sex English words&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Cunnilingus&lt;/li&gt;
+&lt;li&gt;paedophilia&lt;/li&gt;
+&lt;li&gt;pspanking&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
+        <title>圆内接正多边形的面积</title>
+        <link>https://star-hengxing.github.io/p/%E5%9C%86%E5%86%85%E6%8E%A5%E6%AD%A3%E5%A4%9A%E8%BE%B9%E5%BD%A2%E7%9A%84%E9%9D%A2%E7%A7%AF/</link>
+        <pubDate>Sat, 29 Jan 2022 00:00:00 +0000</pubDate>
+        
+        <guid>https://star-hengxing.github.io/p/%E5%9C%86%E5%86%85%E6%8E%A5%E6%AD%A3%E5%A4%9A%E8%BE%B9%E5%BD%A2%E7%9A%84%E9%9D%A2%E7%A7%AF/</guid>
+        <description>&lt;h1 id=&#34;圆内接正多边形的面积&#34;&gt;圆内接正多边形的面积&lt;/h1&gt;
+&lt;p&gt;假设半径为R，正多边形顶点数为n&lt;/p&gt;
+&lt;p&gt;正多边形外接圆，圆和正多边形中心点为同一位置&lt;/p&gt;
+&lt;p&gt;将中心点对每个角连线，生成n个等腰三角形，腰长等于半径&lt;/p&gt;
+&lt;p&gt;求出单个三角形面积，再乘以三角形数量&lt;/p&gt;
+&lt;p&gt;$$
+S = \frac{nR^{2}sin(\frac{2\pi}{n})}{2}
+$$&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>一个函数打印STL容器</title>
+        <link>https://star-hengxing.github.io/p/%E4%B8%80%E4%B8%AA%E5%87%BD%E6%95%B0%E6%89%93%E5%8D%B0stl%E5%AE%B9%E5%99%A8/</link>
+        <pubDate>Tue, 11 Jan 2022 00:00:00 +0000</pubDate>
+        
+        <guid>https://star-hengxing.github.io/p/%E4%B8%80%E4%B8%AA%E5%87%BD%E6%95%B0%E6%89%93%E5%8D%B0stl%E5%AE%B9%E5%99%A8/</guid>
+        <description>&lt;p&gt;满足range这个concept就可以使用该函数&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-C++&#34; data-lang=&#34;C++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;#include&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;iostream&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;#include&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;numeric&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;#include&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;ranges&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;#include&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;vector&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;#include&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;array&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;template&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&lt;/span&gt;std&lt;span style=&#34;color:#ff79c6&#34;&gt;::&lt;/span&gt;ranges&lt;span style=&#34;color:#ff79c6&#34;&gt;::&lt;/span&gt;range T&lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#8be9fd&#34;&gt;void&lt;/span&gt; println(&lt;span style=&#34;color:#ff79c6&#34;&gt;const&lt;/span&gt; T&lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;amp;&lt;/span&gt; args)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#ff79c6&#34;&gt;for&lt;/span&gt;(&lt;span style=&#34;color:#ff79c6&#34;&gt;const&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;auto&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;amp;&lt;/span&gt; &lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;v&lt;/span&gt; : args)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            std&lt;span style=&#34;color:#ff79c6&#34;&gt;::&lt;/span&gt;cout &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; v &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#39; &amp;#39;&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        std&lt;span style=&#34;color:#ff79c6&#34;&gt;::&lt;/span&gt;cout &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#39;\n&amp;#39;&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;template&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&lt;/span&gt;std&lt;span style=&#34;color:#ff79c6&#34;&gt;::&lt;/span&gt;ranges&lt;span style=&#34;color:#ff79c6&#34;&gt;::&lt;/span&gt;range... Ts&lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#8be9fd&#34;&gt;void&lt;/span&gt; print(Ts... args)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        (println(args), ...);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#8be9fd&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;main&lt;/span&gt;()
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        std&lt;span style=&#34;color:#ff79c6&#34;&gt;::&lt;/span&gt;array&lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color:#8be9fd&#34;&gt;int&lt;/span&gt;, &lt;span style=&#34;color:#bd93f9&#34;&gt;10&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;gt;&lt;/span&gt; arr;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        std&lt;span style=&#34;color:#ff79c6&#34;&gt;::&lt;/span&gt;iota(arr.begin(), arr.end(), &lt;span style=&#34;color:#bd93f9&#34;&gt;0&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        std&lt;span style=&#34;color:#ff79c6&#34;&gt;::&lt;/span&gt;vector&lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color:#8be9fd&#34;&gt;int&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;gt;&lt;/span&gt; vec(&lt;span style=&#34;color:#bd93f9&#34;&gt;10&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        std&lt;span style=&#34;color:#ff79c6&#34;&gt;::&lt;/span&gt;iota(vec.begin(), vec.end(), &lt;span style=&#34;color:#ff79c6&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#bd93f9&#34;&gt;10&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        print(arr, vec);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    }
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;输出&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;0 1 2 3 4 5 6 7 8 9
+-10 -9 -8 -7 -6 -5 -4 -3 -2 -1
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+        </item>
+        <item>
+        <title>裸机运行Hello world</title>
+        <link>https://star-hengxing.github.io/p/%E8%A3%B8%E6%9C%BA%E8%BF%90%E8%A1%8Chello-world/</link>
+        <pubDate>Tue, 12 Oct 2021 00:00:00 +0000</pubDate>
+        
+        <guid>https://star-hengxing.github.io/p/%E8%A3%B8%E6%9C%BA%E8%BF%90%E8%A1%8Chello-world/</guid>
+        <description>&lt;h2 id=&#34;前置知识&#34;&gt;前置知识&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;编译链接到可执行程序一系列流程&lt;/li&gt;
+&lt;li&gt;x86架构的一些寄存器&lt;/li&gt;
+&lt;li&gt;elf头&lt;/li&gt;
+&lt;li&gt;下面工具的使用&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;环境配置&#34;&gt;环境配置&lt;/h2&gt;
+&lt;p&gt;os: Linux&lt;/p&gt;
+&lt;p&gt;可能会用到的工具:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;gcc(编译)&lt;/li&gt;
+&lt;li&gt;ld(链接)&lt;/li&gt;
+&lt;li&gt;objcopy(提取二进制)&lt;/li&gt;
+&lt;li&gt;dd(写入虚拟镜像)&lt;/li&gt;
+&lt;li&gt;gdb(调试)&lt;/li&gt;
+&lt;li&gt;make(自动化构建)&lt;/li&gt;
+&lt;li&gt;qemu(虚拟机)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;大部分linux发行版都会自带大部分工具，自行安装最新版本即可&lt;/p&gt;
+&lt;h2 id=&#34;基本介绍&#34;&gt;基本介绍&lt;/h2&gt;
+&lt;p&gt;目标是实现一个不依赖操作系统就能运行的二进制程序，在虚拟机屏幕显示hello world&lt;/p&gt;
+&lt;p&gt;计算机启动，按下电源开关通电启动bios，检查硬件，没啥问题的话，bios会加载该储存设备第一个扇区的512字节(MBR)到物理内存0x7C00&lt;/p&gt;
+&lt;p&gt;如果扇区最后两个字节是0x55和0xAA，那么说明是启动设备，否则bios会跳过该扇区&lt;/p&gt;
+&lt;p&gt;如果装过系统的话，会发现这就是BIOS+MBR传统启动计算机方式，而现在比较“先进”的方式是UEFI启动&lt;/p&gt;
+&lt;p&gt;最后bios使用命令jmp 0x7c00跳到我们代码，我们旅程就这样开始了&lt;/p&gt;
+&lt;h2 id=&#34;实现&#34;&gt;实现&lt;/h2&gt;
+&lt;h3 id=&#34;coding&#34;&gt;coding&lt;/h3&gt;
+&lt;p&gt;汇编大体上两种语法，intel和AT&amp;amp;T，这里选择AT&amp;amp;T，如果是用intel语法，可以去找nasm等汇编器编译&lt;/p&gt;
+&lt;p&gt;附上两个伪指令，表明是16位代码和程序开头在main&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;.globl main
+.code16
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;然后设置段寄存器为零，异或清零是常用的手法。为什么要清零，因为此时cpu在实模式下(real mode)，物理内存寻址是采用 段：偏移，计算方式如下&lt;/p&gt;
+&lt;p&gt;物理地址 = 段 * 16 + 偏移&lt;/p&gt;
+&lt;p&gt;如果我们直接设零，那么偏移量直接等于物理地址&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;xorw %ax, %ax
+movw %ax, %ds
+movw %ax, %es
+movw %ax, %ss
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;因为现代操作系统是分页管理内存，段管理内存已经不再使用，但有时候他会以某种方式出现我们眼前&lt;/p&gt;
+&lt;p&gt;比如：平时写C/C++程序遇到的&lt;em&gt;Segmentation fault&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;如何在屏幕上输出字符串呢，答案是使用bios中断&lt;/p&gt;
+&lt;p&gt;bios中断没必要深究，当成api使用即可，使用方法就是在指定寄存器赋值，然后使用&lt;strong&gt;int&lt;/strong&gt;指令和对应中断号&lt;/p&gt;
+&lt;p&gt;这里看&lt;a class=&#34;link&#34; href=&#34;https://en.wikipedia.org/wiki/INT_10H&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;0x10中断指令&lt;/a&gt;的用法&lt;/p&gt;
+&lt;p&gt;中断返回后，可以看到字符串按照我们的格式输出在屏幕上&lt;/p&gt;
+&lt;h3 id=&#34;编译&#34;&gt;编译&lt;/h3&gt;
+&lt;p&gt;这里我们使用make来管理编译流程&lt;/p&gt;
+&lt;p&gt;gcc/ld/objcopy/dd等使用方法参考我的makefile&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;编译汇编源文件为.o文件&lt;/li&gt;
+&lt;li&gt;指定程序入口函数和地址，链接成elf文件&lt;/li&gt;
+&lt;li&gt;将elf文件中代码和数据提取成纯二进制文件&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;然后使用dd拼接512字节的MBR&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;生成全为零的512字节文件&lt;/li&gt;
+&lt;li&gt;开头刻录我们的二进制文件&lt;/li&gt;
+&lt;li&gt;最后两个字节刻录魔数&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;这里使用其他工具或python脚本也可以完成&lt;/p&gt;
+&lt;h3 id=&#34;运行&#34;&gt;运行&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;qemu-system-x86_64 -no-shutdown -no-reboot -m 128M -hda &amp;lt;你的镜像&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;debug&#34;&gt;debug&lt;/h3&gt;
+&lt;p&gt;加上debug参数的启动命令&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;qemu-system-x86_64 -S -s -no-shutdown -no-reboot -m 128M -hda &amp;lt;你的镜像&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;gdb脚本解读：设置架构-远程链接虚拟机-debug文件-在main函数打断点-显示汇编和寄存器-运行&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;set architecture i386:x86-64
+
+target remote:1234
+
+file build/debug/hello.elf
+
+break main
+layout asm
+layout regs
+
+continue
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;使用gdb脚本&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;gdb -q -x kernel.gdbinit
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;输入si执行单条汇编指令，观察寄存器变化&lt;/p&gt;
+&lt;h1 id=&#34;reference&#34;&gt;Reference&lt;/h1&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://en.wikipedia.org/wiki/INT_10H&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;INT 10H&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://developer.amd.com/resources/developer-guides-manuals/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;AMD64 Architecture Programmer’s Manual Volume 3: General Purpose and System Instructions&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        </item>
+        <item>
+        <title>galgame游玩记录</title>
+        <link>https://star-hengxing.github.io/p/galgame%E6%B8%B8%E7%8E%A9%E8%AE%B0%E5%BD%95/</link>
+        <pubDate>Sun, 19 Sep 2021 00:00:00 +0000</pubDate>
+        
+        <guid>https://star-hengxing.github.io/p/galgame%E6%B8%B8%E7%8E%A9%E8%AE%B0%E5%BD%95/</guid>
+        <description>&lt;ul&gt;
+&lt;li&gt;部分游戏没有全通&lt;/li&gt;
+&lt;li&gt;有些gal没有吐槽&lt;/li&gt;
+&lt;li&gt;内有剧透&lt;/li&gt;
+&lt;li&gt;持续更新（只要我推的快）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;排名不分先后，如有错误请指出&lt;/strong&gt;（最近推完的都会在最上面，&lt;del&gt;其实就是一个栈&lt;/del&gt;）&lt;/p&gt;
+&lt;h2 id=&#34;幼馴染と十年夏&#34;&gt;幼馴染と十年、夏&lt;/h2&gt;
+&lt;p&gt;译名：幼驯染与十年之夏&lt;/p&gt;
+&lt;p&gt;会社：夜のひつじ&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;短篇单线幼驯染作品，氛围不错，但我觉得还是太短了&lt;/p&gt;
+&lt;h2 id=&#34;放課後シンデレラ&#34;&gt;放課後シンデレラ&lt;/h2&gt;
+&lt;p&gt;译名：放学后的灰姑娘&lt;/p&gt;
+&lt;p&gt;会社：HOOKSOFT&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;平平淡淡的废萌发糖作，共通线基本就是与女主深入了解交流（不点名批评某位女主，在共通线一直觉得操作很迷惑）&lt;/p&gt;
+&lt;h2 id=&#34;primalhearts&#34;&gt;PRIMAL×HEARTS&lt;/h2&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.ymgal.com/ga21290&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;月幕&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;译名：月色天娇&lt;/p&gt;
+&lt;p&gt;会社：ま～まれぇど&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;也是比较平平淡淡废萌作品，一开始推了駒形线，感觉不是很对胃口&lt;/p&gt;
+&lt;p&gt;其实进线前我是二选一，所以我直接冲向歌奈线&lt;/p&gt;
+&lt;p&gt;不行了我，麻麻的，感觉身体有电流穿过，这就是恋爱么，而且还是小恶魔学姐，一直拖着不给男主告白，却又给男主尝了点甜头，实在是太刺激了&lt;/p&gt;
+&lt;p&gt;个人线里的冲突事件都处理的很好，很快就完事了，没有高血压操作&lt;/p&gt;
+&lt;h2 id=&#34;かりぐらし恋愛&#34;&gt;かりぐらし恋愛&lt;/h2&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.ymgal.com/ga27869&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;月幕&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;译名：寄宿之恋&lt;/p&gt;
+&lt;p&gt;会社：ASa Project&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;共通线够搞笑，个人线只推了理兎，平平淡淡的发糖&lt;/p&gt;
+&lt;p&gt;群友告诉我，说不定其他线路有意想不到的剧情了，单线战士不可取（可恶，我是纯爱党）。所以我还是去推其他线了&lt;/p&gt;
+&lt;p&gt;好家伙，几乎每条线都能看到理兎妒忌其他女主吃醋，这不让我更爱这个美少女么，呜呜&lt;/p&gt;
+&lt;h2 id=&#34;すぃとはにふぁみり-娘ト妻ニ甘イハ父ノ習ヒ&#34;&gt;すぃ～と・はに～・ふぁみり～ 娘ト妻ニ甘イハ父ノ習ヒ&lt;/h2&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.ymgal.com/ga26948&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;月幕&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;译名：甜蜜家庭～妻女和宠溺父亲的每一天～&lt;/p&gt;
+&lt;p&gt;会社：オーバードーズ&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;拔作，老婆女儿孕肚play好耶&lt;/p&gt;
+&lt;h2 id=&#34;レイジングループ&#34;&gt;レイジングループ&lt;/h2&gt;
+&lt;p&gt;译名：人狼村之谜&lt;/p&gt;
+&lt;p&gt;会社：KEMCO&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;日式狼人杀，故事看得很上头&lt;/p&gt;
+&lt;h2 id=&#34;灰色系列&#34;&gt;灰色系列&lt;/h2&gt;
+&lt;p&gt;会社：Frontwing&lt;/p&gt;
+&lt;h3 id=&#34;グリザイアの果実&#34;&gt;グリザイアの果実&lt;/h3&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.ymgal.com/ga14935&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;月幕&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;译名：灰色的果实&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;个人线都很赞，辛线是唯一看哭的（呜呜）&lt;/p&gt;
+&lt;p&gt;蒔菜线，两个结局感觉都很痛苦（但拿狙击枪的美少女真的很帅啊，后续乐园还有狙击操作）&lt;/p&gt;
+&lt;p&gt;天音线，懂得都懂，那段生存剧情确实很过瘾，动画制作组也懂，所以动画也花了很多精力去做这段剧情。最后面有段小高潮被人追杀，能互相为对方舍命，有点感动。好结局有一丝丝悲伤，毕竟，看到了美少女变老的场景，总觉得&lt;strong&gt;心&lt;/strong&gt;，哪里很难受&lt;/p&gt;
+&lt;h3 id=&#34;グリザイアの迷宮&#34;&gt;グリザイアの迷宮&lt;/h3&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.ymgal.com/ga17410&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;月幕&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;译名：灰色的迷宫&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;OP最好听&lt;/p&gt;
+&lt;h3 id=&#34;グリザイアの楽園&#34;&gt;グリザイアの楽園&lt;/h3&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.ymgal.com/ga17392&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;月幕&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;译名：灰色的乐园&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;战斗的美少女太帅啦&lt;/p&gt;
+&lt;h2 id=&#34;フレラバ-friend-to-lover&#34;&gt;フレラバ ～Friend to Lover～&lt;/h2&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.ymgal.com/ga32221&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;月幕&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;译名：从朋友到恋人&lt;/p&gt;
+&lt;p&gt;会社：Smee&lt;/p&gt;
+&lt;p&gt;FD：フレラバ 〜Friend to Lover〜 ミニファンディスク&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;甜死了甜死了，傲娇大好き&lt;/p&gt;
+&lt;h2 id=&#34;いきなりサキュバス-いちゃらぶ搾精ライフ&#34;&gt;いきなりサキュバス ～いちゃらぶ搾精ライフ～&lt;/h2&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.ymgal.com/ga37630&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;月幕&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;译名：&lt;/p&gt;
+&lt;p&gt;会社：ZION&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;白丝巨乳萝莉魅魔，&lt;del&gt;魅魔星奏的发糖续作&lt;/del&gt;&lt;/p&gt;
+&lt;h2 id=&#34;chaoschild&#34;&gt;Chaos;Child&lt;/h2&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.ymgal.com/ga20473&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;月幕&lt;/a&gt;
+/&lt;a class=&#34;link&#34; href=&#34;https://zh.moegirl.org.cn/Chaos;Child&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;萌娘百科&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;译名：混沌之子&lt;/p&gt;
+&lt;p&gt;会社：5pb.&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;通关后感觉不是滋味，我实在与&lt;strong&gt;宮代 拓留&lt;/strong&gt;太像了，刚好看的一篇文章也令人深思&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://zhuanlan.zhihu.com/p/44592537&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;御宅族与ChaosChild症候群&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;说的对，这就是部垃圾作品，痛击死宅罢了&lt;/p&gt;
+&lt;h2 id=&#34;remember11--the-age-of-infinity-&#34;&gt;Remember11 -The Age of Infinity-&lt;/h2&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.ymgal.com/ga10794&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;月幕&lt;/a&gt;
+/&lt;a class=&#34;link&#34; href=&#34;https://remember11.com/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;中文版解密篇网站&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;译名：Remember11：无限轮回的时光&lt;/p&gt;
+&lt;p&gt;会社：KID&lt;/p&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;从艺术方面看，即使解密篇没有出，但刚刚好完成了困住玩家的这个目标&lt;/li&gt;
+&lt;li&gt;从商业作品看，确实是部不完整的作品&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;但对于我来说，在我认为的神作中排第一&lt;/p&gt;
+&lt;h2 id=&#34;ever17-the-out-of-infinity&#34;&gt;Ever17 —the out of infinity—&lt;/h2&gt;
+&lt;p&gt;译名：Ever17—时空轮回&lt;/p&gt;
+&lt;p&gt;会社：KID&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;约定好不要剧透&lt;/p&gt;
+&lt;h2 id=&#34;出会って5分は俺のもの時間停止と不可避な運命&#34;&gt;出会って5分は俺のもの！時間停止と不可避な運命&lt;/h2&gt;
+&lt;p&gt;译名：相遇之后的5分钟属于我！时间停止与不可避的命运&lt;/p&gt;
+&lt;p&gt;会社：Hulotte&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;白毛萝莉妙啊&lt;/p&gt;
+&lt;h2 id=&#34;キミのとなりで恋してる&#34;&gt;キミのとなりで恋してる&lt;/h2&gt;
+&lt;p&gt;译名：慕情之心今随君作伴&lt;/p&gt;
+&lt;p&gt;会社：Hulotte&lt;/p&gt;
+&lt;p&gt;FD：キミのとなりで恋してる！ -THE RESPECTIVE HAPPINESS-&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;理想中的幼驯染&lt;/p&gt;
+&lt;h2 id=&#34;車輪の国悠久の少年少女&#34;&gt;車輪の国、悠久の少年少女&lt;/h2&gt;
+&lt;p&gt;译名：车轮之国：悠久之少男少女&lt;/p&gt;
+&lt;p&gt;会社：AKABEiSOFT2&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;不会日语，还好早就被剧透了游戏的最后一句话，毕竟这句话是真的man&lt;/p&gt;
+&lt;h2 id=&#34;車輪の国向日葵の少女&#34;&gt;車輪の国、向日葵の少女&lt;/h2&gt;
+&lt;p&gt;译名：车轮之国：向日葵的少女&lt;/p&gt;
+&lt;p&gt;会社：AKABEiSOFT2&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;05年画风也真好看&lt;/p&gt;
+&lt;h2 id=&#34;g線上の魔王&#34;&gt;G線上の魔王&lt;/h2&gt;
+&lt;p&gt;译名：G弦上的魔王&lt;/p&gt;
+&lt;p&gt;会社：AKABEiSOFT2&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;带有叙诡类型的游戏玩的少，所以智斗代入感非常强，看的也很爽&lt;/p&gt;
+&lt;h2 id=&#34;きまぐれテンプテーション&#34;&gt;きまぐれテンプテーション&lt;/h2&gt;
+&lt;p&gt;译名：异想魅惑&lt;/p&gt;
+&lt;p&gt;会社：Silky&amp;rsquo;s Plus WASABI&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;naizi好晃&lt;/p&gt;
+&lt;h2 id=&#34;きゃらぶれーしょん-乙女は恋してキャラぶれる&#34;&gt;きゃらぶれーしょん！ ～乙女は恋してキャラぶれる～&lt;/h2&gt;
+&lt;p&gt;译名：恋爱少女人格崩坏&lt;/p&gt;
+&lt;p&gt;会社：AKABEiSOFT3&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;表里不一（&lt;/p&gt;
+&lt;p&gt;&lt;del&gt;抖m狂喜&lt;/del&gt;&lt;/p&gt;
+&lt;h2 id=&#34;euphoria&#34;&gt;euphoria&lt;/h2&gt;
+&lt;p&gt;译名：乐园&lt;/p&gt;
+&lt;p&gt;会社：CLOCKUP&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;第一次碰猎奇作品，感觉慢慢能接受？&lt;/p&gt;
+&lt;h2 id=&#34;倉野くんちのふたご事情&#34;&gt;倉野くんちのふたご事情&lt;/h2&gt;
+&lt;p&gt;译名：仓野家的双子情事&lt;/p&gt;
+&lt;p&gt;会社：CUBE&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;妹妹可爱&lt;/p&gt;
+&lt;h2 id=&#34;3days満ちてゆく刻の彼方で&#34;&gt;3days～満ちてゆく刻の彼方で～&lt;/h2&gt;
+&lt;p&gt;译名：3days～在逝去时间的另一端～&lt;/p&gt;
+&lt;p&gt;会社：Lass&lt;/p&gt;
+&lt;p&gt;死了N次，还是得看攻略啊（&lt;/p&gt;
+&lt;h2 id=&#34;君と彼女と彼女の恋&#34;&gt;君と彼女と彼女の恋&lt;/h2&gt;
+&lt;p&gt;译名：你和她和她的恋爱&lt;/p&gt;
+&lt;p&gt;会社：Nitro+&lt;/p&gt;
+&lt;p&gt;打到困住轮回里就没怎么打了&lt;/p&gt;
+&lt;h2 id=&#34;summer-pockets&#34;&gt;Summer Pockets&lt;/h2&gt;
+&lt;p&gt;译名：夏日口袋&lt;/p&gt;
+&lt;p&gt;会社：Key&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;Key社换画师后画风好了很多&lt;/p&gt;
+&lt;h2 id=&#34;恋シンアイ彼女&#34;&gt;恋×シンアイ彼女&lt;/h2&gt;
+&lt;p&gt;译名：想要传达给你的爱恋&lt;/p&gt;
+&lt;p&gt;会社：Us:track&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;彩音线好甜&lt;/p&gt;
+&lt;h2 id=&#34;魔女こいにっき&#34;&gt;魔女こいにっき&lt;/h2&gt;
+&lt;p&gt;译名：魔女恋爱日记&lt;/p&gt;
+&lt;p&gt;会社：Qoobrand&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;故事没看懂&amp;hellip;&lt;/p&gt;
+&lt;h2 id=&#34;オトメドメイン&#34;&gt;オトメ＊ドメイン&lt;/h2&gt;
+&lt;p&gt;译名：少女领域&lt;/p&gt;
+&lt;p&gt;会社：Palette&lt;/p&gt;
+&lt;h2 id=&#34;忘却執事と恋するお嬢様の回想録&#34;&gt;忘却執事と恋するお嬢様の回想録&lt;/h2&gt;
+&lt;p&gt;译名：忘却管家与恋爱大小姐的回忆录&lt;/p&gt;
+&lt;p&gt;会社：Campus&lt;/p&gt;
+&lt;h2 id=&#34;僕と恋するポンコツアクマすっごいえっち&#34;&gt;僕と恋するポンコツアクマ。すっごいえっち&lt;/h2&gt;
+&lt;p&gt;译名：与我恋爱的废材恶魔&lt;/p&gt;
+&lt;p&gt;会社：Smile&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;太拔勒，虚了&lt;/p&gt;
+&lt;h2 id=&#34;イブニクル&#34;&gt;イブニクル&lt;/h2&gt;
+&lt;p&gt;译名：夏娃年代记1&lt;/p&gt;
+&lt;p&gt;会社：Alicesoft&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;打怪升级玩上瘾了，已经三周目&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>记录安装arch的过程</title>
+        <link>https://star-hengxing.github.io/p/%E8%AE%B0%E5%BD%95%E5%AE%89%E8%A3%85arch%E7%9A%84%E8%BF%87%E7%A8%8B/</link>
+        <pubDate>Mon, 02 Aug 2021 00:00:00 +0000</pubDate>
+        
+        <guid>https://star-hengxing.github.io/p/%E8%AE%B0%E5%BD%95%E5%AE%89%E8%A3%85arch%E7%9A%84%E8%BF%87%E7%A8%8B/</guid>
+        <description>&lt;h2 id=&#34;配置&#34;&gt;配置&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;虚拟机: Oracle VM VirtualBox&lt;/li&gt;
+&lt;li&gt;笔记本：UEFI启动&lt;/li&gt;
+&lt;li&gt;镜像: &lt;a class=&#34;link&#34; href=&#34;https://archlinux.org/download/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;官网&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;前提&#34;&gt;前提&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;了解UEFI还是BIOS启动，不同的启动方式对应不同的步骤&lt;/li&gt;
+&lt;li&gt;基本的linux命令行操作和知识&lt;/li&gt;
+&lt;li&gt;足够耐心&lt;/li&gt;
+&lt;li&gt;善用archwiki&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;安装&#34;&gt;安装&lt;/h2&gt;
+&lt;h3 id=&#34;联网&#34;&gt;联网&lt;/h3&gt;
+&lt;p&gt;wifi配置麻烦，强烈建议网线或者手机usb联网&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    ip link
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;然后ping查看联网是否成功&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    ping baidu.com
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;更新系统时间&#34;&gt;更新系统时间&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    timedatectl set-ntp &lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;true&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    timedatectl status &lt;span style=&#34;color:#6272a4&#34;&gt;# 检查服务状态&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;硬盘分区&#34;&gt;硬盘分区&lt;/h3&gt;
+&lt;p&gt;硬盘分区工具有很多，推荐小白使用&lt;code&gt;cfdisk&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;查看硬盘用&lt;code&gt;lsblk&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;在分区前，需了解swap(分区)，区别linux根分区和windows盘符的概念&lt;/p&gt;
+&lt;p&gt;如果是UEFI启动，需要分一个EFI区，而BIOS则不用&lt;/p&gt;
+&lt;p&gt;分区步骤大概就是：new-&amp;gt;分大小-&amp;gt;改类型-&amp;gt;保存-&amp;gt;格式化-&amp;gt;挂载&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;EFI分区和正常分区格式化工具不一样&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;根分区需要首先挂载&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;swap区看需求分(格式化和挂载是单独命令使用)&lt;/p&gt;
+&lt;h3 id=&#34;添加国内镜像加速&#34;&gt;添加国内镜像加速&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    vim /etc/pacman.d/mirrorlist
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#6272a4&#34;&gt;# 添加&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;Server&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; https://mirrors.tuna.tsinghua.edu.cn/archlinux/&lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;$repo&lt;/span&gt;/os/&lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;$arch&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;Server&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; https://mirrors.zju.edu.cn/archlinux/&lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;$repo&lt;/span&gt;/os/&lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;$arch&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;安装基本包&#34;&gt;安装基本包&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    pacstrap /mnt base linux linux-firmware
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;在此步骤可以考虑把常用软件装了(vim/networkmanager/sudo)&lt;/p&gt;
+&lt;h3 id=&#34;配置fstab&#34;&gt;配置Fstab&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    genfstab -U /mnt &amp;gt;&amp;gt; /mnt/etc/fstab
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    cat /mnt/etc/fstab &lt;span style=&#34;color:#6272a4&#34;&gt;# 检查&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;change-root&#34;&gt;change root&lt;/h3&gt;
+&lt;p&gt;切换到自己系统&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    arch-chroot /mnt
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;设置时区&#34;&gt;设置时区&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#6272a4&#34;&gt;# Asia和Shanghai按需替换&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    hwclock --systohc
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;设置locale&#34;&gt;设置Locale&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#6272a4&#34;&gt;# 把需要用的注释取消&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    vim /etc/locale.gen
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#6272a4&#34;&gt;# 当前使用的locale&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;echo&lt;/span&gt; &lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;LANG&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt;en_US.UTF-8 &amp;gt;&amp;gt; /etc/locale.conf
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#6272a4&#34;&gt;# 初始化&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    locale-gen
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;设置root密码&#34;&gt;设置root密码&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    passwd &lt;span style=&#34;color:#6272a4&#34;&gt;# 密码不回显&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;网络配置&#34;&gt;网络配置&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#6272a4&#34;&gt;# myhostname替换自己主机名&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;echo&lt;/span&gt; myhostname &amp;gt;&amp;gt; /etc/hostname
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    vim /etc/hosts
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    添加  
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    127.0.0.1	localhost  
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    ::1		    localhost  
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    127.0.1.1	myhostname.localdomain	myhostname &lt;span style=&#34;color:#6272a4&#34;&gt;# 主机名.本地域名 主机名&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;安装引导程序&#34;&gt;安装引导程序&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;grub&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://zhuanlan.zhihu.com/p/113615452&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;不使用grub启动&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;ps:用这个方法前，假如你是intel-cpu，需要先安装intel-ucode&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    bootctl install
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#6272a4&#34;&gt;# 添加&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    vim /boot/loader/loader.conf
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    default arch
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    timeout &lt;span style=&#34;color:#bd93f9&#34;&gt;4&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#6272a4&#34;&gt;# 添加&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    vim /boot/loader/entries/arch.conf
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    title   Arch Linux
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    linux   /vmlinuz-linux
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    initrd  /intel-ucode.img
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    initrd  /initramfs-linux.img
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    options &lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;root&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt;根分区路径 rw &lt;span style=&#34;color:#6272a4&#34;&gt;# 例如/dev/sda2&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;重新启动&#34;&gt;重新启动&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;exit&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    poweroff/reboot
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;拔掉u盘，等待弹出tty终端，要求输入账户密码登录&lt;/p&gt;
+&lt;p&gt;因为我是UEFI引导，所以笔记本需要更改启动方式为UEFI，而不使用BIOS，&lt;/p&gt;
+&lt;h1 id=&#34;reference&#34;&gt;Reference&lt;/h1&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.viseator.com/2017/05/17/arch_install/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;以官方Wiki的方式安装ArchLinux&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        </item>
+        <item>
+        <title>光线与各种几何图形求交</title>
+        <link>https://star-hengxing.github.io/p/%E5%85%89%E7%BA%BF%E4%B8%8E%E5%90%84%E7%A7%8D%E5%87%A0%E4%BD%95%E5%9B%BE%E5%BD%A2%E6%B1%82%E4%BA%A4/</link>
+        <pubDate>Sun, 11 Apr 2021 00:00:00 +0000</pubDate>
+        
+        <guid>https://star-hengxing.github.io/p/%E5%85%89%E7%BA%BF%E4%B8%8E%E5%90%84%E7%A7%8D%E5%87%A0%E4%BD%95%E5%9B%BE%E5%BD%A2%E6%B1%82%E4%BA%A4/</guid>
+        <description>&lt;p&gt;在许多光线追踪的教程，光线求交的位置通常在世界空间(world space)&lt;/p&gt;
+&lt;p&gt;但在一些书籍中，光线求交的位置在几何图形自己的空间里进行(object space)&lt;/p&gt;
+&lt;p&gt;做法：准备模型矩阵(model matrix)的逆矩阵，将光线变换到对象空间&lt;/p&gt;
+&lt;p&gt;$$
+Ray(t)=o+td (0 \leq t &amp;lt;\infty)
+$$&lt;/p&gt;
+&lt;p&gt;光线的方程由点和向量组成，时间不变，对点和向量进行变换
+$$
+M^{-1}Ray
+$$&lt;/p&gt;
+&lt;p&gt;然后在对象空间求交并把相交信息带回世界空间&lt;/p&gt;
+&lt;p&gt;因为大部分几何图形在对象空间位于坐标原点，没有进行变换(旋转/剪切)，处理求交就变得容易。在获取表面信息例如uv和颜色也很方便，除此外还可以提高计算浮点数准确性&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;下文中，如果想从对象空间求交的话，去掉对光线位置偏移的代码就行了&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;我们默认光线都是已经从世界空间变换的物体空间&lt;/p&gt;
+&lt;h2 id=&#34;平面plane&#34;&gt;平面(Plane)&lt;/h2&gt;
+&lt;p&gt;其实AABB包围盒，立方体，平面求交计算都一样，计算比较简单，只是维度不同而已，但我还是要介绍一下平面求交，因为我发现一个比较好玩的地方&lt;/p&gt;
+&lt;p&gt;假设y轴垂直于平面，将公式变形
+$$
+t=(y-o)/d
+$$
+因为我们在物体空间求交，所以y为0&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-C++&#34; data-lang=&#34;C++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;if&lt;/span&gt;(ray.d.y &lt;span style=&#34;color:#ff79c6&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#bd93f9&#34;&gt;0.0f&lt;/span&gt;) &lt;span style=&#34;color:#ff79c6&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;false&lt;/span&gt;; &lt;span style=&#34;color:#6272a4&#34;&gt;// 忽略平行于平面的光线
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#6272a4&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8be9fd&#34;&gt;float&lt;/span&gt; t &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;-&lt;/span&gt;ray.o.y &lt;span style=&#34;color:#ff79c6&#34;&gt;/&lt;/span&gt; ray.d.y;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;if&lt;/span&gt;(t &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&lt;/span&gt; &lt;span style=&#34;color:#bd93f9&#34;&gt;0.0f&lt;/span&gt;) &lt;span style=&#34;color:#ff79c6&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;false&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;相当于求出了无限大的xz平面&lt;/p&gt;
+&lt;p&gt;好玩的地方来，我们通过判断x,z坐标对这个无限大的平面进行限制&lt;/p&gt;
+&lt;p&gt;比如&lt;/p&gt;
+&lt;p&gt;$$
+x^{2}+z^{2}\leq1
+$$&lt;/p&gt;
+&lt;p&gt;这时候在xz二维坐标系上是一个圆心在原点，半径为1的圆&lt;/p&gt;
+&lt;p&gt;我们相当于在一个平面坐标系下绘制图形，所以根据数学，可以画出各种有趣的图案&lt;/p&gt;
+&lt;h2 id=&#34;圆柱cylinder&#34;&gt;圆柱(Cylinder)&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;在世界空间求交，我们要确定圆柱垂直的是哪一轴和圆柱位置，在下面代码根据坐标系小心处理xyz的编排&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;假设圆柱与y轴垂直
+如何确定这个圆柱位置呢，我们以圆柱底面(bottom cap)圆心为坐标&lt;/p&gt;
+&lt;p&gt;$$
+center(x,z)
+$$&lt;/p&gt;
+&lt;p&gt;描述圆柱半径用 r 来描述&lt;/p&gt;
+&lt;p&gt;圆柱高度(垂直的那一轴)&lt;/p&gt;
+&lt;p&gt;$$
+h_{min}h_{max}
+$$&lt;/p&gt;
+&lt;p&gt;底面是一个圆，我们先来判断相交点是否在这个底面&lt;/p&gt;
+&lt;p&gt;$$
+x^{2}+z^{2}=r^{2}
+$$&lt;/p&gt;
+&lt;p&gt;我们首先对发射光线的位置进行偏移
+$$
+o_{x}=o_{x}-center_{x}
+$$&lt;/p&gt;
+&lt;p&gt;$$
+o_{z}=o_{z}-center_{z}
+$$&lt;/p&gt;
+&lt;p&gt;然后把光线代入方程
+$$
+(o_{x}+td_{x})^{2}+(o_{z}+td_{z})^{2}=r^{2}
+$$&lt;/p&gt;
+&lt;p&gt;$$
+(d_{x}^{2}+d_{z}^{2})t^{2}+2(d_{x}o_{x}+d_{z}o_{z})t+o_{x}^{2}+o_{z}^{2}-r^{2}=0
+$$&lt;/p&gt;
+&lt;p&gt;日常解一元二次方程
+$$
+a = (d_{x}^{2}+d_{z}^{2})
+$$&lt;/p&gt;
+&lt;p&gt;$$
+b = 2(d_{x}o_{x}+d_{z}o_{z})
+$$&lt;/p&gt;
+&lt;p&gt;$$
+c = o_{x}^{2}+o_{z}^{2}-r^{2}
+$$&lt;/p&gt;
+&lt;p&gt;然后我们将t代入光线求出相交点，通过y坐标判断是否在圆柱高度内&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-C++&#34; data-lang=&#34;C++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;p &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; ray.at(t);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;if&lt;/span&gt;(p.y &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&lt;/span&gt; h_min &lt;span style=&#34;color:#ff79c6&#34;&gt;||&lt;/span&gt; p.y &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;gt;&lt;/span&gt; h_max) &lt;span style=&#34;color:#ff79c6&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;false&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;如果我们从圆柱上方观察圆柱，会发现圆柱缺了后半部分180°的曲面，我们要代入另一个t来继续判断高度，代码修改如下&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-C++&#34; data-lang=&#34;C++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;p &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; ray.at(t1);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;if&lt;/span&gt;(p.y &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&lt;/span&gt; h_min &lt;span style=&#34;color:#ff79c6&#34;&gt;||&lt;/span&gt; p.y &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;gt;&lt;/span&gt; h_max)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;if&lt;/span&gt;(t1 &lt;span style=&#34;color:#ff79c6&#34;&gt;==&lt;/span&gt; t2) &lt;span style=&#34;color:#ff79c6&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;false&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    p &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; ray.at(t2);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;if&lt;/span&gt;(p.y &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&lt;/span&gt; h_min &lt;span style=&#34;color:#ff79c6&#34;&gt;||&lt;/span&gt; p.y &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;gt;&lt;/span&gt; h_max) &lt;span style=&#34;color:#ff79c6&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;false&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;最后用atan2生成角度(弧度)，比较圆柱的完整度&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-C++&#34; data-lang=&#34;C++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#8be9fd&#34;&gt;float&lt;/span&gt; phi &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; std&lt;span style=&#34;color:#ff79c6&#34;&gt;::&lt;/span&gt;atan2(p.y, p.x);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;if&lt;/span&gt;(phi &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&lt;/span&gt; &lt;span style=&#34;color:#bd93f9&#34;&gt;0.0f&lt;/span&gt;) phi &lt;span style=&#34;color:#ff79c6&#34;&gt;+=&lt;/span&gt; &lt;span style=&#34;color:#bd93f9&#34;&gt;2.0f&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;*&lt;/span&gt; PI;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;if&lt;/span&gt;(phi &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;gt;&lt;/span&gt; phi_max) &lt;span style=&#34;color:#ff79c6&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;false&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;capped-cylinders&#34;&gt;Capped Cylinders&lt;/h2&gt;
+&lt;p&gt;这时候圆柱曲面求交算是基本完成了，但是渲染的时候又发现一个问题，圆柱没有顶盖和底盖，也就是说圆柱是中空的，没有封闭的&lt;/p&gt;
+&lt;p&gt;那么如何描述与顶盖求交呢，这时候我们把圆柱顶面和底面当成平面求交&lt;/p&gt;
+&lt;p&gt;我们有圆柱的高度和光线，反推出t，然后再代入t，对x,z坐标限制&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-C++&#34; data-lang=&#34;C++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#6272a4&#34;&gt;// 底面和顶面都适用以下代码，改下参数即可
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#6272a4&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8be9fd&#34;&gt;float&lt;/span&gt; t_max_cap &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; (h_max &lt;span style=&#34;color:#ff79c6&#34;&gt;-&lt;/span&gt; ray.o.y) &lt;span style=&#34;color:#ff79c6&#34;&gt;/&lt;/span&gt; ray.d.y;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#8be9fd&#34;&gt;float&lt;/span&gt; x &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; ray.at_x(t);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#8be9fd&#34;&gt;float&lt;/span&gt; z &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; ray.at_z(t);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;if&lt;/span&gt;(x &lt;span style=&#34;color:#ff79c6&#34;&gt;*&lt;/span&gt; x &lt;span style=&#34;color:#ff79c6&#34;&gt;+&lt;/span&gt; z &lt;span style=&#34;color:#ff79c6&#34;&gt;*&lt;/span&gt; z) &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#bd93f9&#34;&gt;1.0f&lt;/span&gt;) &lt;span style=&#34;color:#ff79c6&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;false&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;因为是当成平面求交，所以和上面平面求交代码类似&lt;/p&gt;
+&lt;h2 id=&#34;圆盘disk&#34;&gt;圆盘(Disk)&lt;/h2&gt;
+&lt;p&gt;假设圆盘与y轴垂直&lt;/p&gt;
+&lt;p&gt;和圆柱一样用圆心描述位置&lt;/p&gt;
+&lt;p&gt;参数有高度、半径、内半径和角度&lt;/p&gt;
+&lt;p&gt;对发射光线的位置进行偏移&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-C++&#34; data-lang=&#34;C++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;ray.o &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; ray.o &lt;span style=&#34;color:#ff79c6&#34;&gt;-&lt;/span&gt; center;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;用圆盘所处的高度求出光线的t&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-C++&#34; data-lang=&#34;C++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#8be9fd&#34;&gt;float&lt;/span&gt; t &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; (height &lt;span style=&#34;color:#ff79c6&#34;&gt;-&lt;/span&gt; ray.o.y) &lt;span style=&#34;color:#ff79c6&#34;&gt;/&lt;/span&gt; ray.d.y;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;if&lt;/span&gt;(t &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;=&lt;/span&gt; &lt;span style=&#34;color:#bd93f9&#34;&gt;0&lt;/span&gt;) &lt;span style=&#34;color:#ff79c6&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;false&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;如果光线是平行于圆盘，选择忽略这条光线&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-C++&#34; data-lang=&#34;C++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;if&lt;/span&gt;(ray.d.y &lt;span style=&#34;color:#ff79c6&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#bd93f9&#34;&gt;0&lt;/span&gt;) &lt;span style=&#34;color:#ff79c6&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;false&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;光线落在外圆才算相交&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-C++&#34; data-lang=&#34;C++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;p &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; ray.at(t);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#8be9fd&#34;&gt;float&lt;/span&gt; disk2 &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; p.x &lt;span style=&#34;color:#ff79c6&#34;&gt;*&lt;/span&gt; p.x &lt;span style=&#34;color:#ff79c6&#34;&gt;+&lt;/span&gt; p.z &lt;span style=&#34;color:#ff79c6&#34;&gt;*&lt;/span&gt; p.z;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;if&lt;/span&gt;(disk2 &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;gt;&lt;/span&gt; radius &lt;span style=&#34;color:#ff79c6&#34;&gt;*&lt;/span&gt; radius &lt;span style=&#34;color:#ff79c6&#34;&gt;||&lt;/span&gt; disk2 &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&lt;/span&gt; inner_radius &lt;span style=&#34;color:#ff79c6&#34;&gt;*&lt;/span&gt; inner_radius)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;false&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;比较圆盘完整度&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-C++&#34; data-lang=&#34;C++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#8be9fd&#34;&gt;float&lt;/span&gt; phi &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; std&lt;span style=&#34;color:#ff79c6&#34;&gt;::&lt;/span&gt;atan2(p.y, p.x);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;if&lt;/span&gt;(phi &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&lt;/span&gt; &lt;span style=&#34;color:#bd93f9&#34;&gt;0.0f&lt;/span&gt;) phi &lt;span style=&#34;color:#ff79c6&#34;&gt;+=&lt;/span&gt; &lt;span style=&#34;color:#bd93f9&#34;&gt;2.0f&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;*&lt;/span&gt; PI;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;if&lt;/span&gt;(phi &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;gt;&lt;/span&gt; phi_max) &lt;span style=&#34;color:#ff79c6&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;false&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id=&#34;结尾&#34;&gt;结尾&lt;/h1&gt;
+&lt;p&gt;萌新学习ray tracing之路艰难，自身经验有限，如有错误请指出&lt;/p&gt;
+&lt;h1 id=&#34;reference&#34;&gt;Reference&lt;/h1&gt;
+&lt;ol&gt;
+&lt;li&gt;Physically Based Rendering: From Theory to Implementation&lt;/li&gt;
+&lt;li&gt;The Ray Tracer Challenge&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        </item>
+        <item>
+        <title>离线渲染-光线追踪框架学习资料</title>
+        <link>https://star-hengxing.github.io/p/%E7%A6%BB%E7%BA%BF%E6%B8%B2%E6%9F%93-%E5%85%89%E7%BA%BF%E8%BF%BD%E8%B8%AA%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%96%99/</link>
+        <pubDate>Wed, 16 Dec 2020 00:00:00 +0000</pubDate>
+        
+        <guid>https://star-hengxing.github.io/p/%E7%A6%BB%E7%BA%BF%E6%B8%B2%E6%9F%93-%E5%85%89%E7%BA%BF%E8%BF%BD%E8%B8%AA%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%96%99/</guid>
+        <description>&lt;h2 id=&#34;games101现代计算机图形学入门&#34;&gt;GAMES101:现代计算机图形学入门&lt;/h2&gt;
+&lt;p&gt;网课，可在&lt;a class=&#34;link&#34; href=&#34;https://link.zhihu.com/?target=https%3A//www.bilibili.com/video/av90798049/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;b站&lt;/a&gt;上观看&lt;/p&gt;
+&lt;p&gt;assignment 5-7 是光线追踪的作业&lt;br&gt;
+如果对光栅化，几何，动画与模拟，不感兴趣，可以只看Lecture 13-20（个人建议：把整套课看完也是不错的）&lt;/p&gt;
+&lt;h2 id=&#34;taichi课程&#34;&gt;Taichi课程&lt;/h2&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://github.com/taichiCourse01/taichiCourse01&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;课程主页&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;网课，其中6-7讲涉及光线追踪&lt;/p&gt;
+&lt;h2 id=&#34;peter-shirley写的光线追踪三部曲&#34;&gt;Peter Shirley写的光线追踪三部曲&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Ray Tracing in One Weekend&lt;/li&gt;
+&lt;li&gt;Ray Tracing: The Next Week&lt;/li&gt;
+&lt;li&gt;Ray Tracing: The Rest of Your Life&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;书中配套代码，在网上能搜到这三本的笔记和翻译版本&lt;br&gt;
+&lt;em&gt;我认为这是光线追踪入门的最好教程&lt;/em&gt;&lt;/p&gt;
+&lt;h2 id=&#34;daily-pathtracer&#34;&gt;Daily Pathtracer&lt;/h2&gt;
+&lt;p&gt;Aras Pranckevičius大佬写的教程&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://zhuanlan.zhihu.com/p/37462611&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;介绍&lt;/a&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://aras-p.info/blog/2018/03/28/Daily-Pathtracer-Part-0-Intro/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;博客&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;nori&#34;&gt;Nori&lt;/h2&gt;
+&lt;p&gt;an educational ray tracer&lt;br&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://wjakob.github.io/nori/##guidelines&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;主页&lt;/a&gt;&lt;br&gt;
+5个assignment&lt;/p&gt;
+&lt;h2 id=&#34;pbrt&#34;&gt;PBRT&lt;/h2&gt;
+&lt;p&gt;Physically Based Rendering:From Theory To Implementation&lt;br&gt;
+这本书是学习离线渲染系统书（离线渲染圣经），配套代码在github上&lt;br&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://www.pbrt.org/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;网上在线阅读&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;此为光线追踪进阶书籍&lt;/em&gt;&lt;/p&gt;
+&lt;h2 id=&#34;书&#34;&gt;书&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Ray Tracing Gems&lt;/li&gt;
+&lt;li&gt;Advanced global illumination&lt;/li&gt;
+&lt;li&gt;Fundamentals of Computer Graphics&lt;/li&gt;
+&lt;li&gt;Real-Time Rendering&lt;/li&gt;
+&lt;li&gt;全局光照技术&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;杂类&#34;&gt;杂类&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://github.com/zheng95z/fun-with-graphics##cg&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;github&lt;/a&gt;上收集的图形学资料&lt;/li&gt;
+&lt;li&gt;milo yip的&lt;a class=&#34;link&#34; href=&#34;https://www.cnblogs.com/miloyip/archive/2010/03/29/1698953.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;用JavaScript玩转计算机图形学-光线追踪入门&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.scratchapixel.com/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;scratchapixel&lt;/a&gt;，图形学网站，对细节讲解很详细，配套代码&lt;/li&gt;
+&lt;li&gt;99行代码写出路径追踪-&lt;a class=&#34;link&#34; href=&#34;http://www.kevinbeason.com/smallpt/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;smallpt&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;http://www.realtimerendering.com/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;real-time-rendering&lt;/a&gt;，网站内附带很多图形学资料&lt;/li&gt;
+&lt;li&gt;mitsuba,一个开源渲染器&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://computergraphics.stackexchange.com/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;stackexchange&lt;/a&gt;的计算机图形学板块&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

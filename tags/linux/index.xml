@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Linux on 恒星的小站</title>
+    <link>https://star-hengxing.github.io/tags/linux/</link>
+    <description>Recent content in Linux on 恒星的小站</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Wed, 02 Mar 2022 10:03:35 +0800</lastBuildDate><atom:link href="https://star-hengxing.github.io/tags/linux/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>AUR打包记录</title>
+      <link>https://star-hengxing.github.io/p/aur%E6%89%93%E5%8C%85%E8%AE%B0%E5%BD%95/</link>
+      <pubDate>Wed, 02 Mar 2022 10:03:35 +0800</pubDate>
+      
+      <guid>https://star-hengxing.github.io/p/aur%E6%89%93%E5%8C%85%E8%AE%B0%E5%BD%95/</guid>
+      <description>当发现了一个好软件，但aur上没有人打包，这很难受，所以不如自己来为社区做贡献
+这次我打的包是一个appimage，理所当然去参考一些现有的appimage打包PKGBUILD
+所以先设计再编码
+PKGBULID编写  下载最新版本的软件到本地 提取appimage，把软件icon放到/usr/share/icons 制作Desktop Entry，放到/usr/share/applications 最后将软件去掉版本号，安装到常见目录（我选择了放在/opt/appimages）  是不是看起来很简单，但由于不熟悉linux和一些常用工具，一顿操作下来，花了半天才写好PKGBUILD。
+首先是学会用sed，因为appimage里自带了一个Desktop Entry，所以要进行修改。
+其次就是安装到目录的时候需要给权限目录权限，不然复制不进去。
+当上游的包没有checksum的时候，还要自己download到本地生成然后加上PKGBULID。当然makepkg然后给了个便利的命令。
+ # 如果有上一个版本的checksum,先用sed删除再执行该命令  sed -i &amp;#34;$d&amp;#34; PKGBULID  makepkg -g &amp;gt;&amp;gt; PKGBULID 测试 写好PKGBULID，就要检查能不能用。
+# 检查PKGBUILD格式 namcap PKGBUILD # 生成包 makepkg -s # 检查包是否缺少依赖等等 namcap xxx.pkg.tar.zst 检查包的时候我弹了许多报错，不知道怎么修。然后我去用namcap检查一下我参考的那个appimage包，好家伙，他的报错跟我一样。既然他没修那我也就算了吧。
+然后尝试安装
+# 生成.SRCINFO给aur仓库的页面展示，如果第一次提交没有生成，aur仓库会拒绝你的包 makepkg -i &amp;amp;&amp;amp; makepkg --printsrcinfo &amp;gt; .SRCINFO 上传 如果一切没问题，那就可以用git上传aur了（需要一个aur帐号）。
+如果会基本的git操作，下面应该都明白怎么操作。
+# 为aur创建ssh key touch ~/.ssh/config # 写入这些 Host aur.archlinux.org  IdentityFile ~/.ssh/aur  User aur # 生成 ssh-keygen -f ~/.</description>
+    </item>
+    
+    <item>
+      <title>AppImage的使用</title>
+      <link>https://star-hengxing.github.io/p/appimage%E7%9A%84%E4%BD%BF%E7%94%A8/</link>
+      <pubDate>Sat, 29 Jan 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://star-hengxing.github.io/p/appimage%E7%9A%84%E4%BD%BF%E7%94%A8/</guid>
+      <description>Run  cd /path/to/AppImage  chmod +x xxx.AppImage  ./xxx.AppImage Extra icon  ./xxx.AppImage --appimage-extract Desktop Entry For example:
+ [Desktop Entry]  Version=1.0  Type=Application  Name=xxx  Comment=A cross platform comic client.  Exec=/home/&amp;lt;user&amp;gt;/Desktop/AppImages/xxx.AppImage  Icon=/home/&amp;lt;user&amp;gt;/Desktop/AppImages/icons/xxx.png  Terminal=false  tags=Game  X-AppImage-Version=1.0.0   # Copy the content to xxx.desktop  mkdir -p ~/.local/share/applications  touch ~/.local/share/applications/xxx.desktop </description>
+    </item>
+    
+    <item>
+      <title>Linux配置</title>
+      <link>https://star-hengxing.github.io/p/linux%E9%85%8D%E7%BD%AE/</link>
+      <pubDate>Sat, 29 Jan 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://star-hengxing.github.io/p/linux%E9%85%8D%E7%BD%AE/</guid>
+      <description>基本软件    工具 名字     display manager lightdm   desktop environment xfce4   文本编辑器 vscode/vim/emacs   程序启动器 rofi   输入法 fcitx5   browser microsoft-edge-dev(AUR)   多线程下载 aria2   压缩包解压/查看 ark   proxy clash for window(AUR)   RSS fluent-reader   shell zsh   PDF zathura    命令行软件    描述 名字     显示目录大小 ncdu   高级版top htop   打印彩色的十六进制 hexyl   语法高亮和行号的cat+less bat   统计目录代码量 loc   文件浏览器 ranger    新建用户  useradd -m -G wheel username  passwd username  ln -s /usr/bin/vim /usr/bin/vi  visudo 找到# %wheel ALL=(ALL)ALL取消注释</description>
+    </item>
+    
+    <item>
+      <title>记录安装arch的过程</title>
+      <link>https://star-hengxing.github.io/p/%E8%AE%B0%E5%BD%95%E5%AE%89%E8%A3%85arch%E7%9A%84%E8%BF%87%E7%A8%8B/</link>
+      <pubDate>Mon, 02 Aug 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://star-hengxing.github.io/p/%E8%AE%B0%E5%BD%95%E5%AE%89%E8%A3%85arch%E7%9A%84%E8%BF%87%E7%A8%8B/</guid>
+      <description>配置  虚拟机: Oracle VM VirtualBox 笔记本：UEFI启动 镜像: 官网  前提  了解UEFI还是BIOS启动，不同的启动方式对应不同的步骤 基本的linux命令行操作和知识 足够耐心 善用archwiki  安装 联网 wifi配置麻烦，强烈建议网线或者手机usb联网
+ ip link 然后ping查看联网是否成功
+ ping baidu.com 更新系统时间  timedatectl set-ntp true  timedatectl status # 检查服务状态 硬盘分区 硬盘分区工具有很多，推荐小白使用cfdisk
+查看硬盘用lsblk
+在分区前，需了解swap(分区)，区别linux根分区和windows盘符的概念
+如果是UEFI启动，需要分一个EFI区，而BIOS则不用
+分区步骤大概就是：new-&amp;gt;分大小-&amp;gt;改类型-&amp;gt;保存-&amp;gt;格式化-&amp;gt;挂载
+EFI分区和正常分区格式化工具不一样
+根分区需要首先挂载
+swap区看需求分(格式化和挂载是单独命令使用)
+添加国内镜像加速  vim /etc/pacman.d/mirrorlist  # 添加  Server = https://mirrors.tuna.tsinghua.edu.cn/archlinux/$repo/os/$arch  Server = https://mirrors.zju.edu.cn/archlinux/$repo/os/$arch 安装基本包  pacstrap /mnt base linux linux-firmware 在此步骤可以考虑把常用软件装了(vim/networkmanager/sudo)
+配置Fstab  genfstab -U /mnt &amp;gt;&amp;gt; /mnt/etc/fstab  cat /mnt/etc/fstab # 检查 change root 切换到自己系统</description>
+    </item>
+    
+  </channel>
+</rss>

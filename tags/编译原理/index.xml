@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>编译原理 on 恒星的小站</title>
+    <link>https://star-hengxing.github.io/tags/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/</link>
+    <description>Recent content in 编译原理 on 恒星的小站</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Sat, 29 Jan 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://star-hengxing.github.io/tags/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>编译器优化</title>
+      <link>https://star-hengxing.github.io/p/%E7%BC%96%E8%AF%91%E5%99%A8%E4%BC%98%E5%8C%96/</link>
+      <pubDate>Sat, 29 Jan 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://star-hengxing.github.io/p/%E7%BC%96%E8%AF%91%E5%99%A8%E4%BC%98%E5%8C%96/</guid>
+      <description>在书中2.14节 [1]，看到一个循环遍历的编译器优化，书中给出了用指针和for循环遍历的C代码和对应汇编代码
+clear1(int array[], int size) {  int i;  for (int i = 0; i &amp;lt; size; i += 1)  array[i] = 0; }  clear2(int* array, int size) {  int *p;  for (p = &amp;amp;array[0]; p &amp;lt; &amp;amp;array[size]; p = p + 1)  *p = 0; } // 书中并无clear3代码 clear3(int* array, int size) {  const int *end = &amp;amp;array[size]; // 避免在循环里重复计算  for (int* p = &amp;amp;array[0]; p &amp;lt; end; p++)  *p = 0; } ps: int array[]和int* array在编译器看来都一样；&amp;amp;array[0]和array一样(数组名就是地址)</description>
+    </item>
+    
+  </channel>
+</rss>

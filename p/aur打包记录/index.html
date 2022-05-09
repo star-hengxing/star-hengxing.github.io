@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='初次打包上AUR'><title>AUR打包记录</title>
+
+<link rel='canonical' href='https://star-hengxing.github.io/p/aur%E6%89%93%E5%8C%85%E8%AE%B0%E5%BD%95/'>
+
+<link rel="stylesheet" href="/scss/style.min.690a283bac9f967161eea605d3ab2ebc0b689da41a8b82c681a9dd82668ccf94.css"><meta property='og:title' content='AUR打包记录'>
+<meta property='og:description' content='初次打包上AUR'>
+<meta property='og:url' content='https://star-hengxing.github.io/p/aur%E6%89%93%E5%8C%85%E8%AE%B0%E5%BD%95/'>
+<meta property='og:site_name' content='恒星的小站'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Linux' /><meta property='article:published_time' content='2022-03-02T10:03:35&#43;08:00'/><meta property='article:modified_time' content='2022-03-02T10:03:35&#43;08:00'/>
+<meta name="twitter:title" content="AUR打包记录">
+<meta name="twitter:description" content="初次打包上AUR">
+    </head>
+    <body class="
+    article-page has-toc
+">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex 
+    
+        extended
+    
+">
+    
+        <div id="article-toolbar">
+            <a href="/" class="back-home">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="15 6 9 12 15 18" />
+</svg>
+
+
+
+                <span>返回</span>
+            </a>
+        </div>
+    
+<main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/linux/" >
+                Linux
+            </a>
+        
+    </header>
+    
+
+    <h2 class="article-title">
+        <a href="/p/aur%E6%89%93%E5%8C%85%E8%AE%B0%E5%BD%95/">AUR打包记录</a>
+    </h2>
+
+    
+    <h3 class="article-subtitle">
+        初次打包上AUR
+    </h3>
+    
+
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Mar 02, 2022</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 1 分钟
+                </time>
+            </div>
+        
+    </footer>
+    
+</div>
+</header>
+
+    <section class="article-content">
+    
+    
+    <p>当发现了一个好软件，但aur上没有人打包，这很难受，所以不如自己来为社区做贡献</p>
+<p>这次我打的包是一个appimage，理所当然去参考一些现有的appimage打包PKGBUILD</p>
+<p>所以先<del>设计再编码</del></p>
+<h2 id="pkgbulid编写">PKGBULID编写</h2>
+<ol>
+<li>下载最新版本的软件到本地</li>
+<li>提取appimage，把软件icon放到/usr/share/icons</li>
+<li>制作Desktop Entry，放到/usr/share/applications</li>
+<li>最后将软件去掉版本号，安装到常见目录（我选择了放在/opt/appimages）</li>
+</ol>
+<p>是不是看起来很简单，但由于不熟悉linux和一些常用工具，一顿操作下来，花了半天才写好PKGBUILD。</p>
+<p>首先是学会用sed，因为appimage里自带了一个Desktop Entry，所以要进行修改。</p>
+<p>其次就是安装到目录的时候需要给权限目录权限，不然复制不进去。</p>
+<p>当上游的包没有checksum的时候，还要自己download到本地生成然后加上PKGBULID。当然makepkg然后给了个便利的命令。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span> <span style="color:#6272a4"># 如果有上一个版本的checksum,先用sed删除再执行该命令</span>
+</span></span><span style="display:flex;"><span> sed -i <span style="color:#f1fa8c">&#34;</span><span style="color:#8be9fd;font-style:italic">$d</span><span style="color:#f1fa8c">&#34;</span> PKGBULID
+</span></span><span style="display:flex;"><span> makepkg -g &gt;&gt; PKGBULID
+</span></span></code></pre></div><h2 id="测试">测试</h2>
+<p>写好PKGBULID，就要检查能不能用。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#6272a4"># 检查PKGBUILD格式</span>
+</span></span><span style="display:flex;"><span>namcap PKGBUILD
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># 生成包</span>
+</span></span><span style="display:flex;"><span>makepkg -s
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># 检查包是否缺少依赖等等</span>
+</span></span><span style="display:flex;"><span>namcap xxx.pkg.tar.zst
+</span></span></code></pre></div><p>检查包的时候我弹了许多报错，不知道怎么修。然后我去用namcap检查一下我参考的那个appimage包，好家伙，他的报错跟我一样。既然他没修那我也就算了吧。</p>
+<p>然后尝试安装</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#6272a4"># 生成.SRCINFO给aur仓库的页面展示，如果第一次提交没有生成，aur仓库会拒绝你的包</span>
+</span></span><span style="display:flex;"><span>makepkg -i <span style="color:#ff79c6">&amp;&amp;</span> makepkg --printsrcinfo &gt; .SRCINFO
+</span></span></code></pre></div><h2 id="上传">上传</h2>
+<p>如果一切没问题，那就可以用git上传aur了（需要一个aur帐号）。</p>
+<p>如果会基本的git操作，下面应该都明白怎么操作。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#6272a4"># 为aur创建ssh key</span>
+</span></span><span style="display:flex;"><span>touch ~/.ssh/config
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># 写入这些</span>
+</span></span><span style="display:flex;"><span>Host aur.archlinux.org
+</span></span><span style="display:flex;"><span>    IdentityFile ~/.ssh/aur
+</span></span><span style="display:flex;"><span>    User aur
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># 生成</span>
+</span></span><span style="display:flex;"><span>ssh-keygen -f ~/.ssh/aur
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># 首先创建一个aur项目</span>
+</span></span><span style="display:flex;"><span>git clone ssh://aur@aur.archlinux.org/&lt;你的包名字&gt;.git
+</span></span><span style="display:flex;"><span>git add PKGBUILD .SRCINFO
+</span></span><span style="display:flex;"><span>git commit -m <span style="color:#f1fa8c">&#34;init v1.x.x&#34;</span>
+</span></span><span style="display:flex;"><span>git push
+</span></span></code></pre></div><p>成功之后呢，你就可以尝试用<code>paru</code>/<code>yay</code>来下载了。</p>
+<h2 id="reference">Reference</h2>
+<p><a class="link" href="https://junyussh.github.io/p/arch-linux-package-quick-start/"  target="_blank" rel="noopener"
+    >Arch Linux 第一次打包就上手</a></p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/linux/">Linux</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+</article>
+
+    
+
+    <aside class="related-contents--wrapper">
+    
+    
+        <h2 class="section-title">相关文章</h2>
+        <div class="related-contents">
+            <div class="flex article-list--tile">
+                
+                    
+<article class="">
+    <a href="/p/appimage%E7%9A%84%E4%BD%BF%E7%94%A8/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">AppImage的使用</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="">
+    <a href="/p/linux%E9%85%8D%E7%BD%AE/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Linux配置</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="">
+    <a href="/p/%E8%AE%B0%E5%BD%95%E5%AE%89%E8%A3%85arch%E7%9A%84%E8%BF%87%E7%A8%8B/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">记录安装arch的过程</h2>
+        </div>
+    </a>
+</article>
+                
+            </div>
+        </div>
+    
+</aside>
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+        2022 恒星的小站
+    </section>
+    
+    <section class="powerby">
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.8.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css"integrity="sha256-c0uckgykQ9v5k&#43;IqViZOZKc47Jn7KQil4/MP3ySA3F8="crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css"integrity="sha256-SBLU4vv6CA6lHsZ1XyTdhyjJxCjPif/TRkjnsyGAGnE="crossorigin="anonymous"
+            >
+
+            </main>
+    
+        <aside class="sidebar right-sidebar sticky">
+            <section class="widget archives">
+                <div class="widget-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+                </div>
+                <h2 class="widget-title section-title">目录</h2>
+                
+                <div class="widget--toc">
+                    <nav id="TableOfContents">
+  <ol>
+    <li><a href="#pkgbulid编写">PKGBULID编写</a></li>
+    <li><a href="#测试">测试</a></li>
+    <li><a href="#上传">上传</a></li>
+    <li><a href="#reference">Reference</a></li>
+  </ol>
+</nav>
+                </div>
+            </section>
+        </aside>
+    
+
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js"integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

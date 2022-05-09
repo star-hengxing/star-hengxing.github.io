@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>ARK Survival Evolved on 恒星的小站</title>
+    <link>https://star-hengxing.github.io/tags/ark-survival-evolved/</link>
+    <description>Recent content in ARK Survival Evolved on 恒星的小站</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Fri, 04 Feb 2022 13:33:27 +0800</lastBuildDate><atom:link href="https://star-hengxing.github.io/tags/ark-survival-evolved/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>ARK Survival Evolved 开启活动的命令行参数</title>
+      <link>https://star-hengxing.github.io/p/ark-survival-evolved-%E5%BC%80%E5%90%AF%E6%B4%BB%E5%8A%A8%E7%9A%84%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%8F%82%E6%95%B0/</link>
+      <pubDate>Fri, 04 Feb 2022 13:33:27 +0800</pubDate>
+      
+      <guid>https://star-hengxing.github.io/p/ark-survival-evolved-%E5%BC%80%E5%90%AF%E6%B4%BB%E5%8A%A8%E7%9A%84%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%8F%82%E6%95%B0/</guid>
+      <description>Enable ARK: Survival Evolved Events  -activeevent=EventName List of ARK Events    Active event Command     Love Evolved -activeevent=vday   Eggcelect Adventure -activeevent=Easter   Anniversary -activeevent=birthday   Summer Bash -activeevent=Summer   Fear Evolved -activeevent=FearEvolved   Turkey Trial -activeevent=TurkeyTrial   Winter Wonderland -activeevent=WinterWonderland    </description>
+    </item>
+    
+  </channel>
+</rss>

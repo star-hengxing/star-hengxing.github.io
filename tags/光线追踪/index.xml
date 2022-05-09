@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>光线追踪 on 恒星的小站</title>
+    <link>https://star-hengxing.github.io/tags/%E5%85%89%E7%BA%BF%E8%BF%BD%E8%B8%AA/</link>
+    <description>Recent content in 光线追踪 on 恒星的小站</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Sun, 11 Apr 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://star-hengxing.github.io/tags/%E5%85%89%E7%BA%BF%E8%BF%BD%E8%B8%AA/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>光线与各种几何图形求交</title>
+      <link>https://star-hengxing.github.io/p/%E5%85%89%E7%BA%BF%E4%B8%8E%E5%90%84%E7%A7%8D%E5%87%A0%E4%BD%95%E5%9B%BE%E5%BD%A2%E6%B1%82%E4%BA%A4/</link>
+      <pubDate>Sun, 11 Apr 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://star-hengxing.github.io/p/%E5%85%89%E7%BA%BF%E4%B8%8E%E5%90%84%E7%A7%8D%E5%87%A0%E4%BD%95%E5%9B%BE%E5%BD%A2%E6%B1%82%E4%BA%A4/</guid>
+      <description>在许多光线追踪的教程，光线求交的位置通常在世界空间(world space)
+但在一些书籍中，光线求交的位置在几何图形自己的空间里进行(object space)
+做法：准备模型矩阵(model matrix)的逆矩阵，将光线变换到对象空间
+$$ Ray(t)=o+td (0 \leq t &amp;lt;\infty) $$
+光线的方程由点和向量组成，时间不变，对点和向量进行变换 $$ M^{-1}Ray $$
+然后在对象空间求交并把相交信息带回世界空间
+因为大部分几何图形在对象空间位于坐标原点，没有进行变换(旋转/剪切)，处理求交就变得容易。在获取表面信息例如uv和颜色也很方便，除此外还可以提高计算浮点数准确性
+下文中，如果想从对象空间求交的话，去掉对光线位置偏移的代码就行了
+我们默认光线都是已经从世界空间变换的物体空间
+平面(Plane) 其实AABB包围盒，立方体，平面求交计算都一样，计算比较简单，只是维度不同而已，但我还是要介绍一下平面求交，因为我发现一个比较好玩的地方
+假设y轴垂直于平面，将公式变形 $$ t=(y-o)/d $$ 因为我们在物体空间求交，所以y为0
+if(ray.d.y == 0.0f) return false; // 忽略平行于平面的光线 float t = -ray.o.y / ray.d.y; if(t &amp;lt; 0.0f) return false; 相当于求出了无限大的xz平面
+好玩的地方来，我们通过判断x,z坐标对这个无限大的平面进行限制
+比如
+$$ x^{2}+z^{2}\leq1 $$
+这时候在xz二维坐标系上是一个圆心在原点，半径为1的圆
+我们相当于在一个平面坐标系下绘制图形，所以根据数学，可以画出各种有趣的图案
+圆柱(Cylinder) 在世界空间求交，我们要确定圆柱垂直的是哪一轴和圆柱位置，在下面代码根据坐标系小心处理xyz的编排
+假设圆柱与y轴垂直 如何确定这个圆柱位置呢，我们以圆柱底面(bottom cap)圆心为坐标
+$$ center(x,z) $$
+描述圆柱半径用 r 来描述
+圆柱高度(垂直的那一轴)
+$$ h_{min}h_{max} $$
+底面是一个圆，我们先来判断相交点是否在这个底面</description>
+    </item>
+    
+    <item>
+      <title>离线渲染-光线追踪框架学习资料</title>
+      <link>https://star-hengxing.github.io/p/%E7%A6%BB%E7%BA%BF%E6%B8%B2%E6%9F%93-%E5%85%89%E7%BA%BF%E8%BF%BD%E8%B8%AA%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%96%99/</link>
+      <pubDate>Wed, 16 Dec 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://star-hengxing.github.io/p/%E7%A6%BB%E7%BA%BF%E6%B8%B2%E6%9F%93-%E5%85%89%E7%BA%BF%E8%BF%BD%E8%B8%AA%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%96%99/</guid>
+      <description>GAMES101:现代计算机图形学入门 网课，可在b站上观看
+assignment 5-7 是光线追踪的作业
+如果对光栅化，几何，动画与模拟，不感兴趣，可以只看Lecture 13-20（个人建议：把整套课看完也是不错的）
+Taichi课程 课程主页
+网课，其中6-7讲涉及光线追踪
+Peter Shirley写的光线追踪三部曲  Ray Tracing in One Weekend Ray Tracing: The Next Week Ray Tracing: The Rest of Your Life  书中配套代码，在网上能搜到这三本的笔记和翻译版本
+我认为这是光线追踪入门的最好教程
+Daily Pathtracer Aras Pranckevičius大佬写的教程
+介绍 博客
+Nori an educational ray tracer
+主页
+5个assignment
+PBRT Physically Based Rendering:From Theory To Implementation
+这本书是学习离线渲染系统书（离线渲染圣经），配套代码在github上
+网上在线阅读
+此为光线追踪进阶书籍
+书  Ray Tracing Gems Advanced global illumination Fundamentals of Computer Graphics Real-Time Rendering 全局光照技术  杂类  github上收集的图形学资料 milo yip的用JavaScript玩转计算机图形学-光线追踪入门 scratchapixel，图形学网站，对细节讲解很详细，配套代码 99行代码写出路径追踪-smallpt real-time-rendering，网站内附带很多图形学资料 mitsuba,一个开源渲染器 stackexchange的计算机图形学板块  </description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>C&#43;&#43; on 恒星的小站</title>
+    <link>https://star-hengxing.github.io/tags/c&#43;&#43;/</link>
+    <description>Recent content in C&#43;&#43; on 恒星的小站</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Tue, 11 Jan 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://star-hengxing.github.io/tags/c++/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>一个函数打印STL容器</title>
+      <link>https://star-hengxing.github.io/p/%E4%B8%80%E4%B8%AA%E5%87%BD%E6%95%B0%E6%89%93%E5%8D%B0stl%E5%AE%B9%E5%99%A8/</link>
+      <pubDate>Tue, 11 Jan 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://star-hengxing.github.io/p/%E4%B8%80%E4%B8%AA%E5%87%BD%E6%95%B0%E6%89%93%E5%8D%B0stl%E5%AE%B9%E5%99%A8/</guid>
+      <description>满足range这个concept就可以使用该函数
+ #include &amp;lt;iostream&amp;gt; #include &amp;lt;numeric&amp;gt; #include &amp;lt;ranges&amp;gt; #include &amp;lt;vector&amp;gt; #include &amp;lt;array&amp;gt;  template &amp;lt;std::ranges::range T&amp;gt;  void println(const T&amp;amp; args)  {  for(const auto&amp;amp; v : args)  {  std::cout &amp;lt;&amp;lt; v &amp;lt;&amp;lt; &amp;#39; &amp;#39;;  }  std::cout &amp;lt;&amp;lt; &amp;#39;\n&amp;#39;;  }   template &amp;lt;std::ranges::range... Ts&amp;gt;  void print(Ts... args)  {  (println(args), ...);  }   int main()  {  std::array&amp;lt;int, 10&amp;gt; arr;  std::iota(arr.</description>
+    </item>
+    
+  </channel>
+</rss>

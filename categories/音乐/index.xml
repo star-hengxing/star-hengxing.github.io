@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>音乐 on 恒星的小站</title>
+    <link>https://star-hengxing.github.io/categories/%E9%9F%B3%E4%B9%90/</link>
+    <description>Recent content in 音乐 on 恒星的小站</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Sun, 30 Jan 2022 11:25:23 +0800</lastBuildDate><atom:link href="https://star-hengxing.github.io/categories/%E9%9F%B3%E4%B9%90/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>随手记的乐理知识</title>
+      <link>https://star-hengxing.github.io/p/%E9%9A%8F%E6%89%8B%E8%AE%B0%E7%9A%84%E4%B9%90%E7%90%86%E7%9F%A5%E8%AF%86/</link>
+      <pubDate>Sun, 30 Jan 2022 11:25:23 +0800</pubDate>
+      
+      <guid>https://star-hengxing.github.io/p/%E9%9A%8F%E6%89%8B%E8%AE%B0%E7%9A%84%E4%B9%90%E7%90%86%E7%9F%A5%E8%AF%86/</guid>
+      <description>音程（Interval） 两个音高不同的音在一起会形成音程。一个音到下一个相邻的音的距离叫二度（second）。如果距离是半音，音程叫小二度（m2）；全音就叫大二度（M2）
+单位度作为音程的冲量单位
+  旋律（Melodic） -&amp;gt; 两个音一前一后发声
+  和声（Harmonic） -&amp;gt; 多个音同时发声
+  和弦（chord） 同时发声的音 &amp;gt;= 3 就叫和弦
+Reference  精通乐理不是梦：超简单的乐理学习图解版 认识乐理：视唱练耳同步学  </description>
+    </item>
+    
+  </channel>
+</rss>

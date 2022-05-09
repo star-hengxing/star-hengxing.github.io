@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>工具 on 恒星的小站</title>
+    <link>https://star-hengxing.github.io/tags/%E5%B7%A5%E5%85%B7/</link>
+    <description>Recent content in 工具 on 恒星的小站</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Sat, 29 Jan 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://star-hengxing.github.io/tags/%E5%B7%A5%E5%85%B7/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>使用Synapse自建聊天服务器</title>
+      <link>https://star-hengxing.github.io/p/%E4%BD%BF%E7%94%A8synapse%E8%87%AA%E5%BB%BA%E8%81%8A%E5%A4%A9%E6%9C%8D%E5%8A%A1%E5%99%A8/</link>
+      <pubDate>Sat, 29 Jan 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://star-hengxing.github.io/p/%E4%BD%BF%E7%94%A8synapse%E8%87%AA%E5%BB%BA%E8%81%8A%E5%A4%A9%E6%9C%8D%E5%8A%A1%E5%99%A8/</guid>
+      <description>我的系统是ArchLinux，所以看着archwiki一路配置比较舒服
+其他系统请看官方文档
+从安装到启动 my.domain.name替换成自己的域名就行
+ sudo cd /var/lib/synapse  sudo -u synapse python -m synapse.app.homeserver \  --server-name my.domain.name \  --config-path /etc/synapse/homeserver.yaml \  --generate-config \  --report-stats=yes   sudo systemctl start synapse.service  # 服务器至少要有一个用户  register_new_matrix_user -c /etc/synapse/homeserver.yaml http://127.0.0.1:8008 这时候应该就可以用一个matrix client来连接了，这里选择element</description>
+    </item>
+    
+    <item>
+      <title>使用命令行工具下载在线视频</title>
+      <link>https://star-hengxing.github.io/p/%E4%BD%BF%E7%94%A8%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%B7%A5%E5%85%B7%E4%B8%8B%E8%BD%BD%E5%9C%A8%E7%BA%BF%E8%A7%86%E9%A2%91/</link>
+      <pubDate>Sat, 29 Jan 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://star-hengxing.github.io/p/%E4%BD%BF%E7%94%A8%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%B7%A5%E5%85%B7%E4%B8%8B%E8%BD%BD%E5%9C%A8%E7%BA%BF%E8%A7%86%E9%A2%91/</guid>
+      <description>yt-dlp 一个命令行下载youtube视频软件，目前来说就他下载速度还行，其他同类工具被限速了
+TL;DR
+下载一个视频
+ yt-dlp URL 不下载，查看视频下载的信息(选择画质)
+ yt-dlp -F URL   [BiliBili] 12Q4y1S73g: Downloading webpage  [BiliBili] 12Q4y1S73g: Downloading video info page  [info] Available formats for 12Q4y1S73g:  format code extension resolution note  0 flv unknown  1 flv unknown  2 flv unknown 295.77MiB (best) 下载bilibili视频 Bilibili Evolved + aria2 下载视频
+Bilibili Evolved提供了几种视频下载方式，我这里选择aria2
+启动aria2后，在插件里选择aria2 rpc就可以自动下载视频了</description>
+    </item>
+    
+  </channel>
+</rss>

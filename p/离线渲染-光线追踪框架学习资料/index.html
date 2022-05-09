@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='GAMES101:现代计算机图形学入门 网课，可在b站上观看
+assignment 5-7 是光线追踪的作业
+如果对光栅化，几何，动画与模拟，不感兴趣，可以只看Lecture 13-20（个人建议：把整套课看完也是不错的）
+Taichi课程 课程主页
+网课，其中6-7讲涉及光线追踪
+Peter Shirley写的光线追踪三部曲  Ray Tracing in One Weekend Ray Tracing: The Next Week Ray Tracing: The Rest of Your Life  书中配套代码，在网上能搜到这三本的笔记和翻译版本
+我认为这是光线追踪入门的最好教程
+Daily Pathtracer Aras Pranckevičius大佬写的教程
+介绍 博客
+Nori an educational ray tracer
+主页
+5个assignment
+PBRT Physically Based Rendering:From Theory To Implementation
+这本书是学习离线渲染系统书（离线渲染圣经），配套代码在github上
+网上在线阅读
+此为光线追踪进阶书籍
+书  Ray Tracing Gems Advanced global illumination Fundamentals of Computer Graphics Real-Time Rendering 全局光照技术  杂类  github上收集的图形学资料 milo yip的用JavaScript玩转计算机图形学-光线追踪入门 scratchapixel，图形学网站，对细节讲解很详细，配套代码 99行代码写出路径追踪-smallpt real-time-rendering，网站内附带很多图形学资料 mitsuba,一个开源渲染器 stackexchange的计算机图形学板块  '><title>离线渲染-光线追踪框架学习资料</title>
+
+<link rel='canonical' href='https://star-hengxing.github.io/p/%E7%A6%BB%E7%BA%BF%E6%B8%B2%E6%9F%93-%E5%85%89%E7%BA%BF%E8%BF%BD%E8%B8%AA%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%96%99/'>
+
+<link rel="stylesheet" href="/scss/style.min.690a283bac9f967161eea605d3ab2ebc0b689da41a8b82c681a9dd82668ccf94.css"><meta property='og:title' content='离线渲染-光线追踪框架学习资料'>
+<meta property='og:description' content='GAMES101:现代计算机图形学入门 网课，可在b站上观看
+assignment 5-7 是光线追踪的作业
+如果对光栅化，几何，动画与模拟，不感兴趣，可以只看Lecture 13-20（个人建议：把整套课看完也是不错的）
+Taichi课程 课程主页
+网课，其中6-7讲涉及光线追踪
+Peter Shirley写的光线追踪三部曲  Ray Tracing in One Weekend Ray Tracing: The Next Week Ray Tracing: The Rest of Your Life  书中配套代码，在网上能搜到这三本的笔记和翻译版本
+我认为这是光线追踪入门的最好教程
+Daily Pathtracer Aras Pranckevičius大佬写的教程
+介绍 博客
+Nori an educational ray tracer
+主页
+5个assignment
+PBRT Physically Based Rendering:From Theory To Implementation
+这本书是学习离线渲染系统书（离线渲染圣经），配套代码在github上
+网上在线阅读
+此为光线追踪进阶书籍
+书  Ray Tracing Gems Advanced global illumination Fundamentals of Computer Graphics Real-Time Rendering 全局光照技术  杂类  github上收集的图形学资料 milo yip的用JavaScript玩转计算机图形学-光线追踪入门 scratchapixel，图形学网站，对细节讲解很详细，配套代码 99行代码写出路径追踪-smallpt real-time-rendering，网站内附带很多图形学资料 mitsuba,一个开源渲染器 stackexchange的计算机图形学板块  '>
+<meta property='og:url' content='https://star-hengxing.github.io/p/%E7%A6%BB%E7%BA%BF%E6%B8%B2%E6%9F%93-%E5%85%89%E7%BA%BF%E8%BF%BD%E8%B8%AA%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%96%99/'>
+<meta property='og:site_name' content='恒星的小站'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='计算机图形学' /><meta property='article:tag' content='光线追踪' /><meta property='article:published_time' content='2020-12-16T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2021-12-21T00:00:00&#43;00:00'/>
+<meta name="twitter:title" content="离线渲染-光线追踪框架学习资料">
+<meta name="twitter:description" content="GAMES101:现代计算机图形学入门 网课，可在b站上观看
+assignment 5-7 是光线追踪的作业
+如果对光栅化，几何，动画与模拟，不感兴趣，可以只看Lecture 13-20（个人建议：把整套课看完也是不错的）
+Taichi课程 课程主页
+网课，其中6-7讲涉及光线追踪
+Peter Shirley写的光线追踪三部曲  Ray Tracing in One Weekend Ray Tracing: The Next Week Ray Tracing: The Rest of Your Life  书中配套代码，在网上能搜到这三本的笔记和翻译版本
+我认为这是光线追踪入门的最好教程
+Daily Pathtracer Aras Pranckevičius大佬写的教程
+介绍 博客
+Nori an educational ray tracer
+主页
+5个assignment
+PBRT Physically Based Rendering:From Theory To Implementation
+这本书是学习离线渲染系统书（离线渲染圣经），配套代码在github上
+网上在线阅读
+此为光线追踪进阶书籍
+书  Ray Tracing Gems Advanced global illumination Fundamentals of Computer Graphics Real-Time Rendering 全局光照技术  杂类  github上收集的图形学资料 milo yip的用JavaScript玩转计算机图形学-光线追踪入门 scratchapixel，图形学网站，对细节讲解很详细，配套代码 99行代码写出路径追踪-smallpt real-time-rendering，网站内附带很多图形学资料 mitsuba,一个开源渲染器 stackexchange的计算机图形学板块  ">
+    </head>
+    <body class="
+    article-page has-toc
+">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex 
+    
+        extended
+    
+">
+    
+        <div id="article-toolbar">
+            <a href="/" class="back-home">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="15 6 9 12 15 18" />
+</svg>
+
+
+
+                <span>返回</span>
+            </a>
+        </div>
+    
+<main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+
+    <h2 class="article-title">
+        <a href="/p/%E7%A6%BB%E7%BA%BF%E6%B8%B2%E6%9F%93-%E5%85%89%E7%BA%BF%E8%BF%BD%E8%B8%AA%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%96%99/">离线渲染-光线追踪框架学习资料</a>
+    </h2>
+
+    
+
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Dec 16, 2020</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 1 分钟
+                </time>
+            </div>
+        
+    </footer>
+    
+</div>
+</header>
+
+    <section class="article-content">
+    
+    
+    <h2 id="games101现代计算机图形学入门">GAMES101:现代计算机图形学入门</h2>
+<p>网课，可在<a class="link" href="https://link.zhihu.com/?target=https%3A//www.bilibili.com/video/av90798049/"  target="_blank" rel="noopener"
+    >b站</a>上观看</p>
+<p>assignment 5-7 是光线追踪的作业<br>
+如果对光栅化，几何，动画与模拟，不感兴趣，可以只看Lecture 13-20（个人建议：把整套课看完也是不错的）</p>
+<h2 id="taichi课程">Taichi课程</h2>
+<p><a class="link" href="https://github.com/taichiCourse01/taichiCourse01"  target="_blank" rel="noopener"
+    >课程主页</a></p>
+<p>网课，其中6-7讲涉及光线追踪</p>
+<h2 id="peter-shirley写的光线追踪三部曲">Peter Shirley写的光线追踪三部曲</h2>
+<ul>
+<li>Ray Tracing in One Weekend</li>
+<li>Ray Tracing: The Next Week</li>
+<li>Ray Tracing: The Rest of Your Life</li>
+</ul>
+<p>书中配套代码，在网上能搜到这三本的笔记和翻译版本<br>
+<em>我认为这是光线追踪入门的最好教程</em></p>
+<h2 id="daily-pathtracer">Daily Pathtracer</h2>
+<p>Aras Pranckevičius大佬写的教程</p>
+<p><a class="link" href="https://zhuanlan.zhihu.com/p/37462611"  target="_blank" rel="noopener"
+    >介绍</a>
+<a class="link" href="https://aras-p.info/blog/2018/03/28/Daily-Pathtracer-Part-0-Intro/"  target="_blank" rel="noopener"
+    >博客</a></p>
+<h2 id="nori">Nori</h2>
+<p>an educational ray tracer<br>
+<a class="link" href="https://wjakob.github.io/nori/##guidelines"  target="_blank" rel="noopener"
+    >主页</a><br>
+5个assignment</p>
+<h2 id="pbrt">PBRT</h2>
+<p>Physically Based Rendering:From Theory To Implementation<br>
+这本书是学习离线渲染系统书（离线渲染圣经），配套代码在github上<br>
+<a class="link" href="https://www.pbrt.org/"  target="_blank" rel="noopener"
+    >网上在线阅读</a></p>
+<p><em>此为光线追踪进阶书籍</em></p>
+<h2 id="书">书</h2>
+<ul>
+<li>Ray Tracing Gems</li>
+<li>Advanced global illumination</li>
+<li>Fundamentals of Computer Graphics</li>
+<li>Real-Time Rendering</li>
+<li>全局光照技术</li>
+</ul>
+<h2 id="杂类">杂类</h2>
+<ul>
+<li><a class="link" href="https://github.com/zheng95z/fun-with-graphics##cg"  target="_blank" rel="noopener"
+    >github</a>上收集的图形学资料</li>
+<li>milo yip的<a class="link" href="https://www.cnblogs.com/miloyip/archive/2010/03/29/1698953.html"  target="_blank" rel="noopener"
+    >用JavaScript玩转计算机图形学-光线追踪入门</a></li>
+<li><a class="link" href="https://www.scratchapixel.com/"  target="_blank" rel="noopener"
+    >scratchapixel</a>，图形学网站，对细节讲解很详细，配套代码</li>
+<li>99行代码写出路径追踪-<a class="link" href="http://www.kevinbeason.com/smallpt/"  target="_blank" rel="noopener"
+    >smallpt</a></li>
+<li><a class="link" href="http://www.realtimerendering.com/"  target="_blank" rel="noopener"
+    >real-time-rendering</a>，网站内附带很多图形学资料</li>
+<li>mitsuba,一个开源渲染器</li>
+<li><a class="link" href="https://computergraphics.stackexchange.com/"  target="_blank" rel="noopener"
+    >stackexchange</a>的计算机图形学板块</li>
+</ul>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/">计算机图形学</a>
+        
+            <a href="/tags/%E5%85%89%E7%BA%BF%E8%BF%BD%E8%B8%AA/">光线追踪</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    <section class="article-lastmod">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+        <span>
+            最后更新于 Dec 21, 2021
+        </span>
+    </section></footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.13.13/dist/katex.min.css"integrity="sha384-RZU/ijkSsFbcmivfdRBQDtwuwVqK7GMOw6IMvKyeWL2K5UAlyp6WonmB8m7Jd0Hn"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.13.13/dist/katex.min.js"integrity="sha384-pK1WpvzWVBQiP0/GjnvRxV4mOb0oxFuyRxJlk6vVw146n3egcN5C925NCP7a7BY8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.13.13/dist/contrib/auto-render.min.js"integrity="sha384-vZTG03m&#43;2yp6N6BNi5iM4rW4oIwk5DfcNdFfxkk9ZWpDriOkXX8voJBFrAO7MpVl"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        renderMathInElement(document.querySelector(`.article-content`), {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ]
+        });})
+</script>
+    
+</article>
+
+    
+
+    <aside class="related-contents--wrapper">
+    
+    
+        <h2 class="section-title">相关文章</h2>
+        <div class="related-contents">
+            <div class="flex article-list--tile">
+                
+                    
+<article class="">
+    <a href="/p/%E5%85%89%E7%BA%BF%E4%B8%8E%E5%90%84%E7%A7%8D%E5%87%A0%E4%BD%95%E5%9B%BE%E5%BD%A2%E6%B1%82%E4%BA%A4/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">光线与各种几何图形求交</h2>
+        </div>
+    </a>
+</article>
+                
+            </div>
+        </div>
+    
+</aside>
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+        2022 恒星的小站
+    </section>
+    
+    <section class="powerby">
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.8.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css"integrity="sha256-c0uckgykQ9v5k&#43;IqViZOZKc47Jn7KQil4/MP3ySA3F8="crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css"integrity="sha256-SBLU4vv6CA6lHsZ1XyTdhyjJxCjPif/TRkjnsyGAGnE="crossorigin="anonymous"
+            >
+
+            </main>
+    
+        <aside class="sidebar right-sidebar sticky">
+            <section class="widget archives">
+                <div class="widget-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+                </div>
+                <h2 class="widget-title section-title">目录</h2>
+                
+                <div class="widget--toc">
+                    <nav id="TableOfContents">
+  <ol>
+    <li><a href="#games101现代计算机图形学入门">GAMES101:现代计算机图形学入门</a></li>
+    <li><a href="#taichi课程">Taichi课程</a></li>
+    <li><a href="#peter-shirley写的光线追踪三部曲">Peter Shirley写的光线追踪三部曲</a></li>
+    <li><a href="#daily-pathtracer">Daily Pathtracer</a></li>
+    <li><a href="#nori">Nori</a></li>
+    <li><a href="#pbrt">PBRT</a></li>
+    <li><a href="#书">书</a></li>
+    <li><a href="#杂类">杂类</a></li>
+  </ol>
+</nav>
+                </div>
+            </section>
+        </aside>
+    
+
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js"integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>
