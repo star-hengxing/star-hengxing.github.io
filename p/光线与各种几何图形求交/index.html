@@ -1,86 +1,59 @@
 <!DOCTYPE html>
 <html lang="zh-cn">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='在许多光线追踪的教程，光线求交的位置通常在世界空间(world space)
-但在一些书籍中，光线求交的位置在几何图形自己的空间里进行(object space)
-做法：准备模型矩阵(model matrix)的逆矩阵，将光线变换到对象空间
-$$ Ray(t)=o&#43;td (0 \leq t &amp;lt;\infty) $$
-光线的方程由点和向量组成，时间不变，对点和向量进行变换 $$ M^{-1}Ray $$
-然后在对象空间求交并把相交信息带回世界空间
-因为大部分几何图形在对象空间位于坐标原点，没有进行变换(旋转/剪切)，处理求交就变得容易。在获取表面信息例如uv和颜色也很方便，除此外还可以提高计算浮点数准确性
-下文中，如果想从对象空间求交的话，去掉对光线位置偏移的代码就行了
-我们默认光线都是已经从世界空间变换的物体空间
-平面(Plane) 其实AABB包围盒，立方体，平面求交计算都一样，计算比较简单，只是维度不同而已，但我还是要介绍一下平面求交，因为我发现一个比较好玩的地方
-假设y轴垂直于平面，将公式变形 $$ t=(y-o)/d $$ 因为我们在物体空间求交，所以y为0
-if(ray.d.y == 0.0f) return false; // 忽略平行于平面的光线 float t = -ray.o.y / ray.d.y; if(t &amp;lt; 0.0f) return false; 相当于求出了无限大的xz平面
-好玩的地方来，我们通过判断x,z坐标对这个无限大的平面进行限制
-比如
-$$ x^{2}&#43;z^{2}\leq1 $$
-这时候在xz二维坐标系上是一个圆心在原点，半径为1的圆
-我们相当于在一个平面坐标系下绘制图形，所以根据数学，可以画出各种有趣的图案
-圆柱(Cylinder) 在世界空间求交，我们要确定圆柱垂直的是哪一轴和圆柱位置，在下面代码根据坐标系小心处理xyz的编排
-假设圆柱与y轴垂直 如何确定这个圆柱位置呢，我们以圆柱底面(bottom cap)圆心为坐标
-$$ center(x,z) $$
-描述圆柱半径用 r 来描述
-圆柱高度(垂直的那一轴)
-$$ h_{min}h_{max} $$
-底面是一个圆，我们先来判断相交点是否在这个底面'><title>光线与各种几何图形求交</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='在一些基础的光线追踪教程中，光线求交通常发生在世界空间(world space)
+但在离线渲染器中(比如PBRT)，光线求交发生在几何图形自己的局部空间(local/object/model space)
+这是有好处的，比如说简化求交代码，相交表面的normal和uv也很容易计算
+下面就记录一些几何求交的做法，自身经验有限，如有错误请指出
+前提  这里采用的是y轴朝上的右手坐标系，-z轴指向屏幕里，x轴在右手 默认光线已经变换到对象的局部空间  使用几何体的变换矩阵和其逆矩阵，求交时将光线变换到对象空间
+$$ Ray(t)=o&#43;td (t &amp;gt; 0) $$
+$$ Ray_{object}=M^{-1}Ray_{world} $$
+矩形(Rectangle) 假设矩形高度为0，躺在xz平面上。长和宽控制矩形大小
+忽略平行于平面的光线
+if(is_zero(ray.direction.y)) return false; 使用高度计算相交点 $$ t=\frac{0 - o_{y}}{d_{y}} $$
+const auto t = ray.inv_at&amp;lt;Axis::Y&amp;gt;(0); const auto [x, y, z] = ray.at(t); 在矩形范围内的点才算相交成功
+if(std::abs(x) &amp;gt; length || std::abs(z) &amp;gt; width) return false; 球(Sphere) 假设球心在原点，半径控制球的大小
+三维空间中球的一般方程 $$ x^{2}&#43;y^{2}&#43;z^{2}=r^{2} $$
+将光线代入方程 $$ (o&#43;td)^{2}=r^{2} $$
+整理可得关于t的一元二次方程 $$ d^{2}t^{2}&#43;2odt&#43;o^{2}-r^{2}=0\ \begin{align*} &amp;amp; a=d^{2}\ &amp;amp; b=2od\ &amp;amp; c=o^{2}-r^{2} \end{align*} $$'><title>光线与各种几何图形求交</title>
 
 <link rel='canonical' href='https://star-hengxing.github.io/p/%E5%85%89%E7%BA%BF%E4%B8%8E%E5%90%84%E7%A7%8D%E5%87%A0%E4%BD%95%E5%9B%BE%E5%BD%A2%E6%B1%82%E4%BA%A4/'>
 
 <link rel="stylesheet" href="/scss/style.min.690a283bac9f967161eea605d3ab2ebc0b689da41a8b82c681a9dd82668ccf94.css"><meta property='og:title' content='光线与各种几何图形求交'>
-<meta property='og:description' content='在许多光线追踪的教程，光线求交的位置通常在世界空间(world space)
-但在一些书籍中，光线求交的位置在几何图形自己的空间里进行(object space)
-做法：准备模型矩阵(model matrix)的逆矩阵，将光线变换到对象空间
-$$ Ray(t)=o&#43;td (0 \leq t &amp;lt;\infty) $$
-光线的方程由点和向量组成，时间不变，对点和向量进行变换 $$ M^{-1}Ray $$
-然后在对象空间求交并把相交信息带回世界空间
-因为大部分几何图形在对象空间位于坐标原点，没有进行变换(旋转/剪切)，处理求交就变得容易。在获取表面信息例如uv和颜色也很方便，除此外还可以提高计算浮点数准确性
-下文中，如果想从对象空间求交的话，去掉对光线位置偏移的代码就行了
-我们默认光线都是已经从世界空间变换的物体空间
-平面(Plane) 其实AABB包围盒，立方体，平面求交计算都一样，计算比较简单，只是维度不同而已，但我还是要介绍一下平面求交，因为我发现一个比较好玩的地方
-假设y轴垂直于平面，将公式变形 $$ t=(y-o)/d $$ 因为我们在物体空间求交，所以y为0
-if(ray.d.y == 0.0f) return false; // 忽略平行于平面的光线 float t = -ray.o.y / ray.d.y; if(t &amp;lt; 0.0f) return false; 相当于求出了无限大的xz平面
-好玩的地方来，我们通过判断x,z坐标对这个无限大的平面进行限制
-比如
-$$ x^{2}&#43;z^{2}\leq1 $$
-这时候在xz二维坐标系上是一个圆心在原点，半径为1的圆
-我们相当于在一个平面坐标系下绘制图形，所以根据数学，可以画出各种有趣的图案
-圆柱(Cylinder) 在世界空间求交，我们要确定圆柱垂直的是哪一轴和圆柱位置，在下面代码根据坐标系小心处理xyz的编排
-假设圆柱与y轴垂直 如何确定这个圆柱位置呢，我们以圆柱底面(bottom cap)圆心为坐标
-$$ center(x,z) $$
-描述圆柱半径用 r 来描述
-圆柱高度(垂直的那一轴)
-$$ h_{min}h_{max} $$
-底面是一个圆，我们先来判断相交点是否在这个底面'>
+<meta property='og:description' content='在一些基础的光线追踪教程中，光线求交通常发生在世界空间(world space)
+但在离线渲染器中(比如PBRT)，光线求交发生在几何图形自己的局部空间(local/object/model space)
+这是有好处的，比如说简化求交代码，相交表面的normal和uv也很容易计算
+下面就记录一些几何求交的做法，自身经验有限，如有错误请指出
+前提  这里采用的是y轴朝上的右手坐标系，-z轴指向屏幕里，x轴在右手 默认光线已经变换到对象的局部空间  使用几何体的变换矩阵和其逆矩阵，求交时将光线变换到对象空间
+$$ Ray(t)=o&#43;td (t &amp;gt; 0) $$
+$$ Ray_{object}=M^{-1}Ray_{world} $$
+矩形(Rectangle) 假设矩形高度为0，躺在xz平面上。长和宽控制矩形大小
+忽略平行于平面的光线
+if(is_zero(ray.direction.y)) return false; 使用高度计算相交点 $$ t=\frac{0 - o_{y}}{d_{y}} $$
+const auto t = ray.inv_at&amp;lt;Axis::Y&amp;gt;(0); const auto [x, y, z] = ray.at(t); 在矩形范围内的点才算相交成功
+if(std::abs(x) &amp;gt; length || std::abs(z) &amp;gt; width) return false; 球(Sphere) 假设球心在原点，半径控制球的大小
+三维空间中球的一般方程 $$ x^{2}&#43;y^{2}&#43;z^{2}=r^{2} $$
+将光线代入方程 $$ (o&#43;td)^{2}=r^{2} $$
+整理可得关于t的一元二次方程 $$ d^{2}t^{2}&#43;2odt&#43;o^{2}-r^{2}=0\ \begin{align*} &amp;amp; a=d^{2}\ &amp;amp; b=2od\ &amp;amp; c=o^{2}-r^{2} \end{align*} $$'>
 <meta property='og:url' content='https://star-hengxing.github.io/p/%E5%85%89%E7%BA%BF%E4%B8%8E%E5%90%84%E7%A7%8D%E5%87%A0%E4%BD%95%E5%9B%BE%E5%BD%A2%E6%B1%82%E4%BA%A4/'>
 <meta property='og:site_name' content='恒星的小站'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='计算机图形学' /><meta property='article:tag' content='光线追踪' /><meta property='article:published_time' content='2021-04-11T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2021-04-23T00:00:00&#43;00:00'/>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='计算机图形学' /><meta property='article:tag' content='光线追踪' /><meta property='article:published_time' content='2021-04-11T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2022-05-15T00:00:00&#43;00:00'/>
 <meta name="twitter:title" content="光线与各种几何图形求交">
-<meta name="twitter:description" content="在许多光线追踪的教程，光线求交的位置通常在世界空间(world space)
-但在一些书籍中，光线求交的位置在几何图形自己的空间里进行(object space)
-做法：准备模型矩阵(model matrix)的逆矩阵，将光线变换到对象空间
-$$ Ray(t)=o&#43;td (0 \leq t &amp;lt;\infty) $$
-光线的方程由点和向量组成，时间不变，对点和向量进行变换 $$ M^{-1}Ray $$
-然后在对象空间求交并把相交信息带回世界空间
-因为大部分几何图形在对象空间位于坐标原点，没有进行变换(旋转/剪切)，处理求交就变得容易。在获取表面信息例如uv和颜色也很方便，除此外还可以提高计算浮点数准确性
-下文中，如果想从对象空间求交的话，去掉对光线位置偏移的代码就行了
-我们默认光线都是已经从世界空间变换的物体空间
-平面(Plane) 其实AABB包围盒，立方体，平面求交计算都一样，计算比较简单，只是维度不同而已，但我还是要介绍一下平面求交，因为我发现一个比较好玩的地方
-假设y轴垂直于平面，将公式变形 $$ t=(y-o)/d $$ 因为我们在物体空间求交，所以y为0
-if(ray.d.y == 0.0f) return false; // 忽略平行于平面的光线 float t = -ray.o.y / ray.d.y; if(t &amp;lt; 0.0f) return false; 相当于求出了无限大的xz平面
-好玩的地方来，我们通过判断x,z坐标对这个无限大的平面进行限制
-比如
-$$ x^{2}&#43;z^{2}\leq1 $$
-这时候在xz二维坐标系上是一个圆心在原点，半径为1的圆
-我们相当于在一个平面坐标系下绘制图形，所以根据数学，可以画出各种有趣的图案
-圆柱(Cylinder) 在世界空间求交，我们要确定圆柱垂直的是哪一轴和圆柱位置，在下面代码根据坐标系小心处理xyz的编排
-假设圆柱与y轴垂直 如何确定这个圆柱位置呢，我们以圆柱底面(bottom cap)圆心为坐标
-$$ center(x,z) $$
-描述圆柱半径用 r 来描述
-圆柱高度(垂直的那一轴)
-$$ h_{min}h_{max} $$
-底面是一个圆，我们先来判断相交点是否在这个底面">
+<meta name="twitter:description" content="在一些基础的光线追踪教程中，光线求交通常发生在世界空间(world space)
+但在离线渲染器中(比如PBRT)，光线求交发生在几何图形自己的局部空间(local/object/model space)
+这是有好处的，比如说简化求交代码，相交表面的normal和uv也很容易计算
+下面就记录一些几何求交的做法，自身经验有限，如有错误请指出
+前提  这里采用的是y轴朝上的右手坐标系，-z轴指向屏幕里，x轴在右手 默认光线已经变换到对象的局部空间  使用几何体的变换矩阵和其逆矩阵，求交时将光线变换到对象空间
+$$ Ray(t)=o&#43;td (t &amp;gt; 0) $$
+$$ Ray_{object}=M^{-1}Ray_{world} $$
+矩形(Rectangle) 假设矩形高度为0，躺在xz平面上。长和宽控制矩形大小
+忽略平行于平面的光线
+if(is_zero(ray.direction.y)) return false; 使用高度计算相交点 $$ t=\frac{0 - o_{y}}{d_{y}} $$
+const auto t = ray.inv_at&amp;lt;Axis::Y&amp;gt;(0); const auto [x, y, z] = ray.at(t); 在矩形范围内的点才算相交成功
+if(std::abs(x) &amp;gt; length || std::abs(z) &amp;gt; width) return false; 球(Sphere) 假设球心在原点，半径控制球的大小
+三维空间中球的一般方程 $$ x^{2}&#43;y^{2}&#43;z^{2}=r^{2} $$
+将光线代入方程 $$ (o&#43;td)^{2}=r^{2} $$
+整理可得关于t的一元二次方程 $$ d^{2}t^{2}&#43;2odt&#43;o^{2}-r^{2}=0\ \begin{align*} &amp;amp; a=d^{2}\ &amp;amp; b=2od\ &amp;amp; c=o^{2}-r^{2} \end{align*} $$">
     </head>
     <body class="
     article-page has-toc
@@ -179,126 +152,139 @@ $$ h_{min}h_{max} $$
     <section class="article-content">
     
     
-    <p>在许多光线追踪的教程，光线求交的位置通常在世界空间(world space)</p>
-<p>但在一些书籍中，光线求交的位置在几何图形自己的空间里进行(object space)</p>
-<p>做法：准备模型矩阵(model matrix)的逆矩阵，将光线变换到对象空间</p>
+    <p>在一些基础的光线追踪教程中，光线求交通常发生在<strong>世界空间(world space)</strong></p>
+<p>但在离线渲染器中(比如PBRT)，光线求交发生在几何图形自己的<strong>局部空间(local/object/model space)</strong></p>
+<p>这是有好处的，比如说简化求交代码，相交表面的<code>normal</code>和<code>uv</code>也很容易计算</p>
+<p>下面就记录一些几何求交的做法，自身经验有限，如有错误请指出</p>
+<h2 id="前提">前提</h2>
+<ul>
+<li>这里采用的是y轴朝上的右手坐标系，-z轴指向屏幕里，x轴在右手</li>
+<li>默认光线已经变换到对象的局部空间</li>
+</ul>
+<p>使用几何体的变换矩阵和其逆矩阵，求交时将光线变换到对象空间</p>
 <p>$$
-Ray(t)=o+td (0 \leq t &lt;\infty)
+Ray(t)=o+td (t &gt; 0)
 $$</p>
-<p>光线的方程由点和向量组成，时间不变，对点和向量进行变换
+<p>$$
+Ray_{object}=M^{-1}Ray_{world}
+$$</p>
+<h2 id="矩形rectangle">矩形(Rectangle)</h2>
+<p>假设矩形高度为<code>0</code>，躺在<code>xz</code>平面上。<code>长</code>和<code>宽</code>控制矩形大小</p>
+<p>忽略平行于平面的光线</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#ff79c6">if</span>(is_zero(ray.direction.y)) <span style="color:#ff79c6">return</span> <span style="color:#8be9fd;font-style:italic">false</span>;
+</span></span></code></pre></div><p>使用高度计算相交点
 $$
-M^{-1}Ray
+t=\frac{0 - o_{y}}{d_{y}}
 $$</p>
-<p>然后在对象空间求交并把相交信息带回世界空间</p>
-<p>因为大部分几何图形在对象空间位于坐标原点，没有进行变换(旋转/剪切)，处理求交就变得容易。在获取表面信息例如uv和颜色也很方便，除此外还可以提高计算浮点数准确性</p>
-<p><strong>下文中，如果想从对象空间求交的话，去掉对光线位置偏移的代码就行了</strong></p>
-<p>我们默认光线都是已经从世界空间变换的物体空间</p>
-<h2 id="平面plane">平面(Plane)</h2>
-<p>其实AABB包围盒，立方体，平面求交计算都一样，计算比较简单，只是维度不同而已，但我还是要介绍一下平面求交，因为我发现一个比较好玩的地方</p>
-<p>假设y轴垂直于平面，将公式变形
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#ff79c6">const</span> <span style="color:#ff79c6">auto</span> t <span style="color:#ff79c6">=</span> ray.inv_at<span style="color:#ff79c6">&lt;</span>Axis<span style="color:#ff79c6">::</span>Y<span style="color:#ff79c6">&gt;</span>(<span style="color:#bd93f9">0</span>);
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">const</span> <span style="color:#ff79c6">auto</span> [x, y, z] <span style="color:#ff79c6">=</span> ray.at(t);
+</span></span></code></pre></div><p>在矩形范围内的点才算相交成功</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#ff79c6">if</span>(std<span style="color:#ff79c6">::</span>abs(x) <span style="color:#ff79c6">&gt;</span> length <span style="color:#ff79c6">||</span> std<span style="color:#ff79c6">::</span>abs(z) <span style="color:#ff79c6">&gt;</span> width) <span style="color:#ff79c6">return</span> <span style="color:#8be9fd;font-style:italic">false</span>;
+</span></span></code></pre></div><h2 id="球sphere">球(Sphere)</h2>
+<p>假设球心在<strong>原点</strong>，<strong>半径</strong>控制球的大小</p>
+<p>三维空间中球的一般方程
 $$
-t=(y-o)/d
+x^{2}+y^{2}+z^{2}=r^{2}
+$$</p>
+<p>将光线代入方程
 $$
-因为我们在物体空间求交，所以y为0</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#ff79c6">if</span>(ray.d.y <span style="color:#ff79c6">==</span> <span style="color:#bd93f9">0.0f</span>) <span style="color:#ff79c6">return</span> <span style="color:#8be9fd;font-style:italic">false</span>; <span style="color:#6272a4">// 忽略平行于平面的光线
-</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span><span style="color:#8be9fd">float</span> t <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">-</span>ray.o.y <span style="color:#ff79c6">/</span> ray.d.y;
-</span></span><span style="display:flex;"><span><span style="color:#ff79c6">if</span>(t <span style="color:#ff79c6">&lt;</span> <span style="color:#bd93f9">0.0f</span>) <span style="color:#ff79c6">return</span> <span style="color:#8be9fd;font-style:italic">false</span>;
-</span></span></code></pre></div><p>相当于求出了无限大的xz平面</p>
-<p>好玩的地方来，我们通过判断x,z坐标对这个无限大的平面进行限制</p>
-<p>比如</p>
-<p>$$
-x^{2}+z^{2}\leq1
+(o+td)^{2}=r^{2}
 $$</p>
-<p>这时候在xz二维坐标系上是一个圆心在原点，半径为1的圆</p>
-<p>我们相当于在一个平面坐标系下绘制图形，所以根据数学，可以画出各种有趣的图案</p>
-<h2 id="圆柱cylinder">圆柱(Cylinder)</h2>
-<p><strong>在世界空间求交，我们要确定圆柱垂直的是哪一轴和圆柱位置，在下面代码根据坐标系小心处理xyz的编排</strong></p>
-<p>假设圆柱与y轴垂直
-如何确定这个圆柱位置呢，我们以圆柱底面(bottom cap)圆心为坐标</p>
-<p>$$
-center(x,z)
+<p>整理可得关于t的一元二次方程
+$$
+d^{2}t^{2}+2odt+o^{2}-r^{2}=0\
+\begin{align*}
+&amp; a=d^{2}\
+&amp; b=2od\
+&amp; c=o^{2}-r^{2}
+\end{align*}
 $$</p>
-<p>描述圆柱半径用 r 来描述</p>
-<p>圆柱高度(垂直的那一轴)</p>
-<p>$$
-h_{min}h_{max}
+<p>假如光线的方向向量已经归一化，那么
+$$
+|\overrightarrow{d}|^{2}=1
 $$</p>
-<p>底面是一个圆，我们先来判断相交点是否在这个底面</p>
-<p>$$
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#ff79c6">const</span> <span style="color:#ff79c6">auto</span> a <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">1</span>;
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">const</span> <span style="color:#ff79c6">auto</span> b <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">2</span> <span style="color:#ff79c6">*</span> dot(ray.origin, ray.direction);
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">const</span> <span style="color:#ff79c6">auto</span> c <span style="color:#ff79c6">=</span> dot(ray.origin, ray.origin) <span style="color:#ff79c6">-</span> radius <span style="color:#ff79c6">*</span> radius;
+</span></span></code></pre></div><p>解一元二次方程，没有解则求交失败</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#ff79c6">const</span> <span style="color:#ff79c6">auto</span> result <span style="color:#ff79c6">=</span> quadratic(a, b, c);
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">if</span>(<span style="color:#ff79c6">!</span>result) <span style="color:#ff79c6">return</span> <span style="color:#8be9fd;font-style:italic">false</span>;
+</span></span></code></pre></div><p>有解则找到最近的交点</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#ff79c6">const</span> <span style="color:#ff79c6">auto</span> [x1, x2] <span style="color:#ff79c6">=</span> result.value();
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">const</span> <span style="color:#ff79c6">auto</span> t <span style="color:#ff79c6">=</span> min(x1, x2);
+</span></span></code></pre></div><h2 id="圆柱cylinder">圆柱(Cylinder)</h2>
+<p>假设圆柱底面在<code>xz</code>平面，底面圆心在<strong>原点</strong>，<strong>半径</strong>和<strong>高度</strong>控制圆柱大小和长度，<code>phi</code>表示圆柱曲面的完整度</p>
+<p>首先忽略y轴，求出相交点是否在圆柱底面</p>
+<p>圆柱底面的一般方程
+$$
 x^{2}+z^{2}=r^{2}
 $$</p>
-<p>我们首先对发射光线的位置进行偏移
+<p>将光线代入，同理可得
 $$
-o_{x}=o_{x}-center_{x}
+(d_{x}^{2}+d_{z}^{2})t^{2}+2(o_{x}d_{x}+o_{z}d_{z})t+o_{x}^{2}+o_{z}^{2}-r^{2}=0
 $$</p>
+<p>日常解一元二次方程</p>
 <p>$$
-o_{z}=o_{z}-center_{z}
+\begin{align*}
+&amp; a = d_{x}^{2}+d_{z}^{2}\
+&amp; b = 2(o_{x}d_{x}+o_{z}d_{z})\
+&amp; c = o_{x}^{2}+o_{z}^{2}-r^{2}
+\end{align*}
 $$</p>
-<p>然后把光线代入方程
-$$
-(o_{x}+td_{x})^{2}+(o_{z}+td_{z})^{2}=r^{2}
-$$</p>
-<p>$$
-(d_{x}^{2}+d_{z}^{2})t^{2}+2(d_{x}o_{x}+d_{z}o_{z})t+o_{x}^{2}+o_{z}^{2}-r^{2}=0
-$$</p>
-<p>日常解一元二次方程
-$$
-a = (d_{x}^{2}+d_{z}^{2})
-$$</p>
-<p>$$
-b = 2(d_{x}o_{x}+d_{z}o_{z})
-$$</p>
-<p>$$
-c = o_{x}^{2}+o_{z}^{2}-r^{2}
-$$</p>
-<p>然后我们将t代入光线求出相交点，通过y坐标判断是否在圆柱高度内</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span>p <span style="color:#ff79c6">=</span> ray.at(t);
-</span></span><span style="display:flex;"><span><span style="color:#ff79c6">if</span>(p.y <span style="color:#ff79c6">&lt;</span> h_min <span style="color:#ff79c6">||</span> p.y <span style="color:#ff79c6">&gt;</span> h_max) <span style="color:#ff79c6">return</span> <span style="color:#8be9fd;font-style:italic">false</span>;
-</span></span></code></pre></div><p>如果我们从圆柱上方观察圆柱，会发现圆柱缺了后半部分180°的曲面，我们要代入另一个t来继续判断高度，代码修改如下</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span>p <span style="color:#ff79c6">=</span> ray.at(t1);
-</span></span><span style="display:flex;"><span><span style="color:#ff79c6">if</span>(p.y <span style="color:#ff79c6">&lt;</span> h_min <span style="color:#ff79c6">||</span> p.y <span style="color:#ff79c6">&gt;</span> h_max)
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#ff79c6">const</span> <span style="color:#ff79c6">auto</span> a <span style="color:#ff79c6">=</span> dx <span style="color:#ff79c6">*</span> dx <span style="color:#ff79c6">+</span> dz <span style="color:#ff79c6">*</span> dz;
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">const</span> <span style="color:#ff79c6">auto</span> b <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">2</span> <span style="color:#ff79c6">*</span> (ox <span style="color:#ff79c6">*</span> dx <span style="color:#ff79c6">+</span> oz <span style="color:#ff79c6">*</span> dz);
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">const</span> <span style="color:#ff79c6">auto</span> c <span style="color:#ff79c6">=</span> ox <span style="color:#ff79c6">*</span> ox <span style="color:#ff79c6">+</span> oz <span style="color:#ff79c6">*</span> oz <span style="color:#ff79c6">-</span> radius <span style="color:#ff79c6">*</span> radius;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">const</span> <span style="color:#ff79c6">auto</span> result <span style="color:#ff79c6">=</span> quadratic(a, b, c);
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">if</span>(<span style="color:#ff79c6">!</span>result) <span style="color:#ff79c6">return</span> <span style="color:#8be9fd;font-style:italic">false</span>;
+</span></span></code></pre></div><p>计算相交点高度判断是否在范围内，先从最小<code>t</code>开始</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#ff79c6">auto</span> [x1, x2] <span style="color:#ff79c6">=</span> result.value();
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">if</span>(x1 <span style="color:#ff79c6">&gt;</span> x2) std<span style="color:#ff79c6">::</span>swap(x1, x2);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">auto</span> t <span style="color:#ff79c6">=</span> x1;
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">auto</span> [x, y, z] <span style="color:#ff79c6">=</span> ray.at(t);
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">auto</span> phi <span style="color:#ff79c6">=</span> std<span style="color:#ff79c6">::</span>atan2(z, x);
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">if</span>(phi <span style="color:#ff79c6">&lt;</span> <span style="color:#bd93f9">0</span>) phi <span style="color:#ff79c6">+=</span> <span style="color:#bd93f9">2</span> <span style="color:#ff79c6">*</span> PI<span style="color:#ff79c6">&lt;</span>f32<span style="color:#ff79c6">&gt;</span>;
+</span></span></code></pre></div><p>假如第一个<code>x1</code>不符合条件，需要对<code>x2</code>继续进行判断</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#ff79c6">if</span>(y <span style="color:#ff79c6">&lt;</span> min_height <span style="color:#ff79c6">||</span> y <span style="color:#ff79c6">&gt;</span> max_height <span style="color:#ff79c6">||</span> phi <span style="color:#ff79c6">&gt;</span> max_angle)
 </span></span><span style="display:flex;"><span>{
-</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">if</span>(t1 <span style="color:#ff79c6">==</span> t2) <span style="color:#ff79c6">return</span> <span style="color:#8be9fd;font-style:italic">false</span>;
-</span></span><span style="display:flex;"><span>    p <span style="color:#ff79c6">=</span> ray.at(t2);
-</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">if</span>(p.y <span style="color:#ff79c6">&lt;</span> h_min <span style="color:#ff79c6">||</span> p.y <span style="color:#ff79c6">&gt;</span> h_max) <span style="color:#ff79c6">return</span> <span style="color:#8be9fd;font-style:italic">false</span>;
+</span></span><span style="display:flex;"><span>    t <span style="color:#ff79c6">=</span> x2;
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">auto</span> [x, y, z] <span style="color:#ff79c6">=</span> ray.at(t);
+</span></span><span style="display:flex;"><span>    phi <span style="color:#ff79c6">=</span> std<span style="color:#ff79c6">::</span>atan2(z, x);
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">if</span>(phi <span style="color:#ff79c6">&lt;</span> <span style="color:#bd93f9">0</span>) phi <span style="color:#ff79c6">+=</span> <span style="color:#bd93f9">2</span> <span style="color:#ff79c6">*</span> PI<span style="color:#ff79c6">&lt;</span>f32<span style="color:#ff79c6">&gt;</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">if</span>(y <span style="color:#ff79c6">&lt;</span> min_height <span style="color:#ff79c6">||</span> y <span style="color:#ff79c6">&gt;</span> max_height <span style="color:#ff79c6">||</span> phi <span style="color:#ff79c6">&gt;</span> max_angle)
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">return</span> <span style="color:#8be9fd;font-style:italic">false</span>;
 </span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>最后用atan2生成角度(弧度)，比较圆柱的完整度</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#8be9fd">float</span> phi <span style="color:#ff79c6">=</span> std<span style="color:#ff79c6">::</span>atan2(p.y, p.x);
-</span></span><span style="display:flex;"><span><span style="color:#ff79c6">if</span>(phi <span style="color:#ff79c6">&lt;</span> <span style="color:#bd93f9">0.0f</span>) phi <span style="color:#ff79c6">+=</span> <span style="color:#bd93f9">2.0f</span> <span style="color:#ff79c6">*</span> PI;
-</span></span><span style="display:flex;"><span><span style="color:#ff79c6">if</span>(phi <span style="color:#ff79c6">&gt;</span> phi_max) <span style="color:#ff79c6">return</span> <span style="color:#8be9fd;font-style:italic">false</span>;
-</span></span></code></pre></div><h2 id="capped-cylinders">Capped Cylinders</h2>
-<p>这时候圆柱曲面求交算是基本完成了，但是渲染的时候又发现一个问题，圆柱没有顶盖和底盖，也就是说圆柱是中空的，没有封闭的</p>
-<p>那么如何描述与顶盖求交呢，这时候我们把圆柱顶面和底面当成平面求交</p>
-<p>我们有圆柱的高度和光线，反推出t，然后再代入t，对x,z坐标限制</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#6272a4">// 底面和顶面都适用以下代码，改下参数即可
-</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span><span style="color:#8be9fd">float</span> t_max_cap <span style="color:#ff79c6">=</span> (h_max <span style="color:#ff79c6">-</span> ray.o.y) <span style="color:#ff79c6">/</span> ray.d.y;
-</span></span><span style="display:flex;"><span><span style="color:#8be9fd">float</span> x <span style="color:#ff79c6">=</span> ray.at_x(t);
-</span></span><span style="display:flex;"><span><span style="color:#8be9fd">float</span> z <span style="color:#ff79c6">=</span> ray.at_z(t);
-</span></span><span style="display:flex;"><span><span style="color:#ff79c6">if</span>(x <span style="color:#ff79c6">*</span> x <span style="color:#ff79c6">+</span> z <span style="color:#ff79c6">*</span> z) <span style="color:#ff79c6">&gt;</span> <span style="color:#bd93f9">1.0f</span>) <span style="color:#ff79c6">return</span> <span style="color:#8be9fd;font-style:italic">false</span>;
-</span></span></code></pre></div><p>因为是当成平面求交，所以和上面平面求交代码类似</p>
-<h2 id="圆盘disk">圆盘(Disk)</h2>
-<p>假设圆盘与y轴垂直</p>
-<p>和圆柱一样用圆心描述位置</p>
-<p>参数有高度、半径、内半径和角度</p>
-<p>对发射光线的位置进行偏移</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span>ray.o <span style="color:#ff79c6">=</span> ray.o <span style="color:#ff79c6">-</span> center;
-</span></span></code></pre></div><p>用圆盘所处的高度求出光线的t</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#8be9fd">float</span> t <span style="color:#ff79c6">=</span> (height <span style="color:#ff79c6">-</span> ray.o.y) <span style="color:#ff79c6">/</span> ray.d.y;
-</span></span><span style="display:flex;"><span><span style="color:#ff79c6">if</span>(t <span style="color:#ff79c6">&lt;=</span> <span style="color:#bd93f9">0</span>) <span style="color:#ff79c6">return</span> <span style="color:#8be9fd;font-style:italic">false</span>;
-</span></span></code></pre></div><p>如果光线是平行于圆盘，选择忽略这条光线</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#ff79c6">if</span>(ray.d.y <span style="color:#ff79c6">==</span> <span style="color:#bd93f9">0</span>) <span style="color:#ff79c6">return</span> <span style="color:#8be9fd;font-style:italic">false</span>;
-</span></span></code></pre></div><p>光线落在外圆才算相交</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span>p <span style="color:#ff79c6">=</span> ray.at(t);
-</span></span><span style="display:flex;"><span><span style="color:#8be9fd">float</span> disk2 <span style="color:#ff79c6">=</span> p.x <span style="color:#ff79c6">*</span> p.x <span style="color:#ff79c6">+</span> p.z <span style="color:#ff79c6">*</span> p.z;
-</span></span><span style="display:flex;"><span><span style="color:#ff79c6">if</span>(disk2 <span style="color:#ff79c6">&gt;</span> radius <span style="color:#ff79c6">*</span> radius <span style="color:#ff79c6">||</span> disk2 <span style="color:#ff79c6">&lt;</span> inner_radius <span style="color:#ff79c6">*</span> inner_radius)
-</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">return</span> <span style="color:#8be9fd;font-style:italic">false</span>;
-</span></span></code></pre></div><p>比较圆盘完整度</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#8be9fd">float</span> phi <span style="color:#ff79c6">=</span> std<span style="color:#ff79c6">::</span>atan2(p.y, p.x);
-</span></span><span style="display:flex;"><span><span style="color:#ff79c6">if</span>(phi <span style="color:#ff79c6">&lt;</span> <span style="color:#bd93f9">0.0f</span>) phi <span style="color:#ff79c6">+=</span> <span style="color:#bd93f9">2.0f</span> <span style="color:#ff79c6">*</span> PI;
-</span></span><span style="display:flex;"><span><span style="color:#ff79c6">if</span>(phi <span style="color:#ff79c6">&gt;</span> phi_max) <span style="color:#ff79c6">return</span> <span style="color:#8be9fd;font-style:italic">false</span>;
-</span></span></code></pre></div><h1 id="结尾">结尾</h1>
-<p>萌新学习ray tracing之路艰难，自身经验有限，如有错误请指出</p>
-<h1 id="reference">Reference</h1>
+</span></span></code></pre></div><p>小提示：当圆柱曲面不是<strong>封闭</strong>的时候，所求相交点有可能在圆柱内部，这时需要反转(flip)法线才能进行正确的着色</p>
+<h3 id="顶盖和底盖cap">顶盖和底盖(Cap)</h3>
+<p>这时候圆柱求交算是基本完成了，但渲染的时候又发现一个问题，圆柱没有顶盖和底盖，也就是二维曲面并不是封闭的，因为圆柱体是一个退化的二维曲面</p>
+<p>这时候相当于加入了两个圆盘(Disk)</p>
+<p>如果在之前与圆柱曲面相交了，需要传入<code>t</code>与这次求交所得<code>cap_t</code>判断哪个最近</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#ff79c6">const</span> <span style="color:#ff79c6">auto</span> intersect <span style="color:#ff79c6">=</span> [<span style="color:#ff79c6">&amp;</span>](f32 cap_t)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">if</span>(cap_t <span style="color:#ff79c6">&gt;=</span> t <span style="color:#ff79c6">||</span> cap_t <span style="color:#ff79c6">&lt;=</span> <span style="color:#bd93f9">0</span>) <span style="color:#ff79c6">return</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">if</span>(<span style="color:#ff79c6">!</span>check_cap(ray, cap_t)) <span style="color:#ff79c6">return</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    t <span style="color:#ff79c6">=</span> cap_t;
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><p>我们可以增加一个枚举变量<code>cylinder_shape</code>，来表示需要圆柱的顶面/底面，或者说<del>我全都要</del>也行</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#ff79c6">if</span>(cylinder_shape <span style="color:#ff79c6">&amp;</span> cylinder_top)
+</span></span><span style="display:flex;"><span>    intersect(ray.inv_at<span style="color:#ff79c6">&lt;</span>Axis<span style="color:#ff79c6">::</span>Y<span style="color:#ff79c6">&gt;</span>(max_height));
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">if</span>(cylinder_shape <span style="color:#ff79c6">&amp;</span> cylinder_bottom)
+</span></span><span style="display:flex;"><span>    intersect(ray.inv_at<span style="color:#ff79c6">&lt;</span>Axis<span style="color:#ff79c6">::</span>Y<span style="color:#ff79c6">&gt;</span>(min_height));
+</span></span></code></pre></div><p>圆盘求交也很简单
+$$
+x^{2}+z^{2} \leq r^{2}
+$$</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#8be9fd">bool</span> Cylinder<span style="color:#ff79c6">::</span>check_cap(<span style="color:#ff79c6">const</span> Ray3f<span style="color:#ff79c6">&amp;</span> ray, f32 t) <span style="color:#ff79c6">const</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">const</span> <span style="color:#ff79c6">auto</span> x <span style="color:#ff79c6">=</span> ray.at<span style="color:#ff79c6">&lt;</span>Axis<span style="color:#ff79c6">::</span>X<span style="color:#ff79c6">&gt;</span>(t);
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">const</span> <span style="color:#ff79c6">auto</span> z <span style="color:#ff79c6">=</span> ray.at<span style="color:#ff79c6">&lt;</span>Axis<span style="color:#ff79c6">::</span>Z<span style="color:#ff79c6">&gt;</span>(t);
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">return</span> (x <span style="color:#ff79c6">*</span> x <span style="color:#ff79c6">+</span> z <span style="color:#ff79c6">*</span> z) <span style="color:#ff79c6">&lt;=</span> radius <span style="color:#ff79c6">*</span> radius;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h2 id="reference">Reference</h2>
 <ol>
 <li>Physically Based Rendering: From Theory to Implementation</li>
 <li>The Ray Tracer Challenge</li>
@@ -340,7 +326,7 @@ $$</p>
 
 
         <span>
-            最后更新于 Apr 23, 2021
+            最后更新于 May 15, 2022
         </span>
     </section></footer>
 
@@ -515,10 +501,15 @@ $$</p>
                 <div class="widget--toc">
                     <nav id="TableOfContents">
   <ol>
-    <li><a href="#平面plane">平面(Plane)</a></li>
-    <li><a href="#圆柱cylinder">圆柱(Cylinder)</a></li>
-    <li><a href="#capped-cylinders">Capped Cylinders</a></li>
-    <li><a href="#圆盘disk">圆盘(Disk)</a></li>
+    <li><a href="#前提">前提</a></li>
+    <li><a href="#矩形rectangle">矩形(Rectangle)</a></li>
+    <li><a href="#球sphere">球(Sphere)</a></li>
+    <li><a href="#圆柱cylinder">圆柱(Cylinder)</a>
+      <ol>
+        <li><a href="#顶盖和底盖cap">顶盖和底盖(Cap)</a></li>
+      </ol>
+    </li>
+    <li><a href="#reference">Reference</a></li>
   </ol>
 </nav>
                 </div>

@@ -56,7 +56,7 @@
 &lt;tr&gt;
 &lt;td&gt;はつゆきさくら&lt;/td&gt;
 &lt;td&gt;7.0&lt;/td&gt;
-&lt;td&gt;播放序章op闪退了一次，再打开会提示你要不要播放op，暂时体验良好&lt;/td&gt;
+&lt;td&gt;播放序章op闪退了一次，再打开会提示你要不要播放op，能流畅游玩&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;いきなりサキュバス ～いちゃらぶ搾精ライフ～&lt;/td&gt;
@@ -485,7 +485,7 @@
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;高级版top&lt;/td&gt;
-&lt;td&gt;htop&lt;/td&gt;
+&lt;td&gt;gotop(AUR)/htop&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;打印彩色的十六进制&lt;/td&gt;
@@ -502,6 +502,10 @@
 &lt;tr&gt;
 &lt;td&gt;文件浏览器&lt;/td&gt;
 &lt;td&gt;ranger&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;比tmux更好用的单窗口多终端&lt;/td&gt;
+&lt;td&gt;zellij&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
@@ -537,7 +541,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    sudo pacman -S lightdm lightdm-gtk-greeter
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    sudo systemctl &lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;enable&lt;/span&gt; lightdm
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;aur&#34;&gt;AUR&lt;/h2&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    sudo pacman -S yay
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    sudo pacman -S paru 
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;bash&#34;&gt;bash&lt;/h2&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    sudo pacman -S zsh
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    sudo chsh -s /bin/zsh username
@@ -546,7 +550,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;下载&#34;&gt;下载&lt;/h2&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    sudo pacman -S aria2
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#6272a4&#34;&gt;# web前端(还有很多前端可供挑选)&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    yay -S ariang-allinone
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    paru ariang-allinone
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#6272a4&#34;&gt;# copy 大佬的配置&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    git clone https://github.com/P3TERX/aria2.conf
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    mkdir ~/.aria2
@@ -997,10 +1001,23 @@ continue
         <description>&lt;ul&gt;
 &lt;li&gt;部分游戏没有全通&lt;/li&gt;
 &lt;li&gt;有些gal没有吐槽&lt;/li&gt;
-&lt;li&gt;内有剧透&lt;/li&gt;
+&lt;li&gt;内有剧透（&lt;del&gt;这不是废话么&lt;/del&gt;）&lt;/li&gt;
 &lt;li&gt;持续更新（只要我推的快）&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;strong&gt;排名不分先后，如有错误请指出&lt;/strong&gt;（最近推完的都会在最上面，&lt;del&gt;其实就是一个栈&lt;/del&gt;）&lt;/p&gt;
+&lt;h2 id=&#34;はつゆきさくら&#34;&gt;はつゆきさくら&lt;/h2&gt;
+&lt;p&gt;译名：初雪樱&lt;/p&gt;
+&lt;p&gt;会社：Saga Planets&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;好像勉勉强强get到新岛夕说什么，但又没说什么。最后的毕业倒是有点煽情&lt;/p&gt;
+&lt;p&gt;毕业的时候来栖老师说，把一堆麻烦塞给男主，其实是为了让他过上正常的校园生活，这一点我倒是很赞同(谁不想过上青春的校园生活)。不过本作的日常写的一般，而且黄段子属实尬，但女主面对黄段子的演出不错，属实浪费好画风和cv了&lt;/p&gt;
+&lt;p&gt;不过相比魔女恋爱日记好的就是，起码把故事给我讲懂了&lt;/p&gt;
+&lt;p&gt;大部分个人线感觉良好，除了シロクマ，完全意义不明。个人最喜欢あずま 夜&lt;/p&gt;
+&lt;h2 id=&#34;clover-days&#34;&gt;Clover Day&amp;rsquo;s&lt;/h2&gt;
+&lt;p&gt;译名：幸运草的约定&lt;/p&gt;
+&lt;p&gt;会社：ALcot&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;治愈废萌，可爱就完事&lt;/p&gt;
 &lt;h2 id=&#34;幼馴染と十年夏&#34;&gt;幼馴染と十年、夏&lt;/h2&gt;
 &lt;p&gt;译名：幼驯染与十年之夏&lt;/p&gt;
 &lt;p&gt;会社：夜のひつじ&lt;/p&gt;
@@ -1116,7 +1133,7 @@ continue
 &lt;p&gt;白毛萝莉妙啊&lt;/p&gt;
 &lt;h2 id=&#34;キミのとなりで恋してる&#34;&gt;キミのとなりで恋してる&lt;/h2&gt;
 &lt;p&gt;译名：慕情之心今随君作伴&lt;/p&gt;
-&lt;p&gt;会社：Hulotte&lt;/p&gt;
+&lt;p&gt;会社：ALcot ハニカム&lt;/p&gt;
 &lt;p&gt;FD：キミのとなりで恋してる！ -THE RESPECTIVE HAPPINESS-&lt;/p&gt;
 &lt;hr&gt;
 &lt;p&gt;理想中的幼驯染&lt;/p&gt;
@@ -1308,126 +1325,139 @@ continue
         <pubDate>Sun, 11 Apr 2021 00:00:00 +0000</pubDate>
         
         <guid>https://star-hengxing.github.io/p/%E5%85%89%E7%BA%BF%E4%B8%8E%E5%90%84%E7%A7%8D%E5%87%A0%E4%BD%95%E5%9B%BE%E5%BD%A2%E6%B1%82%E4%BA%A4/</guid>
-        <description>&lt;p&gt;在许多光线追踪的教程，光线求交的位置通常在世界空间(world space)&lt;/p&gt;
-&lt;p&gt;但在一些书籍中，光线求交的位置在几何图形自己的空间里进行(object space)&lt;/p&gt;
-&lt;p&gt;做法：准备模型矩阵(model matrix)的逆矩阵，将光线变换到对象空间&lt;/p&gt;
+        <description>&lt;p&gt;在一些基础的光线追踪教程中，光线求交通常发生在&lt;strong&gt;世界空间(world space)&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;但在离线渲染器中(比如PBRT)，光线求交发生在几何图形自己的&lt;strong&gt;局部空间(local/object/model space)&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;这是有好处的，比如说简化求交代码，相交表面的&lt;code&gt;normal&lt;/code&gt;和&lt;code&gt;uv&lt;/code&gt;也很容易计算&lt;/p&gt;
+&lt;p&gt;下面就记录一些几何求交的做法，自身经验有限，如有错误请指出&lt;/p&gt;
+&lt;h2 id=&#34;前提&#34;&gt;前提&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;这里采用的是y轴朝上的右手坐标系，-z轴指向屏幕里，x轴在右手&lt;/li&gt;
+&lt;li&gt;默认光线已经变换到对象的局部空间&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;使用几何体的变换矩阵和其逆矩阵，求交时将光线变换到对象空间&lt;/p&gt;
 &lt;p&gt;$$
-Ray(t)=o+td (0 \leq t &amp;lt;\infty)
+Ray(t)=o+td (t &amp;gt; 0)
 $$&lt;/p&gt;
-&lt;p&gt;光线的方程由点和向量组成，时间不变，对点和向量进行变换
+&lt;p&gt;$$
+Ray_{object}=M^{-1}Ray_{world}
+$$&lt;/p&gt;
+&lt;h2 id=&#34;矩形rectangle&#34;&gt;矩形(Rectangle)&lt;/h2&gt;
+&lt;p&gt;假设矩形高度为&lt;code&gt;0&lt;/code&gt;，躺在&lt;code&gt;xz&lt;/code&gt;平面上。&lt;code&gt;长&lt;/code&gt;和&lt;code&gt;宽&lt;/code&gt;控制矩形大小&lt;/p&gt;
+&lt;p&gt;忽略平行于平面的光线&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-C++&#34; data-lang=&#34;C++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;if&lt;/span&gt;(is_zero(ray.direction.y)) &lt;span style=&#34;color:#ff79c6&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;false&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;使用高度计算相交点
 $$
-M^{-1}Ray
+t=\frac{0 - o_{y}}{d_{y}}
 $$&lt;/p&gt;
-&lt;p&gt;然后在对象空间求交并把相交信息带回世界空间&lt;/p&gt;
-&lt;p&gt;因为大部分几何图形在对象空间位于坐标原点，没有进行变换(旋转/剪切)，处理求交就变得容易。在获取表面信息例如uv和颜色也很方便，除此外还可以提高计算浮点数准确性&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;下文中，如果想从对象空间求交的话，去掉对光线位置偏移的代码就行了&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;我们默认光线都是已经从世界空间变换的物体空间&lt;/p&gt;
-&lt;h2 id=&#34;平面plane&#34;&gt;平面(Plane)&lt;/h2&gt;
-&lt;p&gt;其实AABB包围盒，立方体，平面求交计算都一样，计算比较简单，只是维度不同而已，但我还是要介绍一下平面求交，因为我发现一个比较好玩的地方&lt;/p&gt;
-&lt;p&gt;假设y轴垂直于平面，将公式变形
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-C++&#34; data-lang=&#34;C++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;const&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;auto&lt;/span&gt; t &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; ray.inv_at&lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&lt;/span&gt;Axis&lt;span style=&#34;color:#ff79c6&#34;&gt;::&lt;/span&gt;Y&lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;gt;&lt;/span&gt;(&lt;span style=&#34;color:#bd93f9&#34;&gt;0&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;const&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;auto&lt;/span&gt; [x, y, z] &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; ray.at(t);
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;在矩形范围内的点才算相交成功&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-C++&#34; data-lang=&#34;C++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;if&lt;/span&gt;(std&lt;span style=&#34;color:#ff79c6&#34;&gt;::&lt;/span&gt;abs(x) &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;gt;&lt;/span&gt; length &lt;span style=&#34;color:#ff79c6&#34;&gt;||&lt;/span&gt; std&lt;span style=&#34;color:#ff79c6&#34;&gt;::&lt;/span&gt;abs(z) &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;gt;&lt;/span&gt; width) &lt;span style=&#34;color:#ff79c6&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;false&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;球sphere&#34;&gt;球(Sphere)&lt;/h2&gt;
+&lt;p&gt;假设球心在&lt;strong&gt;原点&lt;/strong&gt;，&lt;strong&gt;半径&lt;/strong&gt;控制球的大小&lt;/p&gt;
+&lt;p&gt;三维空间中球的一般方程
 $$
-t=(y-o)/d
+x^{2}+y^{2}+z^{2}=r^{2}
+$$&lt;/p&gt;
+&lt;p&gt;将光线代入方程
 $$
-因为我们在物体空间求交，所以y为0&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-C++&#34; data-lang=&#34;C++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;if&lt;/span&gt;(ray.d.y &lt;span style=&#34;color:#ff79c6&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#bd93f9&#34;&gt;0.0f&lt;/span&gt;) &lt;span style=&#34;color:#ff79c6&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;false&lt;/span&gt;; &lt;span style=&#34;color:#6272a4&#34;&gt;// 忽略平行于平面的光线
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#6272a4&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8be9fd&#34;&gt;float&lt;/span&gt; t &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;-&lt;/span&gt;ray.o.y &lt;span style=&#34;color:#ff79c6&#34;&gt;/&lt;/span&gt; ray.d.y;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;if&lt;/span&gt;(t &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&lt;/span&gt; &lt;span style=&#34;color:#bd93f9&#34;&gt;0.0f&lt;/span&gt;) &lt;span style=&#34;color:#ff79c6&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;false&lt;/span&gt;;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;相当于求出了无限大的xz平面&lt;/p&gt;
-&lt;p&gt;好玩的地方来，我们通过判断x,z坐标对这个无限大的平面进行限制&lt;/p&gt;
-&lt;p&gt;比如&lt;/p&gt;
-&lt;p&gt;$$
-x^{2}+z^{2}\leq1
+(o+td)^{2}=r^{2}
 $$&lt;/p&gt;
-&lt;p&gt;这时候在xz二维坐标系上是一个圆心在原点，半径为1的圆&lt;/p&gt;
-&lt;p&gt;我们相当于在一个平面坐标系下绘制图形，所以根据数学，可以画出各种有趣的图案&lt;/p&gt;
-&lt;h2 id=&#34;圆柱cylinder&#34;&gt;圆柱(Cylinder)&lt;/h2&gt;
-&lt;p&gt;&lt;strong&gt;在世界空间求交，我们要确定圆柱垂直的是哪一轴和圆柱位置，在下面代码根据坐标系小心处理xyz的编排&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;假设圆柱与y轴垂直
-如何确定这个圆柱位置呢，我们以圆柱底面(bottom cap)圆心为坐标&lt;/p&gt;
-&lt;p&gt;$$
-center(x,z)
+&lt;p&gt;整理可得关于t的一元二次方程
+$$
+d^{2}t^{2}+2odt+o^{2}-r^{2}=0\
+\begin{align*}
+&amp;amp; a=d^{2}\
+&amp;amp; b=2od\
+&amp;amp; c=o^{2}-r^{2}
+\end{align*}
 $$&lt;/p&gt;
-&lt;p&gt;描述圆柱半径用 r 来描述&lt;/p&gt;
-&lt;p&gt;圆柱高度(垂直的那一轴)&lt;/p&gt;
-&lt;p&gt;$$
-h_{min}h_{max}
+&lt;p&gt;假如光线的方向向量已经归一化，那么
+$$
+|\overrightarrow{d}|^{2}=1
 $$&lt;/p&gt;
-&lt;p&gt;底面是一个圆，我们先来判断相交点是否在这个底面&lt;/p&gt;
-&lt;p&gt;$$
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-C++&#34; data-lang=&#34;C++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;const&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;auto&lt;/span&gt; a &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#bd93f9&#34;&gt;1&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;const&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;auto&lt;/span&gt; b &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#bd93f9&#34;&gt;2&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;*&lt;/span&gt; dot(ray.origin, ray.direction);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;const&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;auto&lt;/span&gt; c &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; dot(ray.origin, ray.origin) &lt;span style=&#34;color:#ff79c6&#34;&gt;-&lt;/span&gt; radius &lt;span style=&#34;color:#ff79c6&#34;&gt;*&lt;/span&gt; radius;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;解一元二次方程，没有解则求交失败&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-C++&#34; data-lang=&#34;C++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;const&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;auto&lt;/span&gt; result &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; quadratic(a, b, c);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;if&lt;/span&gt;(&lt;span style=&#34;color:#ff79c6&#34;&gt;!&lt;/span&gt;result) &lt;span style=&#34;color:#ff79c6&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;false&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;有解则找到最近的交点&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-C++&#34; data-lang=&#34;C++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;const&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;auto&lt;/span&gt; [x1, x2] &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; result.value();
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;const&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;auto&lt;/span&gt; t &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; min(x1, x2);
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;圆柱cylinder&#34;&gt;圆柱(Cylinder)&lt;/h2&gt;
+&lt;p&gt;假设圆柱底面在&lt;code&gt;xz&lt;/code&gt;平面，底面圆心在&lt;strong&gt;原点&lt;/strong&gt;，&lt;strong&gt;半径&lt;/strong&gt;和&lt;strong&gt;高度&lt;/strong&gt;控制圆柱大小和长度，&lt;code&gt;phi&lt;/code&gt;表示圆柱曲面的完整度&lt;/p&gt;
+&lt;p&gt;首先忽略y轴，求出相交点是否在圆柱底面&lt;/p&gt;
+&lt;p&gt;圆柱底面的一般方程
+$$
 x^{2}+z^{2}=r^{2}
 $$&lt;/p&gt;
-&lt;p&gt;我们首先对发射光线的位置进行偏移
+&lt;p&gt;将光线代入，同理可得
 $$
-o_{x}=o_{x}-center_{x}
+(d_{x}^{2}+d_{z}^{2})t^{2}+2(o_{x}d_{x}+o_{z}d_{z})t+o_{x}^{2}+o_{z}^{2}-r^{2}=0
 $$&lt;/p&gt;
+&lt;p&gt;日常解一元二次方程&lt;/p&gt;
 &lt;p&gt;$$
-o_{z}=o_{z}-center_{z}
+\begin{align*}
+&amp;amp; a = d_{x}^{2}+d_{z}^{2}\
+&amp;amp; b = 2(o_{x}d_{x}+o_{z}d_{z})\
+&amp;amp; c = o_{x}^{2}+o_{z}^{2}-r^{2}
+\end{align*}
 $$&lt;/p&gt;
-&lt;p&gt;然后把光线代入方程
-$$
-(o_{x}+td_{x})^{2}+(o_{z}+td_{z})^{2}=r^{2}
-$$&lt;/p&gt;
-&lt;p&gt;$$
-(d_{x}^{2}+d_{z}^{2})t^{2}+2(d_{x}o_{x}+d_{z}o_{z})t+o_{x}^{2}+o_{z}^{2}-r^{2}=0
-$$&lt;/p&gt;
-&lt;p&gt;日常解一元二次方程
-$$
-a = (d_{x}^{2}+d_{z}^{2})
-$$&lt;/p&gt;
-&lt;p&gt;$$
-b = 2(d_{x}o_{x}+d_{z}o_{z})
-$$&lt;/p&gt;
-&lt;p&gt;$$
-c = o_{x}^{2}+o_{z}^{2}-r^{2}
-$$&lt;/p&gt;
-&lt;p&gt;然后我们将t代入光线求出相交点，通过y坐标判断是否在圆柱高度内&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-C++&#34; data-lang=&#34;C++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;p &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; ray.at(t);
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;if&lt;/span&gt;(p.y &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&lt;/span&gt; h_min &lt;span style=&#34;color:#ff79c6&#34;&gt;||&lt;/span&gt; p.y &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;gt;&lt;/span&gt; h_max) &lt;span style=&#34;color:#ff79c6&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;false&lt;/span&gt;;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;如果我们从圆柱上方观察圆柱，会发现圆柱缺了后半部分180°的曲面，我们要代入另一个t来继续判断高度，代码修改如下&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-C++&#34; data-lang=&#34;C++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;p &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; ray.at(t1);
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;if&lt;/span&gt;(p.y &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&lt;/span&gt; h_min &lt;span style=&#34;color:#ff79c6&#34;&gt;||&lt;/span&gt; p.y &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;gt;&lt;/span&gt; h_max)
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-C++&#34; data-lang=&#34;C++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;const&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;auto&lt;/span&gt; a &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; dx &lt;span style=&#34;color:#ff79c6&#34;&gt;*&lt;/span&gt; dx &lt;span style=&#34;color:#ff79c6&#34;&gt;+&lt;/span&gt; dz &lt;span style=&#34;color:#ff79c6&#34;&gt;*&lt;/span&gt; dz;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;const&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;auto&lt;/span&gt; b &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#bd93f9&#34;&gt;2&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;*&lt;/span&gt; (ox &lt;span style=&#34;color:#ff79c6&#34;&gt;*&lt;/span&gt; dx &lt;span style=&#34;color:#ff79c6&#34;&gt;+&lt;/span&gt; oz &lt;span style=&#34;color:#ff79c6&#34;&gt;*&lt;/span&gt; dz);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;const&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;auto&lt;/span&gt; c &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; ox &lt;span style=&#34;color:#ff79c6&#34;&gt;*&lt;/span&gt; ox &lt;span style=&#34;color:#ff79c6&#34;&gt;+&lt;/span&gt; oz &lt;span style=&#34;color:#ff79c6&#34;&gt;*&lt;/span&gt; oz &lt;span style=&#34;color:#ff79c6&#34;&gt;-&lt;/span&gt; radius &lt;span style=&#34;color:#ff79c6&#34;&gt;*&lt;/span&gt; radius;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;const&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;auto&lt;/span&gt; result &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; quadratic(a, b, c);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;if&lt;/span&gt;(&lt;span style=&#34;color:#ff79c6&#34;&gt;!&lt;/span&gt;result) &lt;span style=&#34;color:#ff79c6&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;false&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;计算相交点高度判断是否在范围内，先从最小&lt;code&gt;t&lt;/code&gt;开始&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-C++&#34; data-lang=&#34;C++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;auto&lt;/span&gt; [x1, x2] &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; result.value();
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;if&lt;/span&gt;(x1 &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;gt;&lt;/span&gt; x2) std&lt;span style=&#34;color:#ff79c6&#34;&gt;::&lt;/span&gt;swap(x1, x2);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;auto&lt;/span&gt; t &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; x1;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;auto&lt;/span&gt; [x, y, z] &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; ray.at(t);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;auto&lt;/span&gt; phi &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; std&lt;span style=&#34;color:#ff79c6&#34;&gt;::&lt;/span&gt;atan2(z, x);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;if&lt;/span&gt;(phi &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&lt;/span&gt; &lt;span style=&#34;color:#bd93f9&#34;&gt;0&lt;/span&gt;) phi &lt;span style=&#34;color:#ff79c6&#34;&gt;+=&lt;/span&gt; &lt;span style=&#34;color:#bd93f9&#34;&gt;2&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;*&lt;/span&gt; PI&lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&lt;/span&gt;f32&lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;gt;&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;假如第一个&lt;code&gt;x1&lt;/code&gt;不符合条件，需要对&lt;code&gt;x2&lt;/code&gt;继续进行判断&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-C++&#34; data-lang=&#34;C++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;if&lt;/span&gt;(y &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&lt;/span&gt; min_height &lt;span style=&#34;color:#ff79c6&#34;&gt;||&lt;/span&gt; y &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;gt;&lt;/span&gt; max_height &lt;span style=&#34;color:#ff79c6&#34;&gt;||&lt;/span&gt; phi &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;gt;&lt;/span&gt; max_angle)
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;if&lt;/span&gt;(t1 &lt;span style=&#34;color:#ff79c6&#34;&gt;==&lt;/span&gt; t2) &lt;span style=&#34;color:#ff79c6&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;false&lt;/span&gt;;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    p &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; ray.at(t2);
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;if&lt;/span&gt;(p.y &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&lt;/span&gt; h_min &lt;span style=&#34;color:#ff79c6&#34;&gt;||&lt;/span&gt; p.y &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;gt;&lt;/span&gt; h_max) &lt;span style=&#34;color:#ff79c6&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;false&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    t &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; x2;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;auto&lt;/span&gt; [x, y, z] &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; ray.at(t);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    phi &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; std&lt;span style=&#34;color:#ff79c6&#34;&gt;::&lt;/span&gt;atan2(z, x);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;if&lt;/span&gt;(phi &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&lt;/span&gt; &lt;span style=&#34;color:#bd93f9&#34;&gt;0&lt;/span&gt;) phi &lt;span style=&#34;color:#ff79c6&#34;&gt;+=&lt;/span&gt; &lt;span style=&#34;color:#bd93f9&#34;&gt;2&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;*&lt;/span&gt; PI&lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&lt;/span&gt;f32&lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;gt;&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;if&lt;/span&gt;(y &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&lt;/span&gt; min_height &lt;span style=&#34;color:#ff79c6&#34;&gt;||&lt;/span&gt; y &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;gt;&lt;/span&gt; max_height &lt;span style=&#34;color:#ff79c6&#34;&gt;||&lt;/span&gt; phi &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;gt;&lt;/span&gt; max_angle)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#ff79c6&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;false&lt;/span&gt;;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;最后用atan2生成角度(弧度)，比较圆柱的完整度&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-C++&#34; data-lang=&#34;C++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#8be9fd&#34;&gt;float&lt;/span&gt; phi &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; std&lt;span style=&#34;color:#ff79c6&#34;&gt;::&lt;/span&gt;atan2(p.y, p.x);
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;if&lt;/span&gt;(phi &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&lt;/span&gt; &lt;span style=&#34;color:#bd93f9&#34;&gt;0.0f&lt;/span&gt;) phi &lt;span style=&#34;color:#ff79c6&#34;&gt;+=&lt;/span&gt; &lt;span style=&#34;color:#bd93f9&#34;&gt;2.0f&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;*&lt;/span&gt; PI;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;if&lt;/span&gt;(phi &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;gt;&lt;/span&gt; phi_max) &lt;span style=&#34;color:#ff79c6&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;false&lt;/span&gt;;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;capped-cylinders&#34;&gt;Capped Cylinders&lt;/h2&gt;
-&lt;p&gt;这时候圆柱曲面求交算是基本完成了，但是渲染的时候又发现一个问题，圆柱没有顶盖和底盖，也就是说圆柱是中空的，没有封闭的&lt;/p&gt;
-&lt;p&gt;那么如何描述与顶盖求交呢，这时候我们把圆柱顶面和底面当成平面求交&lt;/p&gt;
-&lt;p&gt;我们有圆柱的高度和光线，反推出t，然后再代入t，对x,z坐标限制&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-C++&#34; data-lang=&#34;C++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#6272a4&#34;&gt;// 底面和顶面都适用以下代码，改下参数即可
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#6272a4&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8be9fd&#34;&gt;float&lt;/span&gt; t_max_cap &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; (h_max &lt;span style=&#34;color:#ff79c6&#34;&gt;-&lt;/span&gt; ray.o.y) &lt;span style=&#34;color:#ff79c6&#34;&gt;/&lt;/span&gt; ray.d.y;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#8be9fd&#34;&gt;float&lt;/span&gt; x &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; ray.at_x(t);
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#8be9fd&#34;&gt;float&lt;/span&gt; z &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; ray.at_z(t);
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;if&lt;/span&gt;(x &lt;span style=&#34;color:#ff79c6&#34;&gt;*&lt;/span&gt; x &lt;span style=&#34;color:#ff79c6&#34;&gt;+&lt;/span&gt; z &lt;span style=&#34;color:#ff79c6&#34;&gt;*&lt;/span&gt; z) &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#bd93f9&#34;&gt;1.0f&lt;/span&gt;) &lt;span style=&#34;color:#ff79c6&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;false&lt;/span&gt;;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;因为是当成平面求交，所以和上面平面求交代码类似&lt;/p&gt;
-&lt;h2 id=&#34;圆盘disk&#34;&gt;圆盘(Disk)&lt;/h2&gt;
-&lt;p&gt;假设圆盘与y轴垂直&lt;/p&gt;
-&lt;p&gt;和圆柱一样用圆心描述位置&lt;/p&gt;
-&lt;p&gt;参数有高度、半径、内半径和角度&lt;/p&gt;
-&lt;p&gt;对发射光线的位置进行偏移&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-C++&#34; data-lang=&#34;C++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;ray.o &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; ray.o &lt;span style=&#34;color:#ff79c6&#34;&gt;-&lt;/span&gt; center;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;用圆盘所处的高度求出光线的t&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-C++&#34; data-lang=&#34;C++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#8be9fd&#34;&gt;float&lt;/span&gt; t &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; (height &lt;span style=&#34;color:#ff79c6&#34;&gt;-&lt;/span&gt; ray.o.y) &lt;span style=&#34;color:#ff79c6&#34;&gt;/&lt;/span&gt; ray.d.y;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;if&lt;/span&gt;(t &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;=&lt;/span&gt; &lt;span style=&#34;color:#bd93f9&#34;&gt;0&lt;/span&gt;) &lt;span style=&#34;color:#ff79c6&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;false&lt;/span&gt;;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;如果光线是平行于圆盘，选择忽略这条光线&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-C++&#34; data-lang=&#34;C++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;if&lt;/span&gt;(ray.d.y &lt;span style=&#34;color:#ff79c6&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#bd93f9&#34;&gt;0&lt;/span&gt;) &lt;span style=&#34;color:#ff79c6&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;false&lt;/span&gt;;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;光线落在外圆才算相交&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-C++&#34; data-lang=&#34;C++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;p &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; ray.at(t);
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#8be9fd&#34;&gt;float&lt;/span&gt; disk2 &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; p.x &lt;span style=&#34;color:#ff79c6&#34;&gt;*&lt;/span&gt; p.x &lt;span style=&#34;color:#ff79c6&#34;&gt;+&lt;/span&gt; p.z &lt;span style=&#34;color:#ff79c6&#34;&gt;*&lt;/span&gt; p.z;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;if&lt;/span&gt;(disk2 &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;gt;&lt;/span&gt; radius &lt;span style=&#34;color:#ff79c6&#34;&gt;*&lt;/span&gt; radius &lt;span style=&#34;color:#ff79c6&#34;&gt;||&lt;/span&gt; disk2 &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&lt;/span&gt; inner_radius &lt;span style=&#34;color:#ff79c6&#34;&gt;*&lt;/span&gt; inner_radius)
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;false&lt;/span&gt;;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;比较圆盘完整度&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-C++&#34; data-lang=&#34;C++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#8be9fd&#34;&gt;float&lt;/span&gt; phi &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; std&lt;span style=&#34;color:#ff79c6&#34;&gt;::&lt;/span&gt;atan2(p.y, p.x);
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;if&lt;/span&gt;(phi &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&lt;/span&gt; &lt;span style=&#34;color:#bd93f9&#34;&gt;0.0f&lt;/span&gt;) phi &lt;span style=&#34;color:#ff79c6&#34;&gt;+=&lt;/span&gt; &lt;span style=&#34;color:#bd93f9&#34;&gt;2.0f&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;*&lt;/span&gt; PI;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;if&lt;/span&gt;(phi &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;gt;&lt;/span&gt; phi_max) &lt;span style=&#34;color:#ff79c6&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;false&lt;/span&gt;;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id=&#34;结尾&#34;&gt;结尾&lt;/h1&gt;
-&lt;p&gt;萌新学习ray tracing之路艰难，自身经验有限，如有错误请指出&lt;/p&gt;
-&lt;h1 id=&#34;reference&#34;&gt;Reference&lt;/h1&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;小提示：当圆柱曲面不是&lt;strong&gt;封闭&lt;/strong&gt;的时候，所求相交点有可能在圆柱内部，这时需要反转(flip)法线才能进行正确的着色&lt;/p&gt;
+&lt;h3 id=&#34;顶盖和底盖cap&#34;&gt;顶盖和底盖(Cap)&lt;/h3&gt;
+&lt;p&gt;这时候圆柱求交算是基本完成了，但渲染的时候又发现一个问题，圆柱没有顶盖和底盖，也就是二维曲面并不是封闭的，因为圆柱体是一个退化的二维曲面&lt;/p&gt;
+&lt;p&gt;这时候相当于加入了两个圆盘(Disk)&lt;/p&gt;
+&lt;p&gt;如果在之前与圆柱曲面相交了，需要传入&lt;code&gt;t&lt;/code&gt;与这次求交所得&lt;code&gt;cap_t&lt;/code&gt;判断哪个最近&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-C++&#34; data-lang=&#34;C++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;const&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;auto&lt;/span&gt; intersect &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; [&lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;amp;&lt;/span&gt;](f32 cap_t)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;if&lt;/span&gt;(cap_t &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;gt;=&lt;/span&gt; t &lt;span style=&#34;color:#ff79c6&#34;&gt;||&lt;/span&gt; cap_t &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;=&lt;/span&gt; &lt;span style=&#34;color:#bd93f9&#34;&gt;0&lt;/span&gt;) &lt;span style=&#34;color:#ff79c6&#34;&gt;return&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;if&lt;/span&gt;(&lt;span style=&#34;color:#ff79c6&#34;&gt;!&lt;/span&gt;check_cap(ray, cap_t)) &lt;span style=&#34;color:#ff79c6&#34;&gt;return&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    t &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; cap_t;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;};
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;我们可以增加一个枚举变量&lt;code&gt;cylinder_shape&lt;/code&gt;，来表示需要圆柱的顶面/底面，或者说&lt;del&gt;我全都要&lt;/del&gt;也行&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-C++&#34; data-lang=&#34;C++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;if&lt;/span&gt;(cylinder_shape &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;amp;&lt;/span&gt; cylinder_top)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    intersect(ray.inv_at&lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&lt;/span&gt;Axis&lt;span style=&#34;color:#ff79c6&#34;&gt;::&lt;/span&gt;Y&lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;gt;&lt;/span&gt;(max_height));
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;if&lt;/span&gt;(cylinder_shape &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;amp;&lt;/span&gt; cylinder_bottom)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    intersect(ray.inv_at&lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&lt;/span&gt;Axis&lt;span style=&#34;color:#ff79c6&#34;&gt;::&lt;/span&gt;Y&lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;gt;&lt;/span&gt;(min_height));
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;圆盘求交也很简单
+$$
+x^{2}+z^{2} \leq r^{2}
+$$&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-C++&#34; data-lang=&#34;C++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#8be9fd&#34;&gt;bool&lt;/span&gt; Cylinder&lt;span style=&#34;color:#ff79c6&#34;&gt;::&lt;/span&gt;check_cap(&lt;span style=&#34;color:#ff79c6&#34;&gt;const&lt;/span&gt; Ray3f&lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;amp;&lt;/span&gt; ray, f32 t) &lt;span style=&#34;color:#ff79c6&#34;&gt;const&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;const&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;auto&lt;/span&gt; x &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; ray.at&lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&lt;/span&gt;Axis&lt;span style=&#34;color:#ff79c6&#34;&gt;::&lt;/span&gt;X&lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;gt;&lt;/span&gt;(t);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;const&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;auto&lt;/span&gt; z &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; ray.at&lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&lt;/span&gt;Axis&lt;span style=&#34;color:#ff79c6&#34;&gt;::&lt;/span&gt;Z&lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;gt;&lt;/span&gt;(t);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;return&lt;/span&gt; (x &lt;span style=&#34;color:#ff79c6&#34;&gt;*&lt;/span&gt; x &lt;span style=&#34;color:#ff79c6&#34;&gt;+&lt;/span&gt; z &lt;span style=&#34;color:#ff79c6&#34;&gt;*&lt;/span&gt; z) &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;=&lt;/span&gt; radius &lt;span style=&#34;color:#ff79c6&#34;&gt;*&lt;/span&gt; radius;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;reference&#34;&gt;Reference&lt;/h2&gt;
 &lt;ol&gt;
 &lt;li&gt;Physically Based Rendering: From Theory to Implementation&lt;/li&gt;
 &lt;li&gt;The Ray Tracer Challenge&lt;/li&gt;

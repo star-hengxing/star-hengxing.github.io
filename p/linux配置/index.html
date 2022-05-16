@@ -9,7 +9,7 @@
 <meta property='og:description' content='基本配置/图形界面/常用软件'>
 <meta property='og:url' content='https://star-hengxing.github.io/p/linux%E9%85%8D%E7%BD%AE/'>
 <meta property='og:site_name' content='恒星的小站'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Linux' /><meta property='article:published_time' content='2022-01-29T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2022-01-29T00:00:00&#43;00:00'/>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Linux' /><meta property='article:published_time' content='2022-01-29T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2022-05-16T00:00:00&#43;00:00'/>
 <meta name="twitter:title" content="Linux配置">
 <meta name="twitter:description" content="基本配置/图形界面/常用软件">
     </head>
@@ -196,7 +196,7 @@
 </tr>
 <tr>
 <td>高级版top</td>
-<td>htop</td>
+<td>gotop(AUR)/htop</td>
 </tr>
 <tr>
 <td>打印彩色的十六进制</td>
@@ -213,6 +213,10 @@
 <tr>
 <td>文件浏览器</td>
 <td>ranger</td>
+</tr>
+<tr>
+<td>比tmux更好用的单窗口多终端</td>
+<td>zellij</td>
 </tr>
 </tbody>
 </table></div>
@@ -248,7 +252,7 @@
 </span></span><span style="display:flex;"><span>    sudo pacman -S lightdm lightdm-gtk-greeter
 </span></span><span style="display:flex;"><span>    sudo systemctl <span style="color:#8be9fd;font-style:italic">enable</span> lightdm
 </span></span></code></pre></div><h2 id="aur">AUR</h2>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>    sudo pacman -S yay
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>    sudo pacman -S paru 
 </span></span></code></pre></div><h2 id="bash">bash</h2>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>    sudo pacman -S zsh
 </span></span><span style="display:flex;"><span>    sudo chsh -s /bin/zsh username
@@ -257,7 +261,7 @@
 </span></span></code></pre></div><h2 id="下载">下载</h2>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>    sudo pacman -S aria2
 </span></span><span style="display:flex;"><span>    <span style="color:#6272a4"># web前端(还有很多前端可供挑选)</span>
-</span></span><span style="display:flex;"><span>    yay -S ariang-allinone
+</span></span><span style="display:flex;"><span>    paru ariang-allinone
 </span></span><span style="display:flex;"><span>    <span style="color:#6272a4"># copy 大佬的配置</span>
 </span></span><span style="display:flex;"><span>    git clone https://github.com/P3TERX/aria2.conf
 </span></span><span style="display:flex;"><span>    mkdir ~/.aria2
@@ -298,7 +302,19 @@
 
         <span>Licensed under CC BY-NC-SA 4.0</span>
     </section>
-    </footer>
+    <section class="article-lastmod">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+        <span>
+            最后更新于 May 16, 2022
+        </span>
+    </section></footer>
 
 
     
