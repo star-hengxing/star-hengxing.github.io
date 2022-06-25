@@ -6,7 +6,175 @@
         <description>Recent content on 恒星的小站</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
-        <lastBuildDate>Mon, 09 May 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://star-hengxing.github.io/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sat, 25 Jun 2022 20:17:10 +0800</lastBuildDate><atom:link href="https://star-hengxing.github.io/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>在Windows上使用xmake配置Vulkan开发环境</title>
+        <link>https://star-hengxing.github.io/p/%E5%9C%A8windows%E4%B8%8A%E4%BD%BF%E7%94%A8xmake%E9%85%8D%E7%BD%AEvulkan%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/</link>
+        <pubDate>Sat, 25 Jun 2022 20:17:10 +0800</pubDate>
+        
+        <guid>https://star-hengxing.github.io/p/%E5%9C%A8windows%E4%B8%8A%E4%BD%BF%E7%94%A8xmake%E9%85%8D%E7%BD%AEvulkan%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/</guid>
+        <description>&lt;p&gt;&lt;em&gt;也可以是C++小项目的配置&lt;/em&gt;&lt;/p&gt;
+&lt;h2 id=&#34;开发环境构建&#34;&gt;开发环境构建&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;vscode+xmake+clang+clangd&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;如果在配置过程中有问题，可以先看一下文末的&lt;strong&gt;FQA&lt;/strong&gt;&lt;/p&gt;
+&lt;h3 id=&#34;c编译工具链&#34;&gt;C++编译工具链&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://visualstudio.microsoft.com/vs&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Visual Studio 2022&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://github.com/llvm/llvm-project/tags&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;clang&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;构建系统&#34;&gt;构建系统&lt;/h3&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://xmake.io&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;xmake&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;vulkan-sdk&#34;&gt;Vulkan SDK&lt;/h3&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.lunarg.com/vulkan-sdk/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://www.lunarg.com/vulkan-sdk/&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;假装ide的文本编辑器&#34;&gt;假装IDE的文本编辑器&lt;/h3&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://code.visualstudio.com&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Visual Studio Code&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;安装插件&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;clangd&lt;/li&gt;
+&lt;li&gt;XMake&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;getting-started&#34;&gt;Getting started&lt;/h2&gt;
+&lt;p&gt;假设上面配置都是使用各自的installer，会安装在&lt;strong&gt;默认目录&lt;/strong&gt;并添加&lt;strong&gt;环境变量&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;新建一个目录，在目录下新建xmake.lua，写入下面内容&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-lua&#34; data-lang=&#34;lua&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;set_project(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;vulkan&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;add_rules(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;mode.debug&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;mode.release&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;add_requires(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;vulkansdk&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;glfw&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;glm&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;set_warnings(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;all&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;set_languages(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;cxx20&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;target(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;main&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    set_kind(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;binary&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    add_files(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;*.cpp&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    add_packages(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;vulkansdk&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;glfw&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;glm&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;xmake会自动探测编译器、vulkansdk，glm和glfw库由xmake的包管理处理&lt;/p&gt;
+&lt;h3 id=&#34;编译&#34;&gt;编译&lt;/h3&gt;
+&lt;p&gt;测试代码来自&lt;a class=&#34;link&#34; href=&#34;https://vulkan-tutorial.com/Development_environment&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;vulkan tutorial&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;直接新建一个&lt;code&gt;main.cpp&lt;/code&gt;，把代码copy下来&lt;/p&gt;
+&lt;p&gt;一切配置好后，可以测试一下了&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;xmake
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;xmake run
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;出现窗口代表环境配置成功&lt;/p&gt;
+&lt;h3 id=&#34;intellisense&#34;&gt;Intellisense&lt;/h3&gt;
+&lt;p&gt;xmake会在&lt;code&gt;.vscode&lt;/code&gt;目录自动生成&lt;code&gt;compile_commands.json&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;所以我们在&lt;code&gt;.vscode/settings.json&lt;/code&gt;给clangd加上参数&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-json&#34; data-lang=&#34;json&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;#34;clangd.arguments&amp;#34;&lt;/span&gt;: [
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;--compile-commands-dir=.vscode&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;--header-insertion=never&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;--completion-style=detailed&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    ]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;fqa&#34;&gt;FQA&lt;/h2&gt;
+&lt;p&gt;Q: xmake下载包失败怎么办&lt;/p&gt;
+&lt;p&gt;A: 查看文档&lt;a class=&#34;link&#34; href=&#34;https://xmake.io/#/zh-cn/package/remote_package?id=%e8%bf%9c%e7%a8%8b%e5%8c%85%e4%b8%8b%e8%bd%bd%e4%bc%98%e5%8c%96&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;使用远程包 - xmake&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Q: 编译失败怎么办&lt;/p&gt;
+&lt;p&gt;A: 执行&lt;code&gt;xmake -v&lt;/code&gt;，查看详细输出信息&lt;/p&gt;
+&lt;p&gt;Q: 我想用vs写代码怎么办&lt;/p&gt;
+&lt;p&gt;A: 执行&lt;code&gt;xmake project -k vsxmake -m &amp;quot;debug,release&amp;quot;&lt;/code&gt;生成vs工程文件&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>离线渲染进阶</title>
+        <link>https://star-hengxing.github.io/p/%E7%A6%BB%E7%BA%BF%E6%B8%B2%E6%9F%93%E8%BF%9B%E9%98%B6/</link>
+        <pubDate>Mon, 30 May 2022 00:00:00 +0000</pubDate>
+        
+        <guid>https://star-hengxing.github.io/p/%E7%A6%BB%E7%BA%BF%E6%B8%B2%E6%9F%93%E8%BF%9B%E9%98%B6/</guid>
+        <description>&lt;p&gt;现实世界是如此美丽，那么如何渲染呢&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;光谱&#34;&gt;光谱&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://github.com/geometrian/simple-spectral&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Simple Spectral&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;天空&#34;&gt;天空&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://cgg.mff.cuni.cz/projects/SkylightModelling/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;The Sky Dome Appearance Project&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;彩虹&#34;&gt;彩虹&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://cs.dartmouth.edu/wjarosz/publications/sadeghi11physically.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Physically-based simulation of rainbows&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;动物毛发&#34;&gt;动物毛发&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://sites.cs.ucsb.edu/~lingqi/project_page/fur2/index.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;An Efficient and Practical Near and Far Field Fur Reflectance Model&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        </item>
+        <item>
+        <title>从代码到程序</title>
+        <link>https://star-hengxing.github.io/p/%E4%BB%8E%E4%BB%A3%E7%A0%81%E5%88%B0%E7%A8%8B%E5%BA%8F/</link>
+        <pubDate>Sun, 29 May 2022 00:00:00 +0000</pubDate>
+        
+        <guid>https://star-hengxing.github.io/p/%E4%BB%8E%E4%BB%A3%E7%A0%81%E5%88%B0%E7%A8%8B%E5%BA%8F/</guid>
+        <description>&lt;p&gt;随手记录的一些编译原理笔记。&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;现代编译器分为前后端，为了进一步降低复杂度(模块化)，前端的流程通常是：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;词法分析 -&amp;gt; 语法分析 -&amp;gt; 语义分析
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;上一步的输出是下一步的输入。&lt;/p&gt;
+&lt;h2 id=&#34;词法分析&#34;&gt;词法分析&lt;/h2&gt;
+&lt;p&gt;常见的应用有正则表达式。&lt;/p&gt;
+&lt;p&gt;先定义一个映射， tokens = map(字符串)&lt;/p&gt;
+&lt;p&gt;这个&lt;code&gt;token&lt;/code&gt;是啥呢，比如说我有下面这个算式：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1 + 2 * ３
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;解析后：&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;值&lt;/th&gt;
+&lt;th&gt;类型&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;１&lt;/td&gt;
+&lt;td&gt;整数&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;+&lt;/td&gt;
+&lt;td&gt;加号&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;2&lt;/td&gt;
+&lt;td&gt;整数&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;*&lt;/td&gt;
+&lt;td&gt;乘号&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;3&lt;/td&gt;
+&lt;td&gt;整数&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;我们暂时不知道有什么用，但现在我们解决了字符串里的&lt;strong&gt;空格&lt;/strong&gt;，如果字符串里有奇怪的字符，比如&lt;code&gt;#&lt;/code&gt;啥的，也可以报错。&lt;/p&gt;
+&lt;p&gt;怎么解析其实也是个大问题，通常用&lt;strong&gt;自动机&lt;/strong&gt;解决这个问题。&lt;/p&gt;
+&lt;h2 id=&#34;语法分析&#34;&gt;语法分析&lt;/h2&gt;
+&lt;p&gt;把词法分析输出的一堆token，组合成句子，检查句子的语法，最后生成&lt;strong&gt;抽象语法树(AST)&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;AST用处广泛，比如：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;编辑器错误提示&lt;/li&gt;
+&lt;li&gt;代码格式化&lt;/li&gt;
+&lt;li&gt;代码高亮&lt;/li&gt;
+&lt;li&gt;代码自动补全&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
         <title>如何在Linux和Windows上优雅地玩galgame</title>
         <link>https://star-hengxing.github.io/p/%E5%A6%82%E4%BD%95%E5%9C%A8linux%E5%92%8Cwindows%E4%B8%8A%E4%BC%98%E9%9B%85%E5%9C%B0%E7%8E%A9galgame/</link>
         <pubDate>Mon, 09 May 2022 00:00:00 +0000</pubDate>
@@ -139,7 +307,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt; sed -i &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;$d&lt;/span&gt;&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;&lt;/span&gt; PKGBULID
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt; makepkg -g &amp;gt;&amp;gt; PKGBULID
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;测试&#34;&gt;测试&lt;/h2&gt;
-&lt;p&gt;写好PKGBULID，就要检查能不能用。&lt;/p&gt;
+&lt;p&gt;写好PKGBULID，检查能不能用。&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#6272a4&#34;&gt;# 检查PKGBUILD格式&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;namcap PKGBUILD
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#6272a4&#34;&gt;# 生成包&lt;/span&gt;
@@ -628,43 +796,6 @@
 &lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; SDF Ray Tracing&lt;/li&gt;
 &lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 2D Ray Tracing&lt;/li&gt;
 &lt;/ul&gt;
-</description>
-        </item>
-        <item>
-        <title>编译器优化</title>
-        <link>https://star-hengxing.github.io/p/%E7%BC%96%E8%AF%91%E5%99%A8%E4%BC%98%E5%8C%96/</link>
-        <pubDate>Sat, 29 Jan 2022 00:00:00 +0000</pubDate>
-        
-        <guid>https://star-hengxing.github.io/p/%E7%BC%96%E8%AF%91%E5%99%A8%E4%BC%98%E5%8C%96/</guid>
-        <description>&lt;p&gt;在书中2.14节 [1]，看到一个循环遍历的编译器优化，书中给出了用指针和for循环遍历的C代码和对应汇编代码&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-C&#34; data-lang=&#34;C&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;clear1(&lt;span style=&#34;color:#8be9fd&#34;&gt;int&lt;/span&gt; array[], &lt;span style=&#34;color:#8be9fd&#34;&gt;int&lt;/span&gt; size)
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#8be9fd&#34;&gt;int&lt;/span&gt; i;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;for&lt;/span&gt; (&lt;span style=&#34;color:#8be9fd&#34;&gt;int&lt;/span&gt; i &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#bd93f9&#34;&gt;0&lt;/span&gt;; i &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&lt;/span&gt; size; i &lt;span style=&#34;color:#ff79c6&#34;&gt;+=&lt;/span&gt; &lt;span style=&#34;color:#bd93f9&#34;&gt;1&lt;/span&gt;)
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        array[i] &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#bd93f9&#34;&gt;0&lt;/span&gt;;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;clear2(&lt;span style=&#34;color:#8be9fd&#34;&gt;int&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;*&lt;/span&gt; array, &lt;span style=&#34;color:#8be9fd&#34;&gt;int&lt;/span&gt; size)
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#8be9fd&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;*&lt;/span&gt;p;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;for&lt;/span&gt; (p &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;amp;&lt;/span&gt;array[&lt;span style=&#34;color:#bd93f9&#34;&gt;0&lt;/span&gt;]; p &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;amp;&lt;/span&gt;array[size]; p &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; p &lt;span style=&#34;color:#ff79c6&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#bd93f9&#34;&gt;1&lt;/span&gt;)
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#ff79c6&#34;&gt;*&lt;/span&gt;p &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#bd93f9&#34;&gt;0&lt;/span&gt;;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#6272a4&#34;&gt;// 书中并无clear3代码
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#6272a4&#34;&gt;&lt;/span&gt;clear3(&lt;span style=&#34;color:#8be9fd&#34;&gt;int&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;*&lt;/span&gt; array, &lt;span style=&#34;color:#8be9fd&#34;&gt;int&lt;/span&gt; size)
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;const&lt;/span&gt; &lt;span style=&#34;color:#8be9fd&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;*&lt;/span&gt;end &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;amp;&lt;/span&gt;array[size]; &lt;span style=&#34;color:#6272a4&#34;&gt;// 避免在循环里重复计算
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#6272a4&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;for&lt;/span&gt; (&lt;span style=&#34;color:#8be9fd&#34;&gt;int&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;*&lt;/span&gt; p &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;amp;&lt;/span&gt;array[&lt;span style=&#34;color:#bd93f9&#34;&gt;0&lt;/span&gt;]; p &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&lt;/span&gt; end; p&lt;span style=&#34;color:#ff79c6&#34;&gt;++&lt;/span&gt;)
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#ff79c6&#34;&gt;*&lt;/span&gt;p &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#bd93f9&#34;&gt;0&lt;/span&gt;;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;ps: int array[]和int* array在编译器看来都一样；&amp;amp;array[0]和array一样(数组名就是地址)&lt;/p&gt;
-&lt;p&gt;clear1代码，每次都要根据数组下标进行偏移计算，int是4字节，下标乘于4偏移，整数x4可以优化成左移2位&lt;/p&gt;
-&lt;p&gt;如果使用指针，循环里的指令就可以减少(不需要根据下标计算偏移量，直接对指针偏移)&lt;/p&gt;
-&lt;p&gt;用指针实现，虽然效率快，但可读性差，所以这个繁重的工作应该交给编译器&lt;/p&gt;
-&lt;h1 id=&#34;reference&#34;&gt;Reference&lt;/h1&gt;
-&lt;ol&gt;
-&lt;li&gt;计算机组成与设计：硬件软件接口 第五版&lt;/li&gt;
-&lt;/ol&gt;
 </description>
         </item>
         <item>

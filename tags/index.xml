@@ -6,13 +6,22 @@
     <description>Recent content in Tags on 恒星的小站</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Wed, 04 May 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://star-hengxing.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 25 Jun 2022 20:17:10 +0800</lastBuildDate><atom:link href="https://star-hengxing.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>计算机图形学</title>
-      <link>https://star-hengxing.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/</link>
-      <pubDate>Wed, 04 May 2022 00:00:00 +0000</pubDate>
+      <title>图形API</title>
+      <link>https://star-hengxing.github.io/tags/%E5%9B%BE%E5%BD%A2api/</link>
+      <pubDate>Sat, 25 Jun 2022 20:17:10 +0800</pubDate>
       
-      <guid>https://star-hengxing.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/</guid>
+      <guid>https://star-hengxing.github.io/tags/%E5%9B%BE%E5%BD%A2api/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>编译原理</title>
+      <link>https://star-hengxing.github.io/tags/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/</link>
+      <pubDate>Sun, 29 May 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://star-hengxing.github.io/tags/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/</guid>
       <description></description>
     </item>
     
@@ -49,15 +58,6 @@
       <pubDate>Sun, 30 Jan 2022 11:25:23 +0800</pubDate>
       
       <guid>https://star-hengxing.github.io/tags/%E4%B9%90%E7%90%86/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>编译原理</title>
-      <link>https://star-hengxing.github.io/tags/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/</link>
-      <pubDate>Sat, 29 Jan 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://star-hengxing.github.io/tags/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/</guid>
       <description></description>
     </item>
     
@@ -103,15 +103,6 @@
       <pubDate>Tue, 12 Oct 2021 00:00:00 +0000</pubDate>
       
       <guid>https://star-hengxing.github.io/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>光线追踪</title>
-      <link>https://star-hengxing.github.io/tags/%E5%85%89%E7%BA%BF%E8%BF%BD%E8%B8%AA/</link>
-      <pubDate>Sun, 11 Apr 2021 00:00:00 +0000</pubDate>
-      
-      <guid>https://star-hengxing.github.io/tags/%E5%85%89%E7%BA%BF%E8%BF%BD%E8%B8%AA/</guid>
       <description></description>
     </item>
     

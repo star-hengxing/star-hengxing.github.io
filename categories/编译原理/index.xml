@@ -6,15 +6,25 @@
     <description>Recent content in 编译原理 on 恒星的小站</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sat, 29 Jan 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://star-hengxing.github.io/categories/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 29 May 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://star-hengxing.github.io/categories/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>编译器优化</title>
-      <link>https://star-hengxing.github.io/p/%E7%BC%96%E8%AF%91%E5%99%A8%E4%BC%98%E5%8C%96/</link>
-      <pubDate>Sat, 29 Jan 2022 00:00:00 +0000</pubDate>
+      <title>从代码到程序</title>
+      <link>https://star-hengxing.github.io/p/%E4%BB%8E%E4%BB%A3%E7%A0%81%E5%88%B0%E7%A8%8B%E5%BA%8F/</link>
+      <pubDate>Sun, 29 May 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://star-hengxing.github.io/p/%E7%BC%96%E8%AF%91%E5%99%A8%E4%BC%98%E5%8C%96/</guid>
-      <description>在书中2.14节 [1]，看到一个循环遍历的编译器优化，书中给出了用指针和for循环遍历的C代码和对应汇编代码
-clear1(int array[], int size) {  int i;  for (int i = 0; i &amp;lt; size; i += 1)  array[i] = 0; }  clear2(int* array, int size) {  int *p;  for (p = &amp;amp;array[0]; p &amp;lt; &amp;amp;array[size]; p = p + 1)  *p = 0; } // 书中并无clear3代码 clear3(int* array, int size) {  const int *end = &amp;amp;array[size]; // 避免在循环里重复计算  for (int* p = &amp;amp;array[0]; p &amp;lt; end; p++)  *p = 0; } ps: int array[]和int* array在编译器看来都一样；&amp;amp;array[0]和array一样(数组名就是地址)</description>
+      <guid>https://star-hengxing.github.io/p/%E4%BB%8E%E4%BB%A3%E7%A0%81%E5%88%B0%E7%A8%8B%E5%BA%8F/</guid>
+      <description>随手记录的一些编译原理笔记。
+现代编译器分为前后端，为了进一步降低复杂度(模块化)，前端的流程通常是：
+词法分析 -&amp;gt; 语法分析 -&amp;gt; 语义分析 上一步的输出是下一步的输入。
+词法分析 常见的应用有正则表达式。
+先定义一个映射， tokens = map(字符串)
+这个token是啥呢，比如说我有下面这个算式：
+1 + 2 * ３ 解析后：
+值 类型 １ 整数 + 加号 2 整数 * 乘号 3 整数 我们暂时不知道有什么用，但现在我们解决了字符串里的空格，如果字符串里有奇怪的字符，比如#啥的，也可以报错。
+怎么解析其实也是个大问题，通常用自动机解决这个问题。
+语法分析 把词法分析输出的一堆token，组合成句子，检查句子的语法，最后生成抽象语法树(AST)
+AST用处广泛，比如：
+编辑器错误提示 代码格式化 代码高亮 代码自动补全 </description>
     </item>
     
   </channel>

@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>计算机图形学 on 恒星的小站</title>
+    <link>https://star-hengxing.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/</link>
+    <description>Recent content in 计算机图形学 on 恒星的小站</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Sat, 25 Jun 2022 20:17:10 +0800</lastBuildDate><atom:link href="https://star-hengxing.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>在Windows上使用xmake配置Vulkan开发环境</title>
+      <link>https://star-hengxing.github.io/p/%E5%9C%A8windows%E4%B8%8A%E4%BD%BF%E7%94%A8xmake%E9%85%8D%E7%BD%AEvulkan%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/</link>
+      <pubDate>Sat, 25 Jun 2022 20:17:10 +0800</pubDate>
+      
+      <guid>https://star-hengxing.github.io/p/%E5%9C%A8windows%E4%B8%8A%E4%BD%BF%E7%94%A8xmake%E9%85%8D%E7%BD%AEvulkan%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/</guid>
+      <description>也可以是C++小项目的配置
+开发环境构建 vscode+xmake+clang+clangd
+如果在配置过程中有问题，可以先看一下文末的FQA
+C++编译工具链 Visual Studio 2022 clang 构建系统 xmake
+Vulkan SDK https://www.lunarg.com/vulkan-sdk/
+假装IDE的文本编辑器 Visual Studio Code
+安装插件
+clangd XMake Getting started 假设上面配置都是使用各自的installer，会安装在默认目录并添加环境变量
+新建一个目录，在目录下新建xmake.lua，写入下面内容
+set_project(&amp;#34;vulkan&amp;#34;) add_rules(&amp;#34;mode.debug&amp;#34;, &amp;#34;mode.release&amp;#34;) add_requires(&amp;#34;vulkansdk&amp;#34;, &amp;#34;glfw&amp;#34;, &amp;#34;glm&amp;#34;) set_warnings(&amp;#34;all&amp;#34;) set_languages(&amp;#34;cxx20&amp;#34;) target(&amp;#34;main&amp;#34;) set_kind(&amp;#34;binary&amp;#34;) add_files(&amp;#34;*.cpp&amp;#34;) add_packages(&amp;#34;vulkansdk&amp;#34;, &amp;#34;glfw&amp;#34;, &amp;#34;glm&amp;#34;) xmake会自动探测编译器、vulkansdk，glm和glfw库由xmake的包管理处理
+编译 测试代码来自vulkan tutorial
+直接新建一个main.cpp，把代码copy下来
+一切配置好后，可以测试一下了
+xmake xmake run 出现窗口代表环境配置成功
+Intellisense xmake会在.vscode目录自动生成compile_commands.json
+所以我们在.vscode/settings.json给clangd加上参数
+{ &amp;#34;clangd.arguments&amp;#34;: [ &amp;#34;--compile-commands-dir=.vscode&amp;#34;, &amp;#34;--header-insertion=never&amp;#34;, &amp;#34;--completion-style=detailed&amp;#34; ] } FQA Q: xmake下载包失败怎么办
+A: 查看文档使用远程包 - xmake
+Q: 编译失败怎么办
+A: 执行xmake -v，查看详细输出信息</description>
+    </item>
+    
+    <item>
+      <title>离线渲染进阶</title>
+      <link>https://star-hengxing.github.io/p/%E7%A6%BB%E7%BA%BF%E6%B8%B2%E6%9F%93%E8%BF%9B%E9%98%B6/</link>
+      <pubDate>Mon, 30 May 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://star-hengxing.github.io/p/%E7%A6%BB%E7%BA%BF%E6%B8%B2%E6%9F%93%E8%BF%9B%E9%98%B6/</guid>
+      <description>现实世界是如此美丽，那么如何渲染呢
+光谱 Simple Spectral 天空 The Sky Dome Appearance Project 彩虹 Physically-based simulation of rainbows 动物毛发 An Efficient and Practical Near and Far Field Fur Reflectance Model </description>
+    </item>
+    
+    <item>
+      <title>Chinagraph2020会前课程 真实感图形渲染科研入门 随手记录</title>
+      <link>https://star-hengxing.github.io/p/chinagraph2020%E4%BC%9A%E5%89%8D%E8%AF%BE%E7%A8%8B-%E7%9C%9F%E5%AE%9E%E6%84%9F%E5%9B%BE%E5%BD%A2%E6%B8%B2%E6%9F%93%E7%A7%91%E7%A0%94%E5%85%A5%E9%97%A8-%E9%9A%8F%E6%89%8B%E8%AE%B0%E5%BD%95/</link>
+      <pubDate>Wed, 04 May 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://star-hengxing.github.io/p/chinagraph2020%E4%BC%9A%E5%89%8D%E8%AF%BE%E7%A8%8B-%E7%9C%9F%E5%AE%9E%E6%84%9F%E5%9B%BE%E5%BD%A2%E6%B8%B2%E6%9F%93%E7%A7%91%E7%A0%94%E5%85%A5%E9%97%A8-%E9%9A%8F%E6%89%8B%E8%AE%B0%E5%BD%95/</guid>
+      <description>录播：Chinagraph2020
+论文推荐 真实感图形渲染科研入门笔记（一）：论文推荐
+工具链与参考资料 真实感图形渲染科研入门笔记（二）：工具链与参考资料
+迈向科研的训练 离线 用Intel的Embree写一个光线追踪器 使用多重重要性采样 支持微表面材质 实现一个正确的BDPT 95%做渲染的科研人员都没写对BDPT(太难了)
+检验：和PT的结果比较
+实时 用C++封装OpenGL 支持arcball(能用鼠标拖拽的一个球，里面的物体一起动起来)，写一个VSSM 使用Optix和OpenGL实现RTRT 使用SVGF降噪 未来 材质外观的研究才刚刚开始
+现在用的基本这两种
+diffuse + microfacet 迪士尼原则BRDF 尽管实现很简单，但第一种对真实感渲染错的离谱
+人脸的渲染也没有好的正向模型</description>
+    </item>
+    
+    <item>
+      <title>基于SDF的Raymarching</title>
+      <link>https://star-hengxing.github.io/p/%E5%9F%BA%E4%BA%8Esdf%E7%9A%84raymarching/</link>
+      <pubDate>Sat, 29 Jan 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://star-hengxing.github.io/p/%E5%9F%BA%E4%BA%8Esdf%E7%9A%84raymarching/</guid>
+      <description>其实大部分情况下和raytracing类似
+不同:
+几何物体的描述 光线与几何物体求交 法线的获取 Reference iq大佬的网站 </description>
+    </item>
+    
+    <item>
+      <title>光线与各种几何图形求交</title>
+      <link>https://star-hengxing.github.io/p/%E5%85%89%E7%BA%BF%E4%B8%8E%E5%90%84%E7%A7%8D%E5%87%A0%E4%BD%95%E5%9B%BE%E5%BD%A2%E6%B1%82%E4%BA%A4/</link>
+      <pubDate>Sun, 11 Apr 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://star-hengxing.github.io/p/%E5%85%89%E7%BA%BF%E4%B8%8E%E5%90%84%E7%A7%8D%E5%87%A0%E4%BD%95%E5%9B%BE%E5%BD%A2%E6%B1%82%E4%BA%A4/</guid>
+      <description>在一些基础的光线追踪教程中，光线求交通常发生在世界空间(world space)
+但在离线渲染器中(比如PBRT)，光线求交发生在几何图形自己的局部空间(local/object/model space)
+这是有好处的，比如说简化求交代码，相交表面的normal和uv也很容易计算
+下面就记录一些几何求交的做法，自身经验有限，如有错误请指出
+前提 这里采用的是y轴朝上的右手坐标系，-z轴指向屏幕里，x轴在右手 默认光线已经变换到对象的局部空间 使用几何体的变换矩阵和其逆矩阵，求交时将光线变换到对象空间
+$$ Ray(t)=o+td (t &amp;gt; 0) $$
+$$ Ray_{object}=M^{-1}Ray_{world} $$
+矩形(Rectangle) 假设矩形高度为0，躺在xz平面上。长和宽控制矩形大小
+忽略平行于平面的光线
+if(is_zero(ray.direction.y)) return false; 使用高度计算相交点 $$ t=\frac{0 - o_{y}}{d_{y}} $$
+const auto t = ray.inv_at&amp;lt;Axis::Y&amp;gt;(0); const auto [x, y, z] = ray.at(t); 在矩形范围内的点才算相交成功
+if(std::abs(x) &amp;gt; length || std::abs(z) &amp;gt; width) return false; 球(Sphere) 假设球心在原点，半径控制球的大小
+三维空间中球的一般方程 $$ x^{2}+y^{2}+z^{2}=r^{2} $$
+将光线代入方程 $$ (o+td)^{2}=r^{2} $$
+整理可得关于t的一元二次方程 $$ d^{2}t^{2}+2odt+o^{2}-r^{2}=0\ \begin{align*} &amp;amp; a=d^{2}\ &amp;amp; b=2od\ &amp;amp; c=o^{2}-r^{2} \end{align*} $$</description>
+    </item>
+    
+    <item>
+      <title>离线渲染-光线追踪框架学习资料</title>
+      <link>https://star-hengxing.github.io/p/%E7%A6%BB%E7%BA%BF%E6%B8%B2%E6%9F%93-%E5%85%89%E7%BA%BF%E8%BF%BD%E8%B8%AA%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%96%99/</link>
+      <pubDate>Wed, 16 Dec 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://star-hengxing.github.io/p/%E7%A6%BB%E7%BA%BF%E6%B8%B2%E6%9F%93-%E5%85%89%E7%BA%BF%E8%BF%BD%E8%B8%AA%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%96%99/</guid>
+      <description>GAMES101:现代计算机图形学入门 网课，可在b站上观看
+assignment 5-7 是光线追踪的作业
+如果对光栅化，几何，动画与模拟，不感兴趣，可以只看Lecture 13-20（个人建议：把整套课看完也是不错的）
+Taichi课程 课程主页
+网课，其中6-7讲涉及光线追踪
+Peter Shirley写的光线追踪三部曲 Ray Tracing in One Weekend Ray Tracing: The Next Week Ray Tracing: The Rest of Your Life 书中配套代码，在网上能搜到这三本的笔记和翻译版本
+我认为这是光线追踪入门的最好教程
+Daily Pathtracer Aras Pranckevičius大佬写的教程
+介绍 博客
+Nori an educational ray tracer
+主页
+5个assignment
+PBRT Physically Based Rendering:From Theory To Implementation
+这本书是学习离线渲染系统书（离线渲染圣经），配套代码在github上
+网上在线阅读
+此为光线追踪进阶书籍
+书 Ray Tracing Gems Advanced global illumination Fundamentals of Computer Graphics Real-Time Rendering 全局光照技术 杂类 github上收集的图形学资料 milo yip的用JavaScript玩转计算机图形学-光线追踪入门 scratchapixel，图形学网站，对细节讲解很详细，配套代码 99行代码写出路径追踪-smallpt real-time-rendering，网站内附带很多图形学资料 mitsuba,一个开源渲染器 stackexchange的计算机图形学板块 </description>
+    </item>
+    
+  </channel>
+</rss>

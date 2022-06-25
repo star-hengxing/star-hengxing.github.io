@@ -16,7 +16,7 @@
       <description>我的系统是ArchLinux，所以看着archwiki一路配置比较舒服
 其他系统请看官方文档
 从安装到启动 my.domain.name替换成自己的域名就行
- sudo cd /var/lib/synapse  sudo -u synapse python -m synapse.app.homeserver \  --server-name my.domain.name \  --config-path /etc/synapse/homeserver.yaml \  --generate-config \  --report-stats=yes   sudo systemctl start synapse.service  # 服务器至少要有一个用户  register_new_matrix_user -c /etc/synapse/homeserver.yaml http://127.0.0.1:8008 这时候应该就可以用一个matrix client来连接了，这里选择element</description>
+sudo cd /var/lib/synapse sudo -u synapse python -m synapse.app.homeserver \ --server-name my.domain.name \ --config-path /etc/synapse/homeserver.yaml \ --generate-config \ --report-stats=yes sudo systemctl start synapse.service # 服务器至少要有一个用户 register_new_matrix_user -c /etc/synapse/homeserver.yaml http://127.0.0.1:8008 这时候应该就可以用一个matrix client来连接了，这里选择element</description>
     </item>
     
     <item>
@@ -28,8 +28,8 @@
       <description>yt-dlp 一个命令行下载youtube视频软件，目前来说就他下载速度还行，其他同类工具被限速了
 TL;DR
 下载一个视频
- yt-dlp URL 不下载，查看视频下载的信息(选择画质)
- yt-dlp -F URL   [BiliBili] 12Q4y1S73g: Downloading webpage  [BiliBili] 12Q4y1S73g: Downloading video info page  [info] Available formats for 12Q4y1S73g:  format code extension resolution note  0 flv unknown  1 flv unknown  2 flv unknown 295.77MiB (best) 下载bilibili视频 Bilibili Evolved + aria2 下载视频
+yt-dlp URL 不下载，查看视频下载的信息(选择画质)
+yt-dlp -F URL [BiliBili] 12Q4y1S73g: Downloading webpage [BiliBili] 12Q4y1S73g: Downloading video info page [info] Available formats for 12Q4y1S73g: format code extension resolution note 0 flv unknown 1 flv unknown 2 flv unknown 295.77MiB (best) 下载bilibili视频 Bilibili Evolved + aria2 下载视频
 Bilibili Evolved提供了几种视频下载方式，我这里选择aria2
 启动aria2后，在插件里选择aria2 rpc就可以自动下载视频了</description>
     </item>

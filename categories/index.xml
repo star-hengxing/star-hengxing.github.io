@@ -6,7 +6,34 @@
     <description>Recent content in Categories on 恒星的小站</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Mon, 09 May 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://star-hengxing.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 25 Jun 2022 20:17:10 +0800</lastBuildDate><atom:link href="https://star-hengxing.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>计算机图形学</title>
+      <link>https://star-hengxing.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/</link>
+      <pubDate>Sat, 25 Jun 2022 20:17:10 +0800</pubDate>
+      
+      <guid>https://star-hengxing.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>光线追踪</title>
+      <link>https://star-hengxing.github.io/categories/%E5%85%89%E7%BA%BF%E8%BF%BD%E8%B8%AA/</link>
+      <pubDate>Mon, 30 May 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://star-hengxing.github.io/categories/%E5%85%89%E7%BA%BF%E8%BF%BD%E8%B8%AA/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>编译原理</title>
+      <link>https://star-hengxing.github.io/categories/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/</link>
+      <pubDate>Sun, 29 May 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://star-hengxing.github.io/categories/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>Galgame</title>
       <link>https://star-hengxing.github.io/categories/galgame/</link>
@@ -40,15 +67,6 @@
       <pubDate>Sun, 30 Jan 2022 11:25:23 +0800</pubDate>
       
       <guid>https://star-hengxing.github.io/categories/%E9%9F%B3%E4%B9%90/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>编译原理</title>
-      <link>https://star-hengxing.github.io/categories/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/</link>
-      <pubDate>Sat, 29 Jan 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://star-hengxing.github.io/categories/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/</guid>
       <description></description>
     </item>
     

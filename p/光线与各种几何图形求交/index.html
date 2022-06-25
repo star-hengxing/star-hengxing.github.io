@@ -5,7 +5,7 @@
 但在离线渲染器中(比如PBRT)，光线求交发生在几何图形自己的局部空间(local/object/model space)
 这是有好处的，比如说简化求交代码，相交表面的normal和uv也很容易计算
 下面就记录一些几何求交的做法，自身经验有限，如有错误请指出
-前提  这里采用的是y轴朝上的右手坐标系，-z轴指向屏幕里，x轴在右手 默认光线已经变换到对象的局部空间  使用几何体的变换矩阵和其逆矩阵，求交时将光线变换到对象空间
+前提 这里采用的是y轴朝上的右手坐标系，-z轴指向屏幕里，x轴在右手 默认光线已经变换到对象的局部空间 使用几何体的变换矩阵和其逆矩阵，求交时将光线变换到对象空间
 $$ Ray(t)=o&#43;td (t &amp;gt; 0) $$
 $$ Ray_{object}=M^{-1}Ray_{world} $$
 矩形(Rectangle) 假设矩形高度为0，躺在xz平面上。长和宽控制矩形大小
@@ -24,7 +24,7 @@ if(std::abs(x) &amp;gt; length || std::abs(z) &amp;gt; width) return false; 球(
 但在离线渲染器中(比如PBRT)，光线求交发生在几何图形自己的局部空间(local/object/model space)
 这是有好处的，比如说简化求交代码，相交表面的normal和uv也很容易计算
 下面就记录一些几何求交的做法，自身经验有限，如有错误请指出
-前提  这里采用的是y轴朝上的右手坐标系，-z轴指向屏幕里，x轴在右手 默认光线已经变换到对象的局部空间  使用几何体的变换矩阵和其逆矩阵，求交时将光线变换到对象空间
+前提 这里采用的是y轴朝上的右手坐标系，-z轴指向屏幕里，x轴在右手 默认光线已经变换到对象的局部空间 使用几何体的变换矩阵和其逆矩阵，求交时将光线变换到对象空间
 $$ Ray(t)=o&#43;td (t &amp;gt; 0) $$
 $$ Ray_{object}=M^{-1}Ray_{world} $$
 矩形(Rectangle) 假设矩形高度为0，躺在xz平面上。长和宽控制矩形大小
@@ -37,13 +37,13 @@ if(std::abs(x) &amp;gt; length || std::abs(z) &amp;gt; width) return false; 球(
 整理可得关于t的一元二次方程 $$ d^{2}t^{2}&#43;2odt&#43;o^{2}-r^{2}=0\ \begin{align*} &amp;amp; a=d^{2}\ &amp;amp; b=2od\ &amp;amp; c=o^{2}-r^{2} \end{align*} $$'>
 <meta property='og:url' content='https://star-hengxing.github.io/p/%E5%85%89%E7%BA%BF%E4%B8%8E%E5%90%84%E7%A7%8D%E5%87%A0%E4%BD%95%E5%9B%BE%E5%BD%A2%E6%B1%82%E4%BA%A4/'>
 <meta property='og:site_name' content='恒星的小站'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='计算机图形学' /><meta property='article:tag' content='光线追踪' /><meta property='article:published_time' content='2021-04-11T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2022-05-15T00:00:00&#43;00:00'/>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2021-04-11T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2022-05-15T00:00:00&#43;00:00'/>
 <meta name="twitter:title" content="光线与各种几何图形求交">
 <meta name="twitter:description" content="在一些基础的光线追踪教程中，光线求交通常发生在世界空间(world space)
 但在离线渲染器中(比如PBRT)，光线求交发生在几何图形自己的局部空间(local/object/model space)
 这是有好处的，比如说简化求交代码，相交表面的normal和uv也很容易计算
 下面就记录一些几何求交的做法，自身经验有限，如有错误请指出
-前提  这里采用的是y轴朝上的右手坐标系，-z轴指向屏幕里，x轴在右手 默认光线已经变换到对象的局部空间  使用几何体的变换矩阵和其逆矩阵，求交时将光线变换到对象空间
+前提 这里采用的是y轴朝上的右手坐标系，-z轴指向屏幕里，x轴在右手 默认光线已经变换到对象的局部空间 使用几何体的变换矩阵和其逆矩阵，求交时将光线变换到对象空间
 $$ Ray(t)=o&#43;td (t &amp;gt; 0) $$
 $$ Ray_{object}=M^{-1}Ray_{world} $$
 矩形(Rectangle) 假设矩形高度为0，躺在xz平面上。长和宽控制矩形大小
@@ -104,6 +104,18 @@ if(std::abs(x) &amp;gt; length || std::abs(z) &amp;gt; width) return false; 球(
     <header class="article-header">
 
     <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/" >
+                计算机图形学
+            </a>
+        
+            <a href="/categories/%E5%85%89%E7%BA%BF%E8%BF%BD%E8%B8%AA/" >
+                光线追踪
+            </a>
+        
+    </header>
     
 
     <h2 class="article-title">
@@ -295,14 +307,6 @@ $$</p>
 
     <footer class="article-footer">
     
-    <section class="article-tags">
-        
-            <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/">计算机图形学</a>
-        
-            <a href="/tags/%E5%85%89%E7%BA%BF%E8%BF%BD%E8%B8%AA/">光线追踪</a>
-        
-    </section>
-
 
     
     <section class="article-copyright">
@@ -368,12 +372,60 @@ $$</p>
                 
                     
 <article class="">
+    <a href="/p/%E7%A6%BB%E7%BA%BF%E6%B8%B2%E6%9F%93%E8%BF%9B%E9%98%B6/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">离线渲染进阶</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="">
     <a href="/p/%E7%A6%BB%E7%BA%BF%E6%B8%B2%E6%9F%93-%E5%85%89%E7%BA%BF%E8%BF%BD%E8%B8%AA%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%96%99/">
         
         
 
         <div class="article-details">
             <h2 class="article-title">离线渲染-光线追踪框架学习资料</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="">
+    <a href="/p/%E5%9C%A8windows%E4%B8%8A%E4%BD%BF%E7%94%A8xmake%E9%85%8D%E7%BD%AEvulkan%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">在Windows上使用xmake配置Vulkan开发环境</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="">
+    <a href="/p/chinagraph2020%E4%BC%9A%E5%89%8D%E8%AF%BE%E7%A8%8B-%E7%9C%9F%E5%AE%9E%E6%84%9F%E5%9B%BE%E5%BD%A2%E6%B8%B2%E6%9F%93%E7%A7%91%E7%A0%94%E5%85%A5%E9%97%A8-%E9%9A%8F%E6%89%8B%E8%AE%B0%E5%BD%95/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Chinagraph2020会前课程 真实感图形渲染科研入门 随手记录</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="">
+    <a href="/p/%E5%9F%BA%E4%BA%8Esdf%E7%9A%84raymarching/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">基于SDF的Raymarching</h2>
         </div>
     </a>
 </article>
