@@ -6,7 +6,41 @@
     <description>Recent content in Posts on 恒星的小站</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sat, 25 Jun 2022 20:17:10 +0800</lastBuildDate><atom:link href="https://star-hengxing.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 05 Jul 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://star-hengxing.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>随便记录下看过的书吧</title>
+      <link>https://star-hengxing.github.io/p/%E9%9A%8F%E4%BE%BF%E8%AE%B0%E5%BD%95%E4%B8%8B%E7%9C%8B%E8%BF%87%E7%9A%84%E4%B9%A6%E5%90%A7/</link>
+      <pubDate>Tue, 05 Jul 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://star-hengxing.github.io/p/%E9%9A%8F%E4%BE%BF%E8%AE%B0%E5%BD%95%E4%B8%8B%E7%9C%8B%E8%BF%87%E7%9A%84%E4%B9%A6%E5%90%A7/</guid>
+      <description>技术书看新不看旧
+计算机科学 人月神话 黑客与画家 敏捷软件开发 代码整洁之道 程序员的自我修养 : 链接、装载与库 七周七语言 代码本色 x86汇编语言 : 从实模式到保护模式 深入理解计算机系统 Head First设计模式 编程语言 C C Primer Plus C++ C++ Primer C++ Primer PLus Effective C++ More Effective C++ Effective Modern C++ C++ Best Practices: 45ish Simple Rules with Specific Action Items for Better C++ C++性能优化指南 C++并发编程实战 Rust 深入浅出Rust Rust程序设计语言 Python Python编程 从入门到实践 Haskell Haskell趣学指南 Haskell函数式编程入门 数据结构与算法 大话数据结构 算法导论 计算机体系结构 计算机组成与设计：硬件/软件接口 计算机系统要素 : 从零开始构建现代计算机 编码 : 隐匿在计算机软硬件背后的语言 操作系统 一个64位操作系统的设计与实现 Linux内核设计与实现 现代操作系统 现代操作系统：原理与实现 计算机网络 计算机网络自顶向下方法 TCP/IP详解 卷1：协议 图解HTTP 计算机图形学 Fundamentals of Computer Graphics Ray Tracing Gems series 全局光照技术 实时渲染 Real-Time Rendering 离线渲染 The Ray Tracer Challenge Ray Tracing in One Weekend series Advanced Global Illumination Physically Based Rendering: From Theory to Implementation 数学 线性代数的几何 线性代数及其应用 漫画线性代数 数值分析 从博弈问题到方法论学科 物理 现代光学基础 光学原理 游戏 游戏编程模式 游戏引擎架构 游戏设计艺术 日语 新版中日交流标准日本语初级 音乐 超简单的乐理学习图解版 认识乐理：视唱练耳同步学 杂书 视觉艺术用光 色彩与光线 写实主义绘画指南 我的二本学生 信息简史 信息论基础 信号与系统 </description>
+    </item>
+    
+    <item>
+      <title>使用KeePass作为密码管理器</title>
+      <link>https://star-hengxing.github.io/p/%E4%BD%BF%E7%94%A8keepass%E4%BD%9C%E4%B8%BA%E5%AF%86%E7%A0%81%E7%AE%A1%E7%90%86%E5%99%A8/</link>
+      <pubDate>Mon, 27 Jun 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://star-hengxing.github.io/p/%E4%BD%BF%E7%94%A8keepass%E4%BD%9C%E4%B8%BA%E5%AF%86%E7%A0%81%E7%AE%A1%E7%90%86%E5%99%A8/</guid>
+      <description>最近超星学习通数据泄露大家应该都知道吧，全国上下学生很多都依赖这么一个中心化的网课平台。而且学习通可能还是明文存储密码，这下坏事了，直接撞库
+撞库攻击是网络犯罪分子试图使用一组帐密同时访问多个帐户
+我很久以前就知道有密码管理器的存在，但我是懒鬼，所以没弄过。这次事件提醒了我，还是别偷懒了（
+Getting started KeePass是什么呢
+KeePass is an encrypted password database format. It is an alternative to online password managers and is supported on all major platforms.
+我这里推荐使用跨平台的KeePassXC客户端，原始KeePass客户端实在太丑陋了
+下载客户端后，新建数据库需要一个主密码，这个密码需要你记忆
+我们先来看一个图，来自xkcd 那如何根据上图思路创建一个好密码呢，这里可以看一下diceware的方法
+这个网站根据diceware方法提供在线生成随机英语单词
+如果想要生成随机中文词语，可以在此网页找到 使用diceware构造好的密码
+创建好数据库后，保存在本地随便一个目录，然后我们去KeePassXC设置面板开启浏览器集成，下载对应浏览器插件
+浏览器插件启动后需要连接KeePassXC客户端
+在网站登录页面，如果数据库里没有对应网站url或者已存在，会提示你为该网站新建/更新账号密码。如果没有提示，可以手动使用插件，或者直接在KeePassXC客户端手动录入
+KeePassXC里随手就可以生成一个密码，无论是大小写字母数字还是各种特殊符号。如果想使用密码，Ctrl-C会自动复制到你剪切板上，然后在10秒后清除
+如果手机也要密码管理，安卓客户端可以在f-droid上下载keepassdx
+同步 所有信息都在keepass创建的数据库里，这里可以使用一些文件传输软件进行备份同步，或者存github也没啥问题</description>
+    </item>
+    
     <item>
       <title>在Windows上使用xmake配置Vulkan开发环境</title>
       <link>https://star-hengxing.github.io/p/%E5%9C%A8windows%E4%B8%8A%E4%BD%BF%E7%94%A8xmake%E9%85%8D%E7%BD%AEvulkan%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/</link>

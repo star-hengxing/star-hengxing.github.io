@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='最近超星学习通数据泄露大家应该都知道吧，全国上下学生很多都依赖这么一个中心化的网课平台。而且学习通可能还是明文存储密码，这下坏事了，直接撞库
+撞库攻击是网络犯罪分子试图使用一组帐密同时访问多个帐户
+我很久以前就知道有密码管理器的存在，但我是懒鬼，所以没弄过。这次事件提醒了我，还是别偷懒了（
+Getting started KeePass是什么呢
+KeePass is an encrypted password database format. It is an alternative to online password managers and is supported on all major platforms.
+我这里推荐使用跨平台的KeePassXC客户端，原始KeePass客户端实在太丑陋了
+下载客户端后，新建数据库需要一个主密码，这个密码需要你记忆
+我们先来看一个图，来自xkcd 那如何根据上图思路创建一个好密码呢，这里可以看一下diceware的方法
+这个网站根据diceware方法提供在线生成随机英语单词
+如果想要生成随机中文词语，可以在此网页找到 使用diceware构造好的密码
+创建好数据库后，保存在本地随便一个目录，然后我们去KeePassXC设置面板开启浏览器集成，下载对应浏览器插件
+浏览器插件启动后需要连接KeePassXC客户端
+在网站登录页面，如果数据库里没有对应网站url或者已存在，会提示你为该网站新建/更新账号密码。如果没有提示，可以手动使用插件，或者直接在KeePassXC客户端手动录入
+KeePassXC里随手就可以生成一个密码，无论是大小写字母数字还是各种特殊符号。如果想使用密码，Ctrl-C会自动复制到你剪切板上，然后在10秒后清除
+如果手机也要密码管理，安卓客户端可以在f-droid上下载keepassdx
+同步 所有信息都在keepass创建的数据库里，这里可以使用一些文件传输软件进行备份同步，或者存github也没啥问题'><title>使用KeePass作为密码管理器</title>
+
+<link rel='canonical' href='https://star-hengxing.github.io/p/%E4%BD%BF%E7%94%A8keepass%E4%BD%9C%E4%B8%BA%E5%AF%86%E7%A0%81%E7%AE%A1%E7%90%86%E5%99%A8/'>
+
+<link rel="stylesheet" href="/scss/style.min.690a283bac9f967161eea605d3ab2ebc0b689da41a8b82c681a9dd82668ccf94.css"><meta property='og:title' content='使用KeePass作为密码管理器'>
+<meta property='og:description' content='最近超星学习通数据泄露大家应该都知道吧，全国上下学生很多都依赖这么一个中心化的网课平台。而且学习通可能还是明文存储密码，这下坏事了，直接撞库
+撞库攻击是网络犯罪分子试图使用一组帐密同时访问多个帐户
+我很久以前就知道有密码管理器的存在，但我是懒鬼，所以没弄过。这次事件提醒了我，还是别偷懒了（
+Getting started KeePass是什么呢
+KeePass is an encrypted password database format. It is an alternative to online password managers and is supported on all major platforms.
+我这里推荐使用跨平台的KeePassXC客户端，原始KeePass客户端实在太丑陋了
+下载客户端后，新建数据库需要一个主密码，这个密码需要你记忆
+我们先来看一个图，来自xkcd 那如何根据上图思路创建一个好密码呢，这里可以看一下diceware的方法
+这个网站根据diceware方法提供在线生成随机英语单词
+如果想要生成随机中文词语，可以在此网页找到 使用diceware构造好的密码
+创建好数据库后，保存在本地随便一个目录，然后我们去KeePassXC设置面板开启浏览器集成，下载对应浏览器插件
+浏览器插件启动后需要连接KeePassXC客户端
+在网站登录页面，如果数据库里没有对应网站url或者已存在，会提示你为该网站新建/更新账号密码。如果没有提示，可以手动使用插件，或者直接在KeePassXC客户端手动录入
+KeePassXC里随手就可以生成一个密码，无论是大小写字母数字还是各种特殊符号。如果想使用密码，Ctrl-C会自动复制到你剪切板上，然后在10秒后清除
+如果手机也要密码管理，安卓客户端可以在f-droid上下载keepassdx
+同步 所有信息都在keepass创建的数据库里，这里可以使用一些文件传输软件进行备份同步，或者存github也没啥问题'>
+<meta property='og:url' content='https://star-hengxing.github.io/p/%E4%BD%BF%E7%94%A8keepass%E4%BD%9C%E4%B8%BA%E5%AF%86%E7%A0%81%E7%AE%A1%E7%90%86%E5%99%A8/'>
+<meta property='og:site_name' content='恒星的小站'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='工具' /><meta property='article:published_time' content='2022-06-27T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2022-06-27T00:00:00&#43;00:00'/>
+<meta name="twitter:title" content="使用KeePass作为密码管理器">
+<meta name="twitter:description" content="最近超星学习通数据泄露大家应该都知道吧，全国上下学生很多都依赖这么一个中心化的网课平台。而且学习通可能还是明文存储密码，这下坏事了，直接撞库
+撞库攻击是网络犯罪分子试图使用一组帐密同时访问多个帐户
+我很久以前就知道有密码管理器的存在，但我是懒鬼，所以没弄过。这次事件提醒了我，还是别偷懒了（
+Getting started KeePass是什么呢
+KeePass is an encrypted password database format. It is an alternative to online password managers and is supported on all major platforms.
+我这里推荐使用跨平台的KeePassXC客户端，原始KeePass客户端实在太丑陋了
+下载客户端后，新建数据库需要一个主密码，这个密码需要你记忆
+我们先来看一个图，来自xkcd 那如何根据上图思路创建一个好密码呢，这里可以看一下diceware的方法
+这个网站根据diceware方法提供在线生成随机英语单词
+如果想要生成随机中文词语，可以在此网页找到 使用diceware构造好的密码
+创建好数据库后，保存在本地随便一个目录，然后我们去KeePassXC设置面板开启浏览器集成，下载对应浏览器插件
+浏览器插件启动后需要连接KeePassXC客户端
+在网站登录页面，如果数据库里没有对应网站url或者已存在，会提示你为该网站新建/更新账号密码。如果没有提示，可以手动使用插件，或者直接在KeePassXC客户端手动录入
+KeePassXC里随手就可以生成一个密码，无论是大小写字母数字还是各种特殊符号。如果想使用密码，Ctrl-C会自动复制到你剪切板上，然后在10秒后清除
+如果手机也要密码管理，安卓客户端可以在f-droid上下载keepassdx
+同步 所有信息都在keepass创建的数据库里，这里可以使用一些文件传输软件进行备份同步，或者存github也没啥问题">
+    </head>
+    <body class="
+    article-page has-toc
+">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex 
+    
+        extended
+    
+">
+    
+        <div id="article-toolbar">
+            <a href="/" class="back-home">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="15 6 9 12 15 18" />
+</svg>
+
+
+
+                <span>返回</span>
+            </a>
+        </div>
+    
+<main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+
+    <h2 class="article-title">
+        <a href="/p/%E4%BD%BF%E7%94%A8keepass%E4%BD%9C%E4%B8%BA%E5%AF%86%E7%A0%81%E7%AE%A1%E7%90%86%E5%99%A8/">使用KeePass作为密码管理器</a>
+    </h2>
+
+    
+
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Jun 27, 2022</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 1 分钟
+                </time>
+            </div>
+        
+    </footer>
+    
+</div>
+</header>
+
+    <section class="article-content">
+    
+    
+    <p>最近超星学习通数据泄露大家应该都知道吧，全国上下学生很多都依赖这么一个中心化的网课平台。而且学习通可能还是<strong>明文存储密码</strong>，这下坏事了，直接撞库</p>
+<blockquote>
+<p>撞库攻击是网络犯罪分子试图使用一组帐密同时访问多个帐户</p>
+</blockquote>
+<p>我很久以前就知道有密码管理器的存在，但我是懒鬼，所以没弄过。这次事件提醒了我，还是别偷懒了（</p>
+<h2 id="getting-started">Getting started</h2>
+<p>KeePass是什么呢</p>
+<blockquote>
+<p>KeePass is an encrypted password database format. It is an alternative to online password managers and is supported on all major platforms.</p>
+</blockquote>
+<p>我这里推荐使用跨平台的<strong>KeePassXC</strong>客户端，原始KeePass客户端实在太丑陋了</p>
+<p>下载客户端后，新建数据库需要一个<strong>主密码</strong>，这个密码需要你记忆</p>
+<p>我们先来看一个图，来自<a class="link" href="https://xkcd.com/936/"  target="_blank" rel="noopener"
+    >xkcd</a>
+<img src="https://xkcd.in/resources/compiled_cn/d4a068052cf9c7255c0b4c4643ac0b5b.jpg"
+	
+	
+	
+	loading="lazy"
+	
+		alt="密码强度"
+	
+	
+></p>
+<p>那如何根据上图思路创建一个好密码呢，这里可以看一下<a class="link" href="https://theworld.com/~reinhold/diceware.html"  target="_blank" rel="noopener"
+    >diceware</a>的方法</p>
+<p>这个网站根据diceware方法提供<a class="link" href="https://diceware.dmuth.org/"  target="_blank" rel="noopener"
+    >在线生成随机英语单词</a></p>
+<p>如果想要生成随机中文词语，可以在此网页找到
+<a class="link" href="https://pincong.rocks/article/5582"  target="_blank" rel="noopener"
+    >使用diceware构造好的密码</a></p>
+<p>创建好数据库后，保存在本地随便一个目录，然后我们去<strong>KeePassXC</strong>设置面板开启浏览器集成，下载对应浏览器插件</p>
+<blockquote>
+<p>浏览器插件启动后需要连接<strong>KeePassXC</strong>客户端</p>
+</blockquote>
+<p>在网站登录页面，如果数据库里没有对应网站url或者已存在，会提示你为该网站<code>新建/更新</code>账号密码。如果没有提示，可以手动使用插件，或者直接在<strong>KeePassXC</strong>客户端手动录入</p>
+<p><strong>KeePassXC</strong>里随手就可以生成一个密码，无论是大小写字母数字还是各种特殊符号。如果想使用密码，<code>Ctrl-C</code>会自动复制到你剪切板上，然后在10秒后清除</p>
+<p>如果手机也要密码管理，安卓客户端可以在<strong>f-droid</strong>上下载<strong>keepassdx</strong></p>
+<h2 id="同步">同步</h2>
+<p>所有信息都在keepass创建的数据库里，这里可以使用一些文件传输软件进行备份同步，或者存github也没啥问题</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/%E5%B7%A5%E5%85%B7/">工具</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+</article>
+
+    
+
+    <aside class="related-contents--wrapper">
+    
+    
+</aside>
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+        2022 恒星的小站
+    </section>
+    
+    <section class="powerby">
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.8.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css"integrity="sha256-c0uckgykQ9v5k&#43;IqViZOZKc47Jn7KQil4/MP3ySA3F8="crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css"integrity="sha256-SBLU4vv6CA6lHsZ1XyTdhyjJxCjPif/TRkjnsyGAGnE="crossorigin="anonymous"
+            >
+
+            </main>
+    
+        <aside class="sidebar right-sidebar sticky">
+            <section class="widget archives">
+                <div class="widget-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+                </div>
+                <h2 class="widget-title section-title">目录</h2>
+                
+                <div class="widget--toc">
+                    <nav id="TableOfContents">
+  <ol>
+    <li><a href="#getting-started">Getting started</a></li>
+    <li><a href="#同步">同步</a></li>
+  </ol>
+</nav>
+                </div>
+            </section>
+        </aside>
+    
+
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js"integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

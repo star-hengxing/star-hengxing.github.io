@@ -6,7 +6,209 @@
         <description>Recent content on 恒星的小站</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
-        <lastBuildDate>Sat, 25 Jun 2022 20:17:10 +0800</lastBuildDate><atom:link href="https://star-hengxing.github.io/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Tue, 05 Jul 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://star-hengxing.github.io/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>随便记录下看过的书吧</title>
+        <link>https://star-hengxing.github.io/p/%E9%9A%8F%E4%BE%BF%E8%AE%B0%E5%BD%95%E4%B8%8B%E7%9C%8B%E8%BF%87%E7%9A%84%E4%B9%A6%E5%90%A7/</link>
+        <pubDate>Tue, 05 Jul 2022 00:00:00 +0000</pubDate>
+        
+        <guid>https://star-hengxing.github.io/p/%E9%9A%8F%E4%BE%BF%E8%AE%B0%E5%BD%95%E4%B8%8B%E7%9C%8B%E8%BF%87%E7%9A%84%E4%B9%A6%E5%90%A7/</guid>
+        <description>&lt;p&gt;&lt;strong&gt;技术书看新不看旧&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id=&#34;计算机科学&#34;&gt;计算机科学&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;人月神话&lt;/li&gt;
+&lt;li&gt;黑客与画家&lt;/li&gt;
+&lt;li&gt;敏捷软件开发&lt;/li&gt;
+&lt;li&gt;代码整洁之道&lt;/li&gt;
+&lt;li&gt;程序员的自我修养 : 链接、装载与库&lt;/li&gt;
+&lt;li&gt;七周七语言&lt;/li&gt;
+&lt;li&gt;代码本色&lt;/li&gt;
+&lt;li&gt;x86汇编语言 : 从实模式到保护模式&lt;/li&gt;
+&lt;li&gt;深入理解计算机系统&lt;/li&gt;
+&lt;li&gt;Head First设计模式&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;编程语言&#34;&gt;编程语言&lt;/h3&gt;
+&lt;h4 id=&#34;c&#34;&gt;C&lt;/h4&gt;
+&lt;ol&gt;
+&lt;li&gt;C Primer Plus&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id=&#34;c-1&#34;&gt;C++&lt;/h4&gt;
+&lt;ol&gt;
+&lt;li&gt;C++ Primer&lt;/li&gt;
+&lt;li&gt;C++ Primer PLus&lt;/li&gt;
+&lt;li&gt;Effective C++&lt;/li&gt;
+&lt;li&gt;More Effective C++&lt;/li&gt;
+&lt;li&gt;Effective Modern C++&lt;/li&gt;
+&lt;li&gt;C++ Best Practices: 45ish Simple Rules with Specific Action Items for Better C++&lt;/li&gt;
+&lt;li&gt;C++性能优化指南&lt;/li&gt;
+&lt;li&gt;C++并发编程实战&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id=&#34;rust&#34;&gt;Rust&lt;/h4&gt;
+&lt;ol&gt;
+&lt;li&gt;深入浅出Rust&lt;/li&gt;
+&lt;li&gt;Rust程序设计语言&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id=&#34;python&#34;&gt;Python&lt;/h4&gt;
+&lt;ol&gt;
+&lt;li&gt;Python编程 从入门到实践&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id=&#34;haskell&#34;&gt;Haskell&lt;/h4&gt;
+&lt;ol&gt;
+&lt;li&gt;Haskell趣学指南&lt;/li&gt;
+&lt;li&gt;Haskell函数式编程入门&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;数据结构与算法&#34;&gt;数据结构与算法&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;大话数据结构&lt;/li&gt;
+&lt;li&gt;算法导论&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;计算机体系结构&#34;&gt;计算机体系结构&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://book.douban.com/subject/26604008/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;计算机组成与设计：硬件/软件接口&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://book.douban.com/subject/1998341/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;计算机系统要素 : 从零开始构建现代计算机&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://book.douban.com/subject/4822685/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;编码 : 隐匿在计算机软硬件背后的语言&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;操作系统&#34;&gt;操作系统&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;一个64位操作系统的设计与实现&lt;/li&gt;
+&lt;li&gt;Linux内核设计与实现&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://book.douban.com/subject/27096665/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;现代操作系统&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://book.douban.com/subject/35208251/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;现代操作系统：原理与实现&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;计算机网络&#34;&gt;计算机网络&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;计算机网络自顶向下方法&lt;/li&gt;
+&lt;li&gt;TCP/IP详解 卷1：协议&lt;/li&gt;
+&lt;li&gt;图解HTTP&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;计算机图形学&#34;&gt;计算机图形学&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;Fundamentals of Computer Graphics&lt;/li&gt;
+&lt;li&gt;Ray Tracing Gems series&lt;/li&gt;
+&lt;li&gt;全局光照技术&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id=&#34;实时渲染&#34;&gt;实时渲染&lt;/h4&gt;
+&lt;ol&gt;
+&lt;li&gt;Real-Time Rendering&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id=&#34;离线渲染&#34;&gt;离线渲染&lt;/h4&gt;
+&lt;ol&gt;
+&lt;li&gt;The Ray Tracer Challenge&lt;/li&gt;
+&lt;li&gt;Ray Tracing in One Weekend series&lt;/li&gt;
+&lt;li&gt;Advanced Global Illumination&lt;/li&gt;
+&lt;li&gt;Physically Based Rendering: From Theory to Implementation&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;数学&#34;&gt;数学&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://book.douban.com/subject/26651221/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;线性代数的几何&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://book.douban.com/subject/30310517/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;线性代数及其应用&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://book.douban.com/subject/4010125/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;漫画线性代数&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://book.douban.com/subject/26600495/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;数值分析&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://book.douban.com/subject/4905198/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;从博弈问题到方法论学科&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;物理&#34;&gt;物理&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://book.douban.com/subject/1155816/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;现代光学基础&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://book.douban.com/subject/4062447/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;光学原理&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;游戏&#34;&gt;游戏&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://book.douban.com/subject/26880704/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;游戏编程模式&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://book.douban.com/subject/25815142/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;游戏引擎架构&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://book.douban.com/subject/26791007/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;游戏设计艺术&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;日语&#34;&gt;日语&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://book.douban.com/subject/25981564/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;新版中日交流标准日本语初级&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;音乐&#34;&gt;音乐&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://book.douban.com/subject/26932815/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;超简单的乐理学习图解版&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://book.douban.com/subject/26825412/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;认识乐理：视唱练耳同步学&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;杂书&#34;&gt;杂书&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://book.douban.com/subject/19950884/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;视觉艺术用光&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://book.douban.com/subject/20513213/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;色彩与光线 写实主义绘画指南&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://book.douban.com/subject/35050614/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;我的二本学生&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://book.douban.com/subject/25752043/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;信息简史&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://book.douban.com/subject/2305237/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;信息论基础&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://book.douban.com/subject/21359219/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;信号与系统&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        </item>
+        <item>
+        <title>使用KeePass作为密码管理器</title>
+        <link>https://star-hengxing.github.io/p/%E4%BD%BF%E7%94%A8keepass%E4%BD%9C%E4%B8%BA%E5%AF%86%E7%A0%81%E7%AE%A1%E7%90%86%E5%99%A8/</link>
+        <pubDate>Mon, 27 Jun 2022 00:00:00 +0000</pubDate>
+        
+        <guid>https://star-hengxing.github.io/p/%E4%BD%BF%E7%94%A8keepass%E4%BD%9C%E4%B8%BA%E5%AF%86%E7%A0%81%E7%AE%A1%E7%90%86%E5%99%A8/</guid>
+        <description>&lt;p&gt;最近超星学习通数据泄露大家应该都知道吧，全国上下学生很多都依赖这么一个中心化的网课平台。而且学习通可能还是&lt;strong&gt;明文存储密码&lt;/strong&gt;，这下坏事了，直接撞库&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;撞库攻击是网络犯罪分子试图使用一组帐密同时访问多个帐户&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;我很久以前就知道有密码管理器的存在，但我是懒鬼，所以没弄过。这次事件提醒了我，还是别偷懒了（&lt;/p&gt;
+&lt;h2 id=&#34;getting-started&#34;&gt;Getting started&lt;/h2&gt;
+&lt;p&gt;KeePass是什么呢&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;KeePass is an encrypted password database format. It is an alternative to online password managers and is supported on all major platforms.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;我这里推荐使用跨平台的&lt;strong&gt;KeePassXC&lt;/strong&gt;客户端，原始KeePass客户端实在太丑陋了&lt;/p&gt;
+&lt;p&gt;下载客户端后，新建数据库需要一个&lt;strong&gt;主密码&lt;/strong&gt;，这个密码需要你记忆&lt;/p&gt;
+&lt;p&gt;我们先来看一个图，来自&lt;a class=&#34;link&#34; href=&#34;https://xkcd.com/936/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;xkcd&lt;/a&gt;
+&lt;img src=&#34;https://xkcd.in/resources/compiled_cn/d4a068052cf9c7255c0b4c4643ac0b5b.jpg&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;密码强度&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;那如何根据上图思路创建一个好密码呢，这里可以看一下&lt;a class=&#34;link&#34; href=&#34;https://theworld.com/~reinhold/diceware.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;diceware&lt;/a&gt;的方法&lt;/p&gt;
+&lt;p&gt;这个网站根据diceware方法提供&lt;a class=&#34;link&#34; href=&#34;https://diceware.dmuth.org/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;在线生成随机英语单词&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;如果想要生成随机中文词语，可以在此网页找到
+&lt;a class=&#34;link&#34; href=&#34;https://pincong.rocks/article/5582&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;使用diceware构造好的密码&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;创建好数据库后，保存在本地随便一个目录，然后我们去&lt;strong&gt;KeePassXC&lt;/strong&gt;设置面板开启浏览器集成，下载对应浏览器插件&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;浏览器插件启动后需要连接&lt;strong&gt;KeePassXC&lt;/strong&gt;客户端&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;在网站登录页面，如果数据库里没有对应网站url或者已存在，会提示你为该网站&lt;code&gt;新建/更新&lt;/code&gt;账号密码。如果没有提示，可以手动使用插件，或者直接在&lt;strong&gt;KeePassXC&lt;/strong&gt;客户端手动录入&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;KeePassXC&lt;/strong&gt;里随手就可以生成一个密码，无论是大小写字母数字还是各种特殊符号。如果想使用密码，&lt;code&gt;Ctrl-C&lt;/code&gt;会自动复制到你剪切板上，然后在10秒后清除&lt;/p&gt;
+&lt;p&gt;如果手机也要密码管理，安卓客户端可以在&lt;strong&gt;f-droid&lt;/strong&gt;上下载&lt;strong&gt;keepassdx&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id=&#34;同步&#34;&gt;同步&lt;/h2&gt;
+&lt;p&gt;所有信息都在keepass创建的数据库里，这里可以使用一些文件传输软件进行备份同步，或者存github也没啥问题&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>在Windows上使用xmake配置Vulkan开发环境</title>
         <link>https://star-hengxing.github.io/p/%E5%9C%A8windows%E4%B8%8A%E4%BD%BF%E7%94%A8xmake%E9%85%8D%E7%BD%AEvulkan%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/</link>
         <pubDate>Sat, 25 Jun 2022 20:17:10 +0800</pubDate>
