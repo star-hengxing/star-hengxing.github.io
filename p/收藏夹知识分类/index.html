@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content=' 编程语言 C C&#43;&#43; 体系结构 可视化 优化 高性能计算(编程) 计算机图形学 旋转 虚拟机 逆向 Linux 工具 Git Unity misc 编程语言 C 现代化 C 使用体验 C&#43;&#43; 单例模式 简单的 C&#43;&#43; 结构体字段反射 make a shared_ptr from scratch C&#43;&#43; 系列专题 体系结构 与程序员相关的CPU缓存知识 可视化 浮点数可视化 正则表达式可视化 马尔科夫链可视化 优化 浮点数计算优化 高性能计算(编程) 高性能计算学习路线 从零开始的C/C&#43;&#43;高性能编程指南 C&#43;&#43; 高性能编程实战系列（1） C&#43;&#43; 高性能编程实战系列（2） C&#43;&#43; 高性能编程实战系列（3） 游戏架构设计——面向数据编程（DOP） 游戏架构设计——高性能并行编程 计算机图形学 使用有理数进行渲染 如何验证BXDF 实时&amp;amp;离线皮肤渲染技术（Real-time &amp;amp; Offline Skin Rendering） 旋转 可视化和公式推导 虚拟机 虚拟机随谈（一）：解释器，树遍历解释器，基于栈与基于寄存器，大杂烩 逆向 [原创] 逆向并提取QQ截图&amp;ndash;OCR和其他功能 Linux archlinux 简明指南 一张图理解Linux文件权限 工具 Git 在使用 git 时的一些尴尬场景里的修复方案 Unity Catlike Coding unity tutorials misc GNU工具实现解密 漫画数据化——计算机科学在漫画领域的相关研究简介 整理记录各个包管理器，系统镜像，以及常用软件的好用镜像 图解Functor和Monad GitHub开源项目维护指南 在线矩阵计算 '><title>收藏夹（知识分类）</title>
+
+<link rel='canonical' href='https://star-hengxing.github.io/p/%E6%94%B6%E8%97%8F%E5%A4%B9%E7%9F%A5%E8%AF%86%E5%88%86%E7%B1%BB/'>
+
+<link rel="stylesheet" href="/scss/style.min.690a283bac9f967161eea605d3ab2ebc0b689da41a8b82c681a9dd82668ccf94.css"><meta property='og:title' content='收藏夹（知识分类）'>
+<meta property='og:description' content=' 编程语言 C C&#43;&#43; 体系结构 可视化 优化 高性能计算(编程) 计算机图形学 旋转 虚拟机 逆向 Linux 工具 Git Unity misc 编程语言 C 现代化 C 使用体验 C&#43;&#43; 单例模式 简单的 C&#43;&#43; 结构体字段反射 make a shared_ptr from scratch C&#43;&#43; 系列专题 体系结构 与程序员相关的CPU缓存知识 可视化 浮点数可视化 正则表达式可视化 马尔科夫链可视化 优化 浮点数计算优化 高性能计算(编程) 高性能计算学习路线 从零开始的C/C&#43;&#43;高性能编程指南 C&#43;&#43; 高性能编程实战系列（1） C&#43;&#43; 高性能编程实战系列（2） C&#43;&#43; 高性能编程实战系列（3） 游戏架构设计——面向数据编程（DOP） 游戏架构设计——高性能并行编程 计算机图形学 使用有理数进行渲染 如何验证BXDF 实时&amp;amp;离线皮肤渲染技术（Real-time &amp;amp; Offline Skin Rendering） 旋转 可视化和公式推导 虚拟机 虚拟机随谈（一）：解释器，树遍历解释器，基于栈与基于寄存器，大杂烩 逆向 [原创] 逆向并提取QQ截图&amp;ndash;OCR和其他功能 Linux archlinux 简明指南 一张图理解Linux文件权限 工具 Git 在使用 git 时的一些尴尬场景里的修复方案 Unity Catlike Coding unity tutorials misc GNU工具实现解密 漫画数据化——计算机科学在漫画领域的相关研究简介 整理记录各个包管理器，系统镜像，以及常用软件的好用镜像 图解Functor和Monad GitHub开源项目维护指南 在线矩阵计算 '>
+<meta property='og:url' content='https://star-hengxing.github.io/p/%E6%94%B6%E8%97%8F%E5%A4%B9%E7%9F%A5%E8%AF%86%E5%88%86%E7%B1%BB/'>
+<meta property='og:site_name' content='恒星的小站'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2022-07-19T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2022-07-19T00:00:00&#43;00:00'/>
+<meta name="twitter:title" content="收藏夹（知识分类）">
+<meta name="twitter:description" content=" 编程语言 C C&#43;&#43; 体系结构 可视化 优化 高性能计算(编程) 计算机图形学 旋转 虚拟机 逆向 Linux 工具 Git Unity misc 编程语言 C 现代化 C 使用体验 C&#43;&#43; 单例模式 简单的 C&#43;&#43; 结构体字段反射 make a shared_ptr from scratch C&#43;&#43; 系列专题 体系结构 与程序员相关的CPU缓存知识 可视化 浮点数可视化 正则表达式可视化 马尔科夫链可视化 优化 浮点数计算优化 高性能计算(编程) 高性能计算学习路线 从零开始的C/C&#43;&#43;高性能编程指南 C&#43;&#43; 高性能编程实战系列（1） C&#43;&#43; 高性能编程实战系列（2） C&#43;&#43; 高性能编程实战系列（3） 游戏架构设计——面向数据编程（DOP） 游戏架构设计——高性能并行编程 计算机图形学 使用有理数进行渲染 如何验证BXDF 实时&amp;amp;离线皮肤渲染技术（Real-time &amp;amp; Offline Skin Rendering） 旋转 可视化和公式推导 虚拟机 虚拟机随谈（一）：解释器，树遍历解释器，基于栈与基于寄存器，大杂烩 逆向 [原创] 逆向并提取QQ截图&amp;ndash;OCR和其他功能 Linux archlinux 简明指南 一张图理解Linux文件权限 工具 Git 在使用 git 时的一些尴尬场景里的修复方案 Unity Catlike Coding unity tutorials misc GNU工具实现解密 漫画数据化——计算机科学在漫画领域的相关研究简介 整理记录各个包管理器，系统镜像，以及常用软件的好用镜像 图解Functor和Monad GitHub开源项目维护指南 在线矩阵计算 ">
+    </head>
+    <body class="
+    article-page has-toc
+">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex 
+    
+        extended
+    
+">
+    
+        <div id="article-toolbar">
+            <a href="/" class="back-home">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="15 6 9 12 15 18" />
+</svg>
+
+
+
+                <span>返回</span>
+            </a>
+        </div>
+    
+<main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+
+    <h2 class="article-title">
+        <a href="/p/%E6%94%B6%E8%97%8F%E5%A4%B9%E7%9F%A5%E8%AF%86%E5%88%86%E7%B1%BB/">收藏夹（知识分类）</a>
+    </h2>
+
+    
+
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Jul 19, 2022</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 1 分钟
+                </time>
+            </div>
+        
+    </footer>
+    
+</div>
+</header>
+
+    <section class="article-content">
+    
+    
+    <ul>
+<li><a class="link" href="#%e7%bc%96%e7%a8%8b%e8%af%ad%e8%a8%80" >编程语言</a>
+<ul>
+<li><a class="link" href="#c" >C</a></li>
+<li><a class="link" href="#c-1" >C++</a></li>
+</ul>
+</li>
+<li><a class="link" href="#%e4%bd%93%e7%b3%bb%e7%bb%93%e6%9e%84" >体系结构</a></li>
+<li><a class="link" href="#%e5%8f%af%e8%a7%86%e5%8c%96" >可视化</a></li>
+<li><a class="link" href="#%e4%bc%98%e5%8c%96" >优化</a></li>
+<li><a class="link" href="#%e9%ab%98%e6%80%a7%e8%83%bd%e8%ae%a1%e7%ae%97%e7%bc%96%e7%a8%8b" >高性能计算(编程)</a></li>
+<li><a class="link" href="#%e8%ae%a1%e7%ae%97%e6%9c%ba%e5%9b%be%e5%bd%a2%e5%ad%a6" >计算机图形学</a>
+<ul>
+<li><a class="link" href="#%e6%97%8b%e8%bd%ac" >旋转</a></li>
+</ul>
+</li>
+<li><a class="link" href="#%e8%99%9a%e6%8b%9f%e6%9c%ba" >虚拟机</a></li>
+<li><a class="link" href="#%e9%80%86%e5%90%91" >逆向</a></li>
+<li><a class="link" href="#linux" >Linux</a></li>
+<li><a class="link" href="#%e5%b7%a5%e5%85%b7" >工具</a>
+<ul>
+<li><a class="link" href="#git" >Git</a></li>
+<li><a class="link" href="#unity" >Unity</a></li>
+</ul>
+</li>
+<li><a class="link" href="#misc" >misc</a></li>
+</ul>
+<h2 id="编程语言">编程语言</h2>
+<h3 id="c">C</h3>
+<ul>
+<li><a class="link" href="https://liujiacai.net/blog/2022/04/30/modern-c/"  target="_blank" rel="noopener"
+    >现代化 C 使用体验</a></li>
+</ul>
+<h3 id="c-1">C++</h3>
+<ul>
+<li><a class="link" href="https://lhprojects.github.io/blog/src/Singleton.html"  target="_blank" rel="noopener"
+    >单例模式</a></li>
+<li><a class="link" href="https://bot-man-jl.github.io/articles/?post=2018/Cpp-Struct-Field-Reflection"  target="_blank" rel="noopener"
+    >简单的 C++ 结构体字段反射</a></li>
+<li><a class="link" href="http://qamichaelpeng.github.io/2014/11/20/sharepointer_1.html"  target="_blank" rel="noopener"
+    >make a shared_ptr from scratch</a></li>
+<li><a class="link" href="https://www.zhihu.com/column/c_1360316516295032832"  target="_blank" rel="noopener"
+    >C++ 系列专题</a></li>
+</ul>
+<h2 id="体系结构">体系结构</h2>
+<ul>
+<li><a class="link" href="https://coolshell.cn/articles/20793.html"  target="_blank" rel="noopener"
+    >与程序员相关的CPU缓存知识</a></li>
+</ul>
+<h2 id="可视化">可视化</h2>
+<ul>
+<li><a class="link" href="https://devtool.tech/double-type"  target="_blank" rel="noopener"
+    >浮点数可视化</a></li>
+<li><a class="link" href="https://regex-vis.com/"  target="_blank" rel="noopener"
+    >正则表达式可视化</a></li>
+<li><a class="link" href="https://setosa.io/blog/2014/07/26/markov-chains/"  target="_blank" rel="noopener"
+    >马尔科夫链可视化</a></li>
+</ul>
+<h2 id="优化">优化</h2>
+<ul>
+<li><a class="link" href="https://kristerw.github.io/2021/10/19/fast-math/"  target="_blank" rel="noopener"
+    >浮点数计算优化</a></li>
+</ul>
+<h2 id="高性能计算编程">高性能计算(编程)</h2>
+<ul>
+<li><a class="link" href="https://heptagonhust.github.io/HPC-roadmap/"  target="_blank" rel="noopener"
+    >高性能计算学习路线</a></li>
+<li><a class="link" href="https://zhuanlan.zhihu.com/p/503037055"  target="_blank" rel="noopener"
+    >从零开始的C/C++高性能编程指南</a></li>
+<li><a class="link" href="https://zhuanlan.zhihu.com/p/533708198"  target="_blank" rel="noopener"
+    >C++ 高性能编程实战系列（1）</a></li>
+<li><a class="link" href="https://zhuanlan.zhihu.com/p/534004366"  target="_blank" rel="noopener"
+    >C++ 高性能编程实战系列（2）</a></li>
+<li><a class="link" href="https://zhuanlan.zhihu.com/p/537260855"  target="_blank" rel="noopener"
+    >C++ 高性能编程实战系列（3）</a></li>
+<li><a class="link" href="https://www.cnblogs.com/KillerAery/p/11746639.html"  target="_blank" rel="noopener"
+    >游戏架构设计——面向数据编程（DOP）</a></li>
+<li><a class="link" href="https://www.cnblogs.com/KillerAery/p/16333348.html"  target="_blank" rel="noopener"
+    >游戏架构设计——高性能并行编程</a></li>
+</ul>
+<h2 id="计算机图形学">计算机图形学</h2>
+<ul>
+<li><a class="link" href="https://www.iquilezles.org/www/articles/floatingbar/floatingbar.htm"  target="_blank" rel="noopener"
+    >使用有理数进行渲染</a></li>
+<li><a class="link" href="https://agraphicsguynotes.com/posts/how_does_pbrt_verify_bxdf"  target="_blank" rel="noopener"
+    >如何验证BXDF</a></li>
+<li><a class="link" href="https://www.cnblogs.com/KillerAery/p/15719431.html"  target="_blank" rel="noopener"
+    >实时&amp;离线皮肤渲染技术（Real-time &amp; Offline Skin Rendering）</a></li>
+</ul>
+<h3 id="旋转">旋转</h3>
+<ul>
+<li><a class="link" href="https://thenumbat.github.io/Exponential-Rotations/"  target="_blank" rel="noopener"
+    >可视化和公式推导</a></li>
+</ul>
+<h2 id="虚拟机">虚拟机</h2>
+<ul>
+<li><a class="link" href="https://www.iteye.com/blog/rednaxelafx-492667"  target="_blank" rel="noopener"
+    >虚拟机随谈（一）：解释器，树遍历解释器，基于栈与基于寄存器，大杂烩</a></li>
+</ul>
+<h2 id="逆向">逆向</h2>
+<ul>
+<li><a class="link" href="https://bbs.pediy.com/thread-271332.htm"  target="_blank" rel="noopener"
+    >[原创] 逆向并提取QQ截图&ndash;OCR和其他功能</a></li>
+</ul>
+<h2 id="linux">Linux</h2>
+<ul>
+<li><a class="link" href="https://github.com/NakanoMikuOrg/arch-guide"  target="_blank" rel="noopener"
+    >archlinux 简明指南</a></li>
+<li><a class="link" href="https://twitter.com/devops_tech/status/1525708053487570944"  target="_blank" rel="noopener"
+    >一张图理解Linux文件权限</a></li>
+</ul>
+<h2 id="工具">工具</h2>
+<h3 id="git">Git</h3>
+<ul>
+<li><a class="link" href="https://ohshitgit.com/zh"  target="_blank" rel="noopener"
+    >在使用 git 时的一些尴尬场景里的修复方案</a></li>
+</ul>
+<h3 id="unity">Unity</h3>
+<ul>
+<li><a class="link" href="https://catlikecoding.com/unity/tutorials/"  target="_blank" rel="noopener"
+    >Catlike Coding unity tutorials</a></li>
+</ul>
+<h2 id="misc">misc</h2>
+<ul>
+<li><a class="link" href="http://www.maizure.org/projects/decoded-gnu-coreutils/index.html"  target="_blank" rel="noopener"
+    >GNU工具实现解密</a></li>
+<li><a class="link" href="https://zhuanlan.zhihu.com/p/508796156"  target="_blank" rel="noopener"
+    >漫画数据化——计算机科学在漫画领域的相关研究简介</a></li>
+<li><a class="link" href="https://github.com/eryajf/Thanks-Mirror"  target="_blank" rel="noopener"
+    >整理记录各个包管理器，系统镜像，以及常用软件的好用镜像</a></li>
+<li><a class="link" href="https://adit.io/posts/2013-04-17-functors,_applicatives,_and_monads_in_pictures.html"  target="_blank" rel="noopener"
+    >图解Functor和Monad</a></li>
+<li><a class="link" href="https://github.com/eryajf/HowToStartOpenSource"  target="_blank" rel="noopener"
+    >GitHub开源项目维护指南</a></li>
+<li><a class="link" href="https://www.matrixcalculus.org/"  target="_blank" rel="noopener"
+    >在线矩阵计算</a></li>
+</ul>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+</article>
+
+    
+
+    <aside class="related-contents--wrapper">
+    
+    
+</aside>
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+        2022 恒星的小站
+    </section>
+    
+    <section class="powerby">
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.8.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css"integrity="sha256-c0uckgykQ9v5k&#43;IqViZOZKc47Jn7KQil4/MP3ySA3F8="crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css"integrity="sha256-SBLU4vv6CA6lHsZ1XyTdhyjJxCjPif/TRkjnsyGAGnE="crossorigin="anonymous"
+            >
+
+            </main>
+    
+        <aside class="sidebar right-sidebar sticky">
+            <section class="widget archives">
+                <div class="widget-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+                </div>
+                <h2 class="widget-title section-title">目录</h2>
+                
+                <div class="widget--toc">
+                    <nav id="TableOfContents">
+  <ol>
+    <li><a href="#编程语言">编程语言</a>
+      <ol>
+        <li><a href="#c">C</a></li>
+        <li><a href="#c-1">C++</a></li>
+      </ol>
+    </li>
+    <li><a href="#体系结构">体系结构</a></li>
+    <li><a href="#可视化">可视化</a></li>
+    <li><a href="#优化">优化</a></li>
+    <li><a href="#高性能计算编程">高性能计算(编程)</a></li>
+    <li><a href="#计算机图形学">计算机图形学</a>
+      <ol>
+        <li><a href="#旋转">旋转</a></li>
+      </ol>
+    </li>
+    <li><a href="#虚拟机">虚拟机</a></li>
+    <li><a href="#逆向">逆向</a></li>
+    <li><a href="#linux">Linux</a></li>
+    <li><a href="#工具">工具</a>
+      <ol>
+        <li><a href="#git">Git</a></li>
+        <li><a href="#unity">Unity</a></li>
+      </ol>
+    </li>
+    <li><a href="#misc">misc</a></li>
+  </ol>
+</nav>
+                </div>
+            </section>
+        </aside>
+    
+
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js"integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

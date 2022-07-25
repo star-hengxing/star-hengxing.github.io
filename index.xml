@@ -6,7 +6,352 @@
         <description>Recent content on 恒星的小站</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
-        <lastBuildDate>Tue, 05 Jul 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://star-hengxing.github.io/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Mon, 25 Jul 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://star-hengxing.github.io/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>C&#43;&#43;多态新姿势</title>
+        <link>https://star-hengxing.github.io/p/c-%E5%A4%9A%E6%80%81%E6%96%B0%E5%A7%BF%E5%8A%BF/</link>
+        <pubDate>Mon, 25 Jul 2022 00:00:00 +0000</pubDate>
+        
+        <guid>https://star-hengxing.github.io/p/c-%E5%A4%9A%E6%80%81%E6%96%B0%E5%A7%BF%E5%8A%BF/</guid>
+        <description>&lt;h2 id=&#34;起初&#34;&gt;起初&lt;/h2&gt;
+&lt;p&gt;在实现我的&lt;a class=&#34;link&#34; href=&#34;https://github.com/star-hengxing/cpu_offline_renderer/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;离线渲染器&lt;/a&gt;中，用到了大量oop（其实就是基类然后继承）&lt;/p&gt;
+&lt;p&gt;我有一个&lt;code&gt;Shape&lt;/code&gt;基类，里面接口全声明为标准的纯虚函数接口&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-C++&#34; data-lang=&#34;C++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;virtual&lt;/span&gt; TYPE &lt;span style=&#34;color:#50fa7b&#34;&gt;FUNCTION&lt;/span&gt;() &lt;span style=&#34;color:#ff79c6&#34;&gt;const&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#bd93f9&#34;&gt;0&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;当你继承这个类后，继承类必须实现这个接口，不然编译报错&lt;/p&gt;
+&lt;p&gt;一开始还没有写实现，但类已经继承了，没办法，在接口开个洞（真难看啊&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-C++&#34; data-lang=&#34;C++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;virtual&lt;/span&gt; TYPE &lt;span style=&#34;color:#50fa7b&#34;&gt;FUNCTION&lt;/span&gt;() &lt;span style=&#34;color:#ff79c6&#34;&gt;const&lt;/span&gt; {}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;于是我基于C++20标准库的&lt;a class=&#34;link&#34; href=&#34;https://en.cppreference.com/w/cpp/utility/source_location&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;source_location&lt;/a&gt;写了一个&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-C++&#34; data-lang=&#34;C++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#50fa7b&#34;&gt;[[noreturn]]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;inline&lt;/span&gt; &lt;span style=&#34;color:#8be9fd&#34;&gt;void&lt;/span&gt; unimplemented(&lt;span style=&#34;color:#ff79c6&#34;&gt;const&lt;/span&gt; std&lt;span style=&#34;color:#ff79c6&#34;&gt;::&lt;/span&gt;source_location location &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; std&lt;span style=&#34;color:#ff79c6&#34;&gt;::&lt;/span&gt;source_location&lt;span style=&#34;color:#ff79c6&#34;&gt;::&lt;/span&gt;current())
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    std&lt;span style=&#34;color:#ff79c6&#34;&gt;::&lt;/span&gt;cout &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#39;\n&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;              &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#39;[&amp;#39;&lt;/span&gt;  &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; location.file_name()
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;              &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#39;:&amp;#39;&lt;/span&gt;  &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; location.line()
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;              &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;] &amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; location.function_name()
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;              &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34; unimplemented!&lt;/span&gt;&lt;span style=&#34;color:#f1fa8c&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    exit(&lt;span style=&#34;color:#ff79c6&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#bd93f9&#34;&gt;1&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;还没有实现接口的时候留下&lt;code&gt;unimplemented&lt;/code&gt;，然后运行时报错&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;source_location&lt;/code&gt;暂时只有clang不支持（clang对C++20支持太慢了&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;p&gt;网上冲浪时看到有人说，接口虚函数实现动态多态是一种糟糕实践，优雅的做法是&lt;code&gt;Existential Type&lt;/code&gt;，在C++社区称为&lt;code&gt;sean parent polymorphism&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;详细可以看这个视频&lt;a class=&#34;link&#34; href=&#34;https://www.youtube.com/watch?v=PSxo85L2lC0&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;John Bandela “Polymorphism != Virtual: Easy, Flexible Runtime Polymorphism Without Inheritance”&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.reddit.com/r/cpp/comments/dguo3h/john_bandela_polymorphism_virtual_easy_flexible/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;reddit上的关于该视频的讨论&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;existential-type&#34;&gt;Existential Type&lt;/h2&gt;
+&lt;p&gt;中文语境下叫&lt;strong&gt;类型擦除/隐藏类型实现&lt;/strong&gt;（机翻直译叫存在类型，真怪）&lt;/p&gt;
+&lt;p&gt;看一段C++代码&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-C++&#34; data-lang=&#34;C++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;struct&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;Base&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;template&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;typename&lt;/span&gt; T&lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    Base(T&lt;span style=&#34;color:#ff79c6&#34;&gt;*&lt;/span&gt; t)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        _this&lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;reinterpret_cast&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color:#8be9fd&#34;&gt;void&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;*&amp;gt;&lt;/span&gt;(t);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        _operation &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; [](&lt;span style=&#34;color:#8be9fd&#34;&gt;void&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;*&lt;/span&gt; st)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#ff79c6&#34;&gt;static_cast&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&lt;/span&gt;T&lt;span style=&#34;color:#ff79c6&#34;&gt;*&amp;gt;&lt;/span&gt;(st)&lt;span style=&#34;color:#ff79c6&#34;&gt;-&amp;gt;&lt;/span&gt;f();
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        };
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#8be9fd&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;call&lt;/span&gt;()
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        (&lt;span style=&#34;color:#ff79c6&#34;&gt;*&lt;/span&gt;_operation)(_this);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#8be9fd&#34;&gt;void&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;*&lt;/span&gt; _this &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;nullptr&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#8be9fd&#34;&gt;void&lt;/span&gt;(&lt;span style=&#34;color:#ff79c6&#34;&gt;*&lt;/span&gt;_operation)(&lt;span style=&#34;color:#8be9fd&#34;&gt;void&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;*&lt;/span&gt;) &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;nullptr&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;};
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;存进&lt;code&gt;_this&lt;/code&gt;强转成&lt;code&gt;void*&lt;/code&gt;，那确实是擦除了类型。。。&lt;/p&gt;
+&lt;p&gt;但因为有模板的存在，所以调用&lt;code&gt;call&lt;/code&gt;的时候，还原成原类型，所以编译器就知道调用哪个函数了&lt;/p&gt;
+&lt;h2 id=&#34;不需要virtual的c多态&#34;&gt;不需要virtual的C++多态&lt;/h2&gt;
+&lt;p&gt;随便看了一下代码（没看懂），只知道用到了上面所说的&lt;code&gt;Existential Type&lt;/code&gt;，本质上就是用&lt;strong&gt;模板元编程&lt;/strong&gt;技术手动生成&lt;strong&gt;虚表&lt;/strong&gt;（废话）&lt;/p&gt;
+&lt;p&gt;slides里说benchmark比编译器实现的还快（都是查虚表，哪里有不同呢）&lt;/p&gt;
+&lt;p&gt;不过实际上，在基类接口上不需要加virtual确实是解耦了&lt;/p&gt;
+&lt;p&gt;看了一下对比，wtf？&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;virtual&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-C++&#34; data-lang=&#34;C++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;struct&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;transforming_interface&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;virtual&lt;/span&gt; &lt;span style=&#34;color:#8be9fd&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;translate&lt;/span&gt;(&lt;span style=&#34;color:#8be9fd&#34;&gt;double&lt;/span&gt; x, &lt;span style=&#34;color:#8be9fd&#34;&gt;double&lt;/span&gt; y) &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#bd93f9&#34;&gt;0&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;virtual&lt;/span&gt; &lt;span style=&#34;color:#8be9fd&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;rotate&lt;/span&gt;(&lt;span style=&#34;color:#8be9fd&#34;&gt;double&lt;/span&gt; degrees) &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#bd93f9&#34;&gt;0&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;};
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#8be9fd&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;spin&lt;/span&gt;(transforming_interface&lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;amp;&lt;/span&gt; s)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    s.translate(&lt;span style=&#34;color:#bd93f9&#34;&gt;4&lt;/span&gt;, &lt;span style=&#34;color:#bd93f9&#34;&gt;2&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    s.rotate(&lt;span style=&#34;color:#bd93f9&#34;&gt;45&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;polymorphic&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-C++&#34; data-lang=&#34;C++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;struct&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;translate&lt;/span&gt;{};
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;struct&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;rotate&lt;/span&gt;{};
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#8be9fd&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;spin&lt;/span&gt;(polymorphic&lt;span style=&#34;color:#ff79c6&#34;&gt;::&lt;/span&gt;ref&lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#8be9fd&#34;&gt;void&lt;/span&gt;(translate, &lt;span style=&#34;color:#8be9fd&#34;&gt;double&lt;/span&gt; x, &lt;span style=&#34;color:#8be9fd&#34;&gt;double&lt;/span&gt; y),
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#8be9fd&#34;&gt;void&lt;/span&gt;(rotate, &lt;span style=&#34;color:#8be9fd&#34;&gt;double&lt;/span&gt; degrees)&lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;gt;&lt;/span&gt; s)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    s.call&lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&lt;/span&gt;translate&lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;gt;&lt;/span&gt;(&lt;span style=&#34;color:#bd93f9&#34;&gt;4&lt;/span&gt;, &lt;span style=&#34;color:#bd93f9&#34;&gt;2&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    s.call&lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&lt;/span&gt;rotate&lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;gt;&lt;/span&gt;(&lt;span style=&#34;color:#bd93f9&#34;&gt;45&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;看不懂，也不知道怎么用，翻了下reddit回复，看到有一个简单的&lt;a class=&#34;link&#34; href=&#34;https://gist.github.com/jbandela/faa0aaed4a96aff8658de191ffb95f72&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;实现&lt;/a&gt;，其中一段代码&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-C++&#34; data-lang=&#34;C++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;struct&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;draw&lt;/span&gt; {};
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;struct&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;another&lt;/span&gt; {};
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;template&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;typename&lt;/span&gt; T&lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#8be9fd&#34;&gt;void&lt;/span&gt; poly_extend(draw, T&lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;amp;&lt;/span&gt; t) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  std&lt;span style=&#34;color:#ff79c6&#34;&gt;::&lt;/span&gt;cout &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; t &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f1fa8c&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;template&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;typename&lt;/span&gt; T&lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#8be9fd&#34;&gt;void&lt;/span&gt; poly_extend(another, T&lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;amp;&lt;/span&gt; t) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  t &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; t &lt;span style=&#34;color:#ff79c6&#34;&gt;+&lt;/span&gt; t;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#8be9fd&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;main&lt;/span&gt;() {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#8be9fd&#34;&gt;int&lt;/span&gt; i &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#bd93f9&#34;&gt;5&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#ff79c6&#34;&gt;using&lt;/span&gt; poly &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; polymorphic&lt;span style=&#34;color:#ff79c6&#34;&gt;::&lt;/span&gt;polymorphic_view&lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color:#8be9fd&#34;&gt;void&lt;/span&gt;(draw), &lt;span style=&#34;color:#8be9fd&#34;&gt;void&lt;/span&gt;(another)&lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;gt;&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  poly p1{i};
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  p1.call&lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&lt;/span&gt;draw&lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;gt;&lt;/span&gt;();
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#ff79c6&#34;&gt;auto&lt;/span&gt; p2 &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; p1;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  p2.call&lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&lt;/span&gt;draw&lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;gt;&lt;/span&gt;();
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  std&lt;span style=&#34;color:#ff79c6&#34;&gt;::&lt;/span&gt;string s(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;hello world&amp;#34;&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  p2 &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; poly{s};
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  p2.call&lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&lt;/span&gt;another&lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;gt;&lt;/span&gt;();
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  p2.call&lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&lt;/span&gt;draw&lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;gt;&lt;/span&gt;();
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;把要多态的函数写成结构体，然后放在&lt;code&gt;poly_extend&lt;/code&gt;第一个参数，然后调用的时候需要在模板放入签名&lt;/p&gt;
+&lt;p&gt;第一次看见这种写法，有点不习惯，我改下一下&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;virtual&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-C++&#34; data-lang=&#34;C++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;#include&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;iostream&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;template&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;typename&lt;/span&gt;... Args&lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#8be9fd&#34;&gt;void&lt;/span&gt; println(&lt;span style=&#34;color:#ff79c6&#34;&gt;const&lt;/span&gt; Args&lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;amp;&lt;/span&gt;... args)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    ((std&lt;span style=&#34;color:#ff79c6&#34;&gt;::&lt;/span&gt;cout &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; args &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#39;\n&amp;#39;&lt;/span&gt;), ...);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;struct&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;Base&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;virtual&lt;/span&gt; &lt;span style=&#34;color:#8be9fd&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;test&lt;/span&gt;() { println(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;Base test&amp;#34;&lt;/span&gt;); }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;};
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;struct&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;Derive&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;:&lt;/span&gt; Base
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;virtual&lt;/span&gt; &lt;span style=&#34;color:#8be9fd&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;test&lt;/span&gt;() { println(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;Derive test&amp;#34;&lt;/span&gt;); }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;};
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#8be9fd&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;main&lt;/span&gt;()
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    Base x;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    Derive y;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    Base&lt;span style=&#34;color:#ff79c6&#34;&gt;*&lt;/span&gt; z &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;amp;&lt;/span&gt;x;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    z&lt;span style=&#34;color:#ff79c6&#34;&gt;-&amp;gt;&lt;/span&gt;test();
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    z &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;amp;&lt;/span&gt;y;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    z&lt;span style=&#34;color:#ff79c6&#34;&gt;-&amp;gt;&lt;/span&gt;test();
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;polymorphic&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-C++&#34; data-lang=&#34;C++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;#include&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;iostream&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;template&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;typename&lt;/span&gt;... Args&lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#8be9fd&#34;&gt;void&lt;/span&gt; println(&lt;span style=&#34;color:#ff79c6&#34;&gt;const&lt;/span&gt; Args&lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;amp;&lt;/span&gt;... args)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    ((std&lt;span style=&#34;color:#ff79c6&#34;&gt;::&lt;/span&gt;cout &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; args &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#39;\n&amp;#39;&lt;/span&gt;), ...);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;struct&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;Base&lt;/span&gt;{};
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;struct&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;Derive&lt;/span&gt;{};
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#6272a4&#34;&gt;// function
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#6272a4&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;struct&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;test&lt;/span&gt;{};
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;template&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;typename&lt;/span&gt; T&lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#8be9fd&#34;&gt;void&lt;/span&gt; poly_extend(test, T&lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;amp;&lt;/span&gt; t);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;template&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#8be9fd&#34;&gt;void&lt;/span&gt; poly_extend(test, Base&lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;amp;&lt;/span&gt; t)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    println(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;Base&amp;#34;&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;template&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#8be9fd&#34;&gt;void&lt;/span&gt; poly_extend(test, Derive&lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;amp;&lt;/span&gt; t)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    println(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;Derive&amp;#34;&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;using&lt;/span&gt; poly &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; polymorphic&lt;span style=&#34;color:#ff79c6&#34;&gt;::&lt;/span&gt;polymorphic_view&lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color:#8be9fd&#34;&gt;void&lt;/span&gt;(test)&lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;gt;&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#8be9fd&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;main&lt;/span&gt;()
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    Base x;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    Derive y;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    poly z{x};
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    z.call&lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&lt;/span&gt;test&lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;gt;&lt;/span&gt;();
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    z &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; poly{y};
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    z.call&lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&lt;/span&gt;test&lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;gt;&lt;/span&gt;();
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;嗯，为了保证结构体接口干净，不使用&lt;code&gt;virtual&lt;/code&gt;写实现的时候还是要干许多脏活&lt;/p&gt;
+&lt;p&gt;这看来对C++人来说还是太超前了，平时搞多态首先还是用&lt;code&gt;virtual&lt;/code&gt;吧&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>收藏夹（知识分类）</title>
+        <link>https://star-hengxing.github.io/p/%E6%94%B6%E8%97%8F%E5%A4%B9%E7%9F%A5%E8%AF%86%E5%88%86%E7%B1%BB/</link>
+        <pubDate>Tue, 19 Jul 2022 00:00:00 +0000</pubDate>
+        
+        <guid>https://star-hengxing.github.io/p/%E6%94%B6%E8%97%8F%E5%A4%B9%E7%9F%A5%E8%AF%86%E5%88%86%E7%B1%BB/</guid>
+        <description>&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;#%e7%bc%96%e7%a8%8b%e8%af%ad%e8%a8%80&#34; &gt;编程语言&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;#c&#34; &gt;C&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;#c-1&#34; &gt;C++&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;#%e4%bd%93%e7%b3%bb%e7%bb%93%e6%9e%84&#34; &gt;体系结构&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;#%e5%8f%af%e8%a7%86%e5%8c%96&#34; &gt;可视化&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;#%e4%bc%98%e5%8c%96&#34; &gt;优化&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;#%e9%ab%98%e6%80%a7%e8%83%bd%e8%ae%a1%e7%ae%97%e7%bc%96%e7%a8%8b&#34; &gt;高性能计算(编程)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;#%e8%ae%a1%e7%ae%97%e6%9c%ba%e5%9b%be%e5%bd%a2%e5%ad%a6&#34; &gt;计算机图形学&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;#%e6%97%8b%e8%bd%ac&#34; &gt;旋转&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;#%e8%99%9a%e6%8b%9f%e6%9c%ba&#34; &gt;虚拟机&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;#%e9%80%86%e5%90%91&#34; &gt;逆向&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;#linux&#34; &gt;Linux&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;#%e5%b7%a5%e5%85%b7&#34; &gt;工具&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;#git&#34; &gt;Git&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;#unity&#34; &gt;Unity&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;#misc&#34; &gt;misc&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;编程语言&#34;&gt;编程语言&lt;/h2&gt;
+&lt;h3 id=&#34;c&#34;&gt;C&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://liujiacai.net/blog/2022/04/30/modern-c/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;现代化 C 使用体验&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;c-1&#34;&gt;C++&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://lhprojects.github.io/blog/src/Singleton.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;单例模式&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://bot-man-jl.github.io/articles/?post=2018/Cpp-Struct-Field-Reflection&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;简单的 C++ 结构体字段反射&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;http://qamichaelpeng.github.io/2014/11/20/sharepointer_1.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;make a shared_ptr from scratch&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.zhihu.com/column/c_1360316516295032832&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;C++ 系列专题&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;体系结构&#34;&gt;体系结构&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://coolshell.cn/articles/20793.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;与程序员相关的CPU缓存知识&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;可视化&#34;&gt;可视化&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://devtool.tech/double-type&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;浮点数可视化&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://regex-vis.com/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;正则表达式可视化&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://setosa.io/blog/2014/07/26/markov-chains/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;马尔科夫链可视化&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;优化&#34;&gt;优化&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://kristerw.github.io/2021/10/19/fast-math/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;浮点数计算优化&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;高性能计算编程&#34;&gt;高性能计算(编程)&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://heptagonhust.github.io/HPC-roadmap/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;高性能计算学习路线&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://zhuanlan.zhihu.com/p/503037055&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;从零开始的C/C++高性能编程指南&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://zhuanlan.zhihu.com/p/533708198&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;C++ 高性能编程实战系列（1）&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://zhuanlan.zhihu.com/p/534004366&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;C++ 高性能编程实战系列（2）&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://zhuanlan.zhihu.com/p/537260855&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;C++ 高性能编程实战系列（3）&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.cnblogs.com/KillerAery/p/11746639.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;游戏架构设计——面向数据编程（DOP）&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.cnblogs.com/KillerAery/p/16333348.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;游戏架构设计——高性能并行编程&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;计算机图形学&#34;&gt;计算机图形学&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.iquilezles.org/www/articles/floatingbar/floatingbar.htm&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;使用有理数进行渲染&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://agraphicsguynotes.com/posts/how_does_pbrt_verify_bxdf&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;如何验证BXDF&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.cnblogs.com/KillerAery/p/15719431.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;实时&amp;amp;离线皮肤渲染技术（Real-time &amp;amp; Offline Skin Rendering）&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;旋转&#34;&gt;旋转&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://thenumbat.github.io/Exponential-Rotations/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;可视化和公式推导&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;虚拟机&#34;&gt;虚拟机&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.iteye.com/blog/rednaxelafx-492667&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;虚拟机随谈（一）：解释器，树遍历解释器，基于栈与基于寄存器，大杂烩&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;逆向&#34;&gt;逆向&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://bbs.pediy.com/thread-271332.htm&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;[原创] 逆向并提取QQ截图&amp;ndash;OCR和其他功能&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;linux&#34;&gt;Linux&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://github.com/NakanoMikuOrg/arch-guide&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;archlinux 简明指南&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://twitter.com/devops_tech/status/1525708053487570944&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;一张图理解Linux文件权限&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;工具&#34;&gt;工具&lt;/h2&gt;
+&lt;h3 id=&#34;git&#34;&gt;Git&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://ohshitgit.com/zh&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;在使用 git 时的一些尴尬场景里的修复方案&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;unity&#34;&gt;Unity&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://catlikecoding.com/unity/tutorials/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Catlike Coding unity tutorials&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;misc&#34;&gt;misc&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;http://www.maizure.org/projects/decoded-gnu-coreutils/index.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;GNU工具实现解密&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://zhuanlan.zhihu.com/p/508796156&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;漫画数据化——计算机科学在漫画领域的相关研究简介&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://github.com/eryajf/Thanks-Mirror&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;整理记录各个包管理器，系统镜像，以及常用软件的好用镜像&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://adit.io/posts/2013-04-17-functors,_applicatives,_and_monads_in_pictures.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;图解Functor和Monad&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://github.com/eryajf/HowToStartOpenSource&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;GitHub开源项目维护指南&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.matrixcalculus.org/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;在线矩阵计算&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
         <title>随便记录下看过的书吧</title>
         <link>https://star-hengxing.github.io/p/%E9%9A%8F%E4%BE%BF%E8%AE%B0%E5%BD%95%E4%B8%8B%E7%9C%8B%E8%BF%87%E7%9A%84%E4%B9%A6%E5%90%A7/</link>
         <pubDate>Tue, 05 Jul 2022 00:00:00 +0000</pubDate>
@@ -287,33 +632,68 @@
 </description>
         </item>
         <item>
-        <title>离线渲染进阶</title>
-        <link>https://star-hengxing.github.io/p/%E7%A6%BB%E7%BA%BF%E6%B8%B2%E6%9F%93%E8%BF%9B%E9%98%B6/</link>
+        <title>渲染进阶</title>
+        <link>https://star-hengxing.github.io/p/%E6%B8%B2%E6%9F%93%E8%BF%9B%E9%98%B6/</link>
         <pubDate>Mon, 30 May 2022 00:00:00 +0000</pubDate>
         
-        <guid>https://star-hengxing.github.io/p/%E7%A6%BB%E7%BA%BF%E6%B8%B2%E6%9F%93%E8%BF%9B%E9%98%B6/</guid>
-        <description>&lt;p&gt;现实世界是如此美丽，那么如何渲染呢&lt;/p&gt;
-&lt;hr&gt;
-&lt;h2 id=&#34;光谱&#34;&gt;光谱&lt;/h2&gt;
-&lt;ol&gt;
+        <guid>https://star-hengxing.github.io/p/%E6%B8%B2%E6%9F%93%E8%BF%9B%E9%98%B6/</guid>
+        <description>&lt;h2 id=&#34;图形笑话三则&#34;&gt;图形笑话三则&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://zhuanlan.zhihu.com/p/456526193&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;来点图程破防乐子&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://zhuanlan.zhihu.com/p/456547512&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;无内鬼，来点图形笑话&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://zhuanlan.zhihu.com/p/457506187&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;再来点图程破防乐子&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;免费渲染模型&#34;&gt;免费渲染模型&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://casual-effects.com/data/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;McGuire Computer Graphics Archive&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://benedikt-bitterli.me/resources/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Rendering Resources&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;博客&#34;&gt;博客&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://agraphicsguynotes.com/posts/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;A GRAPHICS GUY&amp;rsquo;S NOTE&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;各种效果&#34;&gt;各种效果&lt;/h2&gt;
+&lt;h3 id=&#34;光谱&#34;&gt;光谱&lt;/h3&gt;
+&lt;ul&gt;
 &lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://github.com/geometrian/simple-spectral&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;Simple Spectral&lt;/a&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h2 id=&#34;天空&#34;&gt;天空&lt;/h2&gt;
-&lt;ol&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;天空&#34;&gt;天空&lt;/h3&gt;
+&lt;ul&gt;
 &lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://cgg.mff.cuni.cz/projects/SkylightModelling/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;The Sky Dome Appearance Project&lt;/a&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h2 id=&#34;彩虹&#34;&gt;彩虹&lt;/h2&gt;
-&lt;ol&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;彩虹&#34;&gt;彩虹&lt;/h3&gt;
+&lt;ul&gt;
 &lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://cs.dartmouth.edu/wjarosz/publications/sadeghi11physically.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;Physically-based simulation of rainbows&lt;/a&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h2 id=&#34;动物毛发&#34;&gt;动物毛发&lt;/h2&gt;
-&lt;ol&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;动物毛发&#34;&gt;动物毛发&lt;/h3&gt;
+&lt;ul&gt;
 &lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://sites.cs.ucsb.edu/~lingqi/project_page/fur2/index.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;An Efficient and Practical Near and Far Field Fur Reflectance Model&lt;/a&gt;&lt;/li&gt;
-&lt;/ol&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;肥皂泡&#34;&gt;肥皂泡&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://light.informatik.uni-bonn.de/chemomechanical-simulation-of-soap-film-flow-on-spherical-bubbles/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Chemomechanical Simulation of Soap Film Flow on Spherical Bubbles&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;fqa&#34;&gt;FQA&lt;/h2&gt;
+&lt;p&gt;（其实就是把群友讨论结果收藏一下&lt;/p&gt;
+&lt;h3 id=&#34;微表面模型中几何项使用h还是n&#34;&gt;微表面模型中几何项使用H还是N&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;p&gt;在离线里面，一般用general smith，不需要用到H或者N的，就无所谓了。&lt;/p&gt;
+&lt;p&gt;虚幻第一次把G=G1G1带到引擎，也是根据egsr07来的，egsr07用的就是H，但到虚幻那就突然变成N了。这也是有原因的，虚幻把&lt;a class=&#34;link&#34; href=&#34;http://igorsklyar.com/system/documents/papers/28/Schlick94.pdf&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Schlick G&lt;/a&gt;当做G1，而不是用对应D项的G1,而Schlick G的确是根据N来的。&lt;/p&gt;
+&lt;p&gt;然后heitz后面提出了joint G，heitz的paper里面当然用的H而不是N，但是，虚幻看之前非joint g的代码用的N，就copy过来了，所以现在虚幻的joint g也是用的N。&lt;/p&gt;
+&lt;p&gt;不知为啥，unity也用的N，好像大家都用N。&lt;/p&gt;
+&lt;/blockquote&gt;
 </description>
         </item>
         <item>
@@ -1338,6 +1718,18 @@ continue
 &lt;li&gt;持续更新（只要我推的快）&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;strong&gt;排名不分先后，如有错误请指出&lt;/strong&gt;（最近推完的都会在最上面，&lt;del&gt;其实就是一个栈&lt;/del&gt;）&lt;/p&gt;
+&lt;h2 id=&#34;金色ラブリッチェ&#34;&gt;金色ラブリッチェ&lt;/h2&gt;
+&lt;p&gt;译名：金辉恋曲四重奏&lt;/p&gt;
+&lt;p&gt;会社：Saga Planets&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;玲奈线，感觉剧情浪费人设了😢&lt;/p&gt;
+&lt;p&gt;3p先不谈，先打炮再表白感觉不爽，后半段剧情还一点镜头都没有，变成基友主场&lt;/p&gt;
+&lt;h2 id=&#34;rewrite&#34;&gt;Rewrite&lt;/h2&gt;
+&lt;p&gt;译名：罚抄&lt;/p&gt;
+&lt;p&gt;会社：Key&lt;/p&gt;
+&lt;p&gt;FD：Rewrite Harvest festa!&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;后劲很大&lt;/p&gt;
 &lt;h2 id=&#34;はつゆきさくら&#34;&gt;はつゆきさくら&lt;/h2&gt;
 &lt;p&gt;译名：初雪樱&lt;/p&gt;
 &lt;p&gt;会社：Saga Planets&lt;/p&gt;

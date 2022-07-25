@@ -36,13 +36,16 @@ A: 执行xmake -v，查看详细输出信息</description>
     </item>
     
     <item>
-      <title>离线渲染进阶</title>
-      <link>https://star-hengxing.github.io/p/%E7%A6%BB%E7%BA%BF%E6%B8%B2%E6%9F%93%E8%BF%9B%E9%98%B6/</link>
+      <title>渲染进阶</title>
+      <link>https://star-hengxing.github.io/p/%E6%B8%B2%E6%9F%93%E8%BF%9B%E9%98%B6/</link>
       <pubDate>Mon, 30 May 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://star-hengxing.github.io/p/%E7%A6%BB%E7%BA%BF%E6%B8%B2%E6%9F%93%E8%BF%9B%E9%98%B6/</guid>
-      <description>现实世界是如此美丽，那么如何渲染呢
-光谱 Simple Spectral 天空 The Sky Dome Appearance Project 彩虹 Physically-based simulation of rainbows 动物毛发 An Efficient and Practical Near and Far Field Fur Reflectance Model </description>
+      <guid>https://star-hengxing.github.io/p/%E6%B8%B2%E6%9F%93%E8%BF%9B%E9%98%B6/</guid>
+      <description>图形笑话三则 来点图程破防乐子 无内鬼，来点图形笑话 再来点图程破防乐子 免费渲染模型 McGuire Computer Graphics Archive Rendering Resources 博客 A GRAPHICS GUY&amp;rsquo;S NOTE 各种效果 光谱 Simple Spectral 天空 The Sky Dome Appearance Project 彩虹 Physically-based simulation of rainbows 动物毛发 An Efficient and Practical Near and Far Field Fur Reflectance Model 肥皂泡 Chemomechanical Simulation of Soap Film Flow on Spherical Bubbles FQA （其实就是把群友讨论结果收藏一下
+微表面模型中几何项使用H还是N 在离线里面，一般用general smith，不需要用到H或者N的，就无所谓了。
+虚幻第一次把G=G1G1带到引擎，也是根据egsr07来的，egsr07用的就是H，但到虚幻那就突然变成N了。这也是有原因的，虚幻把Schlick G当做G1，而不是用对应D项的G1,而Schlick G的确是根据N来的。
+然后heitz后面提出了joint G，heitz的paper里面当然用的H而不是N，但是，虚幻看之前非joint g的代码用的N，就copy过来了，所以现在虚幻的joint g也是用的N。
+不知为啥，unity也用的N，好像大家都用N。</description>
     </item>
     
     <item>

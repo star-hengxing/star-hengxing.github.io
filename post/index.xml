@@ -6,7 +6,37 @@
     <description>Recent content in Posts on 恒星的小站</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Tue, 05 Jul 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://star-hengxing.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 25 Jul 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://star-hengxing.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>C&#43;&#43;多态新姿势</title>
+      <link>https://star-hengxing.github.io/p/c-%E5%A4%9A%E6%80%81%E6%96%B0%E5%A7%BF%E5%8A%BF/</link>
+      <pubDate>Mon, 25 Jul 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://star-hengxing.github.io/p/c-%E5%A4%9A%E6%80%81%E6%96%B0%E5%A7%BF%E5%8A%BF/</guid>
+      <description>起初 在实现我的离线渲染器中，用到了大量oop（其实就是基类然后继承）
+我有一个Shape基类，里面接口全声明为标准的纯虚函数接口
+virtual TYPE FUNCTION() const = 0; 当你继承这个类后，继承类必须实现这个接口，不然编译报错
+一开始还没有写实现，但类已经继承了，没办法，在接口开个洞（真难看啊
+virtual TYPE FUNCTION() const {} 于是我基于C++20标准库的source_location写了一个
+[[noreturn]] inline void unimplemented(const std::source_location location = std::source_location::current()) { std::cout &amp;lt;&amp;lt; &amp;#39;\n&amp;#39; &amp;lt;&amp;lt; &amp;#39;[&amp;#39; &amp;lt;&amp;lt; location.file_name() &amp;lt;&amp;lt; &amp;#39;:&amp;#39; &amp;lt;&amp;lt; location.line() &amp;lt;&amp;lt; &amp;#34;] &amp;#34; &amp;lt;&amp;lt; location.function_name() &amp;lt;&amp;lt; &amp;#34; unimplemented!\n&amp;#34;; exit(-1); } 还没有实现接口的时候留下unimplemented，然后运行时报错
+source_location暂时只有clang不支持（clang对C++20支持太慢了
+网上冲浪时看到有人说，接口虚函数实现动态多态是一种糟糕实践，优雅的做法是Existential Type，在C++社区称为sean parent polymorphism
+详细可以看这个视频John Bandela “Polymorphism != Virtual: Easy, Flexible Runtime Polymorphism Without Inheritance”
+reddit上的关于该视频的讨论
+Existential Type 中文语境下叫类型擦除/隐藏类型实现（机翻直译叫存在类型，真怪）
+看一段C++代码
+struct Base { template &amp;lt;typename T&amp;gt; Base(T* t) { _this= reinterpret_cast&amp;lt;void*&amp;gt;(t); _operation = [](void* st) { static_cast&amp;lt;T*&amp;gt;(st)-&amp;gt;f(); }; } void call() { (*_operation)(_this); } void* _this = nullptr; void(*_operation)(void*) = nullptr; }; 存进_this强转成void*，那确实是擦除了类型。。。</description>
+    </item>
+    
+    <item>
+      <title>收藏夹（知识分类）</title>
+      <link>https://star-hengxing.github.io/p/%E6%94%B6%E8%97%8F%E5%A4%B9%E7%9F%A5%E8%AF%86%E5%88%86%E7%B1%BB/</link>
+      <pubDate>Tue, 19 Jul 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://star-hengxing.github.io/p/%E6%94%B6%E8%97%8F%E5%A4%B9%E7%9F%A5%E8%AF%86%E5%88%86%E7%B1%BB/</guid>
+      <description> 编程语言 C C++ 体系结构 可视化 优化 高性能计算(编程) 计算机图形学 旋转 虚拟机 逆向 Linux 工具 Git Unity misc 编程语言 C 现代化 C 使用体验 C++ 单例模式 简单的 C++ 结构体字段反射 make a shared_ptr from scratch C++ 系列专题 体系结构 与程序员相关的CPU缓存知识 可视化 浮点数可视化 正则表达式可视化 马尔科夫链可视化 优化 浮点数计算优化 高性能计算(编程) 高性能计算学习路线 从零开始的C/C++高性能编程指南 C++ 高性能编程实战系列（1） C++ 高性能编程实战系列（2） C++ 高性能编程实战系列（3） 游戏架构设计——面向数据编程（DOP） 游戏架构设计——高性能并行编程 计算机图形学 使用有理数进行渲染 如何验证BXDF 实时&amp;amp;离线皮肤渲染技术（Real-time &amp;amp; Offline Skin Rendering） 旋转 可视化和公式推导 虚拟机 虚拟机随谈（一）：解释器，树遍历解释器，基于栈与基于寄存器，大杂烩 逆向 [原创] 逆向并提取QQ截图&amp;ndash;OCR和其他功能 Linux archlinux 简明指南 一张图理解Linux文件权限 工具 Git 在使用 git 时的一些尴尬场景里的修复方案 Unity Catlike Coding unity tutorials misc GNU工具实现解密 漫画数据化——计算机科学在漫画领域的相关研究简介 整理记录各个包管理器，系统镜像，以及常用软件的好用镜像 图解Functor和Monad GitHub开源项目维护指南 在线矩阵计算 </description>
+    </item>
+    
     <item>
       <title>随便记录下看过的书吧</title>
       <link>https://star-hengxing.github.io/p/%E9%9A%8F%E4%BE%BF%E8%AE%B0%E5%BD%95%E4%B8%8B%E7%9C%8B%E8%BF%87%E7%9A%84%E4%B9%A6%E5%90%A7/</link>
@@ -70,13 +100,16 @@ A: 执行xmake -v，查看详细输出信息</description>
     </item>
     
     <item>
-      <title>离线渲染进阶</title>
-      <link>https://star-hengxing.github.io/p/%E7%A6%BB%E7%BA%BF%E6%B8%B2%E6%9F%93%E8%BF%9B%E9%98%B6/</link>
+      <title>渲染进阶</title>
+      <link>https://star-hengxing.github.io/p/%E6%B8%B2%E6%9F%93%E8%BF%9B%E9%98%B6/</link>
       <pubDate>Mon, 30 May 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://star-hengxing.github.io/p/%E7%A6%BB%E7%BA%BF%E6%B8%B2%E6%9F%93%E8%BF%9B%E9%98%B6/</guid>
-      <description>现实世界是如此美丽，那么如何渲染呢
-光谱 Simple Spectral 天空 The Sky Dome Appearance Project 彩虹 Physically-based simulation of rainbows 动物毛发 An Efficient and Practical Near and Far Field Fur Reflectance Model </description>
+      <guid>https://star-hengxing.github.io/p/%E6%B8%B2%E6%9F%93%E8%BF%9B%E9%98%B6/</guid>
+      <description>图形笑话三则 来点图程破防乐子 无内鬼，来点图形笑话 再来点图程破防乐子 免费渲染模型 McGuire Computer Graphics Archive Rendering Resources 博客 A GRAPHICS GUY&amp;rsquo;S NOTE 各种效果 光谱 Simple Spectral 天空 The Sky Dome Appearance Project 彩虹 Physically-based simulation of rainbows 动物毛发 An Efficient and Practical Near and Far Field Fur Reflectance Model 肥皂泡 Chemomechanical Simulation of Soap Film Flow on Spherical Bubbles FQA （其实就是把群友讨论结果收藏一下
+微表面模型中几何项使用H还是N 在离线里面，一般用general smith，不需要用到H或者N的，就无所谓了。
+虚幻第一次把G=G1G1带到引擎，也是根据egsr07来的，egsr07用的就是H，但到虚幻那就突然变成N了。这也是有原因的，虚幻把Schlick G当做G1，而不是用对应D项的G1,而Schlick G的确是根据N来的。
+然后heitz后面提出了joint G，heitz的paper里面当然用的H而不是N，但是，虚幻看之前非joint g的代码用的N，就copy过来了，所以现在虚幻的joint g也是用的N。
+不知为啥，unity也用的N，好像大家都用N。</description>
     </item>
     
     <item>
@@ -403,6 +436,14 @@ gcc/ld/objcopy/dd等使用方法参考我的makefile
       
       <guid>https://star-hengxing.github.io/p/galgame%E6%B8%B8%E7%8E%A9%E8%AE%B0%E5%BD%95/</guid>
       <description>部分游戏没有全通 有些gal没有吐槽 内有剧透（这不是废话么） 持续更新（只要我推的快） 排名不分先后，如有错误请指出（最近推完的都会在最上面，其实就是一个栈）
+金色ラブリッチェ 译名：金辉恋曲四重奏
+会社：Saga Planets
+玲奈线，感觉剧情浪费人设了😢
+3p先不谈，先打炮再表白感觉不爽，后半段剧情还一点镜头都没有，变成基友主场
+Rewrite 译名：罚抄
+会社：Key
+FD：Rewrite Harvest festa!
+后劲很大
 はつゆきさくら 译名：初雪樱
 会社：Saga Planets
 好像勉勉强强get到新岛夕说什么，但又没说什么。最后的毕业倒是有点煽情
@@ -439,17 +480,7 @@ PRIMAL×HEARTS 月幕
 会社：KEMCO
 日式狼人杀，故事看得很上头
 灰色系列 会社：Frontwing
-グリザイアの果実 月幕
-译名：灰色的果实
-个人线都很赞，辛线是唯一看哭的（呜呜）
-蒔菜线，两个结局感觉都很痛苦（但拿狙击枪的美少女真的很帅啊，后续乐园还有狙击操作）
-天音线，懂得都懂，那段生存剧情确实很过瘾，动画制作组也懂，所以动画也花了很多精力去做这段剧情。最后面有段小高潮被人追杀，能互相为对方舍命，有点感动。好结局有一丝丝悲伤，毕竟，看到了美少女变老的场景，总觉得心，哪里很难受
-グリザイアの迷宮 月幕
-译名：灰色的迷宫
-OP最好听
-グリザイアの楽園 月幕
-译名：灰色的乐园
-战斗的美少女太帅啦</description>
+グリザイアの果実 月幕</description>
     </item>
     
     <item>
