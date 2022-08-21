@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh-cn">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='起初 在实现我的离线渲染器中，用到了大量oop（其实就是基类然后继承）
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='起因 在实现我的离线渲染器中，用到了大量oop（其实就是基类然后继承）
 我有一个Shape基类，里面接口全声明为标准的纯虚函数接口
 virtual TYPE FUNCTION() const = 0; 当你继承这个类后，继承类必须实现这个接口，不然编译报错
 一开始还没有写实现，但类已经继承了，没办法，在接口开个洞（真难看啊
@@ -18,7 +18,7 @@ struct Base { template &amp;lt;typename T&amp;gt; Base(T* t) { _this= reinterpre
 <link rel='canonical' href='https://star-hengxing.github.io/p/c-%E5%A4%9A%E6%80%81%E6%96%B0%E5%A7%BF%E5%8A%BF/'>
 
 <link rel="stylesheet" href="/scss/style.min.690a283bac9f967161eea605d3ab2ebc0b689da41a8b82c681a9dd82668ccf94.css"><meta property='og:title' content='C&#43;&#43;多态新姿势'>
-<meta property='og:description' content='起初 在实现我的离线渲染器中，用到了大量oop（其实就是基类然后继承）
+<meta property='og:description' content='起因 在实现我的离线渲染器中，用到了大量oop（其实就是基类然后继承）
 我有一个Shape基类，里面接口全声明为标准的纯虚函数接口
 virtual TYPE FUNCTION() const = 0; 当你继承这个类后，继承类必须实现这个接口，不然编译报错
 一开始还没有写实现，但类已经继承了，没办法，在接口开个洞（真难看啊
@@ -33,9 +33,9 @@ Existential Type 中文语境下叫类型擦除/隐藏类型实现（机翻直�
 struct Base { template &amp;lt;typename T&amp;gt; Base(T* t) { _this= reinterpret_cast&amp;lt;void*&amp;gt;(t); _operation = [](void* st) { static_cast&amp;lt;T*&amp;gt;(st)-&amp;gt;f(); }; } void call() { (*_operation)(_this); } void* _this = nullptr; void(*_operation)(void*) = nullptr; }; 存进_this强转成void*，那确实是擦除了类型。。。'>
 <meta property='og:url' content='https://star-hengxing.github.io/p/c-%E5%A4%9A%E6%80%81%E6%96%B0%E5%A7%BF%E5%8A%BF/'>
 <meta property='og:site_name' content='恒星的小站'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='C&#43;&#43;' /><meta property='article:published_time' content='2022-07-25T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2022-07-25T00:00:00&#43;00:00'/>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='C&#43;&#43;' /><meta property='article:published_time' content='2022-07-25T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2022-07-27T00:00:00&#43;00:00'/>
 <meta name="twitter:title" content="C&#43;&#43;多态新姿势">
-<meta name="twitter:description" content="起初 在实现我的离线渲染器中，用到了大量oop（其实就是基类然后继承）
+<meta name="twitter:description" content="起因 在实现我的离线渲染器中，用到了大量oop（其实就是基类然后继承）
 我有一个Shape基类，里面接口全声明为标准的纯虚函数接口
 virtual TYPE FUNCTION() const = 0; 当你继承这个类后，继承类必须实现这个接口，不然编译报错
 一开始还没有写实现，但类已经继承了，没办法，在接口开个洞（真难看啊
@@ -154,7 +154,7 @@ struct Base { template &amp;lt;typename T&amp;gt; Base(T* t) { _this= reinterpre
     <section class="article-content">
     
     
-    <h2 id="起初">起初</h2>
+    <h2 id="起因">起因</h2>
 <p>在实现我的<a class="link" href="https://github.com/star-hengxing/cpu_offline_renderer/"  target="_blank" rel="noopener"
     >离线渲染器</a>中，用到了大量oop（其实就是基类然后继承）</p>
 <p>我有一个<code>Shape</code>基类，里面接口全声明为标准的纯虚函数接口</p>
@@ -267,7 +267,7 @@ struct Base { template &amp;lt;typename T&amp;gt; Base(T* t) { _this= reinterpre
 </span></span><span style="display:flex;"><span>  p2.call<span style="color:#ff79c6">&lt;</span>draw<span style="color:#ff79c6">&gt;</span>();
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><p>把要多态的函数写成结构体，然后放在<code>poly_extend</code>第一个参数，然后调用的时候需要在模板放入签名</p>
-<p>第一次看见这种写法，有点不习惯，我改下一下</p>
+<p>第一次看见这种写法，有点不习惯，我改写一下</p>
 <ul>
 <li>virtual</li>
 </ul>
@@ -371,7 +371,19 @@ struct Base { template &amp;lt;typename T&amp;gt; Base(T* t) { _this= reinterpre
 
         <span>Licensed under CC BY-NC-SA 4.0</span>
     </section>
-    </footer>
+    <section class="article-lastmod">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+        <span>
+            最后更新于 Jul 27, 2022
+        </span>
+    </section></footer>
 
 
     
@@ -502,7 +514,7 @@ struct Base { template &amp;lt;typename T&amp;gt; Base(T* t) { _this= reinterpre
                 <div class="widget--toc">
                     <nav id="TableOfContents">
   <ol>
-    <li><a href="#起初">起初</a></li>
+    <li><a href="#起因">起因</a></li>
     <li><a href="#existential-type">Existential Type</a></li>
     <li><a href="#不需要virtual的c多态">不需要virtual的C++多态</a></li>
   </ol>

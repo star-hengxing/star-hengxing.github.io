@@ -13,7 +13,7 @@
       <pubDate>Mon, 25 Jul 2022 00:00:00 +0000</pubDate>
       
       <guid>https://star-hengxing.github.io/p/c-%E5%A4%9A%E6%80%81%E6%96%B0%E5%A7%BF%E5%8A%BF/</guid>
-      <description>起初 在实现我的离线渲染器中，用到了大量oop（其实就是基类然后继承）
+      <description>起因 在实现我的离线渲染器中，用到了大量oop（其实就是基类然后继承）
 我有一个Shape基类，里面接口全声明为标准的纯虚函数接口
 virtual TYPE FUNCTION() const = 0; 当你继承这个类后，继承类必须实现这个接口，不然编译报错
 一开始还没有写实现，但类已经继承了，没办法，在接口开个洞（真难看啊

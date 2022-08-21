@@ -6,7 +6,31 @@
     <description>Recent content in 计算机图形学 on 恒星的小站</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sat, 25 Jun 2022 20:17:10 +0800</lastBuildDate><atom:link href="https://star-hengxing.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 08 Aug 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://star-hengxing.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>渲染引擎的架构</title>
+      <link>https://star-hengxing.github.io/p/%E6%B8%B2%E6%9F%93%E5%BC%95%E6%93%8E%E7%9A%84%E6%9E%B6%E6%9E%84/</link>
+      <pubDate>Mon, 08 Aug 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://star-hengxing.github.io/p/%E6%B8%B2%E6%9F%93%E5%BC%95%E6%93%8E%E7%9A%84%E6%9E%B6%E6%9E%84/</guid>
+      <description>学vulkan时的笔记（胡言乱语
+前言 渲染需要呈现最终结果，所以和游戏引擎是“耦合”的
+写一个简单的渲染引擎，其实和写一个游戏引擎也没什么区别，因为物理和动画的呈现依赖于渲染
+这里所说的渲染应该不包含各种shader效果，更类似于怎么调图形api
+所以写渲染引擎，本质还是写游戏引擎，那么最终还是要参考游戏引擎的架构
+学vulkan也一样，最终都会写成渲染引擎，所以提前架构一下比较好。这样在使用vulkan tutorial学习时，不局限于单文件恶心自己
+调api渲染的流程 加载数据到cpu/gpu，在gpu描述数据的布局，如何操作数据
+虽然就短短一行字，但拆分下来每一部分都可以讲很多
+资产管理 资产管理，可以简单自定义一个自己的资产文件格式，可以参考vulkan guide
+我的想法是，定义一个最底层的存储格式，如 metadata + data，data 可以使用lz4算法进行压缩
+metadata 可以是格式版本、data 的大小、是否加密&amp;hellip;&amp;hellip;
+然后又可以自定义一个 texture 和 mesh 的格式，也是 metadata + data 模式，然后把这些打包塞给上面格式的 data 里
+然后我们还需要一个转换器，负责把不同的模型格式（比如obj）转换成我们自定义的格式
+思路理清的话，基本上都是一些工程脏活了，实现难度不大
+待续 等我过一遍 unity 的 urp
+参考 有关图形学入门的一些思考·谈谈Vulkan </description>
+    </item>
+    
     <item>
       <title>在Windows上使用xmake配置Vulkan开发环境</title>
       <link>https://star-hengxing.github.io/p/%E5%9C%A8windows%E4%B8%8A%E4%BD%BF%E7%94%A8xmake%E9%85%8D%E7%BD%AEvulkan%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/</link>
@@ -41,11 +65,8 @@ A: 执行xmake -v，查看详细输出信息</description>
       <pubDate>Mon, 30 May 2022 00:00:00 +0000</pubDate>
       
       <guid>https://star-hengxing.github.io/p/%E6%B8%B2%E6%9F%93%E8%BF%9B%E9%98%B6/</guid>
-      <description>图形笑话三则 来点图程破防乐子 无内鬼，来点图形笑话 再来点图程破防乐子 免费渲染模型 McGuire Computer Graphics Archive Rendering Resources 博客 A GRAPHICS GUY&amp;rsquo;S NOTE 各种效果 光谱 Simple Spectral 天空 The Sky Dome Appearance Project 彩虹 Physically-based simulation of rainbows 动物毛发 An Efficient and Practical Near and Far Field Fur Reflectance Model 肥皂泡 Chemomechanical Simulation of Soap Film Flow on Spherical Bubbles FQA （其实就是把群友讨论结果收藏一下
-微表面模型中几何项使用H还是N 在离线里面，一般用general smith，不需要用到H或者N的，就无所谓了。
-虚幻第一次把G=G1G1带到引擎，也是根据egsr07来的，egsr07用的就是H，但到虚幻那就突然变成N了。这也是有原因的，虚幻把Schlick G当做G1，而不是用对应D项的G1,而Schlick G的确是根据N来的。
-然后heitz后面提出了joint G，heitz的paper里面当然用的H而不是N，但是，虚幻看之前非joint g的代码用的N，就copy过来了，所以现在虚幻的joint g也是用的N。
-不知为啥，unity也用的N，好像大家都用N。</description>
+      <description>图形笑话三则 来点图程破防乐子 无内鬼，来点图形笑话 再来点图程破防乐子 免费渲染模型 McGuire Computer Graphics Archive Rendering Resources 博客 A GRAPHICS GUY&amp;rsquo;S NOTE Computer Graphics IQ YangWC&amp;rsquo;s Blog AirGuanZ 《高级计算机图形学——真实感图像合成》目录及序言 各种效果 光谱 Simple Spectral Spectral Ray Tracing 天空 The Sky Dome Appearance Project 彩虹 Physically-based simulation of rainbows 动物毛发 An Efficient and Practical Near and Far Field Fur Reflectance Model 肥皂泡 Chemomechanical Simulation of Soap Film Flow on Spherical Bubbles FQA （其实就是把群友讨论结果收藏一下
+知乎上的常见问题 如何在离线渲染（路径追踪）中实现IBL？ 光线追踪中的透视畸变如何矫正？ 在通常渲染中的漫反射项，究竟是属于反射还是折射？ 如何将Surface Area Heuristic(表面面积启发式)运用到BVH的构建中？ 路径追踪光源重要性采样中为什么要每次均匀选取一个光源？ 微表面模型中几何项使用H还是N 在离线里面，一般用general smith，不需要用到H或者N的，就无所谓了。</description>
     </item>
     
     <item>
