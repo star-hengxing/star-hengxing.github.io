@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='起因 在实现我的离线渲染器中，用到了大量oop（其实就是基类然后继承）
+我有一个Shape基类，里面接口全声明为标准的纯虚函数接口
+virtual TYPE FUNCTION() const = 0; 当你继承这个类后，继承类必须实现这个接口，不然编译报错
+一开始还没有写实现，但类已经继承了，没办法，在接口开个洞（真难看啊
+virtual TYPE FUNCTION() const {} 于是我基于 C&#43;&#43;20 标准库的source_location写了一个
+[[noreturn]] inline void unimplemented(const std::source_location location = std::source_location::current()) { std::cerr &amp;lt;&amp;lt; &amp;#39;\n&amp;#39; &amp;lt;&amp;lt; &amp;#39;[&amp;#39; &amp;lt;&amp;lt; location.file_name() &amp;lt;&amp;lt; &amp;#39;:&amp;#39; &amp;lt;&amp;lt; location.line() &amp;lt;&amp;lt; &amp;#34;] &amp;#34; &amp;lt;&amp;lt; location.function_name() &amp;lt;&amp;lt; &amp;#34; unimplemented!\n&amp;#34;; exit(-1); } 还没有实现接口的时候留下unimplemented，然后运行时报错
+source_location暂时只有clang不支持（clang对C&#43;&#43;20支持太慢了
+网上冲浪时看到有人说，接口虚函数实现动态多态是一种糟糕实践，优雅的做法是Existential Type，在C&#43;&#43;社区称为sean parent polymorphism
+详细可以看这个视频
+John Bandela “Polymorphism != Virtual: Easy, Flexible Runtime Polymorphism Without Inheritance”
+reddit上的关于该视频的讨论
+什么是多态 特定多态 Ad hoc polymorphism'><title>多态</title>
+
+<link rel='canonical' href='https://star-hengxing.github.io/p/%E5%A4%9A%E6%80%81/'>
+
+<link rel="stylesheet" href="/scss/style.min.690a283bac9f967161eea605d3ab2ebc0b689da41a8b82c681a9dd82668ccf94.css"><meta property='og:title' content='多态'>
+<meta property='og:description' content='起因 在实现我的离线渲染器中，用到了大量oop（其实就是基类然后继承）
+我有一个Shape基类，里面接口全声明为标准的纯虚函数接口
+virtual TYPE FUNCTION() const = 0; 当你继承这个类后，继承类必须实现这个接口，不然编译报错
+一开始还没有写实现，但类已经继承了，没办法，在接口开个洞（真难看啊
+virtual TYPE FUNCTION() const {} 于是我基于 C&#43;&#43;20 标准库的source_location写了一个
+[[noreturn]] inline void unimplemented(const std::source_location location = std::source_location::current()) { std::cerr &amp;lt;&amp;lt; &amp;#39;\n&amp;#39; &amp;lt;&amp;lt; &amp;#39;[&amp;#39; &amp;lt;&amp;lt; location.file_name() &amp;lt;&amp;lt; &amp;#39;:&amp;#39; &amp;lt;&amp;lt; location.line() &amp;lt;&amp;lt; &amp;#34;] &amp;#34; &amp;lt;&amp;lt; location.function_name() &amp;lt;&amp;lt; &amp;#34; unimplemented!\n&amp;#34;; exit(-1); } 还没有实现接口的时候留下unimplemented，然后运行时报错
+source_location暂时只有clang不支持（clang对C&#43;&#43;20支持太慢了
+网上冲浪时看到有人说，接口虚函数实现动态多态是一种糟糕实践，优雅的做法是Existential Type，在C&#43;&#43;社区称为sean parent polymorphism
+详细可以看这个视频
+John Bandela “Polymorphism != Virtual: Easy, Flexible Runtime Polymorphism Without Inheritance”
+reddit上的关于该视频的讨论
+什么是多态 特定多态 Ad hoc polymorphism'>
+<meta property='og:url' content='https://star-hengxing.github.io/p/%E5%A4%9A%E6%80%81/'>
+<meta property='og:site_name' content='恒星的小站'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='C&#43;&#43;' /><meta property='article:published_time' content='2022-07-25T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2022-09-11T00:00:00&#43;00:00'/>
+<meta name="twitter:title" content="多态">
+<meta name="twitter:description" content="起因 在实现我的离线渲染器中，用到了大量oop（其实就是基类然后继承）
+我有一个Shape基类，里面接口全声明为标准的纯虚函数接口
+virtual TYPE FUNCTION() const = 0; 当你继承这个类后，继承类必须实现这个接口，不然编译报错
+一开始还没有写实现，但类已经继承了，没办法，在接口开个洞（真难看啊
+virtual TYPE FUNCTION() const {} 于是我基于 C&#43;&#43;20 标准库的source_location写了一个
+[[noreturn]] inline void unimplemented(const std::source_location location = std::source_location::current()) { std::cerr &amp;lt;&amp;lt; &amp;#39;\n&amp;#39; &amp;lt;&amp;lt; &amp;#39;[&amp;#39; &amp;lt;&amp;lt; location.file_name() &amp;lt;&amp;lt; &amp;#39;:&amp;#39; &amp;lt;&amp;lt; location.line() &amp;lt;&amp;lt; &amp;#34;] &amp;#34; &amp;lt;&amp;lt; location.function_name() &amp;lt;&amp;lt; &amp;#34; unimplemented!\n&amp;#34;; exit(-1); } 还没有实现接口的时候留下unimplemented，然后运行时报错
+source_location暂时只有clang不支持（clang对C&#43;&#43;20支持太慢了
+网上冲浪时看到有人说，接口虚函数实现动态多态是一种糟糕实践，优雅的做法是Existential Type，在C&#43;&#43;社区称为sean parent polymorphism
+详细可以看这个视频
+John Bandela “Polymorphism != Virtual: Easy, Flexible Runtime Polymorphism Without Inheritance”
+reddit上的关于该视频的讨论
+什么是多态 特定多态 Ad hoc polymorphism">
+    </head>
+    <body class="
+    article-page has-toc
+">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex 
+    
+        extended
+    
+">
+    
+        <div id="article-toolbar">
+            <a href="/" class="back-home">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="15 6 9 12 15 18" />
+</svg>
+
+
+
+                <span>返回</span>
+            </a>
+        </div>
+    
+<main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/" >
+                编程语言
+            </a>
+        
+    </header>
+    
+
+    <h2 class="article-title">
+        <a href="/p/%E5%A4%9A%E6%80%81/">多态</a>
+    </h2>
+
+    
+
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Jul 25, 2022</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 2 分钟
+                </time>
+            </div>
+        
+    </footer>
+    
+</div>
+</header>
+
+    <section class="article-content">
+    
+    
+    <h2 id="起因">起因</h2>
+<p>在实现我的<a class="link" href="https://github.com/star-hengxing/cpu_offline_renderer/"  target="_blank" rel="noopener"
+    >离线渲染器</a>中，用到了大量oop（其实就是基类然后继承）</p>
+<p>我有一个<code>Shape</code>基类，里面接口全声明为标准的纯虚函数接口</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#ff79c6">virtual</span> TYPE <span style="color:#50fa7b">FUNCTION</span>() <span style="color:#ff79c6">const</span> <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">0</span>;
+</span></span></code></pre></div><p>当你继承这个类后，继承类必须实现这个接口，不然编译报错</p>
+<p>一开始还没有写实现，但类已经继承了，没办法，在接口开个洞（真难看啊</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#ff79c6">virtual</span> TYPE <span style="color:#50fa7b">FUNCTION</span>() <span style="color:#ff79c6">const</span> {}
+</span></span></code></pre></div><p>于是我基于 C++20 标准库的<a class="link" href="https://en.cppreference.com/w/cpp/utility/source_location"  target="_blank" rel="noopener"
+    >source_location</a>写了一个</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#50fa7b">[[noreturn]]</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">inline</span> <span style="color:#8be9fd">void</span> unimplemented(<span style="color:#ff79c6">const</span> std<span style="color:#ff79c6">::</span>source_location location <span style="color:#ff79c6">=</span> std<span style="color:#ff79c6">::</span>source_location<span style="color:#ff79c6">::</span>current())
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    std<span style="color:#ff79c6">::</span>cerr <span style="color:#ff79c6">&lt;&lt;</span> <span style="color:#f1fa8c">&#39;\n&#39;</span>
+</span></span><span style="display:flex;"><span>              <span style="color:#ff79c6">&lt;&lt;</span> <span style="color:#f1fa8c">&#39;[&#39;</span>  <span style="color:#ff79c6">&lt;&lt;</span> location.file_name()
+</span></span><span style="display:flex;"><span>              <span style="color:#ff79c6">&lt;&lt;</span> <span style="color:#f1fa8c">&#39;:&#39;</span>  <span style="color:#ff79c6">&lt;&lt;</span> location.line()
+</span></span><span style="display:flex;"><span>              <span style="color:#ff79c6">&lt;&lt;</span> <span style="color:#f1fa8c">&#34;] &#34;</span> <span style="color:#ff79c6">&lt;&lt;</span> location.function_name()
+</span></span><span style="display:flex;"><span>              <span style="color:#ff79c6">&lt;&lt;</span> <span style="color:#f1fa8c">&#34; unimplemented!</span><span style="color:#f1fa8c">\n</span><span style="color:#f1fa8c">&#34;</span>;
+</span></span><span style="display:flex;"><span>    exit(<span style="color:#ff79c6">-</span><span style="color:#bd93f9">1</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>还没有实现接口的时候留下<code>unimplemented</code>，然后运行时报错</p>
+<blockquote>
+<p><code>source_location</code>暂时只有clang不支持（clang对C++20支持太慢了</p>
+</blockquote>
+<hr>
+<p>网上冲浪时看到<a class="link" href="https://www.zhihu.com/question/491602524/answer/2166170176"  target="_blank" rel="noopener"
+    >有人说</a>，接口虚函数实现动态多态是一种糟糕实践，优雅的做法是<code>Existential Type</code>，在C++社区称为<code>sean parent polymorphism</code></p>
+<p>详细可以看这个视频</p>
+<p><a class="link" href="https://www.youtube.com/watch?v=PSxo85L2lC0"  target="_blank" rel="noopener"
+    >John Bandela “Polymorphism != Virtual: Easy, Flexible Runtime Polymorphism Without Inheritance”</a></p>
+<p><a class="link" href="https://www.reddit.com/r/cpp/comments/dguo3h/john_bandela_polymorphism_virtual_easy_flexible/"  target="_blank" rel="noopener"
+    >reddit上的关于该视频的讨论</a></p>
+<h2 id="什么是多态">什么是多态</h2>
+<h3 id="特定多态">特定多态</h3>
+<p><a class="link" href="https://en.wikipedia.org/wiki/Ad_hoc_polymorphism"  target="_blank" rel="noopener"
+    >Ad hoc polymorphism</a></p>
+<p>函数重载，当然运算符重载也一样</p>
+<h3 id="参数化多态">参数化多态</h3>
+<p><a class="link" href="https://en.wikipedia.org/wiki/Parametric_polymorphism"  target="_blank" rel="noopener"
+    >Parametric polymorphism</a></p>
+<p>类似 C++ 的模板，也可以称为泛型</p>
+<h3 id="子类型多态">子类型多态</h3>
+<p><a class="link" href="https://en.wikipedia.org/wiki/Subtyping"  target="_blank" rel="noopener"
+    >Subtyping</a></p>
+<p>平时编程用的最多的，继承基类，调用相同符号的方法</p>
+<h2 id="existential-type">Existential Type</h2>
+<p>中文语境下叫<strong>类型擦除/隐藏类型实现</strong>（机翻直译叫存在类型）</p>
+<p>看一段 <a class="link" href="https://github.com/IFeelBloated/Type-System-Zoo/blob/master/existential%20type.cxx"  target="_blank" rel="noopener"
+    >C++ 代码</a></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#ff79c6">#include</span> <span style="color:#ff79c6">&lt;functional&gt;</span><span style="color:#ff79c6">
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">#include</span> <span style="color:#ff79c6">&lt;vector&gt;</span><span style="color:#ff79c6">
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">#include</span> <span style="color:#ff79c6">&lt;iostream&gt;</span><span style="color:#ff79c6">
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6"></span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">// type Messenger = ∃ a. { x: a, Print: a -&gt; string -&gt; ⊥ }
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span><span style="color:#ff79c6">struct</span> <span style="color:#50fa7b">Messenger</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">using</span> QuantificationBound <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">auto</span>(std<span style="color:#ff79c6">::</span>string_view)<span style="color:#ff79c6">-&gt;</span><span style="color:#8be9fd">void</span>;
+</span></span><span style="display:flex;"><span>    std<span style="color:#ff79c6">::</span>function<span style="color:#ff79c6">&lt;</span>QuantificationBound<span style="color:#ff79c6">&gt;</span> f <span style="color:#ff79c6">=</span> {};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    Messenger() <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">default</span>;
+</span></span><span style="display:flex;"><span>    Messenger(<span style="color:#ff79c6">auto</span> x) {
+</span></span><span style="display:flex;"><span>        f <span style="color:#ff79c6">=</span> [<span style="color:#ff79c6">=</span>](<span style="color:#ff79c6">auto</span> msg) { x.Print(msg); };
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">auto</span> <span style="color:#50fa7b">Print</span>(<span style="color:#ff79c6">auto</span> msg) <span style="color:#ff79c6">const</span> {
+</span></span><span style="display:flex;"><span>        f(msg);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">struct</span> <span style="color:#50fa7b">A</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">auto</span> <span style="color:#50fa7b">Print</span>(<span style="color:#ff79c6">auto</span> msg) <span style="color:#ff79c6">const</span> {
+</span></span><span style="display:flex;"><span>        std<span style="color:#ff79c6">::</span>cout <span style="color:#ff79c6">&lt;&lt;</span> <span style="color:#f1fa8c">&#34;A says &#34;</span> <span style="color:#ff79c6">&lt;&lt;</span> msg <span style="color:#ff79c6">&lt;&lt;</span> std<span style="color:#ff79c6">::</span>endl;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">struct</span> <span style="color:#50fa7b">B</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">auto</span> <span style="color:#50fa7b">Print</span>(<span style="color:#ff79c6">auto</span> msg) <span style="color:#ff79c6">const</span> {
+</span></span><span style="display:flex;"><span>        std<span style="color:#ff79c6">::</span>cout <span style="color:#ff79c6">&lt;&lt;</span> <span style="color:#f1fa8c">&#34;B says &#34;</span> <span style="color:#ff79c6">&lt;&lt;</span> msg <span style="color:#ff79c6">&lt;&lt;</span> std<span style="color:#ff79c6">::</span>endl;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">auto</span> <span style="color:#50fa7b">main</span>()<span style="color:#ff79c6">-&gt;</span><span style="color:#8be9fd">int</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">auto</span> x <span style="color:#ff79c6">=</span> std<span style="color:#ff79c6">::</span>vector<span style="color:#ff79c6">&lt;</span>Messenger<span style="color:#ff79c6">&gt;</span>{ A{}, B{} };
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">for</span> (<span style="color:#ff79c6">auto</span> <span style="color:#8be9fd;font-style:italic">y</span> : x)
+</span></span><span style="display:flex;"><span>        y.Print(<span style="color:#f1fa8c">&#34;hi&#34;</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>我觉得有点像上面所说的子类型</p>
+<p>在代码中，用<code>std::function</code>封装了真正的调用函数，而不需要考虑<strong>具体类型</strong>。<code>std::function</code>除了保存函数状态，还有运行时多态。但在不同 stl 的实现，有些是直接用 virtual，有些手动用指针打虚表。虽然看起来底层实现一样，不过好处就是，不需要给类函数加上 virtual，这算是一种<strong>解耦</strong></p>
+<p>但用<code>std::function</code>实现其实有一些缺陷，比如将 lambda 函数赋值给它的时候，lambda capture 的变量太多会<strong>动态分配内存</strong>。比较推荐的是用 template</p>
+<h2 id="reference">Reference</h2>
+<ol>
+<li><a class="link" href="https://www.zhihu.com/question/455347112"  target="_blank" rel="noopener"
+    >Existential type 是什么？</a></li>
+<li><a class="link" href="https://zhuanlan.zhihu.com/p/165514192"  target="_blank" rel="noopener"
+    >多态都不知道，谈什么对象</a></li>
+<li><a class="link" href="https://zhuanlan.zhihu.com/p/370563773"  target="_blank" rel="noopener"
+    >关于std function和lambda function的性能调试</a></li>
+</ol>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/c&#43;&#43;/">C&#43;&#43;</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    <section class="article-lastmod">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+        <span>
+            最后更新于 Sep 11, 2022
+        </span>
+    </section></footer>
+
+
+    
+</article>
+
+    
+
+    <aside class="related-contents--wrapper">
+    
+    
+</aside>
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+        2022 恒星的小站
+    </section>
+    
+    <section class="powerby">
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.8.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css"integrity="sha256-c0uckgykQ9v5k&#43;IqViZOZKc47Jn7KQil4/MP3ySA3F8="crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css"integrity="sha256-SBLU4vv6CA6lHsZ1XyTdhyjJxCjPif/TRkjnsyGAGnE="crossorigin="anonymous"
+            >
+
+            </main>
+    
+        <aside class="sidebar right-sidebar sticky">
+            <section class="widget archives">
+                <div class="widget-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+                </div>
+                <h2 class="widget-title section-title">目录</h2>
+                
+                <div class="widget--toc">
+                    <nav id="TableOfContents">
+  <ol>
+    <li><a href="#起因">起因</a></li>
+    <li><a href="#什么是多态">什么是多态</a>
+      <ol>
+        <li><a href="#特定多态">特定多态</a></li>
+        <li><a href="#参数化多态">参数化多态</a></li>
+        <li><a href="#子类型多态">子类型多态</a></li>
+      </ol>
+    </li>
+    <li><a href="#existential-type">Existential Type</a></li>
+    <li><a href="#reference">Reference</a></li>
+  </ol>
+</nav>
+                </div>
+            </section>
+        </aside>
+    
+
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js"integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

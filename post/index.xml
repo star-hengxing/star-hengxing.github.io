@@ -6,7 +6,23 @@
     <description>Recent content in Posts on 恒星的小站</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Mon, 08 Aug 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://star-hengxing.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 19 Sep 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://star-hengxing.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>C&#43;&#43; 胡言乱语X1</title>
+      <link>https://star-hengxing.github.io/p/c-%E8%83%A1%E8%A8%80%E4%B9%B1%E8%AF%ADx1/</link>
+      <pubDate>Mon, 19 Sep 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://star-hengxing.github.io/p/c-%E8%83%A1%E8%A8%80%E4%B9%B1%E8%AF%ADx1/</guid>
+      <description>某些 STL 容器 在刷 leetcode，其中某道题中的代码片段是这样的
+string res; res.resize(size - i); // res.reserve(size - i); for (int j = 0; i &amp;lt; size; i += 1, j += 1) { res[j] = arr[i] + &amp;#39;0&amp;#39;; // res.push_back(arr[i] + &amp;#39;0&amp;#39;); } 没注释的代码比注释的快了几ms，原因如下
+因为容器一开始是空的，不需要考虑拷贝原来的元素
+resize 重新分配内存并且默认初始化，size 改变（大概开销 malloc + memset） reserve 重新分配了内存，不初始化，size 不变 push_back 需要检查 size 有没有大于 capacity，多了分支的开销 然而这里代码也不是最快的，思考一下，这里 resize 还多了一个 memset 的开销，所以最优解应该是，用自己写的 vector（逃
+不知道是历史原因还是标准委员会根本没考虑到，应该加多几个函数来表示需不需要初始化
+改造容器 这里先看一个别人家的 vector：Less
+看一下某个代码片段
+struct default_init_t {}; inline constexpr default_init_t default_init; struct with_capacity_t {}; inline constexpr with_capacity_t with_capacity; vector(default_init_t, size_type const size) { this-&amp;gt;construct(size, size, [](auto p, auto) { new (p, placement_tag) T; }); } vector(size_type size) { this-&amp;gt;construct(size, size, [](auto p, auto) { new (p, placement_tag) T(); }); } vector(with_capacity_t, size_type const capacity) { this-&amp;gt;construct(0u, capacity, [](auto, auto) {}); } vector(size_type size, T const&amp;amp; value) { this-&amp;gt;construct(size, size, [&amp;amp;](auto p, auto) { new (p, placement_tag) T(value); }); } 思考🤔，直接把一个结构体类型作为参数？算了直接去 c++ 群问一下</description>
+    </item>
+    
     <item>
       <title>渲染引擎的架构</title>
       <link>https://star-hengxing.github.io/p/%E6%B8%B2%E6%9F%93%E5%BC%95%E6%93%8E%E7%9A%84%E6%9E%B6%E6%9E%84/</link>
@@ -32,24 +48,23 @@ metadata 可以是格式版本、data 的大小、是否加密&amp;hellip;&amp;h
     </item>
     
     <item>
-      <title>C&#43;&#43;多态新姿势</title>
-      <link>https://star-hengxing.github.io/p/c-%E5%A4%9A%E6%80%81%E6%96%B0%E5%A7%BF%E5%8A%BF/</link>
+      <title>多态</title>
+      <link>https://star-hengxing.github.io/p/%E5%A4%9A%E6%80%81/</link>
       <pubDate>Mon, 25 Jul 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://star-hengxing.github.io/p/c-%E5%A4%9A%E6%80%81%E6%96%B0%E5%A7%BF%E5%8A%BF/</guid>
+      <guid>https://star-hengxing.github.io/p/%E5%A4%9A%E6%80%81/</guid>
       <description>起因 在实现我的离线渲染器中，用到了大量oop（其实就是基类然后继承）
 我有一个Shape基类，里面接口全声明为标准的纯虚函数接口
 virtual TYPE FUNCTION() const = 0; 当你继承这个类后，继承类必须实现这个接口，不然编译报错
 一开始还没有写实现，但类已经继承了，没办法，在接口开个洞（真难看啊
-virtual TYPE FUNCTION() const {} 于是我基于C++20标准库的source_location写了一个
-[[noreturn]] inline void unimplemented(const std::source_location location = std::source_location::current()) { std::cout &amp;lt;&amp;lt; &amp;#39;\n&amp;#39; &amp;lt;&amp;lt; &amp;#39;[&amp;#39; &amp;lt;&amp;lt; location.file_name() &amp;lt;&amp;lt; &amp;#39;:&amp;#39; &amp;lt;&amp;lt; location.line() &amp;lt;&amp;lt; &amp;#34;] &amp;#34; &amp;lt;&amp;lt; location.function_name() &amp;lt;&amp;lt; &amp;#34; unimplemented!\n&amp;#34;; exit(-1); } 还没有实现接口的时候留下unimplemented，然后运行时报错
+virtual TYPE FUNCTION() const {} 于是我基于 C++20 标准库的source_location写了一个
+[[noreturn]] inline void unimplemented(const std::source_location location = std::source_location::current()) { std::cerr &amp;lt;&amp;lt; &amp;#39;\n&amp;#39; &amp;lt;&amp;lt; &amp;#39;[&amp;#39; &amp;lt;&amp;lt; location.file_name() &amp;lt;&amp;lt; &amp;#39;:&amp;#39; &amp;lt;&amp;lt; location.line() &amp;lt;&amp;lt; &amp;#34;] &amp;#34; &amp;lt;&amp;lt; location.function_name() &amp;lt;&amp;lt; &amp;#34; unimplemented!\n&amp;#34;; exit(-1); } 还没有实现接口的时候留下unimplemented，然后运行时报错
 source_location暂时只有clang不支持（clang对C++20支持太慢了
 网上冲浪时看到有人说，接口虚函数实现动态多态是一种糟糕实践，优雅的做法是Existential Type，在C++社区称为sean parent polymorphism
-详细可以看这个视频John Bandela “Polymorphism != Virtual: Easy, Flexible Runtime Polymorphism Without Inheritance”
+详细可以看这个视频
+John Bandela “Polymorphism != Virtual: Easy, Flexible Runtime Polymorphism Without Inheritance”
 reddit上的关于该视频的讨论
-Existential Type 中文语境下叫类型擦除/隐藏类型实现（机翻直译叫存在类型，真怪）
-看一段C++代码
-struct Base { template &amp;lt;typename T&amp;gt; Base(T* t) { _this= reinterpret_cast&amp;lt;void*&amp;gt;(t); _operation = [](void* st) { static_cast&amp;lt;T*&amp;gt;(st)-&amp;gt;f(); }; } void call() { (*_operation)(_this); } void* _this = nullptr; void(*_operation)(void*) = nullptr; }; 存进_this强转成void*，那确实是擦除了类型。。。</description>
+什么是多态 特定多态 Ad hoc polymorphism</description>
     </item>
     
     <item>
@@ -60,7 +75,16 @@ struct Base { template &amp;lt;typename T&amp;gt; Base(T* t) { _this= reinterpre
       <guid>https://star-hengxing.github.io/p/%E6%94%B6%E8%97%8F%E5%A4%B9%E7%9F%A5%E8%AF%86%E5%88%86%E7%B1%BB/</guid>
       <description>下面的目录不好使，只要小部分能跳转，点右边的目录跳转吧
 我在知乎的点赞其实是当收藏用的， 这么多点赞，打算找时间用爬虫全部爬下来慢慢整理
-数学 信息 软件工程 编程语言 C C++ Rust 体系结构 编译原理 可视化 优化 高性能计算 计算机图形学 旋转 虚拟机 逆向 Linux 工具 Git Unity 二次元 galgame 资源 在线 生肉 音声 色度学 misc 数学 我在知乎学数学 信息 压缩算法lzma2,zstd,rar,brotli,lz4,lizardv1对比推荐 软件工程 可逆计算：下一代软件构造理论 抽象的幻觉（1） 抽象的幻觉（2） 游戏架构设计——面向数据编程（DOP） 游戏架构设计——高性能并行编程 编程语言 C 现代化 C 使用体验 The different ways to handle errors in C C++ 单例模式 简单的 C++ 结构体字段反射 make a shared_ptr from scratch C++ 系列专题 Changing std::sort at Google’s Scale and Beyond 最好的C++学习教程(上篇)——The Cherno CppSeries 最好的C++学习教程(下篇)——The Cherno CppSeries Rust 文組也能懂的 Rust async 機制 体系结构 与程序员相关的CPU缓存知识 编译原理 【科普】编译器的构建基本原理 可视化 浮点数可视化 正则表达式可视化 马尔科夫链可视化 四元数可视化 优化 浮点数计算优化 高性能计算 高性能计算学习路线 从零开始的C/C++高性能编程指南 C++ 高性能编程实战系列（1） C++ 高性能编程实战系列（2） C++ 高性能编程实战系列（3） 计算机图形学 使用有理数进行渲染 如何验证BXDF 实时&amp;amp;离线皮肤渲染技术（Real-time &amp;amp; Offline Skin Rendering） Enterprise PBR Shading Model 多种几何体求交 How to build a BVH 旋转 可视化和公式推导 虚拟机 虚拟机随谈（一）：解释器，树遍历解释器，基于栈与基于寄存器，大杂烩 逆向 这里我推荐 CSAPP Lab2-Bomb Lab</description>
+数学 物理 信息 软件工程 编程语言 C C++ Rust Haskell 体系结构 编译原理 可视化 优化 高性能计算 计算机图形学 旋转 逆向 Linux 工具 在线工具 Git Unity 二次元 galgame 资源 在线 生肉 音声 色度学 日语 misc 数学 我在知乎学数学 图形数学方法：FFT（快速傅里叶）的原理讲述 有没有比较好的学习高等数学，线性代数，概率论数理统计的英文书籍推荐？ 物理 Ten Minute Physics 信息 压缩算法lzma2,zstd,rar,brotli,lz4,lizardv1对比推荐 软件工程 语义化版本 2.0.0
+读《Fundamentals of Software Architechture》
+可逆计算：下一代软件构造理论
+抽象的幻觉（1）
+抽象的幻觉（2）
+游戏架构设计——面向数据编程（DOP）
+游戏架构设计——高性能并行编程
+为什么我认为Rust的Result错误处理方式不如Exception，探讨了Monad和工业界主流的异常处理两种错误处理的差异
+游戏编程模式
+编程语言 C 现代化 C 使用体验 The different ways to handle errors in C C++ 单例模式 简单的 C++ 结构体字段反射 make a shared_ptr from scratch C++ 系列专题 Changing std::sort at Google’s Scale and Beyond 最好的C++学习教程(上篇)——The Cherno CppSeries 最好的C++学习教程(下篇)——The Cherno CppSeries More C++ Idioms Learn Modern C++ Rust 文組也能懂的 Rust async 機制 Rust Language Cheat Sheet Haskell Learn Haskell by building a blog generator 体系结构 与程序员相关的CPU缓存知识 深入GPU硬件架构及运行机制 编译原理 【科普】编译器的构建基本原理 Programming Language Documentations 虚拟机随谈（一）：解释器，树遍历解释器，基于栈与基于寄存器，大杂烩 可视化 浮点数可视化 正则表达式可视化 马尔科夫链可视化 四元数可视化 数据结构可视化 优化 浮点数计算优化 高性能计算 高性能计算学习路线 从零开始的C/C++高性能编程指南 C++ 高性能编程实战系列（1） C++ 高性能编程实战系列（2） C++ 高性能编程实战系列（3） 计算机图形学 使用有理数进行渲染 如何验证BXDF 实时&amp;amp;离线皮肤渲染技术（Real-time &amp;amp; Offline Skin Rendering） Enterprise PBR Shading Model 多种几何体求交 How to build a BVH 旋转 可视化和公式推导 逆向 这里我推荐 CSAPP Lab2-Bomb Lab</description>
     </item>
     
     <item>
@@ -131,8 +155,7 @@ A: 执行xmake -v，查看详细输出信息</description>
       <pubDate>Mon, 30 May 2022 00:00:00 +0000</pubDate>
       
       <guid>https://star-hengxing.github.io/p/%E6%B8%B2%E6%9F%93%E8%BF%9B%E9%98%B6/</guid>
-      <description>图形笑话三则 来点图程破防乐子 无内鬼，来点图形笑话 再来点图程破防乐子 免费渲染模型 McGuire Computer Graphics Archive Rendering Resources 博客 A GRAPHICS GUY&amp;rsquo;S NOTE Computer Graphics IQ YangWC&amp;rsquo;s Blog AirGuanZ 《高级计算机图形学——真实感图像合成》目录及序言 各种效果 光谱 Simple Spectral Spectral Ray Tracing 天空 The Sky Dome Appearance Project 彩虹 Physically-based simulation of rainbows 动物毛发 An Efficient and Practical Near and Far Field Fur Reflectance Model 肥皂泡 Chemomechanical Simulation of Soap Film Flow on Spherical Bubbles FQA （其实就是把群友讨论结果收藏一下
-知乎上的常见问题 如何在离线渲染（路径追踪）中实现IBL？ 光线追踪中的透视畸变如何矫正？ 在通常渲染中的漫反射项，究竟是属于反射还是折射？ 如何将Surface Area Heuristic(表面面积启发式)运用到BVH的构建中？ 路径追踪光源重要性采样中为什么要每次均匀选取一个光源？ 微表面模型中几何项使用H还是N 在离线里面，一般用general smith，不需要用到H或者N的，就无所谓了。</description>
+      <description>图形笑话三则 来点图程破防乐子 无内鬼，来点图形笑话 再来点图程破防乐子 免费渲染模型 McGuire Computer Graphics Archive Rendering Resources 博客 A GRAPHICS GUY&amp;rsquo;S NOTE Computer Graphics IQ YangWC&amp;rsquo;s Blog AirGuanZ 《高级计算机图形学——真实感图像合成》目录及序言 课程 CS 87/287 | RENDERING ALGORITHMS UCSD CSE 272: Advanced Image Synthesis Advanced Graphics 各种效果 光谱 Simple Spectral Spectral Ray Tracing 天空 The Sky Dome Appearance Project 彩虹 Physically-based simulation of rainbows 动物毛发 An Efficient and Practical Near and Far Field Fur Reflectance Model 肥皂泡 Chemomechanical Simulation of Soap Film Flow on Spherical Bubbles FQA （其实就是把群友讨论结果收藏一下</description>
     </item>
     
     <item>

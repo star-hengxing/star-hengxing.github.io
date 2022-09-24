@@ -6,7 +6,88 @@
         <description>Recent content on 恒星的小站</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
-        <lastBuildDate>Mon, 08 Aug 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://star-hengxing.github.io/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Mon, 19 Sep 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://star-hengxing.github.io/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>C&#43;&#43; 胡言乱语X1</title>
+        <link>https://star-hengxing.github.io/p/c-%E8%83%A1%E8%A8%80%E4%B9%B1%E8%AF%ADx1/</link>
+        <pubDate>Mon, 19 Sep 2022 00:00:00 +0000</pubDate>
+        
+        <guid>https://star-hengxing.github.io/p/c-%E8%83%A1%E8%A8%80%E4%B9%B1%E8%AF%ADx1/</guid>
+        <description>&lt;h2 id=&#34;某些-stl-容器&#34;&gt;某些 STL 容器&lt;/h2&gt;
+&lt;p&gt;在刷 leetcode，其中某道题中的代码片段是这样的&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-C++&#34; data-lang=&#34;C++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;string res;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;res.resize(size &lt;span style=&#34;color:#ff79c6&#34;&gt;-&lt;/span&gt; i);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#6272a4&#34;&gt;// res.reserve(size - i);
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#6272a4&#34;&gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;for&lt;/span&gt; (&lt;span style=&#34;color:#8be9fd&#34;&gt;int&lt;/span&gt; j &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#bd93f9&#34;&gt;0&lt;/span&gt;; i &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&lt;/span&gt; size; i &lt;span style=&#34;color:#ff79c6&#34;&gt;+=&lt;/span&gt; &lt;span style=&#34;color:#bd93f9&#34;&gt;1&lt;/span&gt;, j &lt;span style=&#34;color:#ff79c6&#34;&gt;+=&lt;/span&gt; &lt;span style=&#34;color:#bd93f9&#34;&gt;1&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    res[j] &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; arr[i] &lt;span style=&#34;color:#ff79c6&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#39;0&amp;#39;&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#6272a4&#34;&gt;// res.push_back(arr[i] + &amp;#39;0&amp;#39;);
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#6272a4&#34;&gt;&lt;/span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;没注释的代码比注释的快了几ms，原因如下&lt;/p&gt;
+&lt;p&gt;因为容器一开始是空的，不需要考虑拷贝原来的元素&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;resize 重新分配内存并且默认初始化，size 改变（大概开销 malloc + memset）&lt;/li&gt;
+&lt;li&gt;reserve 重新分配了内存，不初始化，size 不变&lt;/li&gt;
+&lt;li&gt;push_back 需要检查 size 有没有大于 capacity，多了分支的开销&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;然而这里代码也不是最快的，思考一下，这里 resize 还多了一个 memset 的开销，所以最优解应该是，用自己写的 vector（逃&lt;/p&gt;
+&lt;p&gt;不知道是历史原因还是标准委员会根本没考虑到，应该加多几个函数来表示需不需要初始化&lt;/p&gt;
+&lt;h2 id=&#34;改造容器&#34;&gt;改造容器&lt;/h2&gt;
+&lt;p&gt;这里先看一个别人家的 vector：&lt;a class=&#34;link&#34; href=&#34;https://github.com/cmazakas/less/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Less&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;看一下某个代码片段&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-C++&#34; data-lang=&#34;C++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;struct&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;default_init_t&lt;/span&gt; {};
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;inline&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;constexpr&lt;/span&gt; default_init_t default_init;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;struct&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;with_capacity_t&lt;/span&gt; {};
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;inline&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;constexpr&lt;/span&gt; with_capacity_t with_capacity;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;vector(default_init_t, size_type &lt;span style=&#34;color:#ff79c6&#34;&gt;const&lt;/span&gt; size)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;this&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;-&amp;gt;&lt;/span&gt;construct(size, size, [](&lt;span style=&#34;color:#ff79c6&#34;&gt;auto&lt;/span&gt; p, &lt;span style=&#34;color:#ff79c6&#34;&gt;auto&lt;/span&gt;) { &lt;span style=&#34;color:#ff79c6&#34;&gt;new&lt;/span&gt; (p, placement_tag) T; });
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;vector(size_type size)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;this&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;-&amp;gt;&lt;/span&gt;construct(size, size,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                 [](&lt;span style=&#34;color:#ff79c6&#34;&gt;auto&lt;/span&gt; p, &lt;span style=&#34;color:#ff79c6&#34;&gt;auto&lt;/span&gt;) { &lt;span style=&#34;color:#ff79c6&#34;&gt;new&lt;/span&gt; (p, placement_tag) T(); });
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;vector(with_capacity_t, size_type &lt;span style=&#34;color:#ff79c6&#34;&gt;const&lt;/span&gt; capacity)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;this&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;-&amp;gt;&lt;/span&gt;construct(&lt;span style=&#34;color:#bd93f9&#34;&gt;0u&lt;/span&gt;, capacity, [](&lt;span style=&#34;color:#ff79c6&#34;&gt;auto&lt;/span&gt;, &lt;span style=&#34;color:#ff79c6&#34;&gt;auto&lt;/span&gt;) {});
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;vector(size_type size, T &lt;span style=&#34;color:#ff79c6&#34;&gt;const&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;amp;&lt;/span&gt; value)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;this&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;-&amp;gt;&lt;/span&gt;construct(size, size,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                 [&lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;amp;&lt;/span&gt;](&lt;span style=&#34;color:#ff79c6&#34;&gt;auto&lt;/span&gt; p, &lt;span style=&#34;color:#ff79c6&#34;&gt;auto&lt;/span&gt;) { &lt;span style=&#34;color:#ff79c6&#34;&gt;new&lt;/span&gt; (p, placement_tag) T(value); });
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;思考🤔，直接把一个结构体类型作为参数？算了直接去 c++ 群问一下&lt;/p&gt;
+&lt;p&gt;哦，原来这个叫&lt;code&gt;tag dispatch&lt;/code&gt;，才发现这语法在（MSVC STL）到处都是，感觉不如多写个 make 系列函数，而不是重载构造函数&lt;/p&gt;
+&lt;p&gt;我觉得更好的实践应该是：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-C++&#34; data-lang=&#34;C++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#6272a4&#34;&gt;// 分配内存，size 改变，默认初始化
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#6272a4&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;static&lt;/span&gt; vector&lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&lt;/span&gt;T&lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;gt;&lt;/span&gt; make_default_init(std&lt;span style=&#34;color:#ff79c6&#34;&gt;::&lt;/span&gt;size_t size, &lt;span style=&#34;color:#ff79c6&#34;&gt;const&lt;/span&gt; T&lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;amp;&lt;/span&gt; val &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; T{});
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#6272a4&#34;&gt;// 分配内存，size 改变，不进行初始化
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#6272a4&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;static&lt;/span&gt; vector&lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&lt;/span&gt;T&lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;gt;&lt;/span&gt; make_default_without_init(std&lt;span style=&#34;color:#ff79c6&#34;&gt;::&lt;/span&gt;size_t size);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#6272a4&#34;&gt;// 分配内存，size 不变，不进行初始化
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#6272a4&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;static&lt;/span&gt; vector&lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&lt;/span&gt;T&lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;gt;&lt;/span&gt; make_with_capacity(std&lt;span style=&#34;color:#ff79c6&#34;&gt;::&lt;/span&gt;size_t size);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#6272a4&#34;&gt;// 重新分配内存，size 改变，不进行初始化
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#6272a4&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8be9fd&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;resize_without_init&lt;/span&gt;(std&lt;span style=&#34;color:#ff79c6&#34;&gt;::&lt;/span&gt;size_t size);
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;hr&gt;
+&lt;p&gt;这个库还有个设计是，抛弃 std::allocator，使用自定义 new 和 delete&lt;/p&gt;
+&lt;p&gt;std::allocator 这玩意设计有误，扔掉很正常，至于为什么，看&lt;a class=&#34;link&#34; href=&#34;https://www.zhihu.com/question/50997867/answer/2212678027&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;这个&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;自增运算符&#34;&gt;自增运算符&lt;/h2&gt;
+&lt;p&gt;在最上面的代码，里面自增1都是使用&lt;code&gt;+=&lt;/code&gt;，这是好的代码风格&lt;/p&gt;
+&lt;p&gt;有时候你会看见这种代码：&lt;code&gt;++array[index++]&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;前缀/后缀自增运算符赶紧死一死，后出世的语言基本都没有&lt;code&gt;++&lt;/code&gt;这个语法了&lt;/p&gt;
+&lt;p&gt;更让我觉得恶心的是，群友在 AMD 的笔试说考&lt;code&gt;i+++++i&lt;/code&gt;这种题，就算是外企我也想开喷：中国本土化了这是，真接“谭教授”的地气啊&lt;/p&gt;
+&lt;p&gt;别说能考你 体系结构/操作系统/编译器 的知识，首先有一个大前提就是，&lt;a class=&#34;link&#34; href=&#34;https://en.cppreference.com/w/cpp/language/ub&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;ub&lt;/a&gt; 不能拿来做题目&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>渲染引擎的架构</title>
         <link>https://star-hengxing.github.io/p/%E6%B8%B2%E6%9F%93%E5%BC%95%E6%93%8E%E7%9A%84%E6%9E%B6%E6%9E%84/</link>
         <pubDate>Mon, 08 Aug 2022 00:00:00 +0000</pubDate>
@@ -43,11 +124,11 @@
 </description>
         </item>
         <item>
-        <title>C&#43;&#43;多态新姿势</title>
-        <link>https://star-hengxing.github.io/p/c-%E5%A4%9A%E6%80%81%E6%96%B0%E5%A7%BF%E5%8A%BF/</link>
+        <title>多态</title>
+        <link>https://star-hengxing.github.io/p/%E5%A4%9A%E6%80%81/</link>
         <pubDate>Mon, 25 Jul 2022 00:00:00 +0000</pubDate>
         
-        <guid>https://star-hengxing.github.io/p/c-%E5%A4%9A%E6%80%81%E6%96%B0%E5%A7%BF%E5%8A%BF/</guid>
+        <guid>https://star-hengxing.github.io/p/%E5%A4%9A%E6%80%81/</guid>
         <description>&lt;h2 id=&#34;起因&#34;&gt;起因&lt;/h2&gt;
 &lt;p&gt;在实现我的&lt;a class=&#34;link&#34; href=&#34;https://github.com/star-hengxing/cpu_offline_renderer/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;离线渲染器&lt;/a&gt;中，用到了大量oop（其实就是基类然后继承）&lt;/p&gt;
@@ -56,12 +137,12 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;当你继承这个类后，继承类必须实现这个接口，不然编译报错&lt;/p&gt;
 &lt;p&gt;一开始还没有写实现，但类已经继承了，没办法，在接口开个洞（真难看啊&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-C++&#34; data-lang=&#34;C++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;virtual&lt;/span&gt; TYPE &lt;span style=&#34;color:#50fa7b&#34;&gt;FUNCTION&lt;/span&gt;() &lt;span style=&#34;color:#ff79c6&#34;&gt;const&lt;/span&gt; {}
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;于是我基于C++20标准库的&lt;a class=&#34;link&#34; href=&#34;https://en.cppreference.com/w/cpp/utility/source_location&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;于是我基于 C++20 标准库的&lt;a class=&#34;link&#34; href=&#34;https://en.cppreference.com/w/cpp/utility/source_location&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;source_location&lt;/a&gt;写了一个&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-C++&#34; data-lang=&#34;C++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#50fa7b&#34;&gt;[[noreturn]]&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;inline&lt;/span&gt; &lt;span style=&#34;color:#8be9fd&#34;&gt;void&lt;/span&gt; unimplemented(&lt;span style=&#34;color:#ff79c6&#34;&gt;const&lt;/span&gt; std&lt;span style=&#34;color:#ff79c6&#34;&gt;::&lt;/span&gt;source_location location &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; std&lt;span style=&#34;color:#ff79c6&#34;&gt;::&lt;/span&gt;source_location&lt;span style=&#34;color:#ff79c6&#34;&gt;::&lt;/span&gt;current())
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    std&lt;span style=&#34;color:#ff79c6&#34;&gt;::&lt;/span&gt;cout &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#39;\n&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    std&lt;span style=&#34;color:#ff79c6&#34;&gt;::&lt;/span&gt;cerr &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#39;\n&amp;#39;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;              &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#39;[&amp;#39;&lt;/span&gt;  &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; location.file_name()
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;              &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#39;:&amp;#39;&lt;/span&gt;  &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; location.line()
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;              &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;] &amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; location.function_name()
@@ -73,173 +154,78 @@
 &lt;p&gt;&lt;code&gt;source_location&lt;/code&gt;暂时只有clang不支持（clang对C++20支持太慢了&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;hr&gt;
-&lt;p&gt;网上冲浪时看到有人说，接口虚函数实现动态多态是一种糟糕实践，优雅的做法是&lt;code&gt;Existential Type&lt;/code&gt;，在C++社区称为&lt;code&gt;sean parent polymorphism&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;详细可以看这个视频&lt;a class=&#34;link&#34; href=&#34;https://www.youtube.com/watch?v=PSxo85L2lC0&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+&lt;p&gt;网上冲浪时看到&lt;a class=&#34;link&#34; href=&#34;https://www.zhihu.com/question/491602524/answer/2166170176&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;有人说&lt;/a&gt;，接口虚函数实现动态多态是一种糟糕实践，优雅的做法是&lt;code&gt;Existential Type&lt;/code&gt;，在C++社区称为&lt;code&gt;sean parent polymorphism&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;详细可以看这个视频&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.youtube.com/watch?v=PSxo85L2lC0&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;John Bandela “Polymorphism != Virtual: Easy, Flexible Runtime Polymorphism Without Inheritance”&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.reddit.com/r/cpp/comments/dguo3h/john_bandela_polymorphism_virtual_easy_flexible/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;reddit上的关于该视频的讨论&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;什么是多态&#34;&gt;什么是多态&lt;/h2&gt;
+&lt;h3 id=&#34;特定多态&#34;&gt;特定多态&lt;/h3&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://en.wikipedia.org/wiki/Ad_hoc_polymorphism&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Ad hoc polymorphism&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;函数重载，当然运算符重载也一样&lt;/p&gt;
+&lt;h3 id=&#34;参数化多态&#34;&gt;参数化多态&lt;/h3&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://en.wikipedia.org/wiki/Parametric_polymorphism&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Parametric polymorphism&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;类似 C++ 的模板，也可以称为泛型&lt;/p&gt;
+&lt;h3 id=&#34;子类型多态&#34;&gt;子类型多态&lt;/h3&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://en.wikipedia.org/wiki/Subtyping&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Subtyping&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;平时编程用的最多的，继承基类，调用相同符号的方法&lt;/p&gt;
 &lt;h2 id=&#34;existential-type&#34;&gt;Existential Type&lt;/h2&gt;
-&lt;p&gt;中文语境下叫&lt;strong&gt;类型擦除/隐藏类型实现&lt;/strong&gt;（机翻直译叫存在类型，真怪）&lt;/p&gt;
-&lt;p&gt;看一段C++代码&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-C++&#34; data-lang=&#34;C++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;struct&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;Base&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;template&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;typename&lt;/span&gt; T&lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    Base(T&lt;span style=&#34;color:#ff79c6&#34;&gt;*&lt;/span&gt; t)
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    {
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        _this&lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;reinterpret_cast&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color:#8be9fd&#34;&gt;void&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;*&amp;gt;&lt;/span&gt;(t);
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        _operation &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; [](&lt;span style=&#34;color:#8be9fd&#34;&gt;void&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;*&lt;/span&gt; st)
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        {
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#ff79c6&#34;&gt;static_cast&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&lt;/span&gt;T&lt;span style=&#34;color:#ff79c6&#34;&gt;*&amp;gt;&lt;/span&gt;(st)&lt;span style=&#34;color:#ff79c6&#34;&gt;-&amp;gt;&lt;/span&gt;f();
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        };
+&lt;p&gt;中文语境下叫&lt;strong&gt;类型擦除/隐藏类型实现&lt;/strong&gt;（机翻直译叫存在类型）&lt;/p&gt;
+&lt;p&gt;看一段 &lt;a class=&#34;link&#34; href=&#34;https://github.com/IFeelBloated/Type-System-Zoo/blob/master/existential%20type.cxx&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;C++ 代码&lt;/a&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-C++&#34; data-lang=&#34;C++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;#include&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;functional&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;#include&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;vector&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;#include&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;iostream&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#6272a4&#34;&gt;// type Messenger = ∃ a. { x: a, Print: a -&amp;gt; string -&amp;gt; ⊥ }
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#6272a4&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;struct&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;Messenger&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;using&lt;/span&gt; QuantificationBound &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;auto&lt;/span&gt;(std&lt;span style=&#34;color:#ff79c6&#34;&gt;::&lt;/span&gt;string_view)&lt;span style=&#34;color:#ff79c6&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#8be9fd&#34;&gt;void&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    std&lt;span style=&#34;color:#ff79c6&#34;&gt;::&lt;/span&gt;function&lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&lt;/span&gt;QuantificationBound&lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;gt;&lt;/span&gt; f &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; {};
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    Messenger() &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;default&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    Messenger(&lt;span style=&#34;color:#ff79c6&#34;&gt;auto&lt;/span&gt; x) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        f &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; [&lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt;](&lt;span style=&#34;color:#ff79c6&#34;&gt;auto&lt;/span&gt; msg) { x.Print(msg); };
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    }
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#8be9fd&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;call&lt;/span&gt;()
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    {
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        (&lt;span style=&#34;color:#ff79c6&#34;&gt;*&lt;/span&gt;_operation)(_this);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;auto&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;Print&lt;/span&gt;(&lt;span style=&#34;color:#ff79c6&#34;&gt;auto&lt;/span&gt; msg) &lt;span style=&#34;color:#ff79c6&#34;&gt;const&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        f(msg);
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    }
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#8be9fd&#34;&gt;void&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;*&lt;/span&gt; _this &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;nullptr&lt;/span&gt;;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#8be9fd&#34;&gt;void&lt;/span&gt;(&lt;span style=&#34;color:#ff79c6&#34;&gt;*&lt;/span&gt;_operation)(&lt;span style=&#34;color:#8be9fd&#34;&gt;void&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;*&lt;/span&gt;) &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;nullptr&lt;/span&gt;;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;};
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;存进&lt;code&gt;_this&lt;/code&gt;强转成&lt;code&gt;void*&lt;/code&gt;，那确实是擦除了类型。。。&lt;/p&gt;
-&lt;p&gt;但因为有模板的存在，所以调用&lt;code&gt;call&lt;/code&gt;的时候，还原成原类型，所以编译器就知道调用哪个函数了&lt;/p&gt;
-&lt;h2 id=&#34;不需要virtual的c多态&#34;&gt;不需要virtual的C++多态&lt;/h2&gt;
-&lt;p&gt;随便看了一下代码（没看懂），只知道用到了上面所说的&lt;code&gt;Existential Type&lt;/code&gt;，本质上就是用&lt;strong&gt;模板元编程&lt;/strong&gt;技术手动生成&lt;strong&gt;虚表&lt;/strong&gt;（废话）&lt;/p&gt;
-&lt;p&gt;slides里说benchmark比编译器实现的还快（都是查虚表，哪里有不同呢）&lt;/p&gt;
-&lt;p&gt;不过实际上，在基类接口上不需要加virtual确实是解耦了&lt;/p&gt;
-&lt;p&gt;看了一下对比，wtf？&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;virtual&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-C++&#34; data-lang=&#34;C++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;struct&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;transforming_interface&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;virtual&lt;/span&gt; &lt;span style=&#34;color:#8be9fd&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;translate&lt;/span&gt;(&lt;span style=&#34;color:#8be9fd&#34;&gt;double&lt;/span&gt; x, &lt;span style=&#34;color:#8be9fd&#34;&gt;double&lt;/span&gt; y) &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#bd93f9&#34;&gt;0&lt;/span&gt;;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;virtual&lt;/span&gt; &lt;span style=&#34;color:#8be9fd&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;rotate&lt;/span&gt;(&lt;span style=&#34;color:#8be9fd&#34;&gt;double&lt;/span&gt; degrees) &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#bd93f9&#34;&gt;0&lt;/span&gt;;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;};
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#8be9fd&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;spin&lt;/span&gt;(transforming_interface&lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;amp;&lt;/span&gt; s)
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    s.translate(&lt;span style=&#34;color:#bd93f9&#34;&gt;4&lt;/span&gt;, &lt;span style=&#34;color:#bd93f9&#34;&gt;2&lt;/span&gt;);
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    s.rotate(&lt;span style=&#34;color:#bd93f9&#34;&gt;45&lt;/span&gt;);
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
-&lt;li&gt;polymorphic&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-C++&#34; data-lang=&#34;C++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;struct&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;translate&lt;/span&gt;{};
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;struct&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;rotate&lt;/span&gt;{};
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#8be9fd&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;spin&lt;/span&gt;(polymorphic&lt;span style=&#34;color:#ff79c6&#34;&gt;::&lt;/span&gt;ref&lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#8be9fd&#34;&gt;void&lt;/span&gt;(translate, &lt;span style=&#34;color:#8be9fd&#34;&gt;double&lt;/span&gt; x, &lt;span style=&#34;color:#8be9fd&#34;&gt;double&lt;/span&gt; y),
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#8be9fd&#34;&gt;void&lt;/span&gt;(rotate, &lt;span style=&#34;color:#8be9fd&#34;&gt;double&lt;/span&gt; degrees)&lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;gt;&lt;/span&gt; s)
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    s.call&lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&lt;/span&gt;translate&lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;gt;&lt;/span&gt;(&lt;span style=&#34;color:#bd93f9&#34;&gt;4&lt;/span&gt;, &lt;span style=&#34;color:#bd93f9&#34;&gt;2&lt;/span&gt;);
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    s.call&lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&lt;/span&gt;rotate&lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;gt;&lt;/span&gt;(&lt;span style=&#34;color:#bd93f9&#34;&gt;45&lt;/span&gt;);
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;看不懂，也不知道怎么用，翻了下reddit回复，看到有一个简单的&lt;a class=&#34;link&#34; href=&#34;https://gist.github.com/jbandela/faa0aaed4a96aff8658de191ffb95f72&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;实现&lt;/a&gt;，其中一段代码&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-C++&#34; data-lang=&#34;C++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;struct&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;draw&lt;/span&gt; {};
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;struct&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;another&lt;/span&gt; {};
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;template&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;typename&lt;/span&gt; T&lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#8be9fd&#34;&gt;void&lt;/span&gt; poly_extend(draw, T&lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;amp;&lt;/span&gt; t) {
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  std&lt;span style=&#34;color:#ff79c6&#34;&gt;::&lt;/span&gt;cout &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; t &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f1fa8c&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;&lt;/span&gt;;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;template&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;typename&lt;/span&gt; T&lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#8be9fd&#34;&gt;void&lt;/span&gt; poly_extend(another, T&lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;amp;&lt;/span&gt; t) {
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  t &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; t &lt;span style=&#34;color:#ff79c6&#34;&gt;+&lt;/span&gt; t;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#8be9fd&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;main&lt;/span&gt;() {
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#8be9fd&#34;&gt;int&lt;/span&gt; i &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#bd93f9&#34;&gt;5&lt;/span&gt;;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#ff79c6&#34;&gt;using&lt;/span&gt; poly &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; polymorphic&lt;span style=&#34;color:#ff79c6&#34;&gt;::&lt;/span&gt;polymorphic_view&lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color:#8be9fd&#34;&gt;void&lt;/span&gt;(draw), &lt;span style=&#34;color:#8be9fd&#34;&gt;void&lt;/span&gt;(another)&lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;gt;&lt;/span&gt;;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  poly p1{i};
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  p1.call&lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&lt;/span&gt;draw&lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;gt;&lt;/span&gt;();
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#ff79c6&#34;&gt;auto&lt;/span&gt; p2 &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; p1;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  p2.call&lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&lt;/span&gt;draw&lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;gt;&lt;/span&gt;();
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  std&lt;span style=&#34;color:#ff79c6&#34;&gt;::&lt;/span&gt;string s(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;hello world&amp;#34;&lt;/span&gt;);
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  p2 &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; poly{s};
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  p2.call&lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&lt;/span&gt;another&lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;gt;&lt;/span&gt;();
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  p2.call&lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&lt;/span&gt;draw&lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;gt;&lt;/span&gt;();
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;把要多态的函数写成结构体，然后放在&lt;code&gt;poly_extend&lt;/code&gt;第一个参数，然后调用的时候需要在模板放入签名&lt;/p&gt;
-&lt;p&gt;第一次看见这种写法，有点不习惯，我改写一下&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;virtual&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-C++&#34; data-lang=&#34;C++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;#include&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;iostream&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;template&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;typename&lt;/span&gt;... Args&lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#8be9fd&#34;&gt;void&lt;/span&gt; println(&lt;span style=&#34;color:#ff79c6&#34;&gt;const&lt;/span&gt; Args&lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;amp;&lt;/span&gt;... args)
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    ((std&lt;span style=&#34;color:#ff79c6&#34;&gt;::&lt;/span&gt;cout &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; args &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#39;\n&amp;#39;&lt;/span&gt;), ...);
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;struct&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;Base&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;virtual&lt;/span&gt; &lt;span style=&#34;color:#8be9fd&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;test&lt;/span&gt;() { println(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;Base test&amp;#34;&lt;/span&gt;); }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;struct&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;A&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;auto&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;Print&lt;/span&gt;(&lt;span style=&#34;color:#ff79c6&#34;&gt;auto&lt;/span&gt; msg) &lt;span style=&#34;color:#ff79c6&#34;&gt;const&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        std&lt;span style=&#34;color:#ff79c6&#34;&gt;::&lt;/span&gt;cout &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;A says &amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; msg &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; std&lt;span style=&#34;color:#ff79c6&#34;&gt;::&lt;/span&gt;endl;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    }
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;};
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;struct&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;Derive&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;:&lt;/span&gt; Base
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;virtual&lt;/span&gt; &lt;span style=&#34;color:#8be9fd&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;test&lt;/span&gt;() { println(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;Derive test&amp;#34;&lt;/span&gt;); }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;struct&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;B&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;auto&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;Print&lt;/span&gt;(&lt;span style=&#34;color:#ff79c6&#34;&gt;auto&lt;/span&gt; msg) &lt;span style=&#34;color:#ff79c6&#34;&gt;const&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        std&lt;span style=&#34;color:#ff79c6&#34;&gt;::&lt;/span&gt;cout &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;B says &amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; msg &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; std&lt;span style=&#34;color:#ff79c6&#34;&gt;::&lt;/span&gt;endl;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    }
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;};
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#8be9fd&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;main&lt;/span&gt;()
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    Base x;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    Derive y;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    Base&lt;span style=&#34;color:#ff79c6&#34;&gt;*&lt;/span&gt; z &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;amp;&lt;/span&gt;x;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    z&lt;span style=&#34;color:#ff79c6&#34;&gt;-&amp;gt;&lt;/span&gt;test();
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    z &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;amp;&lt;/span&gt;y;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    z&lt;span style=&#34;color:#ff79c6&#34;&gt;-&amp;gt;&lt;/span&gt;test();
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;auto&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;main&lt;/span&gt;()&lt;span style=&#34;color:#ff79c6&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#8be9fd&#34;&gt;int&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;auto&lt;/span&gt; x &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; std&lt;span style=&#34;color:#ff79c6&#34;&gt;::&lt;/span&gt;vector&lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&lt;/span&gt;Messenger&lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;gt;&lt;/span&gt;{ A{}, B{} };
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;for&lt;/span&gt; (&lt;span style=&#34;color:#ff79c6&#34;&gt;auto&lt;/span&gt; &lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;y&lt;/span&gt; : x)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        y.Print(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;hi&amp;#34;&lt;/span&gt;);
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
-&lt;li&gt;polymorphic&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-C++&#34; data-lang=&#34;C++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;#include&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;iostream&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;template&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;typename&lt;/span&gt;... Args&lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#8be9fd&#34;&gt;void&lt;/span&gt; println(&lt;span style=&#34;color:#ff79c6&#34;&gt;const&lt;/span&gt; Args&lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;amp;&lt;/span&gt;... args)
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    ((std&lt;span style=&#34;color:#ff79c6&#34;&gt;::&lt;/span&gt;cout &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; args &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#39;\n&amp;#39;&lt;/span&gt;), ...);
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;struct&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;Base&lt;/span&gt;{};
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;struct&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;Derive&lt;/span&gt;{};
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#6272a4&#34;&gt;// function
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#6272a4&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;struct&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;test&lt;/span&gt;{};
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;template&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;typename&lt;/span&gt; T&lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#8be9fd&#34;&gt;void&lt;/span&gt; poly_extend(test, T&lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;amp;&lt;/span&gt; t);
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;template&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#8be9fd&#34;&gt;void&lt;/span&gt; poly_extend(test, Base&lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;amp;&lt;/span&gt; t)
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    println(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;Base&amp;#34;&lt;/span&gt;);
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;template&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#8be9fd&#34;&gt;void&lt;/span&gt; poly_extend(test, Derive&lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;amp;&lt;/span&gt; t)
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    println(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;Derive&amp;#34;&lt;/span&gt;);
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;using&lt;/span&gt; poly &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; polymorphic&lt;span style=&#34;color:#ff79c6&#34;&gt;::&lt;/span&gt;polymorphic_view&lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color:#8be9fd&#34;&gt;void&lt;/span&gt;(test)&lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;gt;&lt;/span&gt;;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#8be9fd&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;main&lt;/span&gt;()
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    Base x;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    Derive y;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    poly z{x};
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    z.call&lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&lt;/span&gt;test&lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;gt;&lt;/span&gt;();
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    z &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; poly{y};
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    z.call&lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&lt;/span&gt;test&lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;gt;&lt;/span&gt;();
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;嗯，为了保证结构体接口干净，不使用&lt;code&gt;virtual&lt;/code&gt;写实现的时候还是要干许多脏活&lt;/p&gt;
-&lt;p&gt;这看来对C++人来说还是太超前了，平时搞多态首先还是用&lt;code&gt;virtual&lt;/code&gt;吧&lt;/p&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;我觉得有点像上面所说的子类型&lt;/p&gt;
+&lt;p&gt;在代码中，用&lt;code&gt;std::function&lt;/code&gt;封装了真正的调用函数，而不需要考虑&lt;strong&gt;具体类型&lt;/strong&gt;。&lt;code&gt;std::function&lt;/code&gt;除了保存函数状态，还有运行时多态。但在不同 stl 的实现，有些是直接用 virtual，有些手动用指针打虚表。虽然看起来底层实现一样，不过好处就是，不需要给类函数加上 virtual，这算是一种&lt;strong&gt;解耦&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;但用&lt;code&gt;std::function&lt;/code&gt;实现其实有一些缺陷，比如将 lambda 函数赋值给它的时候，lambda capture 的变量太多会&lt;strong&gt;动态分配内存&lt;/strong&gt;。比较推荐的是用 template&lt;/p&gt;
+&lt;h2 id=&#34;reference&#34;&gt;Reference&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.zhihu.com/question/455347112&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Existential type 是什么？&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://zhuanlan.zhihu.com/p/165514192&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;多态都不知道，谈什么对象&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://zhuanlan.zhihu.com/p/370563773&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;关于std function和lambda function的性能调试&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
 </description>
         </item>
         <item>
@@ -255,6 +241,7 @@
 &lt;hr&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;#%e6%95%b0%e5%ad%a6&#34; &gt;数学&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;#%e7%89%a9%e7%90%86&#34; &gt;物理&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;#%e4%bf%a1%e6%81%af&#34; &gt;信息&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;#%e8%bd%af%e4%bb%b6%e5%b7%a5%e7%a8%8b&#34; &gt;软件工程&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;#%e7%bc%96%e7%a8%8b%e8%af%ad%e8%a8%80&#34; &gt;编程语言&lt;/a&gt;
@@ -262,6 +249,7 @@
 &lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;#c&#34; &gt;C&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;#c-1&#34; &gt;C++&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;#rust&#34; &gt;Rust&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;#haskell&#34; &gt;Haskell&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;#%e4%bd%93%e7%b3%bb%e7%bb%93%e6%9e%84&#34; &gt;体系结构&lt;/a&gt;&lt;/li&gt;
@@ -274,11 +262,11 @@
 &lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;#%e6%97%8b%e8%bd%ac&#34; &gt;旋转&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;#%e8%99%9a%e6%8b%9f%e6%9c%ba&#34; &gt;虚拟机&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;#%e9%80%86%e5%90%91&#34; &gt;逆向&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;#linux&#34; &gt;Linux&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;#%e5%b7%a5%e5%85%b7&#34; &gt;工具&lt;/a&gt;
 &lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;#%e5%9c%a8%e7%ba%bf%e5%b7%a5%e5%85%b7&#34; &gt;在线工具&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;#git&#34; &gt;Git&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;#unity&#34; &gt;Unity&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
@@ -296,12 +284,22 @@
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;#%e8%89%b2%e5%ba%a6%e5%ad%a6&#34; &gt;色度学&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;#%e6%97%a5%e8%af%ad&#34; &gt;日语&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;#misc&#34; &gt;misc&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&#34;数学&#34;&gt;数学&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://zhuanlan.zhihu.com/p/105704401&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;我在知乎学数学&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://zhuanlan.zhihu.com/p/551438234&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;图形数学方法：FFT（快速傅里叶）的原理讲述&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.zhihu.com/question/36512716&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;有没有比较好的学习高等数学，线性代数，概率论数理统计的英文书籍推荐？&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;物理&#34;&gt;物理&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://matthias-research.github.io/pages/tenMinutePhysics/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Ten Minute Physics&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&#34;信息&#34;&gt;信息&lt;/h2&gt;
 &lt;ul&gt;
@@ -310,16 +308,42 @@
 &lt;/ul&gt;
 &lt;h2 id=&#34;软件工程&#34;&gt;软件工程&lt;/h2&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://zhuanlan.zhihu.com/p/64004026&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;可逆计算：下一代软件构造理论&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://zhuanlan.zhihu.com/p/544957616&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;抽象的幻觉（1）&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://zhuanlan.zhihu.com/p/552864392&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;抽象的幻觉（2）&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.cnblogs.com/KillerAery/p/11746639.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;游戏架构设计——面向数据编程（DOP）&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.cnblogs.com/KillerAery/p/16333348.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;游戏架构设计——高性能并行编程&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://semver.org/lang/zh-CN/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;语义化版本 2.0.0&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://zhuanlan.zhihu.com/p/560653798&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;读《Fundamentals of Software Architechture》&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://zhuanlan.zhihu.com/p/64004026&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;可逆计算：下一代软件构造理论&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://zhuanlan.zhihu.com/p/544957616&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;抽象的幻觉（1）&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://zhuanlan.zhihu.com/p/552864392&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;抽象的幻觉（2）&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.cnblogs.com/KillerAery/p/11746639.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;游戏架构设计——面向数据编程（DOP）&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.cnblogs.com/KillerAery/p/16333348.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;游戏架构设计——高性能并行编程&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://zhuanlan.zhihu.com/p/228716574&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;为什么我认为Rust的Result错误处理方式不如Exception&lt;/a&gt;，探讨了&lt;code&gt;Monad&lt;/code&gt;和工业界主流的异常处理两种错误处理的差异&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://gpp.tkchu.me/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;游戏编程模式&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&#34;编程语言&#34;&gt;编程语言&lt;/h2&gt;
 &lt;h3 id=&#34;c&#34;&gt;C&lt;/h3&gt;
@@ -345,21 +369,38 @@
     &gt;最好的C++学习教程(上篇)——The Cherno CppSeries&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://zhuanlan.zhihu.com/p/553405837&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;最好的C++学习教程(下篇)——The Cherno CppSeries&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://en.wikibooks.org/wiki/More_C%2B%2B_Idioms&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;More C++ Idioms&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://learnmoderncpp.com/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Learn Modern C++&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;rust&#34;&gt;Rust&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://blog.pan93.com/what-is-rust-async/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;文組也能懂的 Rust async 機制&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://cheats.rs/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Rust Language Cheat Sheet&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;haskell&#34;&gt;Haskell&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://lhbg-book.link/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Learn Haskell by building a blog generator&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&#34;体系结构&#34;&gt;体系结构&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://coolshell.cn/articles/20793.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;与程序员相关的CPU缓存知识&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.cnblogs.com/timlly/p/11471507.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;深入GPU硬件架构及运行机制&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&#34;编译原理&#34;&gt;编译原理&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://zhuanlan.zhihu.com/p/553543765&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;【科普】编译器的构建基本原理&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://github.com/FrankHB/pl-docs&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Programming Language Documentations&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.iteye.com/blog/rednaxelafx-492667&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;虚拟机随谈（一）：解释器，树遍历解释器，基于栈与基于寄存器，大杂烩&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&#34;可视化&#34;&gt;可视化&lt;/h2&gt;
 &lt;ul&gt;
@@ -371,6 +412,8 @@
     &gt;马尔科夫链可视化&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://eater.net/quaternions&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;四元数可视化&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://visualgo.net/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;数据结构可视化&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&#34;优化&#34;&gt;优化&lt;/h2&gt;
 &lt;ul&gt;
@@ -410,11 +453,6 @@
 &lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://thenumbat.github.io/Exponential-Rotations/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;可视化和公式推导&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2 id=&#34;虚拟机&#34;&gt;虚拟机&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.iteye.com/blog/rednaxelafx-492667&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;虚拟机随谈（一）：解释器，树遍历解释器，基于栈与基于寄存器，大杂烩&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
 &lt;h2 id=&#34;逆向&#34;&gt;逆向&lt;/h2&gt;
 &lt;p&gt;这里我推荐 CSAPP Lab2-Bomb Lab&lt;/p&gt;
 &lt;ul&gt;
@@ -423,12 +461,19 @@
 &lt;/ul&gt;
 &lt;h2 id=&#34;linux&#34;&gt;Linux&lt;/h2&gt;
 &lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://101.ustclug.org/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Linux 101&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://github.com/NakanoMikuOrg/arch-guide&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;archlinux 简明指南&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://twitter.com/devops_tech/status/1525708053487570944&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;一张图理解Linux文件权限&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&#34;工具&#34;&gt;工具&lt;/h2&gt;
+&lt;h3 id=&#34;在线工具&#34;&gt;在线工具&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.zhichun.xyz/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;知春在线工具箱&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
 &lt;h3 id=&#34;git&#34;&gt;Git&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://ohshitgit.com/zh&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
@@ -440,6 +485,8 @@
 &lt;ul&gt;
 &lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://catlikecoding.com/unity/tutorials/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;Catlike Coding unity tutorials&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://zhuanlan.zhihu.com/p/452292806&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Unity SRP下做PBR基于物理的渲染和踩坑（一）&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&#34;二次元&#34;&gt;二次元&lt;/h2&gt;
 &lt;h3 id=&#34;galgame&#34;&gt;galgame&lt;/h3&gt;
@@ -451,52 +498,106 @@
 &lt;/ul&gt;
 &lt;h3 id=&#34;资源&#34;&gt;资源&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://hacg.me/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;琉璃神社(无注册要求)&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://lzacg.us/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;量子ACG(无注册要求，主要是游戏)&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://18moe.co/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;萌次元(无法注册，资源社区)&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://zodgame.xyz/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;Zodgame(注册已关闭，论坛)&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.zuiacg.com/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;最ACG(无注册要求，资源社区)&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://aceacg.com/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;ACEACG(在线本子漫画)&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.sshs.pw/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;紳士会所(无注册，资源社区)&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;http://www.uzxun.in/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;UZXun社区(无注册要求，资源论坛)&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;http://www.wnacg.org/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;紳士漫畫(无注册，在线本子漫画)&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://ahri-hentai.com/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;松鼠症倉庫(无注册要求，在线本子漫画)&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://moeli-desu.com/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;梦璃(无注册要求，资源社区）&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://bulidesu.com/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;布璃(无注册要求，声音资源社区)&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://gkdworld.xyz/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;资源统筹局(答题注册获取邀请码，资源社区)&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://acg02.net/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;次元计划(资源社区)&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.hmoe11.net/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;梦幻之乡(无注册要求，资源社区)&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.wanie.xyz/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;心動漫(答题注册邀请码，资源转载)&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://saber.love/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;saber酱的抱枕(个人资源博客)&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.dmoe.in/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;暗萌(无注册要求，资源社区)&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://blog.reimu.net/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;灵梦御所(个人资源博客，官方有社区软件)&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.mikuclub.cc/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;初音社(无注册要求，资源社区)&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://chaguan.us/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;绅士茶馆(资源社区，无注册)&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;http://www.futa404.com/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;扶她404(资源社区，无注册要求)&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://bbs.sskft5.top/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;绅士咖啡厅(资源论坛，注册邀请码获取)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://vcb-s.com/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;VCB-Studio&lt;/a&gt;，专门修复动漫画质&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://pan.cycg.xyz/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;次元图书馆&lt;/a&gt;，galgame资源多，od盘下载&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://hacg.me/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;琉璃神社(无注册要求)&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://lzacg.us/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;量子ACG(无注册要求，主要是游戏)&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://18moe.co/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;萌次元(无法注册，资源社区)&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://zodgame.xyz/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Zodgame(注册已关闭，论坛)&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.zuiacg.com/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;最ACG(无注册要求，资源社区)&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://aceacg.com/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;ACEACG(在线本子漫画)&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.sshs.pw/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;紳士会所(无注册，资源社区)&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;http://www.uzxun.in/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;UZXun社区(无注册要求，资源论坛)&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;http://www.wnacg.org/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;紳士漫畫(无注册，在线本子漫画)&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://ahri-hentai.com/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;松鼠症倉庫(无注册要求，在线本子漫画)&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://moeli-desu.com/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;梦璃(无注册要求，资源社区）&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://bulidesu.com/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;布璃(无注册要求，声音资源社区)&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://gkdworld.xyz/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;资源统筹局(答题注册获取邀请码，资源社区)&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://acg02.net/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;次元计划(资源社区)&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.hmoe11.net/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;梦幻之乡(无注册要求，资源社区)&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.wanie.xyz/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;心動漫(答题注册邀请码，资源转载)&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://saber.love/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;saber酱的抱枕(个人资源博客)&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.dmoe.in/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;暗萌(无注册要求，资源社区)&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://blog.reimu.net/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;灵梦御所(个人资源博客，官方有社区软件)&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.mikuclub.cc/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;初音社(无注册要求，资源社区)&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://chaguan.us/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;绅士茶馆(资源社区，无注册)&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;http://www.futa404.com/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;扶她404(资源社区，无注册要求)&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://bbs.sskft5.top/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;绅士咖啡厅(资源论坛，注册邀请码获取)&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h4 id=&#34;在线&#34;&gt;在线&lt;/h4&gt;
 &lt;ul&gt;
@@ -544,6 +645,16 @@
 &lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://zhuanlan.zhihu.com/p/100228286&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;色彩科学学习笔记：专栏自述、目录&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
+&lt;h2 id=&#34;日语&#34;&gt;日语&lt;/h2&gt;
+&lt;p&gt;日语学习网站&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.sigure.tw/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;時雨の町&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.duolingo.com/learn&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;duolingo&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.lingq.com/zh-cn/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;LingQ&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
 &lt;h2 id=&#34;misc&#34;&gt;misc&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;http://www.maizure.org/projects/decoded-gnu-coreutils/index.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
@@ -564,6 +675,10 @@
     &gt;（可能是）全网最好用的 HDR 术语速查手册&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://icyfenix.cn/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;凤凰架构 构建可靠的大型分布式系统&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://wantwords.net/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;汉语反向词典&lt;/a&gt;（查近义词）&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://ciechanow.ski/lights-and-shadows/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Lights and Shadows&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </description>
         </item>
@@ -883,6 +998,15 @@
     &gt;AirGuanZ&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://zhuanlan.zhihu.com/p/459580639&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;《高级计算机图形学——真实感图像合成》目录及序言&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;课程&#34;&gt;课程&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://cs87-dartmouth.github.io/Fall2022/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;CS 87/287 | RENDERING ALGORITHMS&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://cseweb.ucsd.edu/~tzli/cse272/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;UCSD CSE 272: Advanced Image Synthesis&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.cs.uu.nl/docs/vakken/magr/2021-2022/index.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Advanced Graphics&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&#34;各种效果&#34;&gt;各种效果&lt;/h2&gt;
 &lt;h3 id=&#34;光谱&#34;&gt;光谱&lt;/h3&gt;

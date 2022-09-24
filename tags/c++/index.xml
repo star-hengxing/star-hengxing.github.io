@@ -6,26 +6,41 @@
     <description>Recent content in C&#43;&#43; on 恒星的小站</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Mon, 25 Jul 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://star-hengxing.github.io/tags/c++/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 19 Sep 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://star-hengxing.github.io/tags/c++/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>C&#43;&#43;多态新姿势</title>
-      <link>https://star-hengxing.github.io/p/c-%E5%A4%9A%E6%80%81%E6%96%B0%E5%A7%BF%E5%8A%BF/</link>
+      <title>C&#43;&#43; 胡言乱语X1</title>
+      <link>https://star-hengxing.github.io/p/c-%E8%83%A1%E8%A8%80%E4%B9%B1%E8%AF%ADx1/</link>
+      <pubDate>Mon, 19 Sep 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://star-hengxing.github.io/p/c-%E8%83%A1%E8%A8%80%E4%B9%B1%E8%AF%ADx1/</guid>
+      <description>某些 STL 容器 在刷 leetcode，其中某道题中的代码片段是这样的
+string res; res.resize(size - i); // res.reserve(size - i); for (int j = 0; i &amp;lt; size; i += 1, j += 1) { res[j] = arr[i] + &amp;#39;0&amp;#39;; // res.push_back(arr[i] + &amp;#39;0&amp;#39;); } 没注释的代码比注释的快了几ms，原因如下
+因为容器一开始是空的，不需要考虑拷贝原来的元素
+resize 重新分配内存并且默认初始化，size 改变（大概开销 malloc + memset） reserve 重新分配了内存，不初始化，size 不变 push_back 需要检查 size 有没有大于 capacity，多了分支的开销 然而这里代码也不是最快的，思考一下，这里 resize 还多了一个 memset 的开销，所以最优解应该是，用自己写的 vector（逃
+不知道是历史原因还是标准委员会根本没考虑到，应该加多几个函数来表示需不需要初始化
+改造容器 这里先看一个别人家的 vector：Less
+看一下某个代码片段
+struct default_init_t {}; inline constexpr default_init_t default_init; struct with_capacity_t {}; inline constexpr with_capacity_t with_capacity; vector(default_init_t, size_type const size) { this-&amp;gt;construct(size, size, [](auto p, auto) { new (p, placement_tag) T; }); } vector(size_type size) { this-&amp;gt;construct(size, size, [](auto p, auto) { new (p, placement_tag) T(); }); } vector(with_capacity_t, size_type const capacity) { this-&amp;gt;construct(0u, capacity, [](auto, auto) {}); } vector(size_type size, T const&amp;amp; value) { this-&amp;gt;construct(size, size, [&amp;amp;](auto p, auto) { new (p, placement_tag) T(value); }); } 思考🤔，直接把一个结构体类型作为参数？算了直接去 c++ 群问一下</description>
+    </item>
+    
+    <item>
+      <title>多态</title>
+      <link>https://star-hengxing.github.io/p/%E5%A4%9A%E6%80%81/</link>
       <pubDate>Mon, 25 Jul 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://star-hengxing.github.io/p/c-%E5%A4%9A%E6%80%81%E6%96%B0%E5%A7%BF%E5%8A%BF/</guid>
+      <guid>https://star-hengxing.github.io/p/%E5%A4%9A%E6%80%81/</guid>
       <description>起因 在实现我的离线渲染器中，用到了大量oop（其实就是基类然后继承）
 我有一个Shape基类，里面接口全声明为标准的纯虚函数接口
 virtual TYPE FUNCTION() const = 0; 当你继承这个类后，继承类必须实现这个接口，不然编译报错
 一开始还没有写实现，但类已经继承了，没办法，在接口开个洞（真难看啊
-virtual TYPE FUNCTION() const {} 于是我基于C++20标准库的source_location写了一个
-[[noreturn]] inline void unimplemented(const std::source_location location = std::source_location::current()) { std::cout &amp;lt;&amp;lt; &amp;#39;\n&amp;#39; &amp;lt;&amp;lt; &amp;#39;[&amp;#39; &amp;lt;&amp;lt; location.file_name() &amp;lt;&amp;lt; &amp;#39;:&amp;#39; &amp;lt;&amp;lt; location.line() &amp;lt;&amp;lt; &amp;#34;] &amp;#34; &amp;lt;&amp;lt; location.function_name() &amp;lt;&amp;lt; &amp;#34; unimplemented!\n&amp;#34;; exit(-1); } 还没有实现接口的时候留下unimplemented，然后运行时报错
+virtual TYPE FUNCTION() const {} 于是我基于 C++20 标准库的source_location写了一个
+[[noreturn]] inline void unimplemented(const std::source_location location = std::source_location::current()) { std::cerr &amp;lt;&amp;lt; &amp;#39;\n&amp;#39; &amp;lt;&amp;lt; &amp;#39;[&amp;#39; &amp;lt;&amp;lt; location.file_name() &amp;lt;&amp;lt; &amp;#39;:&amp;#39; &amp;lt;&amp;lt; location.line() &amp;lt;&amp;lt; &amp;#34;] &amp;#34; &amp;lt;&amp;lt; location.function_name() &amp;lt;&amp;lt; &amp;#34; unimplemented!\n&amp;#34;; exit(-1); } 还没有实现接口的时候留下unimplemented，然后运行时报错
 source_location暂时只有clang不支持（clang对C++20支持太慢了
 网上冲浪时看到有人说，接口虚函数实现动态多态是一种糟糕实践，优雅的做法是Existential Type，在C++社区称为sean parent polymorphism
-详细可以看这个视频John Bandela “Polymorphism != Virtual: Easy, Flexible Runtime Polymorphism Without Inheritance”
+详细可以看这个视频
+John Bandela “Polymorphism != Virtual: Easy, Flexible Runtime Polymorphism Without Inheritance”
 reddit上的关于该视频的讨论
-Existential Type 中文语境下叫类型擦除/隐藏类型实现（机翻直译叫存在类型，真怪）
-看一段C++代码
-struct Base { template &amp;lt;typename T&amp;gt; Base(T* t) { _this= reinterpret_cast&amp;lt;void*&amp;gt;(t); _operation = [](void* st) { static_cast&amp;lt;T*&amp;gt;(st)-&amp;gt;f(); }; } void call() { (*_operation)(_this); } void* _this = nullptr; void(*_operation)(void*) = nullptr; }; 存进_this强转成void*，那确实是擦除了类型。。。</description>
+什么是多态 特定多态 Ad hoc polymorphism</description>
     </item>
     
     <item>

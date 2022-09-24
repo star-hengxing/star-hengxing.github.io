@@ -8,24 +8,23 @@
     <language>zh-cn</language>
     <lastBuildDate>Mon, 25 Jul 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://star-hengxing.github.io/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>C&#43;&#43;多态新姿势</title>
-      <link>https://star-hengxing.github.io/p/c-%E5%A4%9A%E6%80%81%E6%96%B0%E5%A7%BF%E5%8A%BF/</link>
+      <title>多态</title>
+      <link>https://star-hengxing.github.io/p/%E5%A4%9A%E6%80%81/</link>
       <pubDate>Mon, 25 Jul 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://star-hengxing.github.io/p/c-%E5%A4%9A%E6%80%81%E6%96%B0%E5%A7%BF%E5%8A%BF/</guid>
+      <guid>https://star-hengxing.github.io/p/%E5%A4%9A%E6%80%81/</guid>
       <description>起因 在实现我的离线渲染器中，用到了大量oop（其实就是基类然后继承）
 我有一个Shape基类，里面接口全声明为标准的纯虚函数接口
 virtual TYPE FUNCTION() const = 0; 当你继承这个类后，继承类必须实现这个接口，不然编译报错
 一开始还没有写实现，但类已经继承了，没办法，在接口开个洞（真难看啊
-virtual TYPE FUNCTION() const {} 于是我基于C++20标准库的source_location写了一个
-[[noreturn]] inline void unimplemented(const std::source_location location = std::source_location::current()) { std::cout &amp;lt;&amp;lt; &amp;#39;\n&amp;#39; &amp;lt;&amp;lt; &amp;#39;[&amp;#39; &amp;lt;&amp;lt; location.file_name() &amp;lt;&amp;lt; &amp;#39;:&amp;#39; &amp;lt;&amp;lt; location.line() &amp;lt;&amp;lt; &amp;#34;] &amp;#34; &amp;lt;&amp;lt; location.function_name() &amp;lt;&amp;lt; &amp;#34; unimplemented!\n&amp;#34;; exit(-1); } 还没有实现接口的时候留下unimplemented，然后运行时报错
+virtual TYPE FUNCTION() const {} 于是我基于 C++20 标准库的source_location写了一个
+[[noreturn]] inline void unimplemented(const std::source_location location = std::source_location::current()) { std::cerr &amp;lt;&amp;lt; &amp;#39;\n&amp;#39; &amp;lt;&amp;lt; &amp;#39;[&amp;#39; &amp;lt;&amp;lt; location.file_name() &amp;lt;&amp;lt; &amp;#39;:&amp;#39; &amp;lt;&amp;lt; location.line() &amp;lt;&amp;lt; &amp;#34;] &amp;#34; &amp;lt;&amp;lt; location.function_name() &amp;lt;&amp;lt; &amp;#34; unimplemented!\n&amp;#34;; exit(-1); } 还没有实现接口的时候留下unimplemented，然后运行时报错
 source_location暂时只有clang不支持（clang对C++20支持太慢了
 网上冲浪时看到有人说，接口虚函数实现动态多态是一种糟糕实践，优雅的做法是Existential Type，在C++社区称为sean parent polymorphism
-详细可以看这个视频John Bandela “Polymorphism != Virtual: Easy, Flexible Runtime Polymorphism Without Inheritance”
+详细可以看这个视频
+John Bandela “Polymorphism != Virtual: Easy, Flexible Runtime Polymorphism Without Inheritance”
 reddit上的关于该视频的讨论
-Existential Type 中文语境下叫类型擦除/隐藏类型实现（机翻直译叫存在类型，真怪）
-看一段C++代码
-struct Base { template &amp;lt;typename T&amp;gt; Base(T* t) { _this= reinterpret_cast&amp;lt;void*&amp;gt;(t); _operation = [](void* st) { static_cast&amp;lt;T*&amp;gt;(st)-&amp;gt;f(); }; } void call() { (*_operation)(_this); } void* _this = nullptr; void(*_operation)(void*) = nullptr; }; 存进_this强转成void*，那确实是擦除了类型。。。</description>
+什么是多态 特定多态 Ad hoc polymorphism</description>
     </item>
     
   </channel>
