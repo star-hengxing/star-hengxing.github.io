@@ -6,7 +6,17 @@
     <description>Recent content in 工具 on 恒星的小站</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Mon, 27 Jun 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://star-hengxing.github.io/tags/%E5%B7%A5%E5%85%B7/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 06 Nov 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://star-hengxing.github.io/tags/%E5%B7%A5%E5%85%B7/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>浏览器插件</title>
+      <link>https://star-hengxing.github.io/p/%E6%B5%8F%E8%A7%88%E5%99%A8%E6%8F%92%E4%BB%B6/</link>
+      <pubDate>Sun, 06 Nov 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://star-hengxing.github.io/p/%E6%B5%8F%E8%A7%88%E5%99%A8%E6%8F%92%E4%BB%B6/</guid>
+      <description>使用 edge，不需要科学上网就能在不同电脑同步插件
+整洁 清理广告 -&amp;gt; AdGuard 移除 cookies 提醒 -&amp;gt; I don&amp;rsquo;t care about cookies 移除 url 跟踪参数 -&amp;gt; ClearURLs 效率 生成目录 -&amp;gt; Smart TOC 浏览网页 -&amp;gt; Vimium C 鼠标悬停链接显示图像/视频 -&amp;gt; Imagus 贴心工具 网页截图 -&amp;gt; Awesome Screenshot 听歌 -&amp;gt; Listen 1 自定义个人主页 -&amp;gt; Custom New Tab URL 破解网页限制复制 -&amp;gt; SuperCopy github 代码文件树 -&amp;gt; Octotree 集成 Aria2 for Edge KeePassXC-Browser v2ex plus Tampermonkey B站增强 -&amp;gt; Bilibili Evolved 移除 url 跟踪参数 -&amp;gt; Bilibili 干净链接 秒传 -&amp;gt; rapidupload-userscript 给片假名显示原词 -&amp;gt; 片假名终结者 知乎增强 贴吧页面精简 护眼模式 </description>
+    </item>
+    
     <item>
       <title>使用KeePass作为密码管理器</title>
       <link>https://star-hengxing.github.io/p/%E4%BD%BF%E7%94%A8keepass%E4%BD%9C%E4%B8%BA%E5%AF%86%E7%A0%81%E7%AE%A1%E7%90%86%E5%99%A8/</link>

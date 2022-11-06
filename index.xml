@@ -6,7 +6,52 @@
         <description>Recent content on 恒星的小站</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
-        <lastBuildDate>Mon, 19 Sep 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://star-hengxing.github.io/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sun, 06 Nov 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://star-hengxing.github.io/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>浏览器插件</title>
+        <link>https://star-hengxing.github.io/p/%E6%B5%8F%E8%A7%88%E5%99%A8%E6%8F%92%E4%BB%B6/</link>
+        <pubDate>Sun, 06 Nov 2022 00:00:00 +0000</pubDate>
+        
+        <guid>https://star-hengxing.github.io/p/%E6%B5%8F%E8%A7%88%E5%99%A8%E6%8F%92%E4%BB%B6/</guid>
+        <description>&lt;p&gt;使用 edge，不需要科学上网就能在不同电脑同步插件&lt;/p&gt;
+&lt;h2 id=&#34;整洁&#34;&gt;整洁&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;清理广告 -&amp;gt; AdGuard&lt;/li&gt;
+&lt;li&gt;移除 cookies 提醒 -&amp;gt; I don&amp;rsquo;t care about cookies&lt;/li&gt;
+&lt;li&gt;移除 url 跟踪参数 -&amp;gt; ClearURLs&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;效率&#34;&gt;效率&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;生成目录 -&amp;gt; Smart TOC&lt;/li&gt;
+&lt;li&gt;浏览网页 -&amp;gt; Vimium C&lt;/li&gt;
+&lt;li&gt;鼠标悬停链接显示图像/视频 -&amp;gt; Imagus&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;贴心工具&#34;&gt;贴心工具&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;网页截图 -&amp;gt; Awesome Screenshot&lt;/li&gt;
+&lt;li&gt;听歌 -&amp;gt; Listen 1&lt;/li&gt;
+&lt;li&gt;自定义个人主页 -&amp;gt; Custom New Tab URL&lt;/li&gt;
+&lt;li&gt;破解网页限制复制 -&amp;gt; SuperCopy&lt;/li&gt;
+&lt;li&gt;github 代码文件树 -&amp;gt; Octotree&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;集成&#34;&gt;集成&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;Aria2 for Edge&lt;/li&gt;
+&lt;li&gt;KeePassXC-Browser&lt;/li&gt;
+&lt;li&gt;v2ex plus&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;tampermonkey&#34;&gt;Tampermonkey&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;B站增强 -&amp;gt; Bilibili Evolved&lt;/li&gt;
+&lt;li&gt;移除 url 跟踪参数 -&amp;gt; Bilibili 干净链接&lt;/li&gt;
+&lt;li&gt;秒传 -&amp;gt; rapidupload-userscript&lt;/li&gt;
+&lt;li&gt;给片假名显示原词 -&amp;gt; 片假名终结者&lt;/li&gt;
+&lt;li&gt;知乎增强&lt;/li&gt;
+&lt;li&gt;贴吧页面精简&lt;/li&gt;
+&lt;li&gt;护眼模式&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        </item>
+        <item>
         <title>C&#43;&#43; 胡言乱语X1</title>
         <link>https://star-hengxing.github.io/p/c-%E8%83%A1%E8%A8%80%E4%B9%B1%E8%AF%ADx1/</link>
         <pubDate>Mon, 19 Sep 2022 00:00:00 +0000</pubDate>
@@ -243,7 +288,13 @@
 &lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;#%e6%95%b0%e5%ad%a6&#34; &gt;数学&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;#%e7%89%a9%e7%90%86&#34; &gt;物理&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;#%e4%bf%a1%e6%81%af&#34; &gt;信息&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;#%e8%bd%af%e4%bb%b6%e5%b7%a5%e7%a8%8b&#34; &gt;软件工程&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;#%e8%ae%a1%e7%ae%97%e6%9c%ba%e7%90%86%e8%ae%ba&#34; &gt;计算机理论&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;#%e8%bd%af%e4%bb%b6%e5%b7%a5%e7%a8%8b&#34; &gt;软件工程&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;#%e7%90%86%e8%ae%ba&#34; &gt;理论&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;#%e5%ae%9e%e8%b7%b5&#34; &gt;实践&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
 &lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;#%e7%bc%96%e7%a8%8b%e8%af%ad%e8%a8%80&#34; &gt;编程语言&lt;/a&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;#c&#34; &gt;C&lt;/a&gt;&lt;/li&gt;
@@ -306,44 +357,41 @@
 &lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://zhuanlan.zhihu.com/p/513839042&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;压缩算法lzma2,zstd,rar,brotli,lz4,lizardv1对比推荐&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2 id=&#34;软件工程&#34;&gt;软件工程&lt;/h2&gt;
+&lt;h2 id=&#34;计算机理论&#34;&gt;计算机理论&lt;/h2&gt;
 &lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://semver.org/lang/zh-CN/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;语义化版本 2.0.0&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://zhuanlan.zhihu.com/p/560653798&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;读《Fundamentals of Software Architechture》&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://zhuanlan.zhihu.com/p/64004026&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;可逆计算：下一代软件构造理论&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://zhuanlan.zhihu.com/p/544957616&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;抽象的幻觉（1）&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://zhuanlan.zhihu.com/p/552864392&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;抽象的幻觉（2）&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.cnblogs.com/KillerAery/p/11746639.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;游戏架构设计——面向数据编程（DOP）&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.cnblogs.com/KillerAery/p/16333348.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;游戏架构设计——高性能并行编程&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://zhuanlan.zhihu.com/p/228716574&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;为什么我认为Rust的Result错误处理方式不如Exception&lt;/a&gt;，探讨了&lt;code&gt;Monad&lt;/code&gt;和工业界主流的异常处理两种错误处理的差异&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://gpp.tkchu.me/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;游戏编程模式&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://zhuanlan.zhihu.com/p/139397047&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;计算复杂度理论基础（一）Preliminaries&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;软件工程&#34;&gt;软件工程&lt;/h2&gt;
+&lt;h3 id=&#34;理论&#34;&gt;理论&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://semver.org/lang/zh-CN/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;语义化版本 2.0.0&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://zhuanlan.zhihu.com/p/560653798&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;读《Fundamentals of Software Architechture》&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://zhuanlan.zhihu.com/p/64004026&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;可逆计算：下一代软件构造理论&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://zhuanlan.zhihu.com/p/544957616&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;抽象的幻觉（1）&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://zhuanlan.zhihu.com/p/552864392&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;抽象的幻觉（2）&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://draveness.me/whys-the-design/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;为什么这么设计系列文章&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;实践&#34;&gt;实践&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.cnblogs.com/KillerAery/p/11746639.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;游戏架构设计——面向数据编程（DOP）&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.cnblogs.com/KillerAery/p/16333348.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;游戏架构设计——高性能并行编程&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://zhuanlan.zhihu.com/p/228716574&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;为什么我认为Rust的Result错误处理方式不如Exception&lt;/a&gt;，探讨了&lt;code&gt;Monad&lt;/code&gt;和工业界主流的异常处理两种错误处理的差异&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://gpp.tkchu.me/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;游戏编程模式&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://zhuanlan.zhihu.com/p/572540319&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;阿里云块存储团队软件工程实践&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://zhuanlan.zhihu.com/p/574069391&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Chromium 渲染流水线——字节码到像素的一生&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&#34;编程语言&#34;&gt;编程语言&lt;/h2&gt;
 &lt;h3 id=&#34;c&#34;&gt;C&lt;/h3&gt;
@@ -373,6 +421,12 @@
     &gt;More C++ Idioms&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://learnmoderncpp.com/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;Learn Modern C++&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.infoq.cn/article/KsctTt5cIpCCl5T2SmtJ&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;现代化工具链在大规模 C++ 项目中的技术实践&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://blog.conan.io/2022/10/13/Different-flavors-Clang-compiler-Windows.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Understanding the different flavors of Clang C and C++ compilers in Windows&lt;/a&gt;，讲述了C++ 不同编译工具链的差异&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://zhuanlan.zhihu.com/p/568518673&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;从无栈协程到C++异步框架&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;rust&#34;&gt;Rust&lt;/h3&gt;
 &lt;ul&gt;
@@ -390,8 +444,16 @@
 &lt;ul&gt;
 &lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://coolshell.cn/articles/20793.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;与程序员相关的CPU缓存知识&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://mp.weixin.qq.com/s/zVReUAUJihBLorNo3o0luQ&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;深入理解CPU cache：组织、一致性（同步）、编程&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.cnblogs.com/timlly/p/11471507.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;深入GPU硬件架构及运行机制&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.zhihu.com/question/25527491/answer/56571062&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;如何设计内存池？ - 韦易笑的回答 - 知乎&lt;/a&gt;，内存管理是最能体现体系结构知识的地方之一&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://github.com/akhin/microarchitecture-cheatsheet&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Microarchitecture cheat sheet&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://johnysswlab.com/when-an-instruction-depends-on-the-previous-instruction-depends-on-the-previous-instructions-long-instruction-dependency-chains-and-performance/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;When an instruction depends on the previous instruction depends on the previous instructions… : long instruction dependency chains and performance&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&#34;编译原理&#34;&gt;编译原理&lt;/h2&gt;
 &lt;ul&gt;
@@ -419,6 +481,8 @@
 &lt;ul&gt;
 &lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://kristerw.github.io/2021/10/19/fast-math/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;浮点数计算优化&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://wunkolo.github.io/post/2022/10/vfixupimm-signum/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;vfixupimm: signum&lt;/a&gt;，用 AVX 优化取浮点数符号&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&#34;高性能计算&#34;&gt;高性能计算&lt;/h2&gt;
 &lt;ul&gt;
@@ -432,6 +496,8 @@
     &gt;C++ 高性能编程实战系列（2）&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://zhuanlan.zhihu.com/p/537260855&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;C++ 高性能编程实战系列（3）&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.zhihu.com/column/c_1515272289578479616&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;CMU15418 并行计算机架构与编程&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&#34;计算机图形学&#34;&gt;计算机图形学&lt;/h2&gt;
 &lt;ul&gt;
@@ -467,12 +533,18 @@
     &gt;archlinux 简明指南&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://twitter.com/devops_tech/status/1525708053487570944&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;一张图理解Linux文件权限&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://explainshell.com/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;解释 shell 参数&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://github.com/espoal/awesome-iouring&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Delightful io_uring packages and resources&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&#34;工具&#34;&gt;工具&lt;/h2&gt;
 &lt;h3 id=&#34;在线工具&#34;&gt;在线工具&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.zhichun.xyz/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;知春在线工具箱&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://tool.tsutsu.one/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;つつの工具箱&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;git&#34;&gt;Git&lt;/h3&gt;
 &lt;ul&gt;
@@ -601,14 +673,10 @@
 &lt;/ul&gt;
 &lt;h4 id=&#34;在线&#34;&gt;在线&lt;/h4&gt;
 &lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;http://omofun.tv&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;omofun&lt;/a&gt;，相对高清，有弹幕，加载小慢，新番和热门动画基本都有&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;http://ysjdm.net&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;异世界动漫&lt;/a&gt;，资源比&lt;code&gt;omofun&lt;/code&gt;稍多点，在这类网站里播放相对稳定  广告很多&lt;/p&gt;
-&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.bimiacg4.net/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;bimi动漫&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;http://ysjdm.net&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;异世界动漫&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h4 id=&#34;生肉&#34;&gt;生肉&lt;/h4&gt;
 &lt;ul&gt;
@@ -676,9 +744,13 @@
 &lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://icyfenix.cn/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;凤凰架构 构建可靠的大型分布式系统&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://wantwords.net/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;汉语反向词典&lt;/a&gt;（查近义词）&lt;/li&gt;
+    &gt;汉语反向词典&lt;/a&gt;，查近义词&lt;/li&gt;
 &lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://ciechanow.ski/lights-and-shadows/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;Lights and Shadows&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://wangchujiang.com/reference/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Quick Reference&lt;/a&gt;，针对开发人员的速查表&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://course.fast.ai/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Practical Deep Learning&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </description>
         </item>
@@ -885,11 +957,11 @@
 </description>
         </item>
         <item>
-        <title>在Windows上使用xmake配置Vulkan开发环境</title>
-        <link>https://star-hengxing.github.io/p/%E5%9C%A8windows%E4%B8%8A%E4%BD%BF%E7%94%A8xmake%E9%85%8D%E7%BD%AEvulkan%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/</link>
-        <pubDate>Sat, 25 Jun 2022 20:17:10 +0800</pubDate>
+        <title>在 Windows 上使用 Xmake 配置 Vulkan 开发环境</title>
+        <link>https://star-hengxing.github.io/p/%E5%9C%A8-windows-%E4%B8%8A%E4%BD%BF%E7%94%A8-xmake-%E9%85%8D%E7%BD%AE-vulkan-%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/</link>
+        <pubDate>Mon, 20 Jun 2022 00:00:00 +0000</pubDate>
         
-        <guid>https://star-hengxing.github.io/p/%E5%9C%A8windows%E4%B8%8A%E4%BD%BF%E7%94%A8xmake%E9%85%8D%E7%BD%AEvulkan%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/</guid>
+        <guid>https://star-hengxing.github.io/p/%E5%9C%A8-windows-%E4%B8%8A%E4%BD%BF%E7%94%A8-xmake-%E9%85%8D%E7%BD%AE-vulkan-%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/</guid>
         <description>&lt;p&gt;&lt;em&gt;也可以是C++小项目的配置&lt;/em&gt;&lt;/p&gt;
 &lt;h2 id=&#34;开发环境构建&#34;&gt;开发环境构建&lt;/h2&gt;
 &lt;blockquote&gt;
@@ -918,26 +990,28 @@
 &lt;li&gt;XMake&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&#34;getting-started&#34;&gt;Getting started&lt;/h2&gt;
-&lt;p&gt;假设上面配置都是使用各自的installer，会安装在&lt;strong&gt;默认目录&lt;/strong&gt;并添加&lt;strong&gt;环境变量&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;新建一个目录，在目录下新建xmake.lua，写入下面内容&lt;/p&gt;
+&lt;p&gt;上面列出来的工具下载完成后，新建一个目录，在目录下新建&lt;code&gt;xmake.lua&lt;/code&gt;，写入下面内容&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-lua&#34; data-lang=&#34;lua&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;set_project(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;vulkan&amp;#34;&lt;/span&gt;)
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;add_rules(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;mode.debug&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;mode.release&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;set_arch(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;x64&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;set_warnings(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;all&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;set_languages(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;c++20&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;set_toolchains(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;clang&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;add_rules(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;mode.debug&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;mode.releasedbg&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;mode.release&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;mode.minsizerel&amp;#34;&lt;/span&gt;)
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;add_requires(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;vulkansdk&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;glfw&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;glm&amp;#34;&lt;/span&gt;)
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;set_warnings(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;all&amp;#34;&lt;/span&gt;)
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;set_languages(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;cxx20&amp;#34;&lt;/span&gt;)
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;target(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;main&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    set_default(&lt;span style=&#34;color:#ff79c6&#34;&gt;true&lt;/span&gt;)
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    set_kind(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;binary&amp;#34;&lt;/span&gt;)
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    add_files(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;*.cpp&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    add_files(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;src/main.cpp&amp;#34;&lt;/span&gt;)
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    add_packages(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;vulkansdk&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;glfw&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;glm&amp;#34;&lt;/span&gt;)
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;xmake会自动探测编译器、vulkansdk，glm和glfw库由xmake的包管理处理&lt;/p&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;依赖的 vulkansdk 在上面已经下载，如果用他的 installer 安装会自动设置环境变量，xmake 会根据环境变量自动探测编译器、vulkansdk 的正确位置，glm 和 glfw 由 xmake 的包管理处理&lt;/p&gt;
 &lt;h3 id=&#34;编译&#34;&gt;编译&lt;/h3&gt;
 &lt;p&gt;测试代码来自&lt;a class=&#34;link&#34; href=&#34;https://vulkan-tutorial.com/Development_environment&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;vulkan tutorial&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;直接新建一个&lt;code&gt;main.cpp&lt;/code&gt;，把代码copy下来&lt;/p&gt;
+&lt;p&gt;直接新建一个&lt;code&gt;main.cpp&lt;/code&gt;，把代码复制下来&lt;/p&gt;
 &lt;p&gt;一切配置好后，可以测试一下了&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;xmake
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;xmake run
@@ -1007,6 +1081,8 @@
     &gt;UCSD CSE 272: Advanced Image Synthesis&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.cs.uu.nl/docs/vakken/magr/2021-2022/index.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;Advanced Graphics&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://cseweb.ucsd.edu/~viscomp/classes/cse168/sp20/168.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;CSE 168 Computer Graphics II: Rendering&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&#34;各种效果&#34;&gt;各种效果&lt;/h2&gt;
 &lt;h3 id=&#34;光谱&#34;&gt;光谱&lt;/h3&gt;
@@ -1691,68 +1767,6 @@
 &lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://archlinuxstudio.github.io/ArchLinuxTutorial/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;Arch Linux 安装使用教程 - ArchTutorial - Arch Linux Studio &lt;/a&gt;&lt;/li&gt;
 &lt;/ol&gt;
-</description>
-        </item>
-        <item>
-        <title>Todo list</title>
-        <link>https://star-hengxing.github.io/p/todo-list/</link>
-        <pubDate>Sat, 29 Jan 2022 00:00:00 +0000</pubDate>
-        
-        <guid>https://star-hengxing.github.io/p/todo-list/</guid>
-        <description>&lt;h2 id=&#34;daily&#34;&gt;DAILy&lt;/h2&gt;
-&lt;ol&gt;
-&lt;li&gt;codewars&lt;/li&gt;
-&lt;li&gt;nand2tetris&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h2 id=&#34;project&#34;&gt;PROJECT&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 复现Ski Safari&lt;/li&gt;
-&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 复现4399造梦西游3&lt;/li&gt;
-&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; Markdown parser&lt;/li&gt;
-&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 类似galgame阅读方式的跨平台图文阅读工具&lt;/li&gt;
-&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 基于oicq/mirai的第三方qq跨平台客户端&lt;/li&gt;
-&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; Android本地音乐播放器，可接入网易云web api&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;study&#34;&gt;STUDY&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;learnopengl&lt;/li&gt;
-&lt;li&gt;games系列&lt;/li&gt;
-&lt;li&gt;编译原理&lt;/li&gt;
-&lt;li&gt;操作系统&lt;/li&gt;
-&lt;li&gt;计算机网络(&lt;a class=&#34;link&#34; href=&#34;https://zhuanlan.zhihu.com/p/376391937&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;网络包分析器&lt;/a&gt;)&lt;/li&gt;
-&lt;li&gt;信号处理&lt;/li&gt;
-&lt;li&gt;日语&lt;/li&gt;
-&lt;li&gt;美术(素描？)&lt;/li&gt;
-&lt;li&gt;音乐
-&lt;ol&gt;
-&lt;li&gt;基础乐理&lt;/li&gt;
-&lt;li&gt;架子鼓/贝斯/吉他&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/li&gt;
-&lt;li&gt;哲学(马哲？)&lt;/li&gt;
-&lt;li&gt;物理(几大力学？)&lt;/li&gt;
-&lt;li&gt;数学
-&lt;ol&gt;
-&lt;li&gt;数学分析&lt;/li&gt;
-&lt;li&gt;测度学&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/li&gt;
-&lt;li&gt;wota艺&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;2021-summer-holiday&#34;&gt;2021 Summer Holiday&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; play raw(comic or galgame)&lt;/li&gt;
-&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; develope a demo with any game engine&lt;/li&gt;
-&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; draw a beautiful girl&lt;/li&gt;
-&lt;li&gt;&lt;input checked=&#34;&#34; disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; Alpha–beta pruning Algorithm(java, cpp, etc..)&lt;/li&gt;
-&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; implement firework with java(a classmate todo)&lt;/li&gt;
-&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; reconstruct raytracer/rasterizer software render&lt;/li&gt;
-&lt;li&gt;&lt;input checked=&#34;&#34; disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; mathlib&lt;/li&gt;
-&lt;li&gt;&lt;input checked=&#34;&#34; disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; SIMD and SIMD mathlib&lt;/li&gt;
-&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; SDF Ray Tracing&lt;/li&gt;
-&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 2D Ray Tracing&lt;/li&gt;
-&lt;/ul&gt;
 </description>
         </item>
         <item>

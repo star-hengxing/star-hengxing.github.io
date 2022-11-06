@@ -6,7 +6,17 @@
     <description>Recent content in Posts on 恒星的小站</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Mon, 19 Sep 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://star-hengxing.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 06 Nov 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://star-hengxing.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>浏览器插件</title>
+      <link>https://star-hengxing.github.io/p/%E6%B5%8F%E8%A7%88%E5%99%A8%E6%8F%92%E4%BB%B6/</link>
+      <pubDate>Sun, 06 Nov 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://star-hengxing.github.io/p/%E6%B5%8F%E8%A7%88%E5%99%A8%E6%8F%92%E4%BB%B6/</guid>
+      <description>使用 edge，不需要科学上网就能在不同电脑同步插件
+整洁 清理广告 -&amp;gt; AdGuard 移除 cookies 提醒 -&amp;gt; I don&amp;rsquo;t care about cookies 移除 url 跟踪参数 -&amp;gt; ClearURLs 效率 生成目录 -&amp;gt; Smart TOC 浏览网页 -&amp;gt; Vimium C 鼠标悬停链接显示图像/视频 -&amp;gt; Imagus 贴心工具 网页截图 -&amp;gt; Awesome Screenshot 听歌 -&amp;gt; Listen 1 自定义个人主页 -&amp;gt; Custom New Tab URL 破解网页限制复制 -&amp;gt; SuperCopy github 代码文件树 -&amp;gt; Octotree 集成 Aria2 for Edge KeePassXC-Browser v2ex plus Tampermonkey B站增强 -&amp;gt; Bilibili Evolved 移除 url 跟踪参数 -&amp;gt; Bilibili 干净链接 秒传 -&amp;gt; rapidupload-userscript 给片假名显示原词 -&amp;gt; 片假名终结者 知乎增强 贴吧页面精简 护眼模式 </description>
+    </item>
+    
     <item>
       <title>C&#43;&#43; 胡言乱语X1</title>
       <link>https://star-hengxing.github.io/p/c-%E8%83%A1%E8%A8%80%E4%B9%B1%E8%AF%ADx1/</link>
@@ -75,16 +85,7 @@ reddit上的关于该视频的讨论
       <guid>https://star-hengxing.github.io/p/%E6%94%B6%E8%97%8F%E5%A4%B9%E7%9F%A5%E8%AF%86%E5%88%86%E7%B1%BB/</guid>
       <description>下面的目录不好使，只要小部分能跳转，点右边的目录跳转吧
 我在知乎的点赞其实是当收藏用的， 这么多点赞，打算找时间用爬虫全部爬下来慢慢整理
-数学 物理 信息 软件工程 编程语言 C C++ Rust Haskell 体系结构 编译原理 可视化 优化 高性能计算 计算机图形学 旋转 逆向 Linux 工具 在线工具 Git Unity 二次元 galgame 资源 在线 生肉 音声 色度学 日语 misc 数学 我在知乎学数学 图形数学方法：FFT（快速傅里叶）的原理讲述 有没有比较好的学习高等数学，线性代数，概率论数理统计的英文书籍推荐？ 物理 Ten Minute Physics 信息 压缩算法lzma2,zstd,rar,brotli,lz4,lizardv1对比推荐 软件工程 语义化版本 2.0.0
-读《Fundamentals of Software Architechture》
-可逆计算：下一代软件构造理论
-抽象的幻觉（1）
-抽象的幻觉（2）
-游戏架构设计——面向数据编程（DOP）
-游戏架构设计——高性能并行编程
-为什么我认为Rust的Result错误处理方式不如Exception，探讨了Monad和工业界主流的异常处理两种错误处理的差异
-游戏编程模式
-编程语言 C 现代化 C 使用体验 The different ways to handle errors in C C++ 单例模式 简单的 C++ 结构体字段反射 make a shared_ptr from scratch C++ 系列专题 Changing std::sort at Google’s Scale and Beyond 最好的C++学习教程(上篇)——The Cherno CppSeries 最好的C++学习教程(下篇)——The Cherno CppSeries More C++ Idioms Learn Modern C++ Rust 文組也能懂的 Rust async 機制 Rust Language Cheat Sheet Haskell Learn Haskell by building a blog generator 体系结构 与程序员相关的CPU缓存知识 深入GPU硬件架构及运行机制 编译原理 【科普】编译器的构建基本原理 Programming Language Documentations 虚拟机随谈（一）：解释器，树遍历解释器，基于栈与基于寄存器，大杂烩 可视化 浮点数可视化 正则表达式可视化 马尔科夫链可视化 四元数可视化 数据结构可视化 优化 浮点数计算优化 高性能计算 高性能计算学习路线 从零开始的C/C++高性能编程指南 C++ 高性能编程实战系列（1） C++ 高性能编程实战系列（2） C++ 高性能编程实战系列（3） 计算机图形学 使用有理数进行渲染 如何验证BXDF 实时&amp;amp;离线皮肤渲染技术（Real-time &amp;amp; Offline Skin Rendering） Enterprise PBR Shading Model 多种几何体求交 How to build a BVH 旋转 可视化和公式推导 逆向 这里我推荐 CSAPP Lab2-Bomb Lab</description>
+数学 物理 信息 计算机理论 软件工程 理论 实践 编程语言 C C++ Rust Haskell 体系结构 编译原理 可视化 优化 高性能计算 计算机图形学 旋转 逆向 Linux 工具 在线工具 Git Unity 二次元 galgame 资源 在线 生肉 音声 色度学 日语 misc 数学 我在知乎学数学 图形数学方法：FFT（快速傅里叶）的原理讲述 有没有比较好的学习高等数学，线性代数，概率论数理统计的英文书籍推荐？ 物理 Ten Minute Physics 信息 压缩算法lzma2,zstd,rar,brotli,lz4,lizardv1对比推荐 计算机理论 计算复杂度理论基础（一）Preliminaries 软件工程 理论 语义化版本 2.0.0 读《Fundamentals of Software Architechture》 可逆计算：下一代软件构造理论 抽象的幻觉（1） 抽象的幻觉（2） 为什么这么设计系列文章 实践 游戏架构设计——面向数据编程（DOP） 游戏架构设计——高性能并行编程 为什么我认为Rust的Result错误处理方式不如Exception，探讨了Monad和工业界主流的异常处理两种错误处理的差异 游戏编程模式 阿里云块存储团队软件工程实践 Chromium 渲染流水线——字节码到像素的一生 编程语言 C 现代化 C 使用体验 The different ways to handle errors in C C++ 单例模式 简单的 C++ 结构体字段反射 make a shared_ptr from scratch C++ 系列专题 Changing std::sort at Google’s Scale and Beyond 最好的C++学习教程(上篇)——The Cherno CppSeries 最好的C++学习教程(下篇)——The Cherno CppSeries More C++ Idioms Learn Modern C++ 现代化工具链在大规模 C++ 项目中的技术实践 Understanding the different flavors of Clang C and C++ compilers in Windows，讲述了C++ 不同编译工具链的差异 从无栈协程到C++异步框架 Rust 文組也能懂的 Rust async 機制 Rust Language Cheat Sheet Haskell Learn Haskell by building a blog generator 体系结构 与程序员相关的CPU缓存知识 深入理解CPU cache：组织、一致性（同步）、编程 深入GPU硬件架构及运行机制 如何设计内存池？ - 韦易笑的回答 - 知乎，内存管理是最能体现体系结构知识的地方之一 Microarchitecture cheat sheet When an instruction depends on the previous instruction depends on the previous instructions… : long instruction dependency chains and performance 编译原理 【科普】编译器的构建基本原理 Programming Language Documentations 虚拟机随谈（一）：解释器，树遍历解释器，基于栈与基于寄存器，大杂烩 可视化 浮点数可视化 正则表达式可视化 马尔科夫链可视化 四元数可视化 数据结构可视化 优化 浮点数计算优化 vfixupimm: signum，用 AVX 优化取浮点数符号 高性能计算 高性能计算学习路线 从零开始的C/C++高性能编程指南 C++ 高性能编程实战系列（1） C++ 高性能编程实战系列（2） C++ 高性能编程实战系列（3） CMU15418 并行计算机架构与编程 计算机图形学 使用有理数进行渲染 如何验证BXDF 实时&amp;amp;离线皮肤渲染技术（Real-time &amp;amp; Offline Skin Rendering） Enterprise PBR Shading Model 多种几何体求交 How to build a BVH 旋转 可视化和公式推导 逆向 这里我推荐 CSAPP Lab2-Bomb Lab</description>
     </item>
     
     <item>
@@ -122,11 +123,11 @@ KeePassXC里随手就可以生成一个密码，无论是大小写字母数字�
     </item>
     
     <item>
-      <title>在Windows上使用xmake配置Vulkan开发环境</title>
-      <link>https://star-hengxing.github.io/p/%E5%9C%A8windows%E4%B8%8A%E4%BD%BF%E7%94%A8xmake%E9%85%8D%E7%BD%AEvulkan%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/</link>
-      <pubDate>Sat, 25 Jun 2022 20:17:10 +0800</pubDate>
+      <title>在 Windows 上使用 Xmake 配置 Vulkan 开发环境</title>
+      <link>https://star-hengxing.github.io/p/%E5%9C%A8-windows-%E4%B8%8A%E4%BD%BF%E7%94%A8-xmake-%E9%85%8D%E7%BD%AE-vulkan-%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/</link>
+      <pubDate>Mon, 20 Jun 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://star-hengxing.github.io/p/%E5%9C%A8windows%E4%B8%8A%E4%BD%BF%E7%94%A8xmake%E9%85%8D%E7%BD%AEvulkan%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/</guid>
+      <guid>https://star-hengxing.github.io/p/%E5%9C%A8-windows-%E4%B8%8A%E4%BD%BF%E7%94%A8-xmake-%E9%85%8D%E7%BD%AE-vulkan-%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/</guid>
       <description>也可以是C++小项目的配置
 开发环境构建 vscode+xmake+clang+clangd
 如果在配置过程中有问题，可以先看一下文末的FQA
@@ -134,19 +135,15 @@ C++编译工具链 Visual Studio 2022 clang 构建系统 xmake
 Vulkan SDK https://www.lunarg.com/vulkan-sdk/
 假装IDE的文本编辑器 Visual Studio Code
 安装插件
-clangd XMake Getting started 假设上面配置都是使用各自的installer，会安装在默认目录并添加环境变量
-新建一个目录，在目录下新建xmake.lua，写入下面内容
-set_project(&amp;#34;vulkan&amp;#34;) add_rules(&amp;#34;mode.debug&amp;#34;, &amp;#34;mode.release&amp;#34;) add_requires(&amp;#34;vulkansdk&amp;#34;, &amp;#34;glfw&amp;#34;, &amp;#34;glm&amp;#34;) set_warnings(&amp;#34;all&amp;#34;) set_languages(&amp;#34;cxx20&amp;#34;) target(&amp;#34;main&amp;#34;) set_kind(&amp;#34;binary&amp;#34;) add_files(&amp;#34;*.cpp&amp;#34;) add_packages(&amp;#34;vulkansdk&amp;#34;, &amp;#34;glfw&amp;#34;, &amp;#34;glm&amp;#34;) xmake会自动探测编译器、vulkansdk，glm和glfw库由xmake的包管理处理
+clangd XMake Getting started 上面列出来的工具下载完成后，新建一个目录，在目录下新建xmake.lua，写入下面内容
+set_project(&amp;#34;vulkan&amp;#34;) set_arch(&amp;#34;x64&amp;#34;) set_warnings(&amp;#34;all&amp;#34;) set_languages(&amp;#34;c++20&amp;#34;) set_toolchains(&amp;#34;clang&amp;#34;) add_rules(&amp;#34;mode.debug&amp;#34;, &amp;#34;mode.releasedbg&amp;#34;, &amp;#34;mode.release&amp;#34;, &amp;#34;mode.minsizerel&amp;#34;) add_requires(&amp;#34;vulkansdk&amp;#34;, &amp;#34;glfw&amp;#34;, &amp;#34;glm&amp;#34;) target(&amp;#34;main&amp;#34;) set_default(true) set_kind(&amp;#34;binary&amp;#34;) add_files(&amp;#34;src/main.cpp&amp;#34;) add_packages(&amp;#34;vulkansdk&amp;#34;, &amp;#34;glfw&amp;#34;, &amp;#34;glm&amp;#34;) 依赖的 vulkansdk 在上面已经下载，如果用他的 installer 安装会自动设置环境变量，xmake 会根据环境变量自动探测编译器、vulkansdk 的正确位置，glm 和 glfw 由 xmake 的包管理处理
 编译 测试代码来自vulkan tutorial
-直接新建一个main.cpp，把代码copy下来
+直接新建一个main.cpp，把代码复制下来
 一切配置好后，可以测试一下了
 xmake xmake run 出现窗口代表环境配置成功
 Intellisense xmake会在.vscode目录自动生成compile_commands.json
 所以我们在.vscode/settings.json给clangd加上参数
-{ &amp;#34;clangd.arguments&amp;#34;: [ &amp;#34;--compile-commands-dir=.vscode&amp;#34;, &amp;#34;--header-insertion=never&amp;#34;, &amp;#34;--completion-style=detailed&amp;#34; ] } FQA Q: xmake下载包失败怎么办
-A: 查看文档使用远程包 - xmake
-Q: 编译失败怎么办
-A: 执行xmake -v，查看详细输出信息</description>
+{ &amp;#34;clangd.arguments&amp;#34;: [ &amp;#34;--compile-commands-dir=.</description>
     </item>
     
     <item>
@@ -155,7 +152,7 @@ A: 执行xmake -v，查看详细输出信息</description>
       <pubDate>Mon, 30 May 2022 00:00:00 +0000</pubDate>
       
       <guid>https://star-hengxing.github.io/p/%E6%B8%B2%E6%9F%93%E8%BF%9B%E9%98%B6/</guid>
-      <description>图形笑话三则 来点图程破防乐子 无内鬼，来点图形笑话 再来点图程破防乐子 免费渲染模型 McGuire Computer Graphics Archive Rendering Resources 博客 A GRAPHICS GUY&amp;rsquo;S NOTE Computer Graphics IQ YangWC&amp;rsquo;s Blog AirGuanZ 《高级计算机图形学——真实感图像合成》目录及序言 课程 CS 87/287 | RENDERING ALGORITHMS UCSD CSE 272: Advanced Image Synthesis Advanced Graphics 各种效果 光谱 Simple Spectral Spectral Ray Tracing 天空 The Sky Dome Appearance Project 彩虹 Physically-based simulation of rainbows 动物毛发 An Efficient and Practical Near and Far Field Fur Reflectance Model 肥皂泡 Chemomechanical Simulation of Soap Film Flow on Spherical Bubbles FQA （其实就是把群友讨论结果收藏一下</description>
+      <description>图形笑话三则 来点图程破防乐子 无内鬼，来点图形笑话 再来点图程破防乐子 免费渲染模型 McGuire Computer Graphics Archive Rendering Resources 博客 A GRAPHICS GUY&amp;rsquo;S NOTE Computer Graphics IQ YangWC&amp;rsquo;s Blog AirGuanZ 《高级计算机图形学——真实感图像合成》目录及序言 课程 CS 87/287 | RENDERING ALGORITHMS UCSD CSE 272: Advanced Image Synthesis Advanced Graphics CSE 168 Computer Graphics II: Rendering 各种效果 光谱 Simple Spectral Spectral Ray Tracing 天空 The Sky Dome Appearance Project 彩虹 Physically-based simulation of rainbows 动物毛发 An Efficient and Practical Near and Far Field Fur Reflectance Model 肥皂泡 Chemomechanical Simulation of Soap Film Flow on Spherical Bubbles FQA （其实就是把群友讨论结果收藏一下</description>
     </item>
     
     <item>
@@ -332,15 +329,6 @@ Reference 精通乐理不是梦：超简单的乐理学习图解版 认识乐理
       <description>基本软件 工具 名字 display manager lightdm desktop environment xfce4 文本编辑器 vscode/vim/emacs 程序启动器 rofi 输入法 fcitx5 browser microsoft-edge-dev(AUR) 多线程下载 aria2 压缩包解压/查看 ark proxy clash for window(AUR) RSS fluent-reader shell zsh PDF zathura 命令行软件 描述 名字 显示目录大小 ncdu 高级版top gotop(AUR)/htop 打印彩色的十六进制 hexyl 语法高亮和行号的cat+less bat 统计目录代码量 loc 文件浏览器 ranger 比tmux更好用的单窗口多终端 zellij 新建用户 useradd -m -G wheel username passwd username ln -s /usr/bin/vim /usr/bin/vi visudo 找到# %wheel ALL=(ALL)ALL取消注释
 硬件 网卡 万物起源先上网，但有些网卡需要手动装驱动(比如我笔记本的博通网卡)
 sudo pacman -S linux-headers broadcom-wl-dkms reboot dkms status 声卡 sudo pacman -S alsa-utils pulseaudio-alsa 蓝牙 sudo pacman -S bluez bluez-utils /etc/bluetooth/main.</description>
-    </item>
-    
-    <item>
-      <title>Todo list</title>
-      <link>https://star-hengxing.github.io/p/todo-list/</link>
-      <pubDate>Sat, 29 Jan 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://star-hengxing.github.io/p/todo-list/</guid>
-      <description>DAILy codewars nand2tetris PROJECT 复现Ski Safari 复现4399造梦西游3 Markdown parser 类似galgame阅读方式的跨平台图文阅读工具 基于oicq/mirai的第三方qq跨平台客户端 Android本地音乐播放器，可接入网易云web api STUDY learnopengl games系列 编译原理 操作系统 计算机网络(网络包分析器) 信号处理 日语 美术(素描？) 音乐 基础乐理 架子鼓/贝斯/吉他 哲学(马哲？) 物理(几大力学？) 数学 数学分析 测度学 wota艺 2021 Summer Holiday play raw(comic or galgame) develope a demo with any game engine draw a beautiful girl Alpha–beta pruning Algorithm(java, cpp, etc..) implement firework with java(a classmate todo) reconstruct raytracer/rasterizer software render mathlib SIMD and SIMD mathlib SDF Ray Tracing 2D Ray Tracing </description>
     </item>
     
     <item>
