@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Xmake on 恒星的小站</title>
+    <link>https://star-hengxing.github.io/tags/xmake/</link>
+    <description>Recent content in Xmake on 恒星的小站</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Wed, 04 Jan 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://star-hengxing.github.io/tags/xmake/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>使用 Xmake 生成静态和动态库</title>
+      <link>https://star-hengxing.github.io/p/%E4%BD%BF%E7%94%A8-xmake-%E7%94%9F%E6%88%90%E9%9D%99%E6%80%81%E5%92%8C%E5%8A%A8%E6%80%81%E5%BA%93/</link>
+      <pubDate>Wed, 04 Jan 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://star-hengxing.github.io/p/%E4%BD%BF%E7%94%A8-xmake-%E7%94%9F%E6%88%90%E9%9D%99%E6%80%81%E5%92%8C%E5%8A%A8%E6%80%81%E5%BA%93/</guid>
+      <description>前言 当前环境在 Windows，默认了解 C/C++ 编译流程。
+静态库 target 下直接考虑用set_kind(&amp;quot;static&amp;quot;)即可。
+有一个可以注意的地方，可以使用set_policy(&amp;quot;build.merge_archive&amp;quot;, true)来合并所有静态库。（大概是用在分发二进制的时候？）
+动态库 C 考虑到 windows dll 要在函数声明__declspec(dllexport)才能导出接口（当然不止这个方法）。
+xmake 对 C 语言做了支持，不用手动声明，只要在 target 下添加：
+add_rules(&amp;#34;utils.symbols.export_all&amp;#34;) 如果想要自定义导出的符号，使用utils.symbols.export_list，参考文档
+C++ 众所周知 C++ 的符号比较复杂（毕竟有重载这一大特性），所以 xmake 暂未支持。
+那还是用回上述方案，通常我们定义这样一个宏：
+#ifdef _WIN32 #ifdef LIBRARY_EXPORTS #define LIBRARY_API __declspec(dllexport) #else #define LIBRARY_API // #define LIBRARY_API __declspec(dllimport) #endif #elif #define LIBRARY_API #endif 然后在函数声明加上：
+LIBRARY_API auto read_file(const char* filename) -&amp;gt; std::tuple&amp;lt;std::unique_ptr&amp;lt;char[]&amp;gt;, size_t&amp;gt;; 如果没有修饰函数，即使用了set_kind(&amp;quot;shared&amp;quot;)，当程序调用 dll 里的 api 的时候会直接崩溃。
+然后在库xmake.lua写：
+add_includedirs(&amp;#34;include&amp;#34;, {public = true}) option(&amp;#34;shared&amp;#34;) set_default(false) set_showmenu(true) set_description(&amp;#34;Enable shared library (default: false)&amp;#34;) option_end() function my_config(target) if has_config(&amp;#34;shared&amp;#34;) then target:set(&amp;#34;kind&amp;#34;, &amp;#34;shared&amp;#34;) if is_plat(&amp;#34;windows&amp;#34;) then target:add(&amp;#34;defines&amp;#34;, &amp;#34;LIBRARY_EXPORTS&amp;#34;) end else target:set(&amp;#34;kind&amp;#34;, &amp;#34;static&amp;#34;) end end target(&amp;#34;add&amp;#34;) add_files(&amp;#34;src/add.</description>
+    </item>
+    
+    <item>
+      <title>使用 Xmake 作为 CS149 作业的 bulild system</title>
+      <link>https://star-hengxing.github.io/p/%E4%BD%BF%E7%94%A8-xmake-%E4%BD%9C%E4%B8%BA-cs149-%E4%BD%9C%E4%B8%9A%E7%9A%84-bulild-system/</link>
+      <pubDate>Sun, 18 Dec 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://star-hengxing.github.io/p/%E4%BD%BF%E7%94%A8-xmake-%E4%BD%9C%E4%B8%BA-cs149-%E4%BD%9C%E4%B8%9A%E7%9A%84-bulild-system/</guid>
+      <description>前言 CS149 是一个教并行编程的课程，课程作业使用了 makefile 作为 build system。
+本文通过改造 build system 来讲述一些xmake的使用方法。
+分析 这个课程主要有四个作业，那么是一个多target工程，考虑用多级配置。
+作业里用到了很多工具，xmake都支持这些工具链。不过有些作业不跨平台（只能在 Linux 下运行），所以尽可能地将作业移植到 windows 上。
+改造 完整配置在GitHub上，这里选讲几个部分。
+根目录配置 最小xmake版本。ispc编译在这个版本后支持。 set_xmakever(&amp;#34;2.7.3&amp;#34;) 跨平台首选clang作为 C++ 编译器，在 windows 下使用clang-cl接受 msvc 风格的参数。 在开发环境下，链接动态库可以减少二进制体积，加速链接。 添加宏定义处理一些 windows 的屎。 if is_os(&amp;#34;windows&amp;#34;) then set_toolchains(&amp;#34;clang-cl&amp;#34;) set_runtimes(&amp;#34;MD&amp;#34;) add_defines(&amp;#34;_CRT_SECURE_NO_WARNINGS&amp;#34;, &amp;#34;NOMINMAX&amp;#34;) else set_toolchains(&amp;#34;clang&amp;#34;) end 源码目录配置 考虑到 windows 没有getopt.h，这里在 github 上随便找了一个库代替，并开放头文件权限给依赖此库的target使用。 if is_os(&amp;#34;windows&amp;#34;) then target(&amp;#34;getopt&amp;#34;) set_kind(&amp;#34;static&amp;#34;) add_includedirs(&amp;#34;getopt-for-windows&amp;#34;, {public = true}) add_files(&amp;#34;getopt-for-windows/getopt.c&amp;#34;) end 作业1 作业有多个target，其实可以考虑每个给每个target单独一个配置，不过这里选择把多个target都放在同一个xmake.lua中。
+根据原始 makefile 参数，处理一些跨平台配置。 考虑到作业会生成 ppm 格式的图片，所以改变该target的运行目录。 target(&amp;#34;mandelbrot&amp;#34;) set_kind(&amp;#34;binary&amp;#34;) add_files(&amp;#34;prog1_mandelbrot_threads/*.</description>
+    </item>
+    
+  </channel>
+</rss>

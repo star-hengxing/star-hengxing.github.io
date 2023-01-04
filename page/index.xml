@@ -14,8 +14,7 @@
       
       <guid>https://star-hengxing.github.io/about/</guid>
       <description>cs本科大三在读
-喜欢galgame，平时看看动画和漫画 对计算机科学非常有兴趣 想实现
-Markdown parser 光线追踪/光栅化 CPU 渲染器 全栈搭建个人博客 流媒体网站，web + 跨平台客户端 自定义协议 im，web + 跨平台客户端 文本编辑器(希望能进化成 C++ ide) 音乐播放器，后端接入各大平台的 api，下载播放音乐，前端使用跨平台框架 基于 Github 上开源的 qq 协议库， native 跨平台非官方客户端 类似galgame阅读方式的跨平台图文阅读工具(直接游戏引擎吧) </description>
+喜欢galgame，平时看看动画和漫画 对计算机科学非常有兴趣 有很多想实现的玩意 大工程 Markdown parser 光线追踪/光栅化 CPU 渲染器 全栈搭建个人博客 流媒体网站，web + 跨平台客户端 自定义协议 im，web + 跨平台客户端 文本编辑器(希望能进化成 C++ ide) 音乐播放器，后端接入各大平台的 api，下载播放音乐，前端使用跨平台框架 基于 Github 上开源的 qq 协议库， native 跨平台非官方客户端 类似galgame阅读方式的跨平台图文阅读工具(直接游戏引擎吧) 小玩具 黄油启动器 用 C++ 或 CUDA 复现 幻影坦克 AI 生成涩图：Stable Diffusion NCNN 刚体碰撞教程 相对论/非线性光线追踪 Visualizing Black Holes with General Relativistic Ray Tracing Non-linear Monte Carlo Ray Tracing for Visualizing Warped Spacetime 离线渲染 复现有多重散射的微表面材质 光谱 PM -&amp;gt; PPM -&amp;gt; SPPM -&amp;gt; unbiased PM 支持更多的几何求交，参考IQ 只渲染 mesh 的渲染器 噪声纹理 面向就业学习 unity/ue4 vulkan/opengl 渲染 deferred rendering PBR 光照 球谐环境光照 IBL 高光 shadowmap，支持三种光源 Bloom and Tonemapping TAA real-time ray tracing 音视频 tiny video player recording microphone, pcm -&amp;gt; mp3 remote real-time desktop rtmp server webrtc and real-time audio and video rtc </description>
     </item>
     
     <item>

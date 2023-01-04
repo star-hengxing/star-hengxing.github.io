@@ -6,7 +6,411 @@
         <description>Recent content on 恒星的小站</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
-        <lastBuildDate>Sun, 06 Nov 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://star-hengxing.github.io/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Wed, 04 Jan 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://star-hengxing.github.io/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>使用 Xmake 生成静态和动态库</title>
+        <link>https://star-hengxing.github.io/p/%E4%BD%BF%E7%94%A8-xmake-%E7%94%9F%E6%88%90%E9%9D%99%E6%80%81%E5%92%8C%E5%8A%A8%E6%80%81%E5%BA%93/</link>
+        <pubDate>Wed, 04 Jan 2023 00:00:00 +0000</pubDate>
+        
+        <guid>https://star-hengxing.github.io/p/%E4%BD%BF%E7%94%A8-xmake-%E7%94%9F%E6%88%90%E9%9D%99%E6%80%81%E5%92%8C%E5%8A%A8%E6%80%81%E5%BA%93/</guid>
+        <description>&lt;h2 id=&#34;前言&#34;&gt;前言&lt;/h2&gt;
+&lt;p&gt;当前环境在 Windows，默认了解 C/C++ 编译流程。&lt;/p&gt;
+&lt;h2 id=&#34;静态库&#34;&gt;静态库&lt;/h2&gt;
+&lt;p&gt;target 下直接考虑用&lt;code&gt;set_kind(&amp;quot;static&amp;quot;)&lt;/code&gt;即可。&lt;/p&gt;
+&lt;p&gt;有一个可以注意的地方，可以使用&lt;code&gt;set_policy(&amp;quot;build.merge_archive&amp;quot;, true)&lt;/code&gt;来合并所有静态库。（大概是用在分发二进制的时候？）&lt;/p&gt;
+&lt;h2 id=&#34;动态库&#34;&gt;动态库&lt;/h2&gt;
+&lt;h3 id=&#34;c&#34;&gt;C&lt;/h3&gt;
+&lt;p&gt;考虑到 windows dll 要在函数声明&lt;code&gt;__declspec(dllexport)&lt;/code&gt;才能导出接口（当然不止这个方法）。&lt;/p&gt;
+&lt;p&gt;xmake 对 C 语言做了支持，不用手动声明，只要在 target 下添加：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-lua&#34; data-lang=&#34;lua&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;add_rules(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;utils.symbols.export_all&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;如果想要自定义导出的符号，使用&lt;code&gt;utils.symbols.export_list&lt;/code&gt;，参考&lt;a class=&#34;link&#34; href=&#34;https://xmake.io/#/zh-cn/manual/custom_rule?id=utilssymbolsexport_all&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;文档&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;c-1&#34;&gt;C++&lt;/h3&gt;
+&lt;p&gt;众所周知 C++ 的符号比较复杂（毕竟有重载这一大特性），所以 xmake 暂未支持。&lt;/p&gt;
+&lt;p&gt;那还是用回上述方案，通常我们定义这样一个宏：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-C++&#34; data-lang=&#34;C++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;#ifdef _WIN32
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;#ifdef LIBRARY_EXPORTS
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;#define LIBRARY_API __declspec(dllexport)
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;#else
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;#define LIBRARY_API
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#6272a4&#34;&gt;// #define LIBRARY_API __declspec(dllimport)
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#6272a4&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;#endif
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;#elif
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;#define LIBRARY_API
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;#endif
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;然后在函数声明加上：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-C++&#34; data-lang=&#34;C++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;LIBRARY_API
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;auto&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;read_file&lt;/span&gt;(&lt;span style=&#34;color:#ff79c6&#34;&gt;const&lt;/span&gt; &lt;span style=&#34;color:#8be9fd&#34;&gt;char&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;*&lt;/span&gt; filename) &lt;span style=&#34;color:#ff79c6&#34;&gt;-&amp;gt;&lt;/span&gt; std&lt;span style=&#34;color:#ff79c6&#34;&gt;::&lt;/span&gt;tuple&lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&lt;/span&gt;std&lt;span style=&#34;color:#ff79c6&#34;&gt;::&lt;/span&gt;unique_ptr&lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color:#8be9fd&#34;&gt;char&lt;/span&gt;[]&lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;gt;&lt;/span&gt;, size_t&lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;gt;&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;blockquote&gt;
+&lt;p&gt;如果没有修饰函数，即使用了&lt;code&gt;set_kind(&amp;quot;shared&amp;quot;)&lt;/code&gt;，当程序调用 dll 里的 api 的时候会直接崩溃。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;p&gt;然后在库&lt;code&gt;xmake.lua&lt;/code&gt;写：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-lua&#34; data-lang=&#34;lua&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;add_includedirs(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;include&amp;#34;&lt;/span&gt;, {public &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;true&lt;/span&gt;})
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;option(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;shared&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    set_default(&lt;span style=&#34;color:#ff79c6&#34;&gt;false&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    set_showmenu(&lt;span style=&#34;color:#ff79c6&#34;&gt;true&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    set_description(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;Enable shared library (default: false)&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;option_end()
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;function&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;my_config&lt;/span&gt;(target)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;if&lt;/span&gt; has_config(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;shared&amp;#34;&lt;/span&gt;) &lt;span style=&#34;color:#ff79c6&#34;&gt;then&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        target:set(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;kind&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;shared&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#ff79c6&#34;&gt;if&lt;/span&gt; is_plat(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;windows&amp;#34;&lt;/span&gt;) &lt;span style=&#34;color:#ff79c6&#34;&gt;then&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            target:add(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;defines&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;LIBRARY_EXPORTS&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#ff79c6&#34;&gt;end&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;else&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        target:set(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;kind&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;static&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;end&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;end&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;target(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;add&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    add_files(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;src/add.cpp&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    on_load(my_config)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;target(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;sub&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    add_files(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;src/sub.cpp&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    on_load(my_config)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;target(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;test&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    add_files(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;src/test.cpp&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    add_deps(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;add&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;sub&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;not&lt;/span&gt; has_config(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;shared&amp;#34;&lt;/span&gt;) &lt;span style=&#34;color:#ff79c6&#34;&gt;then&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        set_policy(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;build.merge_archive&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#ff79c6&#34;&gt;true&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;end&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    on_load(my_config)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;使用不同类型的库只要&lt;code&gt;xmake f --shared=true/false&lt;/code&gt;就行了。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>使用 Xmake 作为 CS149 作业的 bulild system</title>
+        <link>https://star-hengxing.github.io/p/%E4%BD%BF%E7%94%A8-xmake-%E4%BD%9C%E4%B8%BA-cs149-%E4%BD%9C%E4%B8%9A%E7%9A%84-bulild-system/</link>
+        <pubDate>Sun, 18 Dec 2022 00:00:00 +0000</pubDate>
+        
+        <guid>https://star-hengxing.github.io/p/%E4%BD%BF%E7%94%A8-xmake-%E4%BD%9C%E4%B8%BA-cs149-%E4%BD%9C%E4%B8%9A%E7%9A%84-bulild-system/</guid>
+        <description>&lt;h2 id=&#34;前言&#34;&gt;前言&lt;/h2&gt;
+&lt;p&gt;CS149 是一个教&lt;strong&gt;并行编程&lt;/strong&gt;的课程，课程作业使用了 makefile 作为 build system。&lt;/p&gt;
+&lt;p&gt;本文通过改造 build system 来讲述一些&lt;code&gt;xmake&lt;/code&gt;的使用方法。&lt;/p&gt;
+&lt;h2 id=&#34;分析&#34;&gt;分析&lt;/h2&gt;
+&lt;p&gt;这个课程主要有四个作业，那么是一个多&lt;code&gt;target&lt;/code&gt;工程，考虑用&lt;a class=&#34;link&#34; href=&#34;https://xmake.io/#/zh-cn/guide/syntax_description?id=%e5%a4%9a%e7%ba%a7%e9%85%8d%e7%bd%ae&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;多级配置&lt;/a&gt;。&lt;/p&gt;
+&lt;p&gt;作业里用到了很多工具，&lt;code&gt;xmake&lt;/code&gt;都支持这些工具链。不过有些作业不跨平台（只能在 Linux 下运行），所以尽可能地将作业移植到 windows 上。&lt;/p&gt;
+&lt;h2 id=&#34;改造&#34;&gt;改造&lt;/h2&gt;
+&lt;p&gt;完整配置在&lt;a class=&#34;link&#34; href=&#34;https://github.com/star-hengxing/cs149-xmake&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;GitHub&lt;/a&gt;上，这里选讲几个部分。&lt;/p&gt;
+&lt;h3 id=&#34;根目录配置&#34;&gt;根目录配置&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;最小&lt;code&gt;xmake&lt;/code&gt;版本。&lt;code&gt;ispc&lt;/code&gt;编译在这个版本后支持。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-lua&#34; data-lang=&#34;lua&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;set_xmakever(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;2.7.3&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;跨平台首选&lt;code&gt;clang&lt;/code&gt;作为 C++ 编译器，在 windows 下使用&lt;code&gt;clang-cl&lt;/code&gt;接受 msvc 风格的&lt;strong&gt;参数&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;在开发环境下，链接动态库可以减少二进制体积，加速链接。&lt;/li&gt;
+&lt;li&gt;添加宏定义处理一些 windows 的屎。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-lua&#34; data-lang=&#34;lua&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;if&lt;/span&gt; is_os(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;windows&amp;#34;&lt;/span&gt;) &lt;span style=&#34;color:#ff79c6&#34;&gt;then&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    set_toolchains(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;clang-cl&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    set_runtimes(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;MD&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    add_defines(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;_CRT_SECURE_NO_WARNINGS&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;NOMINMAX&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;else&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    set_toolchains(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;clang&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;end&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;源码目录配置&#34;&gt;源码目录配置&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;考虑到 windows 没有&lt;code&gt;getopt.h&lt;/code&gt;，这里在 github 上随便找了一个库代替，并开放&lt;a class=&#34;link&#34; href=&#34;https://xmake.io/#/zh-cn/manual/project_target?id=%e6%b7%bb%e5%8a%a0%e5%a4%b4%e6%96%87%e4%bb%b6%e6%90%9c%e7%b4%a2%e7%9b%ae%e5%bd%95&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;头文件权限&lt;/a&gt;给依赖此库的&lt;code&gt;target&lt;/code&gt;使用。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-lua&#34; data-lang=&#34;lua&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;if&lt;/span&gt; is_os(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;windows&amp;#34;&lt;/span&gt;) &lt;span style=&#34;color:#ff79c6&#34;&gt;then&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    target(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;getopt&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        set_kind(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;static&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        add_includedirs(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;getopt-for-windows&amp;#34;&lt;/span&gt;, {public &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;true&lt;/span&gt;})
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        add_files(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;getopt-for-windows/getopt.c&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;end&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;作业1&#34;&gt;作业1&lt;/h3&gt;
+&lt;p&gt;作业有多个&lt;code&gt;target&lt;/code&gt;，其实可以考虑每个给每个&lt;code&gt;target&lt;/code&gt;单独一个配置，不过这里选择把多个&lt;code&gt;target&lt;/code&gt;都放在同一个&lt;code&gt;xmake.lua&lt;/code&gt;中。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;根据原始 makefile 参数，处理一些跨平台配置。&lt;/li&gt;
+&lt;li&gt;考虑到作业会生成 ppm 格式的图片，所以改变该&lt;code&gt;target&lt;/code&gt;的运行目录。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-lua&#34; data-lang=&#34;lua&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;target(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;mandelbrot&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    set_kind(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;binary&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    add_files(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;prog1_mandelbrot_threads/*.cpp&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    set_optimize(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;fastest&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    add_deps(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;common&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;if&lt;/span&gt; is_os(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;windows&amp;#34;&lt;/span&gt;) &lt;span style=&#34;color:#ff79c6&#34;&gt;then&lt;/span&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        add_deps(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;getopt&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;elseif&lt;/span&gt; is_os(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;linux&amp;#34;&lt;/span&gt;) &lt;span style=&#34;color:#ff79c6&#34;&gt;then&lt;/span&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        add_syslinks(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;m&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;pthread&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;end&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    set_rundir(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;prog1_mandelbrot_threads&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;这里用到了&lt;code&gt;ispc&lt;/code&gt;进行编译，使用&lt;code&gt;xmake&lt;/code&gt;的内置规则进行编译。&lt;/li&gt;
+&lt;li&gt;编译 ispc 文件会生成一个对象文件和头文件，这里通过&lt;code&gt;header_extension&lt;/code&gt;配置控制生成头文件的后缀，然后就可以在代码中引用生成的头文件&lt;code&gt;xxx_ispc.h&lt;/code&gt;（xxx.ispc）。&lt;/li&gt;
+&lt;li&gt;由于没有内置的 ispc api，这里使用&lt;code&gt;set_values&lt;/code&gt;传递编译参数。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-lua&#34; data-lang=&#34;lua&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;target(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;sqrt&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    set_kind(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;binary&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    add_rules(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;utils.ispc&amp;#34;&lt;/span&gt;, {header_extension &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;_ispc.h&amp;#34;&lt;/span&gt;})
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    add_files(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;prog4_sqrt/*.ispc&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    add_files(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;prog4_sqrt/*.cpp&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    add_cxxflags(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;-march=native&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    set_values(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;ispc.flags&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;--target=avx2-i32x8&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;--arch=x86-64&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    set_optimize(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;fastest&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    add_deps(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;common&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;if&lt;/span&gt; is_os(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;linux&amp;#34;&lt;/span&gt;) &lt;span style=&#34;color:#ff79c6&#34;&gt;then&lt;/span&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        add_syslinks(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;m&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;pthread&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;end&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;作业2&#34;&gt;作业2&lt;/h3&gt;
+&lt;p&gt;本作业两个&lt;code&gt;target&lt;/code&gt;的配置相同，可以用一个循环来生成。（常用于生成相同配置的单元测试）&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-lua&#34; data-lang=&#34;lua&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;for&lt;/span&gt; _, part &lt;span style=&#34;color:#ff79c6&#34;&gt;in&lt;/span&gt; ipairs({&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;part_a&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;part_b&amp;#34;&lt;/span&gt;}) &lt;span style=&#34;color:#ff79c6&#34;&gt;do&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;target(part)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    set_kind(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;binary&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    add_includedirs(part)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    add_includedirs(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;../common&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;tests&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    add_files(part &lt;span style=&#34;color:#ff79c6&#34;&gt;..&lt;/span&gt; &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;/*.cpp&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    add_files(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;tests/main.cpp&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;if&lt;/span&gt; is_os(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;windows&amp;#34;&lt;/span&gt;) &lt;span style=&#34;color:#ff79c6&#34;&gt;then&lt;/span&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        add_deps(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;getopt&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;elseif&lt;/span&gt; is_os(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;linux&amp;#34;&lt;/span&gt;) &lt;span style=&#34;color:#ff79c6&#34;&gt;then&lt;/span&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        add_syslinks(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;m&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;pthread&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;end&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;end&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;作业内置 test，但官方没有提供完成所有测试的脚本（其实直接改源码也可以），不过这里考虑用 xmake 的脚本域来做这件事。&lt;/li&gt;
+&lt;li&gt;设置一个空目标类型，覆盖内置的&lt;a class=&#34;link&#34; href=&#34;https://xmake.io/#/zh-cn/manual/project_target?id=%e6%b7%bb%e5%8a%a0%e5%a4%b4%e6%96%87%e4%bb%b6%e6%90%9c%e7%b4%a2%e7%9b%ae%e5%bd%95&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;on_run&lt;/a&gt;，然后使用 xmake 一些内置的 api 运行测试。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-lua&#34; data-lang=&#34;lua&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;target(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;part_a_test&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    set_kind(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;phony&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    add_deps(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;part_a&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    on_run(&lt;span style=&#34;color:#ff79c6&#34;&gt;function&lt;/span&gt; ()
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;local&lt;/span&gt; test_names &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;simple_test_sync&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;ping_pong_equal&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;ping_pong_unequal&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;super_light&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;super_super_light&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;recursive_fibonacci&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;math_operations_in_tight_for_loop&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;math_operations_in_tight_for_loop_fewer_tasks&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;math_operations_in_tight_for_loop_fan_in&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;math_operations_in_tight_for_loop_reduction_tree&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;spin_between_run_calls&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;mandelbrot_chunked&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#ff79c6&#34;&gt;for&lt;/span&gt; _, value &lt;span style=&#34;color:#ff79c6&#34;&gt;in&lt;/span&gt; ipairs(test_names)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#ff79c6&#34;&gt;do&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#6272a4&#34;&gt;-- cprint(&amp;#34;Testing &amp;#34; .. &amp;#34;${bright green}%s&amp;#34;, value)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#6272a4&#34;&gt;-- os.runv(name, {value})&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            os.execv(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;xmake&amp;#34;&lt;/span&gt;, {&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;run&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;part_a&amp;#34;&lt;/span&gt;, value})
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#ff79c6&#34;&gt;end&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        cprint(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;${bright red}Pass!&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;end&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;作业3&#34;&gt;作业3&lt;/h3&gt;
+&lt;p&gt;xmake 会自动探测 cuda 的目录，如果不在默认的安装目录，设置一下。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;xmake f --cuda=&amp;lt;PATH&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;xmake 对&lt;code&gt;cuda&lt;/code&gt;支持还算完善，直接&lt;code&gt;add_files&lt;/code&gt;就能直接编译。&lt;/li&gt;
+&lt;li&gt;cuda runtime 也有动态库，不过 xmake 默认链接静态库，这里需要手动添加链接动态库的名字。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-lua&#34; data-lang=&#34;lua&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;add_cugencodes(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;compute_35&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;add_links(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;cudart&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;target(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;render&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    set_kind(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;binary&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    add_files(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;render/*.cpp&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    add_files(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;render/*.cu&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    add_packages(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;freeglut&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    set_rundir(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;render&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;作业4&#34;&gt;作业4&lt;/h3&gt;
+&lt;p&gt;该作业只能运行在 Linux 平台，因为官方只提供了 Linux 平台的二进制进行链接。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;这里写了一个函数禁用&lt;code&gt;target&lt;/code&gt;，然后在&lt;a class=&#34;link&#34; href=&#34;https://xmake.io/#/zh-cn/manual/project_target?id=targeton_load&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;on_load&lt;/a&gt;时禁用，可以使用其他写法禁用&lt;code&gt;target&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;官方提供了一个静态库，但静态库名字前缀不是&lt;code&gt;lib&lt;/code&gt;开头，链接器不接受，所以不能直接用&lt;code&gt;add_links&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-lua&#34; data-lang=&#34;lua&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;function&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;only_linux&lt;/span&gt;(target)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;if&lt;/span&gt; target:is_plat(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;linux&amp;#34;&lt;/span&gt;) &lt;span style=&#34;color:#ff79c6&#34;&gt;then&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        target:set(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;enabled&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#ff79c6&#34;&gt;true&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;else&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        target:set(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;enabled&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#ff79c6&#34;&gt;false&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;end&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;end&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;target(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;pr&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    set_kind(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;binary&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    add_files(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;pagerank/main.cpp&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;pagerank/page_rank.cpp&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    add_linkdirs(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;pagerank&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    add_ldflags(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;-fopenmp&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    add_ldflags(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;-l:ref_pr.a&amp;#34;&lt;/span&gt;, {force &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;true&lt;/span&gt;})
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    add_deps(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;assignment4_common&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    on_load(only_linux)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;对象文件也可也直接&lt;a class=&#34;link&#34; href=&#34;https://xmake.io/#/zh-cn/manual/project_target?id=targetadd_files&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;add_files&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-lua&#34; data-lang=&#34;lua&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;target(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;bfs&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    set_kind(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;binary&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    add_files(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;bfs/main.cpp&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;bfs/bfs.cpp&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    add_files(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;bfs/ref_bfs.o&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    add_ldflags(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;-fopenmp&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    add_deps(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;assignment4_common&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    on_load(only_linux)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+        </item>
+        <item>
+        <title>用 vscode 写 UE 代码</title>
+        <link>https://star-hengxing.github.io/p/%E7%94%A8-vscode-%E5%86%99-ue-%E4%BB%A3%E7%A0%81/</link>
+        <pubDate>Fri, 25 Nov 2022 00:00:00 +0000</pubDate>
+        
+        <guid>https://star-hengxing.github.io/p/%E7%94%A8-vscode-%E5%86%99-ue-%E4%BB%A3%E7%A0%81/</guid>
+        <description>&lt;h2 id=&#34;前提&#34;&gt;前提&lt;/h2&gt;
+&lt;p&gt;目前来说 Rider 还是最好的 UE IDE，本文只是提供多一种选项来写 UE 代码。&lt;/p&gt;
+&lt;h2 id=&#34;环境&#34;&gt;环境&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;vscode 插件 clangd&lt;/li&gt;
+&lt;li&gt;clang&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Windows 推荐使用 scoop 下载 clang。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;scoop install llvm
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;部署&#34;&gt;部署&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;用 vscode 打开 UE 项目目录，新建&lt;code&gt;.vscode&lt;/code&gt;目录。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;新建&lt;code&gt;.vscode/settings.json&lt;/code&gt;文件，写入下面内容。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-json&#34; data-lang=&#34;json&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;#34;clangd.arguments&amp;#34;&lt;/span&gt;: [
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;--background-index&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;--compile-commands-dir=.vscode&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#6272a4&#34;&gt;// completion
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#6272a4&#34;&gt;&lt;/span&gt;        &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;--header-insertion=never&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;--completion-style=bundled&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;--function-arg-placeholders=false&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#6272a4&#34;&gt;// effective
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#6272a4&#34;&gt;&lt;/span&gt;        &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;--pch-storage=memory&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;-j=16&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#6272a4&#34;&gt;// coding
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#6272a4&#34;&gt;&lt;/span&gt;        &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;--clang-tidy&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#6272a4&#34;&gt;// misc
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#6272a4&#34;&gt;&lt;/span&gt;        &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;--log=error&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    ]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;
+&lt;p&gt;在项目目录新建&lt;code&gt;.clang-format&lt;/code&gt;文件，谷歌一下 UE clang-format，随便找一个复制下来。这里用来格式化代码。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;使用脚本生成反射信息和&lt;code&gt;compile_commands.json&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;compile_commands.json&lt;/code&gt;成功生成后，打开 cpp 文件，clangd 就会自动运行。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;UE 的 Unreal Build Tool 可以生成&lt;code&gt;compile_commands.json&lt;/code&gt;，需要 clang 辅助。不过 UBT 写的比较奇葩，在命令行直接&lt;code&gt;clang -v&lt;/code&gt;有结果，但 UBT 还是找不到，在论坛看了一遍 Linux/Windows 都是这样。&lt;/p&gt;
+&lt;p&gt;但 Windows 还是能找到 clang 的，不过需要把 LLVM 工具链放在这里。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;C:/Program Files/LLVM
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;这里建议弄一个目录软链接，或者直接拷贝过来。不会用 mklink 可以看看这篇文章：&lt;a class=&#34;link&#34; href=&#34;https://blog.walterlv.com/post/ntfs-link-comparisons.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;比较 Windows 上四种不同的文件（夹）链接方式（NTFS 的硬链接、目录联接、符号链接，和大家熟知的快捷方式）
+&lt;/a&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-powershell&#34; data-lang=&#34;powershell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#6272a4&#34;&gt;# C:/Program Files/&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;cmd /c mklink /J LLVM &amp;lt;LLVM_PATH&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;然后这里需要一个脚本来调用 UBT，可以考虑用 vscode 内置的 tasks，也可也用 python 等脚本语言，假如要用 vsocde tasks：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;新建文件&lt;code&gt;.vscode/tasks.json&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;假设 UE 目录在 &lt;code&gt;C:/Program Files/Epic Games/UE_4.27&lt;/code&gt;，新建项目名称为&lt;code&gt;demo&lt;/code&gt;。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-json&#34; data-lang=&#34;json&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;#34;version&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;2.0.0&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;#34;tasks&amp;#34;&lt;/span&gt;: [
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;#34;type&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;shell&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;#34;label&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;Gen Generated Code&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;#34;group&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;none&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;#34;command&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;Engine/Binaries/DotNET/UnrealBuildTool.exe&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;#34;args&amp;#34;&lt;/span&gt;: [
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;demoEditor&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#6272a4&#34;&gt;// &amp;lt;project name&amp;gt;Editor
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#6272a4&#34;&gt;&lt;/span&gt;                &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;Win64&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;DebugGame&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;-SkipBuild&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;-project=${workspaceFolder}/demo.uproject&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;-game&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;-engine&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            ],
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;#34;options&amp;#34;&lt;/span&gt;: {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;#34;cwd&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;C:/Program Files/Epic Games/UE_4.27&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        },
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;#34;type&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;shell&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;#34;label&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;Subtask:GenClangDatabase&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;#34;group&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;none&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;#34;command&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;Engine/Binaries/DotNET/UnrealBuildTool.exe&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;#34;args&amp;#34;&lt;/span&gt;: [
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;demoEditor&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#6272a4&#34;&gt;// &amp;lt;project name&amp;gt;Editor
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#6272a4&#34;&gt;&lt;/span&gt;                &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;Win64&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;DebugGame&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;-SkipBuild&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;-project=${workspaceFolder}/demo.uproject&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;-game&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;-engine&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;-mode=GenerateClangDatabase&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            ],
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;#34;options&amp;#34;&lt;/span&gt;: {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;#34;cwd&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;C:/Program Files/Epic Games/UE_4.27&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        },
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;#34;type&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;shell&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;#34;label&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;Subtask:MoveCompileCommands&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;#34;group&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;none&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;#34;command&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;move&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;#34;args&amp;#34;&lt;/span&gt;: [
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;-Force&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;compile_commands.json&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;${workspaceFolder}/.vscode&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            ],
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;#34;options&amp;#34;&lt;/span&gt;: {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;#34;cwd&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;C:/Program Files/Epic Games/UE_4.27&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        },
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;#34;label&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;Gen Compile Commands&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;#34;group&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;none&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;#34;dependsOn&amp;#34;&lt;/span&gt;: [
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;Subtask:GenClangDatabase&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;Subtask:MoveCompileCommands&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            ],
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;#34;dependsOrder&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;sequence&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    ]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;reference&#34;&gt;Reference&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://zhuanlan.zhihu.com/p/507625365&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Windows 下使用 Vscode + Clangd 搭建 UE4 开发环境&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
         <title>浏览器插件</title>
         <link>https://star-hengxing.github.io/p/%E6%B5%8F%E8%A7%88%E5%99%A8%E6%8F%92%E4%BB%B6/</link>
         <pubDate>Sun, 06 Nov 2022 00:00:00 +0000</pubDate>
@@ -313,6 +717,7 @@
 &lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;#%e6%97%8b%e8%bd%ac&#34; &gt;旋转&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;#%e9%9f%b3%e8%a7%86%e9%a2%91&#34; &gt;音视频&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;#%e9%80%86%e5%90%91&#34; &gt;逆向&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;#linux&#34; &gt;Linux&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;#%e5%b7%a5%e5%85%b7&#34; &gt;工具&lt;/a&gt;
@@ -392,6 +797,8 @@
     &gt;阿里云块存储团队软件工程实践&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://zhuanlan.zhihu.com/p/574069391&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;Chromium 渲染流水线——字节码到像素的一生&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://growing-products.paralect.com/a-development-process-startup-founders-should-use-to-ship-features-weirdly-fast&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;A development process startup founders should use to ship features weirdly fast&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&#34;编程语言&#34;&gt;编程语言&lt;/h2&gt;
 &lt;h3 id=&#34;c&#34;&gt;C&lt;/h3&gt;
@@ -400,6 +807,8 @@
     &gt;现代化 C 使用体验&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://mccue.dev/pages/7-27-22-c-errors&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;The different ways to handle errors in C&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://faultlore.com/blah/c-isnt-a-language/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;C Isn&amp;rsquo;t A Programming Language Anymore&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;c-1&#34;&gt;C++&lt;/h3&gt;
 &lt;ul&gt;
@@ -483,6 +892,8 @@
     &gt;浮点数计算优化&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://wunkolo.github.io/post/2022/10/vfixupimm-signum/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;vfixupimm: signum&lt;/a&gt;，用 AVX 优化取浮点数符号&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://johnysswlab.com/when-an-instruction-depends-on-the-previous-instruction-depends-on-the-previous-instructions-long-instruction-dependency-chains-and-performance/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;When an instruction depends on the previous instruction depends on the previous instructions… : long instruction dependency chains and performance&lt;/a&gt;，CPU 指令依赖链太长拖慢速度，但依赖链解决不了，只能交叉两个依赖链提高效率&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&#34;高性能计算&#34;&gt;高性能计算&lt;/h2&gt;
 &lt;ul&gt;
@@ -519,6 +930,13 @@
 &lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://thenumbat.github.io/Exponential-Rotations/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;可视化和公式推导&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
+&lt;h2 id=&#34;音视频&#34;&gt;音视频&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://ffmpeg.xianwaizhiyin.net/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;FFmpeg原理&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://feater.top/ffmpeg/ffmpeg-learning-indexes&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;FFmpeg5开发入门系列索引&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
 &lt;h2 id=&#34;逆向&#34;&gt;逆向&lt;/h2&gt;
 &lt;p&gt;这里我推荐 CSAPP Lab2-Bomb Lab&lt;/p&gt;
 &lt;ul&gt;
@@ -545,6 +963,8 @@
     &gt;知春在线工具箱&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://tool.tsutsu.one/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;つつの工具箱&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.itdog.cn/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;在线Ping/测速等&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;git&#34;&gt;Git&lt;/h3&gt;
 &lt;ul&gt;
@@ -722,6 +1142,8 @@
     &gt;duolingo&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.lingq.com/zh-cn/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;LingQ&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://res.wokanxing.info/jpgramma/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;日语语法指南&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&#34;misc&#34;&gt;misc&lt;/h2&gt;
 &lt;ul&gt;
@@ -1072,6 +1494,8 @@
     &gt;AirGuanZ&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://zhuanlan.zhihu.com/p/459580639&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;《高级计算机图形学——真实感图像合成》目录及序言&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://space.bilibili.com/18010881/article&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;OEOTYAN&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&#34;课程&#34;&gt;课程&lt;/h2&gt;
 &lt;ul&gt;
@@ -1083,6 +1507,8 @@
     &gt;Advanced Graphics&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://cseweb.ucsd.edu/~viscomp/classes/cse168/sp20/168.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;CSE 168 Computer Graphics II: Rendering&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://cis565-fall-2022.github.io/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;CIS 565 GPU Programming and Architecture Fall 2022&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&#34;各种效果&#34;&gt;各种效果&lt;/h2&gt;
 &lt;h3 id=&#34;光谱&#34;&gt;光谱&lt;/h3&gt;
@@ -2103,21 +2529,67 @@ continue
         <description>&lt;ul&gt;
 &lt;li&gt;部分游戏没有全通&lt;/li&gt;
 &lt;li&gt;有些gal没有吐槽&lt;/li&gt;
+&lt;li&gt;系列作品会合在一起&lt;/li&gt;
+&lt;li&gt;没有汉化 tag 的默认是生肉&lt;/li&gt;
 &lt;li&gt;内有剧透（&lt;del&gt;这不是废话么&lt;/del&gt;）&lt;/li&gt;
-&lt;li&gt;持续更新（只要我推的快）&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;排名不分先后，如有错误请指出&lt;/strong&gt;（最近推完的都会在最上面，&lt;del&gt;其实就是一个栈&lt;/del&gt;）&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;オモカゲ-えっちなハプニング-なんでもどんとこい&#34;&gt;オモカゲ ～えっちなハプニング!? なんでもどんとこい!～&lt;/h2&gt;
+&lt;p&gt;译名：思影&lt;/p&gt;
+&lt;p&gt;会社：あかべぇそふとすりぃ&lt;/p&gt;
+&lt;p&gt;Tag：汉化 萌拔 幼驯染 后宫&lt;/p&gt;
+&lt;h2 id=&#34;空の青と白と瞬きの夏&#34;&gt;空の青と白と／瞬きの夏&lt;/h2&gt;
+&lt;p&gt;译名：天空的蓝与白/如梭夏日&lt;/p&gt;
+&lt;p&gt;会社：バリスタラボ&lt;/p&gt;
+&lt;p&gt;Tag：汉化 废萌&lt;/p&gt;
+&lt;h2 id=&#34;輪舞曲duo--夜明けのフォルテシモ--ぷにゅぷりff&#34;&gt;輪舞曲Duo -夜明けのフォルテシモ- ぷにゅぷりff&lt;/h2&gt;
+&lt;p&gt;译名：天空的蓝与白/如梭夏日&lt;/p&gt;
+&lt;p&gt;会社：ティンクルベル&lt;/p&gt;
+&lt;p&gt;Tag：汉化 百合 扶她 拔作&lt;/p&gt;
+&lt;h2 id=&#34;神採りアルケミーマイスター&#34;&gt;神採りアルケミーマイスター&lt;/h2&gt;
+&lt;p&gt;译名：神采炼金大师&lt;/p&gt;
+&lt;p&gt;会社：エウシュリー&lt;/p&gt;
+&lt;p&gt;Tag：汉化 SLG 后宫&lt;/p&gt;
+&lt;h2 id=&#34;放課後シンデレラ２&#34;&gt;放課後シンデレラ２&lt;/h2&gt;
+&lt;p&gt;译名：放学后的灰姑娘2&lt;/p&gt;
+&lt;p&gt;会社：HOOKSOFT&lt;/p&gt;
+&lt;p&gt;Tag：废萌&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;共通日常可以，个人线没对上胃口&lt;/p&gt;
+&lt;h2 id=&#34;終わる世界とバースデイ&#34;&gt;終わる世界とバースデイ&lt;/h2&gt;
+&lt;p&gt;译名：世界末日和生日&lt;/p&gt;
+&lt;p&gt;会社：コットンソフト&lt;/p&gt;
+&lt;p&gt;Tag：科幻 悬疑 妹系 泣系 猎奇&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;演出神作，尽管推完的那天并不是自己的生日，还是被感动到哭了&lt;/p&gt;
+&lt;h2 id=&#34;穢翼のユースティア&#34;&gt;穢翼のユースティア&lt;/h2&gt;
+&lt;p&gt;译名：秽翼的尤斯蒂娅&lt;/p&gt;
+&lt;p&gt;会社：オーガスト&lt;/p&gt;
+&lt;p&gt;Tag：汉化 奇幻&lt;/p&gt;
+&lt;h2 id=&#34;island&#34;&gt;ISLAND&lt;/h2&gt;
+&lt;p&gt;会社：Front Wing&lt;/p&gt;
+&lt;p&gt;Tag：汉化 科幻 悬疑&lt;/p&gt;
+&lt;h2 id=&#34;シロナガス島への帰還&#34;&gt;シロナガス島への帰還&lt;/h2&gt;
+&lt;p&gt;译名：重返蓝鲸岛&lt;/p&gt;
+&lt;p&gt;会社：旅の道&lt;/p&gt;
+&lt;p&gt;Tag：汉化 恐怖 悬疑 馆系&lt;/p&gt;
+&lt;h2 id=&#34;ふゆからくるる&#34;&gt;ふゆから、くるる&lt;/h2&gt;
+&lt;p&gt;译名：冬旅，方冥冥&lt;/p&gt;
+&lt;p&gt;会社：シルキーズプラス&lt;/p&gt;
+&lt;p&gt;Tag：汉化 科幻 悬疑 百合 扶她&lt;/p&gt;
 &lt;h2 id=&#34;時計仕掛けのレイライン&#34;&gt;時計仕掛けのレイライン&lt;/h2&gt;
 &lt;p&gt;译名：时钟机关的Ley-line&lt;/p&gt;
 &lt;p&gt;会社：ユニゾンシフト：ブロッサム&lt;/p&gt;
+&lt;p&gt;Tag：汉化 傲娇&lt;/p&gt;
 &lt;hr&gt;
-&lt;p&gt;有人讲是三部曲，但只是分割商法出的三部作品，所以应该当成同一部作品对待&lt;/p&gt;
+&lt;p&gt;有人讲是三部曲，但我感觉是分割商法出的三部作品，所以应该当成同一部作品对待&lt;/p&gt;
 &lt;p&gt;在第一部中，各种遗品剧情的插入感觉有点生硬，后面有所改观。剧情最后提了一点因果律，但没有继续深入&lt;/p&gt;
 &lt;p&gt;总的来说，算是稳扎稳打，伏笔都能完整回收，剧情高潮时一气呵成，因此&lt;strong&gt;可能&lt;/strong&gt;缺乏一定的剧情深度&lt;/p&gt;
 &lt;p&gt;最棒的是塑造了个完美的傲娇女主-憂緒，而且巨乳角色很少，治好了我的&lt;del&gt;晕奶&lt;/del&gt;。其他女主的恋爱戏份很少，几乎可以当只有憂緒一个女主。不过一些个人线玩起来很欢乐，比如眠子&lt;/p&gt;
 &lt;h2 id=&#34;金色ラブリッチェ&#34;&gt;金色ラブリッチェ&lt;/h2&gt;
 &lt;p&gt;译名：金辉恋曲四重奏&lt;/p&gt;
 &lt;p&gt;会社：Saga Planets&lt;/p&gt;
+&lt;p&gt;Tag: 汉化 废萌 后宫&lt;/p&gt;
 &lt;hr&gt;
 &lt;p&gt;玲奈线，感觉剧情浪费人设了😢&lt;/p&gt;
 &lt;p&gt;3p先不谈，先打炮再表白感觉不爽，后半段剧情还一点镜头都没有，变成基友主场&lt;/p&gt;

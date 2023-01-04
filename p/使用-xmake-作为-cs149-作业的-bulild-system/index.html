@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='前言 CS149 是一个教并行编程的课程，课程作业使用了 makefile 作为 build system。
+本文通过改造 build system 来讲述一些xmake的使用方法。
+分析 这个课程主要有四个作业，那么是一个多target工程，考虑用多级配置。
+作业里用到了很多工具，xmake都支持这些工具链。不过有些作业不跨平台（只能在 Linux 下运行），所以尽可能地将作业移植到 windows 上。
+改造 完整配置在GitHub上，这里选讲几个部分。
+根目录配置 最小xmake版本。ispc编译在这个版本后支持。 set_xmakever(&amp;#34;2.7.3&amp;#34;) 跨平台首选clang作为 C&#43;&#43; 编译器，在 windows 下使用clang-cl接受 msvc 风格的参数。 在开发环境下，链接动态库可以减少二进制体积，加速链接。 添加宏定义处理一些 windows 的屎。 if is_os(&amp;#34;windows&amp;#34;) then set_toolchains(&amp;#34;clang-cl&amp;#34;) set_runtimes(&amp;#34;MD&amp;#34;) add_defines(&amp;#34;_CRT_SECURE_NO_WARNINGS&amp;#34;, &amp;#34;NOMINMAX&amp;#34;) else set_toolchains(&amp;#34;clang&amp;#34;) end 源码目录配置 考虑到 windows 没有getopt.h，这里在 github 上随便找了一个库代替，并开放头文件权限给依赖此库的target使用。 if is_os(&amp;#34;windows&amp;#34;) then target(&amp;#34;getopt&amp;#34;) set_kind(&amp;#34;static&amp;#34;) add_includedirs(&amp;#34;getopt-for-windows&amp;#34;, {public = true}) add_files(&amp;#34;getopt-for-windows/getopt.c&amp;#34;) end 作业1 作业有多个target，其实可以考虑每个给每个target单独一个配置，不过这里选择把多个target都放在同一个xmake.lua中。
+根据原始 makefile 参数，处理一些跨平台配置。 考虑到作业会生成 ppm 格式的图片，所以改变该target的运行目录。 target(&amp;#34;mandelbrot&amp;#34;) set_kind(&amp;#34;binary&amp;#34;) add_files(&amp;#34;prog1_mandelbrot_threads/*.'><title>使用 Xmake 作为 CS149 作业的 bulild system</title>
+
+<link rel='canonical' href='https://star-hengxing.github.io/p/%E4%BD%BF%E7%94%A8-xmake-%E4%BD%9C%E4%B8%BA-cs149-%E4%BD%9C%E4%B8%9A%E7%9A%84-bulild-system/'>
+
+<link rel="stylesheet" href="/scss/style.min.690a283bac9f967161eea605d3ab2ebc0b689da41a8b82c681a9dd82668ccf94.css"><meta property='og:title' content='使用 Xmake 作为 CS149 作业的 bulild system'>
+<meta property='og:description' content='前言 CS149 是一个教并行编程的课程，课程作业使用了 makefile 作为 build system。
+本文通过改造 build system 来讲述一些xmake的使用方法。
+分析 这个课程主要有四个作业，那么是一个多target工程，考虑用多级配置。
+作业里用到了很多工具，xmake都支持这些工具链。不过有些作业不跨平台（只能在 Linux 下运行），所以尽可能地将作业移植到 windows 上。
+改造 完整配置在GitHub上，这里选讲几个部分。
+根目录配置 最小xmake版本。ispc编译在这个版本后支持。 set_xmakever(&amp;#34;2.7.3&amp;#34;) 跨平台首选clang作为 C&#43;&#43; 编译器，在 windows 下使用clang-cl接受 msvc 风格的参数。 在开发环境下，链接动态库可以减少二进制体积，加速链接。 添加宏定义处理一些 windows 的屎。 if is_os(&amp;#34;windows&amp;#34;) then set_toolchains(&amp;#34;clang-cl&amp;#34;) set_runtimes(&amp;#34;MD&amp;#34;) add_defines(&amp;#34;_CRT_SECURE_NO_WARNINGS&amp;#34;, &amp;#34;NOMINMAX&amp;#34;) else set_toolchains(&amp;#34;clang&amp;#34;) end 源码目录配置 考虑到 windows 没有getopt.h，这里在 github 上随便找了一个库代替，并开放头文件权限给依赖此库的target使用。 if is_os(&amp;#34;windows&amp;#34;) then target(&amp;#34;getopt&amp;#34;) set_kind(&amp;#34;static&amp;#34;) add_includedirs(&amp;#34;getopt-for-windows&amp;#34;, {public = true}) add_files(&amp;#34;getopt-for-windows/getopt.c&amp;#34;) end 作业1 作业有多个target，其实可以考虑每个给每个target单独一个配置，不过这里选择把多个target都放在同一个xmake.lua中。
+根据原始 makefile 参数，处理一些跨平台配置。 考虑到作业会生成 ppm 格式的图片，所以改变该target的运行目录。 target(&amp;#34;mandelbrot&amp;#34;) set_kind(&amp;#34;binary&amp;#34;) add_files(&amp;#34;prog1_mandelbrot_threads/*.'>
+<meta property='og:url' content='https://star-hengxing.github.io/p/%E4%BD%BF%E7%94%A8-xmake-%E4%BD%9C%E4%B8%BA-cs149-%E4%BD%9C%E4%B8%9A%E7%9A%84-bulild-system/'>
+<meta property='og:site_name' content='恒星的小站'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='C&#43;&#43;' /><meta property='article:tag' content='Xmake' /><meta property='article:published_time' content='2022-12-18T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2022-12-18T00:00:00&#43;00:00'/>
+<meta name="twitter:title" content="使用 Xmake 作为 CS149 作业的 bulild system">
+<meta name="twitter:description" content="前言 CS149 是一个教并行编程的课程，课程作业使用了 makefile 作为 build system。
+本文通过改造 build system 来讲述一些xmake的使用方法。
+分析 这个课程主要有四个作业，那么是一个多target工程，考虑用多级配置。
+作业里用到了很多工具，xmake都支持这些工具链。不过有些作业不跨平台（只能在 Linux 下运行），所以尽可能地将作业移植到 windows 上。
+改造 完整配置在GitHub上，这里选讲几个部分。
+根目录配置 最小xmake版本。ispc编译在这个版本后支持。 set_xmakever(&amp;#34;2.7.3&amp;#34;) 跨平台首选clang作为 C&#43;&#43; 编译器，在 windows 下使用clang-cl接受 msvc 风格的参数。 在开发环境下，链接动态库可以减少二进制体积，加速链接。 添加宏定义处理一些 windows 的屎。 if is_os(&amp;#34;windows&amp;#34;) then set_toolchains(&amp;#34;clang-cl&amp;#34;) set_runtimes(&amp;#34;MD&amp;#34;) add_defines(&amp;#34;_CRT_SECURE_NO_WARNINGS&amp;#34;, &amp;#34;NOMINMAX&amp;#34;) else set_toolchains(&amp;#34;clang&amp;#34;) end 源码目录配置 考虑到 windows 没有getopt.h，这里在 github 上随便找了一个库代替，并开放头文件权限给依赖此库的target使用。 if is_os(&amp;#34;windows&amp;#34;) then target(&amp;#34;getopt&amp;#34;) set_kind(&amp;#34;static&amp;#34;) add_includedirs(&amp;#34;getopt-for-windows&amp;#34;, {public = true}) add_files(&amp;#34;getopt-for-windows/getopt.c&amp;#34;) end 作业1 作业有多个target，其实可以考虑每个给每个target单独一个配置，不过这里选择把多个target都放在同一个xmake.lua中。
+根据原始 makefile 参数，处理一些跨平台配置。 考虑到作业会生成 ppm 格式的图片，所以改变该target的运行目录。 target(&amp;#34;mandelbrot&amp;#34;) set_kind(&amp;#34;binary&amp;#34;) add_files(&amp;#34;prog1_mandelbrot_threads/*.">
+    </head>
+    <body class="
+    article-page has-toc
+">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex 
+    
+        extended
+    
+">
+    
+        <div id="article-toolbar">
+            <a href="/" class="back-home">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="15 6 9 12 15 18" />
+</svg>
+
+
+
+                <span>返回</span>
+            </a>
+        </div>
+    
+<main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+
+    <h2 class="article-title">
+        <a href="/p/%E4%BD%BF%E7%94%A8-xmake-%E4%BD%9C%E4%B8%BA-cs149-%E4%BD%9C%E4%B8%9A%E7%9A%84-bulild-system/">使用 Xmake 作为 CS149 作业的 bulild system</a>
+    </h2>
+
+    
+
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Dec 18, 2022</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 2 分钟
+                </time>
+            </div>
+        
+    </footer>
+    
+</div>
+</header>
+
+    <section class="article-content">
+    
+    
+    <h2 id="前言">前言</h2>
+<p>CS149 是一个教<strong>并行编程</strong>的课程，课程作业使用了 makefile 作为 build system。</p>
+<p>本文通过改造 build system 来讲述一些<code>xmake</code>的使用方法。</p>
+<h2 id="分析">分析</h2>
+<p>这个课程主要有四个作业，那么是一个多<code>target</code>工程，考虑用<a class="link" href="https://xmake.io/#/zh-cn/guide/syntax_description?id=%e5%a4%9a%e7%ba%a7%e9%85%8d%e7%bd%ae"  target="_blank" rel="noopener"
+    >多级配置</a>。</p>
+<p>作业里用到了很多工具，<code>xmake</code>都支持这些工具链。不过有些作业不跨平台（只能在 Linux 下运行），所以尽可能地将作业移植到 windows 上。</p>
+<h2 id="改造">改造</h2>
+<p>完整配置在<a class="link" href="https://github.com/star-hengxing/cs149-xmake"  target="_blank" rel="noopener"
+    >GitHub</a>上，这里选讲几个部分。</p>
+<h3 id="根目录配置">根目录配置</h3>
+<ul>
+<li>最小<code>xmake</code>版本。<code>ispc</code>编译在这个版本后支持。</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lua" data-lang="lua"><span style="display:flex;"><span>set_xmakever(<span style="color:#f1fa8c">&#34;2.7.3&#34;</span>)
+</span></span></code></pre></div><ul>
+<li>跨平台首选<code>clang</code>作为 C++ 编译器，在 windows 下使用<code>clang-cl</code>接受 msvc 风格的<strong>参数</strong>。</li>
+<li>在开发环境下，链接动态库可以减少二进制体积，加速链接。</li>
+<li>添加宏定义处理一些 windows 的屎。</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lua" data-lang="lua"><span style="display:flex;"><span><span style="color:#ff79c6">if</span> is_os(<span style="color:#f1fa8c">&#34;windows&#34;</span>) <span style="color:#ff79c6">then</span>
+</span></span><span style="display:flex;"><span>    set_toolchains(<span style="color:#f1fa8c">&#34;clang-cl&#34;</span>)
+</span></span><span style="display:flex;"><span>    set_runtimes(<span style="color:#f1fa8c">&#34;MD&#34;</span>)
+</span></span><span style="display:flex;"><span>    add_defines(<span style="color:#f1fa8c">&#34;_CRT_SECURE_NO_WARNINGS&#34;</span>, <span style="color:#f1fa8c">&#34;NOMINMAX&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">else</span>
+</span></span><span style="display:flex;"><span>    set_toolchains(<span style="color:#f1fa8c">&#34;clang&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">end</span>
+</span></span></code></pre></div><h3 id="源码目录配置">源码目录配置</h3>
+<ul>
+<li>考虑到 windows 没有<code>getopt.h</code>，这里在 github 上随便找了一个库代替，并开放<a class="link" href="https://xmake.io/#/zh-cn/manual/project_target?id=%e6%b7%bb%e5%8a%a0%e5%a4%b4%e6%96%87%e4%bb%b6%e6%90%9c%e7%b4%a2%e7%9b%ae%e5%bd%95"  target="_blank" rel="noopener"
+    >头文件权限</a>给依赖此库的<code>target</code>使用。</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lua" data-lang="lua"><span style="display:flex;"><span><span style="color:#ff79c6">if</span> is_os(<span style="color:#f1fa8c">&#34;windows&#34;</span>) <span style="color:#ff79c6">then</span>
+</span></span><span style="display:flex;"><span>    target(<span style="color:#f1fa8c">&#34;getopt&#34;</span>)
+</span></span><span style="display:flex;"><span>        set_kind(<span style="color:#f1fa8c">&#34;static&#34;</span>)
+</span></span><span style="display:flex;"><span>        add_includedirs(<span style="color:#f1fa8c">&#34;getopt-for-windows&#34;</span>, {public <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">true</span>})
+</span></span><span style="display:flex;"><span>        add_files(<span style="color:#f1fa8c">&#34;getopt-for-windows/getopt.c&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">end</span>
+</span></span></code></pre></div><h3 id="作业1">作业1</h3>
+<p>作业有多个<code>target</code>，其实可以考虑每个给每个<code>target</code>单独一个配置，不过这里选择把多个<code>target</code>都放在同一个<code>xmake.lua</code>中。</p>
+<ul>
+<li>根据原始 makefile 参数，处理一些跨平台配置。</li>
+<li>考虑到作业会生成 ppm 格式的图片，所以改变该<code>target</code>的运行目录。</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lua" data-lang="lua"><span style="display:flex;"><span>target(<span style="color:#f1fa8c">&#34;mandelbrot&#34;</span>)
+</span></span><span style="display:flex;"><span>    set_kind(<span style="color:#f1fa8c">&#34;binary&#34;</span>)
+</span></span><span style="display:flex;"><span>    add_files(<span style="color:#f1fa8c">&#34;prog1_mandelbrot_threads/*.cpp&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    set_optimize(<span style="color:#f1fa8c">&#34;fastest&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    add_deps(<span style="color:#f1fa8c">&#34;common&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">if</span> is_os(<span style="color:#f1fa8c">&#34;windows&#34;</span>) <span style="color:#ff79c6">then</span> 
+</span></span><span style="display:flex;"><span>        add_deps(<span style="color:#f1fa8c">&#34;getopt&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">elseif</span> is_os(<span style="color:#f1fa8c">&#34;linux&#34;</span>) <span style="color:#ff79c6">then</span> 
+</span></span><span style="display:flex;"><span>        add_syslinks(<span style="color:#f1fa8c">&#34;m&#34;</span>, <span style="color:#f1fa8c">&#34;pthread&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">end</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    set_rundir(<span style="color:#f1fa8c">&#34;prog1_mandelbrot_threads&#34;</span>)
+</span></span></code></pre></div><ul>
+<li>这里用到了<code>ispc</code>进行编译，使用<code>xmake</code>的内置规则进行编译。</li>
+<li>编译 ispc 文件会生成一个对象文件和头文件，这里通过<code>header_extension</code>配置控制生成头文件的后缀，然后就可以在代码中引用生成的头文件<code>xxx_ispc.h</code>（xxx.ispc）。</li>
+<li>由于没有内置的 ispc api，这里使用<code>set_values</code>传递编译参数。</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lua" data-lang="lua"><span style="display:flex;"><span>target(<span style="color:#f1fa8c">&#34;sqrt&#34;</span>)
+</span></span><span style="display:flex;"><span>    set_kind(<span style="color:#f1fa8c">&#34;binary&#34;</span>)
+</span></span><span style="display:flex;"><span>    add_rules(<span style="color:#f1fa8c">&#34;utils.ispc&#34;</span>, {header_extension <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#34;_ispc.h&#34;</span>})
+</span></span><span style="display:flex;"><span>    add_files(<span style="color:#f1fa8c">&#34;prog4_sqrt/*.ispc&#34;</span>)
+</span></span><span style="display:flex;"><span>    add_files(<span style="color:#f1fa8c">&#34;prog4_sqrt/*.cpp&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    add_cxxflags(<span style="color:#f1fa8c">&#34;-march=native&#34;</span>)
+</span></span><span style="display:flex;"><span>    set_values(<span style="color:#f1fa8c">&#34;ispc.flags&#34;</span>, <span style="color:#f1fa8c">&#34;--target=avx2-i32x8&#34;</span>, <span style="color:#f1fa8c">&#34;--arch=x86-64&#34;</span>)
+</span></span><span style="display:flex;"><span>    set_optimize(<span style="color:#f1fa8c">&#34;fastest&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    add_deps(<span style="color:#f1fa8c">&#34;common&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">if</span> is_os(<span style="color:#f1fa8c">&#34;linux&#34;</span>) <span style="color:#ff79c6">then</span> 
+</span></span><span style="display:flex;"><span>        add_syslinks(<span style="color:#f1fa8c">&#34;m&#34;</span>, <span style="color:#f1fa8c">&#34;pthread&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">end</span>
+</span></span></code></pre></div><h3 id="作业2">作业2</h3>
+<p>本作业两个<code>target</code>的配置相同，可以用一个循环来生成。（常用于生成相同配置的单元测试）</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lua" data-lang="lua"><span style="display:flex;"><span><span style="color:#ff79c6">for</span> _, part <span style="color:#ff79c6">in</span> ipairs({<span style="color:#f1fa8c">&#34;part_a&#34;</span>, <span style="color:#f1fa8c">&#34;part_b&#34;</span>}) <span style="color:#ff79c6">do</span>
+</span></span><span style="display:flex;"><span>target(part)
+</span></span><span style="display:flex;"><span>    set_kind(<span style="color:#f1fa8c">&#34;binary&#34;</span>)
+</span></span><span style="display:flex;"><span>    add_includedirs(part)
+</span></span><span style="display:flex;"><span>    add_includedirs(<span style="color:#f1fa8c">&#34;../common&#34;</span>, <span style="color:#f1fa8c">&#34;tests&#34;</span>)
+</span></span><span style="display:flex;"><span>    add_files(part <span style="color:#ff79c6">..</span> <span style="color:#f1fa8c">&#34;/*.cpp&#34;</span>)
+</span></span><span style="display:flex;"><span>    add_files(<span style="color:#f1fa8c">&#34;tests/main.cpp&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">if</span> is_os(<span style="color:#f1fa8c">&#34;windows&#34;</span>) <span style="color:#ff79c6">then</span> 
+</span></span><span style="display:flex;"><span>        add_deps(<span style="color:#f1fa8c">&#34;getopt&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">elseif</span> is_os(<span style="color:#f1fa8c">&#34;linux&#34;</span>) <span style="color:#ff79c6">then</span> 
+</span></span><span style="display:flex;"><span>        add_syslinks(<span style="color:#f1fa8c">&#34;m&#34;</span>, <span style="color:#f1fa8c">&#34;pthread&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">end</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">end</span>
+</span></span></code></pre></div><ul>
+<li>作业内置 test，但官方没有提供完成所有测试的脚本（其实直接改源码也可以），不过这里考虑用 xmake 的脚本域来做这件事。</li>
+<li>设置一个空目标类型，覆盖内置的<a class="link" href="https://xmake.io/#/zh-cn/manual/project_target?id=%e6%b7%bb%e5%8a%a0%e5%a4%b4%e6%96%87%e4%bb%b6%e6%90%9c%e7%b4%a2%e7%9b%ae%e5%bd%95"  target="_blank" rel="noopener"
+    >on_run</a>，然后使用 xmake 一些内置的 api 运行测试。</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lua" data-lang="lua"><span style="display:flex;"><span>target(<span style="color:#f1fa8c">&#34;part_a_test&#34;</span>)
+</span></span><span style="display:flex;"><span>    set_kind(<span style="color:#f1fa8c">&#34;phony&#34;</span>)
+</span></span><span style="display:flex;"><span>    add_deps(<span style="color:#f1fa8c">&#34;part_a&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    on_run(<span style="color:#ff79c6">function</span> ()
+</span></span><span style="display:flex;"><span>        <span style="color:#8be9fd;font-style:italic">local</span> test_names <span style="color:#ff79c6">=</span>
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#f1fa8c">&#34;simple_test_sync&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f1fa8c">&#34;ping_pong_equal&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f1fa8c">&#34;ping_pong_unequal&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f1fa8c">&#34;super_light&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f1fa8c">&#34;super_super_light&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f1fa8c">&#34;recursive_fibonacci&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f1fa8c">&#34;math_operations_in_tight_for_loop&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f1fa8c">&#34;math_operations_in_tight_for_loop_fewer_tasks&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f1fa8c">&#34;math_operations_in_tight_for_loop_fan_in&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f1fa8c">&#34;math_operations_in_tight_for_loop_reduction_tree&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f1fa8c">&#34;spin_between_run_calls&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f1fa8c">&#34;mandelbrot_chunked&#34;</span>,
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">for</span> _, value <span style="color:#ff79c6">in</span> ipairs(test_names)
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">do</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#6272a4">-- cprint(&#34;Testing &#34; .. &#34;${bright green}%s&#34;, value)</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#6272a4">-- os.runv(name, {value})</span>
+</span></span><span style="display:flex;"><span>            os.execv(<span style="color:#f1fa8c">&#34;xmake&#34;</span>, {<span style="color:#f1fa8c">&#34;run&#34;</span>, <span style="color:#f1fa8c">&#34;part_a&#34;</span>, value})
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">end</span>
+</span></span><span style="display:flex;"><span>        cprint(<span style="color:#f1fa8c">&#34;${bright red}Pass!&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">end</span>)
+</span></span></code></pre></div><h3 id="作业3">作业3</h3>
+<p>xmake 会自动探测 cuda 的目录，如果不在默认的安装目录，设置一下。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>xmake f --cuda=&lt;PATH&gt;
+</span></span></code></pre></div><ul>
+<li>xmake 对<code>cuda</code>支持还算完善，直接<code>add_files</code>就能直接编译。</li>
+<li>cuda runtime 也有动态库，不过 xmake 默认链接静态库，这里需要手动添加链接动态库的名字。</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lua" data-lang="lua"><span style="display:flex;"><span>add_cugencodes(<span style="color:#f1fa8c">&#34;compute_35&#34;</span>)
+</span></span><span style="display:flex;"><span>add_links(<span style="color:#f1fa8c">&#34;cudart&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>target(<span style="color:#f1fa8c">&#34;render&#34;</span>)
+</span></span><span style="display:flex;"><span>    set_kind(<span style="color:#f1fa8c">&#34;binary&#34;</span>)
+</span></span><span style="display:flex;"><span>    add_files(<span style="color:#f1fa8c">&#34;render/*.cpp&#34;</span>)
+</span></span><span style="display:flex;"><span>    add_files(<span style="color:#f1fa8c">&#34;render/*.cu&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    add_packages(<span style="color:#f1fa8c">&#34;freeglut&#34;</span>)
+</span></span><span style="display:flex;"><span>    set_rundir(<span style="color:#f1fa8c">&#34;render&#34;</span>)
+</span></span></code></pre></div><h3 id="作业4">作业4</h3>
+<p>该作业只能运行在 Linux 平台，因为官方只提供了 Linux 平台的二进制进行链接。</p>
+<ul>
+<li>这里写了一个函数禁用<code>target</code>，然后在<a class="link" href="https://xmake.io/#/zh-cn/manual/project_target?id=targeton_load"  target="_blank" rel="noopener"
+    >on_load</a>时禁用，可以使用其他写法禁用<code>target</code>。</li>
+<li>官方提供了一个静态库，但静态库名字前缀不是<code>lib</code>开头，链接器不接受，所以不能直接用<code>add_links</code></li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lua" data-lang="lua"><span style="display:flex;"><span><span style="color:#ff79c6">function</span> <span style="color:#50fa7b">only_linux</span>(target)
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">if</span> target:is_plat(<span style="color:#f1fa8c">&#34;linux&#34;</span>) <span style="color:#ff79c6">then</span>
+</span></span><span style="display:flex;"><span>        target:set(<span style="color:#f1fa8c">&#34;enabled&#34;</span>, <span style="color:#ff79c6">true</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">else</span>
+</span></span><span style="display:flex;"><span>        target:set(<span style="color:#f1fa8c">&#34;enabled&#34;</span>, <span style="color:#ff79c6">false</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">end</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">end</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>target(<span style="color:#f1fa8c">&#34;pr&#34;</span>)
+</span></span><span style="display:flex;"><span>    set_kind(<span style="color:#f1fa8c">&#34;binary&#34;</span>)
+</span></span><span style="display:flex;"><span>    add_files(<span style="color:#f1fa8c">&#34;pagerank/main.cpp&#34;</span>, <span style="color:#f1fa8c">&#34;pagerank/page_rank.cpp&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    add_linkdirs(<span style="color:#f1fa8c">&#34;pagerank&#34;</span>)
+</span></span><span style="display:flex;"><span>    add_ldflags(<span style="color:#f1fa8c">&#34;-fopenmp&#34;</span>)
+</span></span><span style="display:flex;"><span>    add_ldflags(<span style="color:#f1fa8c">&#34;-l:ref_pr.a&#34;</span>, {force <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">true</span>})
+</span></span><span style="display:flex;"><span>    add_deps(<span style="color:#f1fa8c">&#34;assignment4_common&#34;</span>)
+</span></span><span style="display:flex;"><span>    on_load(only_linux)
+</span></span></code></pre></div><ul>
+<li>对象文件也可也直接<a class="link" href="https://xmake.io/#/zh-cn/manual/project_target?id=targetadd_files"  target="_blank" rel="noopener"
+    >add_files</a></li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lua" data-lang="lua"><span style="display:flex;"><span>target(<span style="color:#f1fa8c">&#34;bfs&#34;</span>)
+</span></span><span style="display:flex;"><span>    set_kind(<span style="color:#f1fa8c">&#34;binary&#34;</span>)
+</span></span><span style="display:flex;"><span>    add_files(<span style="color:#f1fa8c">&#34;bfs/main.cpp&#34;</span>, <span style="color:#f1fa8c">&#34;bfs/bfs.cpp&#34;</span>)
+</span></span><span style="display:flex;"><span>    add_files(<span style="color:#f1fa8c">&#34;bfs/ref_bfs.o&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    add_ldflags(<span style="color:#f1fa8c">&#34;-fopenmp&#34;</span>)
+</span></span><span style="display:flex;"><span>    add_deps(<span style="color:#f1fa8c">&#34;assignment4_common&#34;</span>)
+</span></span><span style="display:flex;"><span>    on_load(only_linux)
+</span></span></code></pre></div>
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/c&#43;&#43;/">C&#43;&#43;</a>
+        
+            <a href="/tags/xmake/">Xmake</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+</article>
+
+    
+
+    <aside class="related-contents--wrapper">
+    
+    
+</aside>
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2022 - 
+        
+        2023 恒星的小站
+    </section>
+    
+    <section class="powerby">
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.8.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css"integrity="sha256-c0uckgykQ9v5k&#43;IqViZOZKc47Jn7KQil4/MP3ySA3F8="crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css"integrity="sha256-SBLU4vv6CA6lHsZ1XyTdhyjJxCjPif/TRkjnsyGAGnE="crossorigin="anonymous"
+            >
+
+            </main>
+    
+        <aside class="sidebar right-sidebar sticky">
+            <section class="widget archives">
+                <div class="widget-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+                </div>
+                <h2 class="widget-title section-title">目录</h2>
+                
+                <div class="widget--toc">
+                    <nav id="TableOfContents">
+  <ol>
+    <li><a href="#前言">前言</a></li>
+    <li><a href="#分析">分析</a></li>
+    <li><a href="#改造">改造</a>
+      <ol>
+        <li><a href="#根目录配置">根目录配置</a></li>
+        <li><a href="#源码目录配置">源码目录配置</a></li>
+        <li><a href="#作业1">作业1</a></li>
+        <li><a href="#作业2">作业2</a></li>
+        <li><a href="#作业3">作业3</a></li>
+        <li><a href="#作业4">作业4</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+                </div>
+            </section>
+        </aside>
+    
+
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js"integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

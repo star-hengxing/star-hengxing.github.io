@@ -6,7 +6,22 @@
     <description>Recent content in C&#43;&#43; on 恒星的小站</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Mon, 19 Sep 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://star-hengxing.github.io/tags/c++/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 18 Dec 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://star-hengxing.github.io/tags/c++/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>使用 Xmake 作为 CS149 作业的 bulild system</title>
+      <link>https://star-hengxing.github.io/p/%E4%BD%BF%E7%94%A8-xmake-%E4%BD%9C%E4%B8%BA-cs149-%E4%BD%9C%E4%B8%9A%E7%9A%84-bulild-system/</link>
+      <pubDate>Sun, 18 Dec 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://star-hengxing.github.io/p/%E4%BD%BF%E7%94%A8-xmake-%E4%BD%9C%E4%B8%BA-cs149-%E4%BD%9C%E4%B8%9A%E7%9A%84-bulild-system/</guid>
+      <description>前言 CS149 是一个教并行编程的课程，课程作业使用了 makefile 作为 build system。
+本文通过改造 build system 来讲述一些xmake的使用方法。
+分析 这个课程主要有四个作业，那么是一个多target工程，考虑用多级配置。
+作业里用到了很多工具，xmake都支持这些工具链。不过有些作业不跨平台（只能在 Linux 下运行），所以尽可能地将作业移植到 windows 上。
+改造 完整配置在GitHub上，这里选讲几个部分。
+根目录配置 最小xmake版本。ispc编译在这个版本后支持。 set_xmakever(&amp;#34;2.7.3&amp;#34;) 跨平台首选clang作为 C++ 编译器，在 windows 下使用clang-cl接受 msvc 风格的参数。 在开发环境下，链接动态库可以减少二进制体积，加速链接。 添加宏定义处理一些 windows 的屎。 if is_os(&amp;#34;windows&amp;#34;) then set_toolchains(&amp;#34;clang-cl&amp;#34;) set_runtimes(&amp;#34;MD&amp;#34;) add_defines(&amp;#34;_CRT_SECURE_NO_WARNINGS&amp;#34;, &amp;#34;NOMINMAX&amp;#34;) else set_toolchains(&amp;#34;clang&amp;#34;) end 源码目录配置 考虑到 windows 没有getopt.h，这里在 github 上随便找了一个库代替，并开放头文件权限给依赖此库的target使用。 if is_os(&amp;#34;windows&amp;#34;) then target(&amp;#34;getopt&amp;#34;) set_kind(&amp;#34;static&amp;#34;) add_includedirs(&amp;#34;getopt-for-windows&amp;#34;, {public = true}) add_files(&amp;#34;getopt-for-windows/getopt.c&amp;#34;) end 作业1 作业有多个target，其实可以考虑每个给每个target单独一个配置，不过这里选择把多个target都放在同一个xmake.lua中。
+根据原始 makefile 参数，处理一些跨平台配置。 考虑到作业会生成 ppm 格式的图片，所以改变该target的运行目录。 target(&amp;#34;mandelbrot&amp;#34;) set_kind(&amp;#34;binary&amp;#34;) add_files(&amp;#34;prog1_mandelbrot_threads/*.</description>
+    </item>
+    
     <item>
       <title>C&#43;&#43; 胡言乱语X1</title>
       <link>https://star-hengxing.github.io/p/c-%E8%83%A1%E8%A8%80%E4%B9%B1%E8%AF%ADx1/</link>

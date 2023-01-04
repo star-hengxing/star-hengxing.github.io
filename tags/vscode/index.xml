@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>vscode on 恒星的小站</title>
+    <link>https://star-hengxing.github.io/tags/vscode/</link>
+    <description>Recent content in vscode on 恒星的小站</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Fri, 25 Nov 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://star-hengxing.github.io/tags/vscode/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>用 vscode 写 UE 代码</title>
+      <link>https://star-hengxing.github.io/p/%E7%94%A8-vscode-%E5%86%99-ue-%E4%BB%A3%E7%A0%81/</link>
+      <pubDate>Fri, 25 Nov 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://star-hengxing.github.io/p/%E7%94%A8-vscode-%E5%86%99-ue-%E4%BB%A3%E7%A0%81/</guid>
+      <description>前提 目前来说 Rider 还是最好的 UE IDE，本文只是提供多一种选项来写 UE 代码。
+环境 vscode 插件 clangd clang Windows 推荐使用 scoop 下载 clang。
+scoop install llvm 部署 用 vscode 打开 UE 项目目录，新建.vscode目录。
+新建.vscode/settings.json文件，写入下面内容。
+{ &amp;#34;clangd.arguments&amp;#34;: [ &amp;#34;--background-index&amp;#34;, &amp;#34;--compile-commands-dir=.vscode&amp;#34;, // completion &amp;#34;--header-insertion=never&amp;#34;, &amp;#34;--completion-style=bundled&amp;#34;, &amp;#34;--function-arg-placeholders=false&amp;#34;, // effective &amp;#34;--pch-storage=memory&amp;#34;, &amp;#34;-j=16&amp;#34;, // coding &amp;#34;--clang-tidy&amp;#34;, // misc &amp;#34;--log=error&amp;#34; ] } 在项目目录新建.clang-format文件，谷歌一下 UE clang-format，随便找一个复制下来。这里用来格式化代码。
+使用脚本生成反射信息和compile_commands.json
+compile_commands.json成功生成后，打开 cpp 文件，clangd 就会自动运行。
+UE 的 Unreal Build Tool 可以生成compile_commands.json，需要 clang 辅助。不过 UBT 写的比较奇葩，在命令行直接clang -v有结果，但 UBT 还是找不到，在论坛看了一遍 Linux/Windows 都是这样。</description>
+    </item>
+    
+  </channel>
+</rss>
