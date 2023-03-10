@@ -2,26 +2,32 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://star-hengxing.github.io/tags/c&#43;&#43;/</loc>
+    <lastmod>2023-03-06T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>https://star-hengxing.github.io/post/</loc>
-    <lastmod>2023-01-04T00:00:00+00:00</lastmod>
+    <lastmod>2023-03-06T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://star-hengxing.github.io/tags/</loc>
-    <lastmod>2023-01-04T00:00:00+00:00</lastmod>
+    <lastmod>2023-03-06T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://star-hengxing.github.io/tags/xmake/</loc>
-    <lastmod>2023-01-04T00:00:00+00:00</lastmod>
+    <lastmod>2023-03-06T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://star-hengxing.github.io/p/xmake-%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E8%A7%A3%E7%AD%94/</loc>
+    <lastmod>2023-03-06T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://star-hengxing.github.io/</loc>
-    <lastmod>2023-01-04T00:00:00+00:00</lastmod>
+    <lastmod>2023-03-06T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://star-hengxing.github.io/p/c-%E8%83%A1%E8%A8%80%E4%B9%B1%E8%AF%ADx2/</loc>
+    <lastmod>2023-02-25T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://star-hengxing.github.io/p/%E4%BD%BF%E7%94%A8-xmake-%E7%94%9F%E6%88%90%E9%9D%99%E6%80%81%E5%92%8C%E5%8A%A8%E6%80%81%E5%BA%93/</loc>
-    <lastmod>2023-01-04T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://star-hengxing.github.io/tags/c&#43;&#43;/</loc>
-    <lastmod>2022-12-18T00:00:00+00:00</lastmod>
+    <lastmod>2023-01-21T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://star-hengxing.github.io/p/%E4%BD%BF%E7%94%A8-xmake-%E4%BD%9C%E4%B8%BA-cs149-%E4%BD%9C%E4%B8%9A%E7%9A%84-bulild-system/</loc>
-    <lastmod>2022-12-18T00:00:00+00:00</lastmod>
+    <lastmod>2023-01-15T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://star-hengxing.github.io/tags/ue4/</loc>
     <lastmod>2022-11-26T00:00:00+00:00</lastmod>
@@ -135,7 +141,7 @@
     <lastmod>2022-01-30T11:25:23+08:00</lastmod>
   </url><url>
     <loc>https://star-hengxing.github.io/about/</loc>
-    <lastmod>2022-12-06T00:00:00+00:00</lastmod>
+    <lastmod>2023-01-04T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://star-hengxing.github.io/p/appimage%E7%9A%84%E4%BD%BF%E7%94%A8/</loc>
     <lastmod>2021-02-15T00:00:00+00:00</lastmod>
@@ -144,7 +150,7 @@
     <lastmod>2022-05-16T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://star-hengxing.github.io/page/</loc>
-    <lastmod>2022-12-06T00:00:00+00:00</lastmod>
+    <lastmod>2023-01-04T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://star-hengxing.github.io/p/%E5%9F%BA%E4%BA%8Esdf%E7%9A%84raymarching/</loc>
     <lastmod>2022-01-29T00:00:00+00:00</lastmod>

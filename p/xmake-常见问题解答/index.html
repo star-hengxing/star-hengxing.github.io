@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='如果在本文没找到解答，可以去 github 提 issue 和讨论区搜索。
+如果是官方包管理的问题，或者想请求加入一些包，去 xmake-repo 提 issue。
+提 issue 请附带 log，xmake -vD命令可以输出详细的 log 信息。
+如何一键编译运行 在 target 下加入以下代码：
+before_run(function (target) os.execv(&amp;#34;xmake build &amp;#34; .. target:name()) end) -- xmake run target 反过来也可以
+after_build(function (target) os.execv(&amp;#34;xmake run &amp;#34; .. target:name()) end) -- xmake IDE(vscode/vs)不显示头文件 给 target 加上add_headerfiles(&amp;quot;**.h)
+vs工程 自动更新 sln。 add_rules(&amp;#34;plugin.vsxmake.autoupdate&amp;#34;) 使用set_group可以给代码结构分组。 如何在脚本域添加文件 只能在on_load添加，并且需要确保路径正确。
+因为描述域的add_files()和脚本域的target:add(&amp;quot;files&amp;quot;)有一些差异，并不会做路径转换。
+后者接口可能会在任何地方使用，所以路径只能用os.projectdir或者os.scriptdir进行拼接路径。
+此外，需要确保该 target 已经应用了一个编译规则，否则不会根据后缀名去添加文件。
+比如你在脚本域添加 .cpp 文件，那么首先在描述域添加add_rules(&amp;quot;c&#43;&#43;&amp;quot;)。
+有些远程包为什么没有拉预编译版本 众所周知 c&#43;&#43; 编译器编译出的二进制有 abi 问题，同一个编译器不同版本都可能不兼容，所以当预编译库的编译器版本（github ci 编译）和本地编译器版本不一致的时候，会拉取源码进行编译。'><title>Xmake 常见问题解答</title>
+
+<link rel='canonical' href='https://star-hengxing.github.io/p/xmake-%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E8%A7%A3%E7%AD%94/'>
+
+<link rel="stylesheet" href="/scss/style.min.690a283bac9f967161eea605d3ab2ebc0b689da41a8b82c681a9dd82668ccf94.css"><meta property='og:title' content='Xmake 常见问题解答'>
+<meta property='og:description' content='如果在本文没找到解答，可以去 github 提 issue 和讨论区搜索。
+如果是官方包管理的问题，或者想请求加入一些包，去 xmake-repo 提 issue。
+提 issue 请附带 log，xmake -vD命令可以输出详细的 log 信息。
+如何一键编译运行 在 target 下加入以下代码：
+before_run(function (target) os.execv(&amp;#34;xmake build &amp;#34; .. target:name()) end) -- xmake run target 反过来也可以
+after_build(function (target) os.execv(&amp;#34;xmake run &amp;#34; .. target:name()) end) -- xmake IDE(vscode/vs)不显示头文件 给 target 加上add_headerfiles(&amp;quot;**.h)
+vs工程 自动更新 sln。 add_rules(&amp;#34;plugin.vsxmake.autoupdate&amp;#34;) 使用set_group可以给代码结构分组。 如何在脚本域添加文件 只能在on_load添加，并且需要确保路径正确。
+因为描述域的add_files()和脚本域的target:add(&amp;quot;files&amp;quot;)有一些差异，并不会做路径转换。
+后者接口可能会在任何地方使用，所以路径只能用os.projectdir或者os.scriptdir进行拼接路径。
+此外，需要确保该 target 已经应用了一个编译规则，否则不会根据后缀名去添加文件。
+比如你在脚本域添加 .cpp 文件，那么首先在描述域添加add_rules(&amp;quot;c&#43;&#43;&amp;quot;)。
+有些远程包为什么没有拉预编译版本 众所周知 c&#43;&#43; 编译器编译出的二进制有 abi 问题，同一个编译器不同版本都可能不兼容，所以当预编译库的编译器版本（github ci 编译）和本地编译器版本不一致的时候，会拉取源码进行编译。'>
+<meta property='og:url' content='https://star-hengxing.github.io/p/xmake-%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E8%A7%A3%E7%AD%94/'>
+<meta property='og:site_name' content='恒星的小站'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='C&#43;&#43;' /><meta property='article:tag' content='Xmake' /><meta property='article:published_time' content='2023-03-04T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2023-03-06T00:00:00&#43;00:00'/>
+<meta name="twitter:title" content="Xmake 常见问题解答">
+<meta name="twitter:description" content="如果在本文没找到解答，可以去 github 提 issue 和讨论区搜索。
+如果是官方包管理的问题，或者想请求加入一些包，去 xmake-repo 提 issue。
+提 issue 请附带 log，xmake -vD命令可以输出详细的 log 信息。
+如何一键编译运行 在 target 下加入以下代码：
+before_run(function (target) os.execv(&amp;#34;xmake build &amp;#34; .. target:name()) end) -- xmake run target 反过来也可以
+after_build(function (target) os.execv(&amp;#34;xmake run &amp;#34; .. target:name()) end) -- xmake IDE(vscode/vs)不显示头文件 给 target 加上add_headerfiles(&amp;quot;**.h)
+vs工程 自动更新 sln。 add_rules(&amp;#34;plugin.vsxmake.autoupdate&amp;#34;) 使用set_group可以给代码结构分组。 如何在脚本域添加文件 只能在on_load添加，并且需要确保路径正确。
+因为描述域的add_files()和脚本域的target:add(&amp;quot;files&amp;quot;)有一些差异，并不会做路径转换。
+后者接口可能会在任何地方使用，所以路径只能用os.projectdir或者os.scriptdir进行拼接路径。
+此外，需要确保该 target 已经应用了一个编译规则，否则不会根据后缀名去添加文件。
+比如你在脚本域添加 .cpp 文件，那么首先在描述域添加add_rules(&amp;quot;c&#43;&#43;&amp;quot;)。
+有些远程包为什么没有拉预编译版本 众所周知 c&#43;&#43; 编译器编译出的二进制有 abi 问题，同一个编译器不同版本都可能不兼容，所以当预编译库的编译器版本（github ci 编译）和本地编译器版本不一致的时候，会拉取源码进行编译。">
+    </head>
+    <body class="
+    article-page has-toc
+">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex 
+    
+        extended
+    
+">
+    
+        <div id="article-toolbar">
+            <a href="/" class="back-home">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="15 6 9 12 15 18" />
+</svg>
+
+
+
+                <span>返回</span>
+            </a>
+        </div>
+    
+<main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+
+    <h2 class="article-title">
+        <a href="/p/xmake-%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E8%A7%A3%E7%AD%94/">Xmake 常见问题解答</a>
+    </h2>
+
+    
+
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Mar 04, 2023</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 1 分钟
+                </time>
+            </div>
+        
+    </footer>
+    
+</div>
+</header>
+
+    <section class="article-content">
+    
+    
+    <p><strong>如果在本文没找到解答，可以去 <a class="link" href="https://github.com/xmake-io/xmake/"  target="_blank" rel="noopener"
+    >github</a> 提 issue 和讨论区搜索。</strong></p>
+<p>如果是官方包管理的问题，或者想请求加入一些包，去 <a class="link" href="https://github.com/xmake-io/xmake-repo"  target="_blank" rel="noopener"
+    >xmake-repo</a> 提 issue。</p>
+<blockquote>
+<p>提 issue 请附带 log，<code>xmake -vD</code>命令可以输出详细的 log 信息。</p>
+</blockquote>
+<h2 id="如何一键编译运行">如何一键编译运行</h2>
+<p>在 target 下加入以下代码：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lua" data-lang="lua"><span style="display:flex;"><span>before_run(<span style="color:#ff79c6">function</span> (target)
+</span></span><span style="display:flex;"><span>    os.execv(<span style="color:#f1fa8c">&#34;xmake build &#34;</span> <span style="color:#ff79c6">..</span> target:name())
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">end</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">-- xmake run target</span>
+</span></span></code></pre></div><p>反过来也可以</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lua" data-lang="lua"><span style="display:flex;"><span>after_build(<span style="color:#ff79c6">function</span> (target)
+</span></span><span style="display:flex;"><span>    os.execv(<span style="color:#f1fa8c">&#34;xmake run &#34;</span> <span style="color:#ff79c6">..</span> target:name())
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">end</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">-- xmake</span>
+</span></span></code></pre></div><h2 id="idevscodevs不显示头文件">IDE(vscode/vs)不显示头文件</h2>
+<p>给 target 加上<code>add_headerfiles(&quot;**.h)</code></p>
+<h2 id="vs工程">vs工程</h2>
+<ul>
+<li>自动更新 sln。</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lua" data-lang="lua"><span style="display:flex;"><span>add_rules(<span style="color:#f1fa8c">&#34;plugin.vsxmake.autoupdate&#34;</span>)
+</span></span></code></pre></div><ul>
+<li>使用<code>set_group</code>可以给代码结构分组。</li>
+</ul>
+<h2 id="如何在脚本域添加文件">如何在脚本域添加文件</h2>
+<p>只能在<code>on_load</code>添加，并且需要确保路径正确。</p>
+<p>因为描述域的<code>add_files()</code>和脚本域的<code>target:add(&quot;files&quot;)</code>有一些差异，并不会做路径转换。</p>
+<p>后者接口可能会在任何地方使用，所以路径只能用<code>os.projectdir</code>或者<code>os.scriptdir</code>进行拼接路径。</p>
+<p>此外，需要确保该 target 已经应用了一个编译规则，否则不会根据后缀名去添加文件。</p>
+<p>比如你在脚本域添加 .cpp 文件，那么首先在描述域添加<code>add_rules(&quot;c++&quot;)</code>。</p>
+<h2 id="有些远程包为什么没有拉预编译版本">有些远程包为什么没有拉预编译版本</h2>
+<p>众所周知 c++ 编译器编译出的二进制有 abi 问题，同一个编译器<strong>不同版本</strong>都可能不兼容，所以当预编译库的编译器版本（github ci 编译）和本地编译器版本<strong>不一致</strong>的时候，会拉取源码进行编译。</p>
+<p>有些库很大，编译需要很久，可以考虑下面方案：</p>
+<ul>
+<li>
+<p>比较推荐通过<code>set_base(&quot;package&quot;)</code>继承包，然后覆盖包的一些设置，跳过 xmake 的检查直接<a class="link" href="https://xmake.io/#/zh-cn/package/remote_package?id=%e5%ae%89%e8%a3%85%e4%ba%8c%e8%bf%9b%e5%88%b6%e5%8c%85"  target="_blank" rel="noopener"
+    >安装二进制包</a>。这里可能需要对 xmake 有一定的基础，不过完成后都是自动化，这是值得的。</p>
+</li>
+<li>
+<p>手动下载预编译包到本地包仓库</p>
+</li>
+</ul>
+<p>假设预编译包目录和<code>xmake.lua</code>同一个目录，使用<code>on_fetch</code>进行配置。</p>
+<p>这里拿 <a class="link" href="https://github.com/glfw/glfw/releases"  target="_blank" rel="noopener"
+    >glfw</a> 作为参考。</p>
+<p>我这里下载并解压了<code>glfw-3.3.8.bin.WIN64.zip</code>，然后在<code>xmake.lua</code>这样写：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lua" data-lang="lua"><span style="display:flex;"><span>package(<span style="color:#f1fa8c">&#34;glfw&#34;</span>)
+</span></span><span style="display:flex;"><span>    on_load(<span style="color:#ff79c6">function</span> (package)
+</span></span><span style="display:flex;"><span>        <span style="color:#6272a4">-- set package dir</span>
+</span></span><span style="display:flex;"><span>        package:set(<span style="color:#f1fa8c">&#34;installdir&#34;</span>, path.join(os.scriptdir(), <span style="color:#f1fa8c">&#34;glfw-3.3.8.bin.WIN64&#34;</span>))
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">end</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    on_fetch(<span style="color:#ff79c6">function</span> (package)
+</span></span><span style="display:flex;"><span>        <span style="color:#6272a4">-- add dll</span>
+</span></span><span style="display:flex;"><span>        package:addenv(<span style="color:#f1fa8c">&#34;PATH&#34;</span>, package:installdir(<span style="color:#f1fa8c">&#34;lib-vc2022&#34;</span>))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#8be9fd;font-style:italic">local</span> result <span style="color:#ff79c6">=</span> {}
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">if</span> is_plat(<span style="color:#f1fa8c">&#34;windows&#34;</span>) <span style="color:#ff79c6">then</span>
+</span></span><span style="display:flex;"><span>            result.syslinks <span style="color:#ff79c6">=</span>  {<span style="color:#f1fa8c">&#34;user32&#34;</span>, <span style="color:#f1fa8c">&#34;shell32&#34;</span>, <span style="color:#f1fa8c">&#34;gdi32&#34;</span>}
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">end</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        result.links <span style="color:#ff79c6">=</span> {<span style="color:#f1fa8c">&#34;glfw3&#34;</span>, <span style="color:#f1fa8c">&#34;glfw3_mt&#34;</span>, <span style="color:#f1fa8c">&#34;glfw3dll&#34;</span>}
+</span></span><span style="display:flex;"><span>        result.includedirs <span style="color:#ff79c6">=</span> package:installdir(<span style="color:#f1fa8c">&#34;include&#34;</span>)
+</span></span><span style="display:flex;"><span>        result.linkdirs <span style="color:#ff79c6">=</span> package:installdir(<span style="color:#f1fa8c">&#34;lib-vc2022&#34;</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">return</span> result
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">end</span>)
+</span></span><span style="display:flex;"><span>package_end()
+</span></span></code></pre></div><p>使用：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lua" data-lang="lua"><span style="display:flex;"><span>set_runtimes(<span style="color:#f1fa8c">&#34;MD&#34;</span>)
+</span></span><span style="display:flex;"><span>add_requires(<span style="color:#f1fa8c">&#34;glfw&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>target(<span style="color:#f1fa8c">&#34;test&#34;</span>)
+</span></span><span style="display:flex;"><span>    set_kind(<span style="color:#f1fa8c">&#34;binary&#34;</span>)
+</span></span><span style="display:flex;"><span>    add_files(<span style="color:#f1fa8c">&#34;*.cpp&#34;</span>)
+</span></span><span style="display:flex;"><span>    add_packages(<span style="color:#f1fa8c">&#34;glfw&#34;</span>)
+</span></span></code></pre></div><h2 id="终端不支持色彩输出">终端不支持色彩输出</h2>
+<p>切换<a class="link" href="https://xmake.io/#/zh-cn/theme/builtin_themes"  target="_blank" rel="noopener"
+    >主题</a>。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>xmake g --theme<span style="color:#ff79c6">=</span>plain
+</span></span></code></pre></div><h2 id="xmake-源码怎么看">xmake 源码怎么看</h2>
+<p>有一篇老文章可以看看 -&gt; <a class="link" href="https://tboox.org/cn/2017/09/28/xmake-sourcecode-arch/"  target="_blank" rel="noopener"
+    >xmake 源码架构剖析</a></p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/c&#43;&#43;/">C&#43;&#43;</a>
+        
+            <a href="/tags/xmake/">Xmake</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    <section class="article-lastmod">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+        <span>
+            最后更新于 Mar 06, 2023
+        </span>
+    </section></footer>
+
+
+    
+</article>
+
+    
+
+    <aside class="related-contents--wrapper">
+    
+    
+        <h2 class="section-title">相关文章</h2>
+        <div class="related-contents">
+            <div class="flex article-list--tile">
+                
+                    
+<article class="">
+    <a href="/p/%E4%BD%BF%E7%94%A8-xmake-%E4%BD%9C%E4%B8%BA-cs149-%E4%BD%9C%E4%B8%9A%E7%9A%84-bulild-system/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">使用 Xmake 作为 CS149 作业的 bulild system</h2>
+        </div>
+    </a>
+</article>
+                
+            </div>
+        </div>
+    
+</aside>
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2022 - 
+        
+        2023 恒星的小站
+    </section>
+    
+    <section class="powerby">
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.8.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css"integrity="sha256-c0uckgykQ9v5k&#43;IqViZOZKc47Jn7KQil4/MP3ySA3F8="crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css"integrity="sha256-SBLU4vv6CA6lHsZ1XyTdhyjJxCjPif/TRkjnsyGAGnE="crossorigin="anonymous"
+            >
+
+            </main>
+    
+        <aside class="sidebar right-sidebar sticky">
+            <section class="widget archives">
+                <div class="widget-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+                </div>
+                <h2 class="widget-title section-title">目录</h2>
+                
+                <div class="widget--toc">
+                    <nav id="TableOfContents">
+  <ol>
+    <li><a href="#如何一键编译运行">如何一键编译运行</a></li>
+    <li><a href="#idevscodevs不显示头文件">IDE(vscode/vs)不显示头文件</a></li>
+    <li><a href="#vs工程">vs工程</a></li>
+    <li><a href="#如何在脚本域添加文件">如何在脚本域添加文件</a></li>
+    <li><a href="#有些远程包为什么没有拉预编译版本">有些远程包为什么没有拉预编译版本</a></li>
+    <li><a href="#终端不支持色彩输出">终端不支持色彩输出</a></li>
+    <li><a href="#xmake-源码怎么看">xmake 源码怎么看</a></li>
+  </ol>
+</nav>
+                </div>
+            </section>
+        </aside>
+    
+
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js"integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

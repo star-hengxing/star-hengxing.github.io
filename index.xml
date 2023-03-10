@@ -6,82 +6,237 @@
         <description>Recent content on 恒星的小站</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
-        <lastBuildDate>Wed, 04 Jan 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://star-hengxing.github.io/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sat, 04 Mar 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://star-hengxing.github.io/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Xmake 常见问题解答</title>
+        <link>https://star-hengxing.github.io/p/xmake-%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E8%A7%A3%E7%AD%94/</link>
+        <pubDate>Sat, 04 Mar 2023 00:00:00 +0000</pubDate>
+        
+        <guid>https://star-hengxing.github.io/p/xmake-%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E8%A7%A3%E7%AD%94/</guid>
+        <description>&lt;p&gt;&lt;strong&gt;如果在本文没找到解答，可以去 &lt;a class=&#34;link&#34; href=&#34;https://github.com/xmake-io/xmake/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;github&lt;/a&gt; 提 issue 和讨论区搜索。&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;如果是官方包管理的问题，或者想请求加入一些包，去 &lt;a class=&#34;link&#34; href=&#34;https://github.com/xmake-io/xmake-repo&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;xmake-repo&lt;/a&gt; 提 issue。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;提 issue 请附带 log，&lt;code&gt;xmake -vD&lt;/code&gt;命令可以输出详细的 log 信息。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;如何一键编译运行&#34;&gt;如何一键编译运行&lt;/h2&gt;
+&lt;p&gt;在 target 下加入以下代码：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-lua&#34; data-lang=&#34;lua&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;before_run(&lt;span style=&#34;color:#ff79c6&#34;&gt;function&lt;/span&gt; (target)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    os.execv(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;xmake build &amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;..&lt;/span&gt; target:name())
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;end&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#6272a4&#34;&gt;-- xmake run target&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;反过来也可以&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-lua&#34; data-lang=&#34;lua&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;after_build(&lt;span style=&#34;color:#ff79c6&#34;&gt;function&lt;/span&gt; (target)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    os.execv(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;xmake run &amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;..&lt;/span&gt; target:name())
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;end&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#6272a4&#34;&gt;-- xmake&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;idevscodevs不显示头文件&#34;&gt;IDE(vscode/vs)不显示头文件&lt;/h2&gt;
+&lt;p&gt;给 target 加上&lt;code&gt;add_headerfiles(&amp;quot;**.h)&lt;/code&gt;&lt;/p&gt;
+&lt;h2 id=&#34;vs工程&#34;&gt;vs工程&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;自动更新 sln。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-lua&#34; data-lang=&#34;lua&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;add_rules(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;plugin.vsxmake.autoupdate&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;使用&lt;code&gt;set_group&lt;/code&gt;可以给代码结构分组。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;如何在脚本域添加文件&#34;&gt;如何在脚本域添加文件&lt;/h2&gt;
+&lt;p&gt;只能在&lt;code&gt;on_load&lt;/code&gt;添加，并且需要确保路径正确。&lt;/p&gt;
+&lt;p&gt;因为描述域的&lt;code&gt;add_files()&lt;/code&gt;和脚本域的&lt;code&gt;target:add(&amp;quot;files&amp;quot;)&lt;/code&gt;有一些差异，并不会做路径转换。&lt;/p&gt;
+&lt;p&gt;后者接口可能会在任何地方使用，所以路径只能用&lt;code&gt;os.projectdir&lt;/code&gt;或者&lt;code&gt;os.scriptdir&lt;/code&gt;进行拼接路径。&lt;/p&gt;
+&lt;p&gt;此外，需要确保该 target 已经应用了一个编译规则，否则不会根据后缀名去添加文件。&lt;/p&gt;
+&lt;p&gt;比如你在脚本域添加 .cpp 文件，那么首先在描述域添加&lt;code&gt;add_rules(&amp;quot;c++&amp;quot;)&lt;/code&gt;。&lt;/p&gt;
+&lt;h2 id=&#34;有些远程包为什么没有拉预编译版本&#34;&gt;有些远程包为什么没有拉预编译版本&lt;/h2&gt;
+&lt;p&gt;众所周知 c++ 编译器编译出的二进制有 abi 问题，同一个编译器&lt;strong&gt;不同版本&lt;/strong&gt;都可能不兼容，所以当预编译库的编译器版本（github ci 编译）和本地编译器版本&lt;strong&gt;不一致&lt;/strong&gt;的时候，会拉取源码进行编译。&lt;/p&gt;
+&lt;p&gt;有些库很大，编译需要很久，可以考虑下面方案：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;比较推荐通过&lt;code&gt;set_base(&amp;quot;package&amp;quot;)&lt;/code&gt;继承包，然后覆盖包的一些设置，跳过 xmake 的检查直接&lt;a class=&#34;link&#34; href=&#34;https://xmake.io/#/zh-cn/package/remote_package?id=%e5%ae%89%e8%a3%85%e4%ba%8c%e8%bf%9b%e5%88%b6%e5%8c%85&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;安装二进制包&lt;/a&gt;。这里可能需要对 xmake 有一定的基础，不过完成后都是自动化，这是值得的。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;手动下载预编译包到本地包仓库&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;假设预编译包目录和&lt;code&gt;xmake.lua&lt;/code&gt;同一个目录，使用&lt;code&gt;on_fetch&lt;/code&gt;进行配置。&lt;/p&gt;
+&lt;p&gt;这里拿 &lt;a class=&#34;link&#34; href=&#34;https://github.com/glfw/glfw/releases&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;glfw&lt;/a&gt; 作为参考。&lt;/p&gt;
+&lt;p&gt;我这里下载并解压了&lt;code&gt;glfw-3.3.8.bin.WIN64.zip&lt;/code&gt;，然后在&lt;code&gt;xmake.lua&lt;/code&gt;这样写：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-lua&#34; data-lang=&#34;lua&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;package(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;glfw&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    on_load(&lt;span style=&#34;color:#ff79c6&#34;&gt;function&lt;/span&gt; (package)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#6272a4&#34;&gt;-- set package dir&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        package:set(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;installdir&amp;#34;&lt;/span&gt;, path.join(os.scriptdir(), &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;glfw-3.3.8.bin.WIN64&amp;#34;&lt;/span&gt;))
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;end&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    on_fetch(&lt;span style=&#34;color:#ff79c6&#34;&gt;function&lt;/span&gt; (package)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#6272a4&#34;&gt;-- add dll&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        package:addenv(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;PATH&amp;#34;&lt;/span&gt;, package:installdir(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;lib-vc2022&amp;#34;&lt;/span&gt;))
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;local&lt;/span&gt; result &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; {}
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#ff79c6&#34;&gt;if&lt;/span&gt; is_plat(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;windows&amp;#34;&lt;/span&gt;) &lt;span style=&#34;color:#ff79c6&#34;&gt;then&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            result.syslinks &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt;  {&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;user32&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;shell32&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;gdi32&amp;#34;&lt;/span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#ff79c6&#34;&gt;end&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        result.links &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; {&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;glfw3&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;glfw3_mt&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;glfw3dll&amp;#34;&lt;/span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        result.includedirs &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; package:installdir(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;include&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        result.linkdirs &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; package:installdir(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;lib-vc2022&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#ff79c6&#34;&gt;return&lt;/span&gt; result
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;end&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;package_end()
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;使用：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-lua&#34; data-lang=&#34;lua&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;set_runtimes(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;MD&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;add_requires(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;glfw&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;target(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;test&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    set_kind(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;binary&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    add_files(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;*.cpp&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    add_packages(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;glfw&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;终端不支持色彩输出&#34;&gt;终端不支持色彩输出&lt;/h2&gt;
+&lt;p&gt;切换&lt;a class=&#34;link&#34; href=&#34;https://xmake.io/#/zh-cn/theme/builtin_themes&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;主题&lt;/a&gt;。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;xmake g --theme&lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt;plain
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;xmake-源码怎么看&#34;&gt;xmake 源码怎么看&lt;/h2&gt;
+&lt;p&gt;有一篇老文章可以看看 -&amp;gt; &lt;a class=&#34;link&#34; href=&#34;https://tboox.org/cn/2017/09/28/xmake-sourcecode-arch/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;xmake 源码架构剖析&lt;/a&gt;&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>C&#43;&#43; 胡言乱语X2</title>
+        <link>https://star-hengxing.github.io/p/c-%E8%83%A1%E8%A8%80%E4%B9%B1%E8%AF%ADx2/</link>
+        <pubDate>Sat, 25 Feb 2023 00:00:00 +0000</pubDate>
+        
+        <guid>https://star-hengxing.github.io/p/c-%E8%83%A1%E8%A8%80%E4%B9%B1%E8%AF%ADx2/</guid>
+        <description>&lt;p&gt;子标题：理解 std::move 和所有权。&lt;/p&gt;
+&lt;h2 id=&#34;前言&#34;&gt;前言&lt;/h2&gt;
+&lt;p&gt;关于 std::move 其实也有很多文章了，不过为了给群友解释，再造一次轮子。&lt;/p&gt;
+&lt;h2 id=&#34;stdmove&#34;&gt;std::move&lt;/h2&gt;
+&lt;p&gt;我们打开 std::move 的实现，发现里面是一个强制类型转换（随便找的代码）。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-cpp&#34; data-lang=&#34;cpp&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;template&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;typename&lt;/span&gt; T&lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;typename&lt;/span&gt; remove_reference&lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&lt;/span&gt;T&lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;gt;::&lt;/span&gt;type&lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; move(T&lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; arg)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;static_cast&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;typename&lt;/span&gt; remove_reference&lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&lt;/span&gt;T&lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;gt;::&lt;/span&gt;type&lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;amp;&amp;amp;&amp;gt;&lt;/span&gt;(arg);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;使用：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-cpp&#34; data-lang=&#34;cpp&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Object A;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Object B &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; std&lt;span style=&#34;color:#ff79c6&#34;&gt;::&lt;/span&gt;move(A);
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;这右值有啥用啊？假设 Object 类有以下构造函数：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-cpp&#34; data-lang=&#34;cpp&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#6272a4&#34;&gt;// 函数1
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#6272a4&#34;&gt;&lt;/span&gt;Object(&lt;span style=&#34;color:#ff79c6&#34;&gt;const&lt;/span&gt; Object&lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;amp;&lt;/span&gt; object);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#6272a4&#34;&gt;// 函数2
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#6272a4&#34;&gt;&lt;/span&gt;Object(Object&lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; object);
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;如果没有&lt;code&gt;std::move(A)&lt;/code&gt;这一步，那么B将会调用函数1进行构造，反之调用函数2。&lt;/p&gt;
+&lt;p&gt;但分开两个构造函数是干什么呢，这里就牵涉到一个资源分配和所有权问题。&lt;/p&gt;
+&lt;h2 id=&#34;所有权&#34;&gt;所有权&lt;/h2&gt;
+&lt;p&gt;假如你是A，你从宠物商店买了一只仓鼠回来（仓鼠挺可爱的），那你就成为了这只仓鼠的主人。&lt;/p&gt;
+&lt;p&gt;B是你的好朋友，他经常到你家玩。他觉得你的仓鼠很可爱，于是他也想买一只，但是他没有足够的钱。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;分支路线1：&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;可是突然有一天，你不想养这只仓鼠了，就想找个人帮你继续养下去。你知道B也想养一只属于自己的仓鼠，但没有钱去买。于是你找来了B，将仓鼠送给了他。&lt;/p&gt;
+&lt;p&gt;那么B从这天起，就成为了仓鼠的第二任主人了。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;分支路线2：&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;有一天B打工赚了许多钱，于是他去问你这只仓鼠是什么品种，然后自己到宠物商店买了一只差不多一样的。&lt;/p&gt;
+&lt;p&gt;现在又有一只小仓鼠找到了新家了。&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;回到主题，在上面，抽象来讲，买了一只仓鼠，其实就是分配了一个资源，你就拥有了他的使用权（所有权）。&lt;/p&gt;
+&lt;p&gt;分支路线1中，A把仓鼠送给了B，这就是转移了仓鼠的所有权，主人从A变成了B，对应&lt;code&gt;Object(Object&amp;amp;&amp;amp; object)&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;分支路线2中，B也买了一只仓鼠，这样两只仓鼠，都有了各自的主人，对应&lt;code&gt;Object(const Object&amp;amp; object)&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;要知道买一只新仓鼠是要花钱的，所以在某些场景用 std::move 来节省这个&lt;strong&gt;资源&lt;/strong&gt;的开销。&lt;/p&gt;
+&lt;p&gt;但仓鼠毕竟是别人养过的，想要一只&lt;strong&gt;独一无二属于&lt;/strong&gt;自己的小仓鼠，那就买一只新的吧，所以就需要申请一份&lt;strong&gt;新的资源&lt;/strong&gt;。&lt;/p&gt;
+&lt;h2 id=&#34;后记&#34;&gt;后记&lt;/h2&gt;
+&lt;p&gt;理解所有权后，就像学数据结构学会了链表。学习新的知识，第一步总是最难的。&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>使用 Xmake 生成静态和动态库</title>
         <link>https://star-hengxing.github.io/p/%E4%BD%BF%E7%94%A8-xmake-%E7%94%9F%E6%88%90%E9%9D%99%E6%80%81%E5%92%8C%E5%8A%A8%E6%80%81%E5%BA%93/</link>
         <pubDate>Wed, 04 Jan 2023 00:00:00 +0000</pubDate>
         
         <guid>https://star-hengxing.github.io/p/%E4%BD%BF%E7%94%A8-xmake-%E7%94%9F%E6%88%90%E9%9D%99%E6%80%81%E5%92%8C%E5%8A%A8%E6%80%81%E5%BA%93/</guid>
         <description>&lt;h2 id=&#34;前言&#34;&gt;前言&lt;/h2&gt;
-&lt;p&gt;当前环境在 Windows，默认了解 C/C++ 编译流程。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;当前环境在 Windows，默认了解 C/C++ 编译流程。&lt;/li&gt;
+&lt;li&gt;不一定是最佳实践。&lt;/li&gt;
+&lt;/ul&gt;
 &lt;h2 id=&#34;静态库&#34;&gt;静态库&lt;/h2&gt;
 &lt;p&gt;target 下直接考虑用&lt;code&gt;set_kind(&amp;quot;static&amp;quot;)&lt;/code&gt;即可。&lt;/p&gt;
 &lt;p&gt;有一个可以注意的地方，可以使用&lt;code&gt;set_policy(&amp;quot;build.merge_archive&amp;quot;, true)&lt;/code&gt;来合并所有静态库。（大概是用在分发二进制的时候？）&lt;/p&gt;
 &lt;h2 id=&#34;动态库&#34;&gt;动态库&lt;/h2&gt;
-&lt;h3 id=&#34;c&#34;&gt;C&lt;/h3&gt;
-&lt;p&gt;考虑到 windows dll 要在函数声明&lt;code&gt;__declspec(dllexport)&lt;/code&gt;才能导出接口（当然不止这个方法）。&lt;/p&gt;
-&lt;p&gt;xmake 对 C 语言做了支持，不用手动声明，只要在 target 下添加：&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-lua&#34; data-lang=&#34;lua&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;add_rules(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;utils.symbols.export_all&amp;#34;&lt;/span&gt;)
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;如果想要自定义导出的符号，使用&lt;code&gt;utils.symbols.export_list&lt;/code&gt;，参考&lt;a class=&#34;link&#34; href=&#34;https://xmake.io/#/zh-cn/manual/custom_rule?id=utilssymbolsexport_all&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;文档&lt;/a&gt;&lt;/p&gt;
-&lt;h3 id=&#34;c-1&#34;&gt;C++&lt;/h3&gt;
-&lt;p&gt;众所周知 C++ 的符号比较复杂（毕竟有重载这一大特性），所以 xmake 暂未支持。&lt;/p&gt;
-&lt;p&gt;那还是用回上述方案，通常我们定义这样一个宏：&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-C++&#34; data-lang=&#34;C++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;#ifdef _WIN32
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;#ifdef LIBRARY_EXPORTS
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;#define LIBRARY_API __declspec(dllexport)
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;#else
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;#define LIBRARY_API
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#6272a4&#34;&gt;// #define LIBRARY_API __declspec(dllimport)
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#6272a4&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;#endif
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;#elif
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;#define LIBRARY_API
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;#endif
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;然后在函数声明加上：&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-C++&#34; data-lang=&#34;C++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;LIBRARY_API
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;auto&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;read_file&lt;/span&gt;(&lt;span style=&#34;color:#ff79c6&#34;&gt;const&lt;/span&gt; &lt;span style=&#34;color:#8be9fd&#34;&gt;char&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;*&lt;/span&gt; filename) &lt;span style=&#34;color:#ff79c6&#34;&gt;-&amp;gt;&lt;/span&gt; std&lt;span style=&#34;color:#ff79c6&#34;&gt;::&lt;/span&gt;tuple&lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&lt;/span&gt;std&lt;span style=&#34;color:#ff79c6&#34;&gt;::&lt;/span&gt;unique_ptr&lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color:#8be9fd&#34;&gt;char&lt;/span&gt;[]&lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;gt;&lt;/span&gt;, size_t&lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;gt;&lt;/span&gt;;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;blockquote&gt;
-&lt;p&gt;如果没有修饰函数，即使用了&lt;code&gt;set_kind(&amp;quot;shared&amp;quot;)&lt;/code&gt;，当程序调用 dll 里的 api 的时候会直接崩溃。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;!-- raw HTML omitted --&gt;
-&lt;!-- raw HTML omitted --&gt;
-&lt;p&gt;然后在库&lt;code&gt;xmake.lua&lt;/code&gt;写：&lt;/p&gt;
+&lt;p&gt;考虑到 windows dll 要在函数声明&lt;code&gt;__declspec(dllexport)&lt;/code&gt;导出接口（也可以用&lt;code&gt;.def&lt;/code&gt;文件）。&lt;/p&gt;
+&lt;p&gt;手动给每个符号声明很麻烦，需要 build system 来自动化。&lt;/p&gt;
+&lt;p&gt;xmake 对此做了支持，只需要在 target 下添加：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-lua&#34; data-lang=&#34;lua&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#6272a4&#34;&gt;-- C&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;add_rules(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;utils.symbols.export_all&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#6272a4&#34;&gt;-- C++&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;add_rules(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;utils.symbols.export_all&amp;#34;&lt;/span&gt;, {export_classes &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;true&lt;/span&gt;})
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;就会生成正确 dll 文件了。&lt;/p&gt;
+&lt;p&gt;如果想要自定义导出符号，使用&lt;a class=&#34;link&#34; href=&#34;https://xmake.io/#/zh-cn/manual/custom_rule?id=utilssymbolsexport_list&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;utils.symbols.export_list&lt;/a&gt;。&lt;/p&gt;
+&lt;h2 id=&#34;直接配置&#34;&gt;直接配置&lt;/h2&gt;
+&lt;p&gt;假设&lt;code&gt;test&lt;/code&gt;目录下是一个库，把上面静态库和动态库的用法结合起来：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-lua&#34; data-lang=&#34;lua&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;add_includedirs(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;include&amp;#34;&lt;/span&gt;, {public &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;true&lt;/span&gt;})
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;option(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;shared&amp;#34;&lt;/span&gt;)
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    set_default(&lt;span style=&#34;color:#ff79c6&#34;&gt;false&lt;/span&gt;)
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    set_showmenu(&lt;span style=&#34;color:#ff79c6&#34;&gt;true&lt;/span&gt;)
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    set_description(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;Enable shared library (default: false)&amp;#34;&lt;/span&gt;)
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;option_end()
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;function&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;my_config&lt;/span&gt;(target)
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;if&lt;/span&gt; has_config(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;shared&amp;#34;&lt;/span&gt;) &lt;span style=&#34;color:#ff79c6&#34;&gt;then&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        target:set(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;kind&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;shared&amp;#34;&lt;/span&gt;)
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#ff79c6&#34;&gt;if&lt;/span&gt; is_plat(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;windows&amp;#34;&lt;/span&gt;) &lt;span style=&#34;color:#ff79c6&#34;&gt;then&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            target:add(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;defines&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;LIBRARY_EXPORTS&amp;#34;&lt;/span&gt;)
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#ff79c6&#34;&gt;end&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;else&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        target:set(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;kind&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;static&amp;#34;&lt;/span&gt;)
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;end&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;end&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;target(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;add&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    set_kind(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;$(kind)&amp;#34;&lt;/span&gt;)
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    add_files(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;src/add.cpp&amp;#34;&lt;/span&gt;)
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    on_load(my_config)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;if&lt;/span&gt; is_kind(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;shared&amp;#34;&lt;/span&gt;) &lt;span style=&#34;color:#ff79c6&#34;&gt;and&lt;/span&gt; is_plat(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;windows&amp;#34;&lt;/span&gt;) &lt;span style=&#34;color:#ff79c6&#34;&gt;then&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        add_rules(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;utils.symbols.export_all&amp;#34;&lt;/span&gt;, {export_classes &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;true&lt;/span&gt;})
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;end&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;target(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;sub&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    set_kind(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;$(kind)&amp;#34;&lt;/span&gt;)
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    add_files(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;src/sub.cpp&amp;#34;&lt;/span&gt;)
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    on_load(my_config)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;if&lt;/span&gt; is_kind(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;shared&amp;#34;&lt;/span&gt;) &lt;span style=&#34;color:#ff79c6&#34;&gt;and&lt;/span&gt; is_plat(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;windows&amp;#34;&lt;/span&gt;) &lt;span style=&#34;color:#ff79c6&#34;&gt;then&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        add_rules(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;utils.symbols.export_all&amp;#34;&lt;/span&gt;, {export_classes &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;true&lt;/span&gt;})
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;end&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;target(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;test&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    set_kind(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;$(kind)&amp;#34;&lt;/span&gt;)
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    add_files(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;src/test.cpp&amp;#34;&lt;/span&gt;)
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    add_deps(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;add&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;sub&amp;#34;&lt;/span&gt;)
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;not&lt;/span&gt; has_config(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;shared&amp;#34;&lt;/span&gt;) &lt;span style=&#34;color:#ff79c6&#34;&gt;then&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;if&lt;/span&gt; is_kind(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;shared&amp;#34;&lt;/span&gt;) &lt;span style=&#34;color:#ff79c6&#34;&gt;and&lt;/span&gt; is_plat(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;windows&amp;#34;&lt;/span&gt;) &lt;span style=&#34;color:#ff79c6&#34;&gt;then&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        add_rules(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;utils.symbols.export_all&amp;#34;&lt;/span&gt;, {export_classes &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;true&lt;/span&gt;})
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;elseif&lt;/span&gt; is_kind(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;static&amp;#34;&lt;/span&gt;) &lt;span style=&#34;color:#ff79c6&#34;&gt;then&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        set_policy(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;build.merge_archive&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#ff79c6&#34;&gt;true&lt;/span&gt;)
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;end&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    on_load(my_config)
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;使用不同类型的库只要&lt;code&gt;xmake f --shared=true/false&lt;/code&gt;就行了。&lt;/p&gt;
-</description>
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;使用不同类型的库只要&lt;code&gt;xmake f -k shared/static&lt;/code&gt;就行了。&lt;/p&gt;
+&lt;h2 id=&#34;使用规则&#34;&gt;使用规则&lt;/h2&gt;
+&lt;p&gt;上面只是临时用法，实际在工程中，我推荐使用规则。下面代码和上面效果是一样的。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-lua&#34; data-lang=&#34;lua&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;rule(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;module&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    on_load(&lt;span style=&#34;color:#ff79c6&#34;&gt;function&lt;/span&gt; (target)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#ff79c6&#34;&gt;if&lt;/span&gt; is_mode(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;debug&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;releasedbg&amp;#34;&lt;/span&gt;) &lt;span style=&#34;color:#ff79c6&#34;&gt;then&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            target:set(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;kind&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;shared&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#ff79c6&#34;&gt;if&lt;/span&gt; is_plat(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;windows&amp;#34;&lt;/span&gt;) &lt;span style=&#34;color:#ff79c6&#34;&gt;then&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                import(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;core.project.rule&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                &lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;local&lt;/span&gt; rule &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; rule.rule(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;utils.symbols.export_all&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                target:rule_add(rule)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                target:extraconf_set(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;rules&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;utils.symbols.export_all&amp;#34;&lt;/span&gt;, {export_classes &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;true&lt;/span&gt;})
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#ff79c6&#34;&gt;end&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#ff79c6&#34;&gt;elseif&lt;/span&gt; is_mode(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;release&amp;#34;&lt;/span&gt;) &lt;span style=&#34;color:#ff79c6&#34;&gt;then&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            target:set(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;kind&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;static&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#ff79c6&#34;&gt;else&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            assert(&lt;span style=&#34;color:#ff79c6&#34;&gt;false&lt;/span&gt;, &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;Unknown build kind&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#ff79c6&#34;&gt;end&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;end&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;rule_end()
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;开发时(debug mode)，全编译为动态库，加速链接。&lt;/li&gt;
+&lt;li&gt;发布时(release mode)，全编译为静态库，生成单个可执行程序文件。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;使用：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-lua&#34; data-lang=&#34;lua&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;target(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;test&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    set_kind(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;$(kind)&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    add_files(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;src/test.cpp&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    add_deps(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;add&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;sub&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    add_rules(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;module&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
         </item>
         <item>
         <title>使用 Xmake 作为 CS149 作业的 bulild system</title>
@@ -101,31 +256,32 @@
     &gt;GitHub&lt;/a&gt;上，这里选讲几个部分。&lt;/p&gt;
 &lt;h3 id=&#34;根目录配置&#34;&gt;根目录配置&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;最小&lt;code&gt;xmake&lt;/code&gt;版本。&lt;code&gt;ispc&lt;/code&gt;编译在这个版本后支持。&lt;/li&gt;
+&lt;li&gt;最小&lt;code&gt;xmake&lt;/code&gt;版本。&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-lua&#34; data-lang=&#34;lua&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;set_xmakever(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;2.7.3&amp;#34;&lt;/span&gt;)
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-lua&#34; data-lang=&#34;lua&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;set_xmakever(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;2.7.5&amp;#34;&lt;/span&gt;)
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
 &lt;li&gt;跨平台首选&lt;code&gt;clang&lt;/code&gt;作为 C++ 编译器，在 windows 下使用&lt;code&gt;clang-cl&lt;/code&gt;接受 msvc 风格的&lt;strong&gt;参数&lt;/strong&gt;。&lt;/li&gt;
 &lt;li&gt;在开发环境下，链接动态库可以减少二进制体积，加速链接。&lt;/li&gt;
 &lt;li&gt;添加宏定义处理一些 windows 的屎。&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-lua&#34; data-lang=&#34;lua&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;if&lt;/span&gt; is_os(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;windows&amp;#34;&lt;/span&gt;) &lt;span style=&#34;color:#ff79c6&#34;&gt;then&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    set_toolchains(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;clang-cl&amp;#34;&lt;/span&gt;)
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-lua&#34; data-lang=&#34;lua&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;if&lt;/span&gt; is_plat(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;windows&amp;#34;&lt;/span&gt;) &lt;span style=&#34;color:#ff79c6&#34;&gt;then&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#6272a4&#34;&gt;-- set_toolchains(&amp;#34;clang-cl&amp;#34;)&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    set_runtimes(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;MD&amp;#34;&lt;/span&gt;)
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    add_defines(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;_CRT_SECURE_NO_WARNINGS&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;NOMINMAX&amp;#34;&lt;/span&gt;)
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;else&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    set_toolchains(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;clang&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#6272a4&#34;&gt;-- set_toolchains(&amp;#34;clang&amp;#34;)&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;end&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;源码目录配置&#34;&gt;源码目录配置&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;考虑到 windows 没有&lt;code&gt;getopt.h&lt;/code&gt;，这里在 github 上随便找了一个库代替，并开放&lt;a class=&#34;link&#34; href=&#34;https://xmake.io/#/zh-cn/manual/project_target?id=%e6%b7%bb%e5%8a%a0%e5%a4%b4%e6%96%87%e4%bb%b6%e6%90%9c%e7%b4%a2%e7%9b%ae%e5%bd%95&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;头文件权限&lt;/a&gt;给依赖此库的&lt;code&gt;target&lt;/code&gt;使用。&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-lua&#34; data-lang=&#34;lua&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;if&lt;/span&gt; is_os(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;windows&amp;#34;&lt;/span&gt;) &lt;span style=&#34;color:#ff79c6&#34;&gt;then&lt;/span&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-lua&#34; data-lang=&#34;lua&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;if&lt;/span&gt; is_plat(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;windows&amp;#34;&lt;/span&gt;) &lt;span style=&#34;color:#ff79c6&#34;&gt;then&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    target(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;getopt&amp;#34;&lt;/span&gt;)
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        set_kind(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;static&amp;#34;&lt;/span&gt;)
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        add_includedirs(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;getopt-for-windows&amp;#34;&lt;/span&gt;, {public &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;true&lt;/span&gt;})
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        add_files(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;getopt-for-windows/getopt.c&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    target_end()
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;end&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;作业1&#34;&gt;作业1&lt;/h3&gt;
 &lt;p&gt;作业有多个&lt;code&gt;target&lt;/code&gt;，其实可以考虑每个给每个&lt;code&gt;target&lt;/code&gt;单独一个配置，不过这里选择把多个&lt;code&gt;target&lt;/code&gt;都放在同一个&lt;code&gt;xmake.lua&lt;/code&gt;中。&lt;/p&gt;
@@ -141,13 +297,14 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    add_deps(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;common&amp;#34;&lt;/span&gt;)
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;if&lt;/span&gt; is_os(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;windows&amp;#34;&lt;/span&gt;) &lt;span style=&#34;color:#ff79c6&#34;&gt;then&lt;/span&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;if&lt;/span&gt; is_plat(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;windows&amp;#34;&lt;/span&gt;) &lt;span style=&#34;color:#ff79c6&#34;&gt;then&lt;/span&gt; 
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        add_deps(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;getopt&amp;#34;&lt;/span&gt;)
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;elseif&lt;/span&gt; is_os(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;linux&amp;#34;&lt;/span&gt;) &lt;span style=&#34;color:#ff79c6&#34;&gt;then&lt;/span&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;elseif&lt;/span&gt; is_plat(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;linux&amp;#34;&lt;/span&gt;) &lt;span style=&#34;color:#ff79c6&#34;&gt;then&lt;/span&gt; 
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        add_syslinks(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;m&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;pthread&amp;#34;&lt;/span&gt;)
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;end&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    set_rundir(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;prog1_mandelbrot_threads&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;target_end()
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
 &lt;li&gt;这里用到了&lt;code&gt;ispc&lt;/code&gt;进行编译，使用&lt;code&gt;xmake&lt;/code&gt;的内置规则进行编译。&lt;/li&gt;
 &lt;li&gt;编译 ispc 文件会生成一个对象文件和头文件，这里通过&lt;code&gt;header_extension&lt;/code&gt;配置控制生成头文件的后缀，然后就可以在代码中引用生成的头文件&lt;code&gt;xxx_ispc.h&lt;/code&gt;（xxx.ispc）。&lt;/li&gt;
@@ -165,9 +322,10 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    add_deps(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;common&amp;#34;&lt;/span&gt;)
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;if&lt;/span&gt; is_os(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;linux&amp;#34;&lt;/span&gt;) &lt;span style=&#34;color:#ff79c6&#34;&gt;then&lt;/span&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;if&lt;/span&gt; is_plat(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;linux&amp;#34;&lt;/span&gt;) &lt;span style=&#34;color:#ff79c6&#34;&gt;then&lt;/span&gt; 
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        add_syslinks(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;m&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;pthread&amp;#34;&lt;/span&gt;)
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;end&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;target_end()
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;作业2&#34;&gt;作业2&lt;/h3&gt;
 &lt;p&gt;本作业两个&lt;code&gt;target&lt;/code&gt;的配置相同，可以用一个循环来生成。（常用于生成相同配置的单元测试）&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-lua&#34; data-lang=&#34;lua&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;for&lt;/span&gt; _, part &lt;span style=&#34;color:#ff79c6&#34;&gt;in&lt;/span&gt; ipairs({&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;part_a&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;part_b&amp;#34;&lt;/span&gt;}) &lt;span style=&#34;color:#ff79c6&#34;&gt;do&lt;/span&gt;
@@ -178,11 +336,12 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    add_files(part &lt;span style=&#34;color:#ff79c6&#34;&gt;..&lt;/span&gt; &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;/*.cpp&amp;#34;&lt;/span&gt;)
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    add_files(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;tests/main.cpp&amp;#34;&lt;/span&gt;)
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;if&lt;/span&gt; is_os(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;windows&amp;#34;&lt;/span&gt;) &lt;span style=&#34;color:#ff79c6&#34;&gt;then&lt;/span&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;if&lt;/span&gt; is_plat(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;windows&amp;#34;&lt;/span&gt;) &lt;span style=&#34;color:#ff79c6&#34;&gt;then&lt;/span&gt; 
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        add_deps(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;getopt&amp;#34;&lt;/span&gt;)
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;elseif&lt;/span&gt; is_os(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;linux&amp;#34;&lt;/span&gt;) &lt;span style=&#34;color:#ff79c6&#34;&gt;then&lt;/span&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;elseif&lt;/span&gt; is_plat(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;linux&amp;#34;&lt;/span&gt;) &lt;span style=&#34;color:#ff79c6&#34;&gt;then&lt;/span&gt; 
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        add_syslinks(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;m&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;pthread&amp;#34;&lt;/span&gt;)
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;end&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;target_end()
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;end&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
 &lt;li&gt;作业内置 test，但官方没有提供完成所有测试的脚本（其实直接改源码也可以），不过这里考虑用 xmake 的脚本域来做这件事。&lt;/li&gt;
@@ -218,6 +377,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#ff79c6&#34;&gt;end&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        cprint(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;${bright red}Pass!&amp;#34;&lt;/span&gt;)
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;end&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;target_end()
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;作业3&#34;&gt;作业3&lt;/h3&gt;
 &lt;p&gt;xmake 会自动探测 cuda 的目录，如果不在默认的安装目录，设置一下。&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;xmake f --cuda=&amp;lt;PATH&amp;gt;
@@ -235,6 +395,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    add_packages(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;freeglut&amp;#34;&lt;/span&gt;)
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    set_rundir(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;render&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;target_end()
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;作业4&#34;&gt;作业4&lt;/h3&gt;
 &lt;p&gt;该作业只能运行在 Linux 平台，因为官方只提供了 Linux 平台的二进制进行链接。&lt;/p&gt;
 &lt;ul&gt;
@@ -259,6 +420,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    add_ldflags(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;-l:ref_pr.a&amp;#34;&lt;/span&gt;, {force &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;true&lt;/span&gt;})
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    add_deps(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;assignment4_common&amp;#34;&lt;/span&gt;)
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    on_load(only_linux)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;target_end()
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
 &lt;li&gt;对象文件也可也直接&lt;a class=&#34;link&#34; href=&#34;https://xmake.io/#/zh-cn/manual/project_target?id=targetadd_files&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;add_files&lt;/a&gt;&lt;/li&gt;
@@ -271,6 +433,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    add_ldflags(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;-fopenmp&amp;#34;&lt;/span&gt;)
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    add_deps(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;assignment4_common&amp;#34;&lt;/span&gt;)
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    on_load(only_linux)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;target_end()
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
         </item>
         <item>
