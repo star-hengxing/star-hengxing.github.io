@@ -6,7 +6,55 @@
     <description>Recent content in C&#43;&#43; on 恒星的小站</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sat, 04 Mar 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://star-hengxing.github.io/tags/c++/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 19 Aug 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://star-hengxing.github.io/tags/c++/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>如何给 Xmake 打包</title>
+      <link>https://star-hengxing.github.io/p/%E5%A6%82%E4%BD%95%E7%BB%99-xmake-%E6%89%93%E5%8C%85/</link>
+      <pubDate>Sat, 19 Aug 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://star-hengxing.github.io/p/%E5%A6%82%E4%BD%95%E7%BB%99-xmake-%E6%89%93%E5%8C%85/</guid>
+      <description>先来展示个 cmake 包模板。
+package(&amp;#34;xxx&amp;#34;) set_homepage(&amp;#34;https://github.com/xxx/yyy&amp;#34;) set_description(&amp;#34;&amp;#34;) set_license(&amp;#34;&amp;#34;) add_urls(&amp;#34;https://github.com/xxx/yyy/archive/refs/tags/$(version).tar.gz&amp;#34;, &amp;#34;https://github.com/xxx/yyy.git&amp;#34;) add_versions(&amp;#34;v1.0.0&amp;#34;, &amp;#34;sha256&amp;#34;) add_deps(&amp;#34;cmake&amp;#34;, &amp;#34;ninja&amp;#34;) on_install(function (package) local configs = {} table.insert(configs, &amp;#34;-DCMAKE_BUILD_TYPE=&amp;#34; .. (package:is_debug() and &amp;#34;Debug&amp;#34; or &amp;#34;Release&amp;#34;)) table.insert(configs, &amp;#34;-DBUILD_SHARED_LIBS=&amp;#34; .. (package:config(&amp;#34;shared&amp;#34;) and &amp;#34;ON&amp;#34; or &amp;#34;OFF&amp;#34;)) if package:is_plat(&amp;#34;windows&amp;#34;) and package:config(&amp;#34;shared&amp;#34;) then table.insert(configs, &amp;#34;-DCMAKE_WINDOWS_EXPORT_ALL_SYMBOLS=ON&amp;#34;) end io.replace(&amp;#34;CMakeLists.txt&amp;#34;, &amp;#34;xxx&amp;#34;, &amp;#34;&amp;#34;, {plain = true}) import(&amp;#34;package.tools.cmake&amp;#34;).install(package, configs, {cmake_generator = &amp;#34;Ninja&amp;#34;}) end) on_test(function (package) assert(package:has_cxxfuncs(&amp;#34;xxx&amp;#34;, {includes = &amp;#34;yyy.h&amp;#34;})) end) 观察发现，这其实和写 target 差不多，不过 api 的语义不一样而已。
+git clone https://github.com/xmake-io/xmake-repo # 使用脚本生成模板 xmake l scripts/new.</description>
+    </item>
+    
+    <item>
+      <title>C&#43;&#43; 胡言乱语X3</title>
+      <link>https://star-hengxing.github.io/p/c-%E8%83%A1%E8%A8%80%E4%B9%B1%E8%AF%ADx3/</link>
+      <pubDate>Tue, 15 Aug 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://star-hengxing.github.io/p/c-%E8%83%A1%E8%A8%80%E4%B9%B1%E8%AF%ADx3/</guid>
+      <description>子标题：一个第三方库需要哪些构建选项。
+C Runtime 在 Linux 下编译，基本都是动态链接 glibc 吧，如果你想静态链接，或者静态链接其他 libc (如 musl)。 在 Windows 下，通常都是链接 UCRT，那问题来了，应该有个选项选择 MT/MTd/MD/MDd 吧。 生成动态/静态库 这貌似是一个很基础的选项，没必要提出来，但事实上还是有很多开发者根本不处理（也许别人没考虑过 Windows 平台）。
+比如在编译静态库时用了 #define EXPORT __declspec(dllexport)，但根本不需要这玩意。
+对编译不负责任就算了，实在偷懒可以用构建系统自带的导出符号。
+测试/例子 一个库总会有测试和例子，那问题来了，你不提供选项，内部也没处理，编译的时候还得顺带编译这一坨东西，但我最终只是想用 bin/lib/include 作为开发而已。
+依赖管理 现在的项目管理外部依赖，通常考虑集成第三方库源码在项目里或者通过包管理下载（vcpkg/conan/CPM/FetchContent etc&amp;hellip;）。
+应该有一些构建选项可以让用户选择，自行下载依赖库还是使用集成在项目里的源码。但也有例外，有些项目的 cmakelists 里没有相关逻辑去选择，会直接用 CPM/FetchContent 下载依赖，直接打满硬盘空间，这就很可怕。不过这点可以通过加硬盘处理。
+但要命的是，有时候会出现几个依赖库，本身也依赖了同一个库的情况，项目在编译链接的时候大概率报错失败，因为违反了 odr 原则，符号冲突了。不过大部分包管理也很难解决级联依赖的冲突，所以还是要要自己手工处理依赖，而依赖库可以提供选择自行下载依赖选项就好了。
+Address Sanitizer 现在编译器已经普及了这一技术，然而很多开发者根本不知道有这玩意，或者知道了但没去开启 asan 。除了自己代码开 asan，所依赖的库最好也开启 asan 编译效果才最佳，否则有机率会出现 &amp;ldquo;假阳性&amp;rdquo;。
+未完待续 </description>
+    </item>
+    
+    <item>
+      <title>Xmake 新手教程</title>
+      <link>https://star-hengxing.github.io/p/xmake-%E6%96%B0%E6%89%8B%E6%95%99%E7%A8%8B/</link>
+      <pubDate>Fri, 30 Jun 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://star-hengxing.github.io/p/xmake-%E6%96%B0%E6%89%8B%E6%95%99%E7%A8%8B/</guid>
+      <description>构建系统的文档好像都有一个老毛病，就是不太适合新手去阅读（官方教程过于简短）。一些人认为文档写得很混乱，cmake/xmake/meson 都是如此，因此有了这个教程。
+新手，是指了解 c/c++ 基础的编译链接，并不是对计算机科学（用过至少一门编程语言）一无所知的萌新。
+这里还有两份教程可以互相参考。
+A Tour of xmake 一份非官方的xmake教程 xmake从入门到精通1：安装和更新 如果想看类似于 meson 的 How do I do X in Meson? 和 Frequently Asked Questions，请看另一篇文章： Xmake 常见问题解答。
+xmake 的官方交流群，可以查看文档自行添加。
+安装 这部分文档写得很清楚，在各自的平台用对应的包管理安装即可，另外使用 Windows 系统的读者需要注意两点：
+自行下载压缩包然后解压到某个目录，确保该目录没有其他东西。 曾有人解压到了软件目录，里面有其他软件，然后卸载 xmake 的时候，把其他软件也删了。
+想通过源码的方式编译安装，需要提前装好一个 xmake，因为 xmake 源码由 c + lua 组成，c 源码需要 xmake 自己编译，也就是&amp;quot;自举&amp;quot;。 打开命令行，输入xmake --version验证一下是否正确安装。
+Hello world 这里先介绍怎么编译一个 hello world 工程。
+打开命令行，输入xmake create hello，用 xmake 生成自带的 hello world 模板。
+$ xmake create hello create hello .</description>
+    </item>
+    
     <item>
       <title>Xmake 常见问题解答</title>
       <link>https://star-hengxing.github.io/p/xmake-%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E8%A7%A3%E7%AD%94/</link>
@@ -16,15 +64,11 @@
       <description>如果在本文没找到解答，可以去 github 提 issue 和讨论区搜索。
 如果是官方包管理的问题，或者想请求加入一些包，去 xmake-repo 提 issue。
 提 issue 请附带 log，xmake -vD命令可以输出详细的 log 信息。
-如何一键编译运行 在 target 下加入以下代码：
-before_run(function (target) os.execv(&amp;#34;xmake build &amp;#34; .. target:name()) end) -- xmake run target 反过来也可以
-after_build(function (target) os.execv(&amp;#34;xmake run &amp;#34; .. target:name()) end) -- xmake IDE(vscode/vs)不显示头文件 给 target 加上add_headerfiles(&amp;quot;**.h)
-vs工程 自动更新 sln。 add_rules(&amp;#34;plugin.vsxmake.autoupdate&amp;#34;) 使用set_group可以给代码结构分组。 如何在脚本域添加文件 只能在on_load添加，并且需要确保路径正确。
-因为描述域的add_files()和脚本域的target:add(&amp;quot;files&amp;quot;)有一些差异，并不会做路径转换。
-后者接口可能会在任何地方使用，所以路径只能用os.projectdir或者os.scriptdir进行拼接路径。
-此外，需要确保该 target 已经应用了一个编译规则，否则不会根据后缀名去添加文件。
-比如你在脚本域添加 .cpp 文件，那么首先在描述域添加add_rules(&amp;quot;c++&amp;quot;)。
-有些远程包为什么没有拉预编译版本 众所周知 c++ 编译器编译出的二进制有 abi 问题，同一个编译器不同版本都可能不兼容，所以当预编译库的编译器版本（github ci 编译）和本地编译器版本不一致的时候，会拉取源码进行编译。</description>
+基础 避免外网访问 xmake 很多操作需要访问 github（拉取 xmake-repo/build-artifact），而在公司内网开发是不需要这些操作的。
+xmake g --network=private 参考：
+https://github.com/xmake-io/xmake/issues/947 Windows 上 Qt 项目控制台没有输出 使用：
+add_ldflags(&amp;#34;/subsystem:console&amp;#34;) xmake 的 qt rule 里会检测 ldflags 里有没有/subsystem，如果没有就默认/subsystem:windows。
+给单独源文件添加参数 add_files(&amp;#34;test/*.c&amp;#34;, &amp;#34;test2/test2.c&amp;#34;, {defines = &amp;#34;TEST2&amp;#34;, languages = &amp;#34;c99&amp;#34;, includedirs = &amp;#34;.&amp;#34;, cflags = &amp;#34;-O0&amp;#34;}) -- 强制禁用 cxflags,cflags 等编译选项的自动检测 add_files(&amp;#34;src/*.c&amp;#34;, {force = {cxflags = &amp;#34;-DTEST&amp;#34;, mflags = &amp;#34;-framework xxx&amp;#34;}}) 给指定文件添加 config target(&amp;#34;test&amp;#34;) add_files(&amp;#34;test/*.</description>
     </item>
     
     <item>

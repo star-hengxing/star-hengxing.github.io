@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='先来展示个 cmake 包模板。
+package(&amp;#34;xxx&amp;#34;) set_homepage(&amp;#34;https://github.com/xxx/yyy&amp;#34;) set_description(&amp;#34;&amp;#34;) set_license(&amp;#34;&amp;#34;) add_urls(&amp;#34;https://github.com/xxx/yyy/archive/refs/tags/$(version).tar.gz&amp;#34;, &amp;#34;https://github.com/xxx/yyy.git&amp;#34;) add_versions(&amp;#34;v1.0.0&amp;#34;, &amp;#34;sha256&amp;#34;) add_deps(&amp;#34;cmake&amp;#34;, &amp;#34;ninja&amp;#34;) on_install(function (package) local configs = {} table.insert(configs, &amp;#34;-DCMAKE_BUILD_TYPE=&amp;#34; .. (package:is_debug() and &amp;#34;Debug&amp;#34; or &amp;#34;Release&amp;#34;)) table.insert(configs, &amp;#34;-DBUILD_SHARED_LIBS=&amp;#34; .. (package:config(&amp;#34;shared&amp;#34;) and &amp;#34;ON&amp;#34; or &amp;#34;OFF&amp;#34;)) if package:is_plat(&amp;#34;windows&amp;#34;) and package:config(&amp;#34;shared&amp;#34;) then table.insert(configs, &amp;#34;-DCMAKE_WINDOWS_EXPORT_ALL_SYMBOLS=ON&amp;#34;) end io.replace(&amp;#34;CMakeLists.txt&amp;#34;, &amp;#34;xxx&amp;#34;, &amp;#34;&amp;#34;, {plain = true}) import(&amp;#34;package.tools.cmake&amp;#34;).install(package, configs, {cmake_generator = &amp;#34;Ninja&amp;#34;}) end) on_test(function (package) assert(package:has_cxxfuncs(&amp;#34;xxx&amp;#34;, {includes = &amp;#34;yyy.h&amp;#34;})) end) 观察发现，这其实和写 target 差不多，不过 api 的语义不一样而已。
+git clone https://github.com/xmake-io/xmake-repo # 使用脚本生成模板 xmake l scripts/new.'><title>如何给 Xmake 打包</title>
+
+<link rel='canonical' href='https://star-hengxing.github.io/p/%E5%A6%82%E4%BD%95%E7%BB%99-xmake-%E6%89%93%E5%8C%85/'>
+
+<link rel="stylesheet" href="/scss/style.min.690a283bac9f967161eea605d3ab2ebc0b689da41a8b82c681a9dd82668ccf94.css"><meta property='og:title' content='如何给 Xmake 打包'>
+<meta property='og:description' content='先来展示个 cmake 包模板。
+package(&amp;#34;xxx&amp;#34;) set_homepage(&amp;#34;https://github.com/xxx/yyy&amp;#34;) set_description(&amp;#34;&amp;#34;) set_license(&amp;#34;&amp;#34;) add_urls(&amp;#34;https://github.com/xxx/yyy/archive/refs/tags/$(version).tar.gz&amp;#34;, &amp;#34;https://github.com/xxx/yyy.git&amp;#34;) add_versions(&amp;#34;v1.0.0&amp;#34;, &amp;#34;sha256&amp;#34;) add_deps(&amp;#34;cmake&amp;#34;, &amp;#34;ninja&amp;#34;) on_install(function (package) local configs = {} table.insert(configs, &amp;#34;-DCMAKE_BUILD_TYPE=&amp;#34; .. (package:is_debug() and &amp;#34;Debug&amp;#34; or &amp;#34;Release&amp;#34;)) table.insert(configs, &amp;#34;-DBUILD_SHARED_LIBS=&amp;#34; .. (package:config(&amp;#34;shared&amp;#34;) and &amp;#34;ON&amp;#34; or &amp;#34;OFF&amp;#34;)) if package:is_plat(&amp;#34;windows&amp;#34;) and package:config(&amp;#34;shared&amp;#34;) then table.insert(configs, &amp;#34;-DCMAKE_WINDOWS_EXPORT_ALL_SYMBOLS=ON&amp;#34;) end io.replace(&amp;#34;CMakeLists.txt&amp;#34;, &amp;#34;xxx&amp;#34;, &amp;#34;&amp;#34;, {plain = true}) import(&amp;#34;package.tools.cmake&amp;#34;).install(package, configs, {cmake_generator = &amp;#34;Ninja&amp;#34;}) end) on_test(function (package) assert(package:has_cxxfuncs(&amp;#34;xxx&amp;#34;, {includes = &amp;#34;yyy.h&amp;#34;})) end) 观察发现，这其实和写 target 差不多，不过 api 的语义不一样而已。
+git clone https://github.com/xmake-io/xmake-repo # 使用脚本生成模板 xmake l scripts/new.'>
+<meta property='og:url' content='https://star-hengxing.github.io/p/%E5%A6%82%E4%BD%95%E7%BB%99-xmake-%E6%89%93%E5%8C%85/'>
+<meta property='og:site_name' content='恒星的小站'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='C&#43;&#43;' /><meta property='article:published_time' content='2023-08-19T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2023-08-19T00:00:00&#43;00:00'/>
+<meta name="twitter:title" content="如何给 Xmake 打包">
+<meta name="twitter:description" content="先来展示个 cmake 包模板。
+package(&amp;#34;xxx&amp;#34;) set_homepage(&amp;#34;https://github.com/xxx/yyy&amp;#34;) set_description(&amp;#34;&amp;#34;) set_license(&amp;#34;&amp;#34;) add_urls(&amp;#34;https://github.com/xxx/yyy/archive/refs/tags/$(version).tar.gz&amp;#34;, &amp;#34;https://github.com/xxx/yyy.git&amp;#34;) add_versions(&amp;#34;v1.0.0&amp;#34;, &amp;#34;sha256&amp;#34;) add_deps(&amp;#34;cmake&amp;#34;, &amp;#34;ninja&amp;#34;) on_install(function (package) local configs = {} table.insert(configs, &amp;#34;-DCMAKE_BUILD_TYPE=&amp;#34; .. (package:is_debug() and &amp;#34;Debug&amp;#34; or &amp;#34;Release&amp;#34;)) table.insert(configs, &amp;#34;-DBUILD_SHARED_LIBS=&amp;#34; .. (package:config(&amp;#34;shared&amp;#34;) and &amp;#34;ON&amp;#34; or &amp;#34;OFF&amp;#34;)) if package:is_plat(&amp;#34;windows&amp;#34;) and package:config(&amp;#34;shared&amp;#34;) then table.insert(configs, &amp;#34;-DCMAKE_WINDOWS_EXPORT_ALL_SYMBOLS=ON&amp;#34;) end io.replace(&amp;#34;CMakeLists.txt&amp;#34;, &amp;#34;xxx&amp;#34;, &amp;#34;&amp;#34;, {plain = true}) import(&amp;#34;package.tools.cmake&amp;#34;).install(package, configs, {cmake_generator = &amp;#34;Ninja&amp;#34;}) end) on_test(function (package) assert(package:has_cxxfuncs(&amp;#34;xxx&amp;#34;, {includes = &amp;#34;yyy.h&amp;#34;})) end) 观察发现，这其实和写 target 差不多，不过 api 的语义不一样而已。
+git clone https://github.com/xmake-io/xmake-repo # 使用脚本生成模板 xmake l scripts/new.">
+    </head>
+    <body class="
+    article-page has-toc
+">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex 
+    
+        extended
+    
+">
+    
+        <div id="article-toolbar">
+            <a href="/" class="back-home">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="15 6 9 12 15 18" />
+</svg>
+
+
+
+                <span>返回</span>
+            </a>
+        </div>
+    
+<main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+
+    <h2 class="article-title">
+        <a href="/p/%E5%A6%82%E4%BD%95%E7%BB%99-xmake-%E6%89%93%E5%8C%85/">如何给 Xmake 打包</a>
+    </h2>
+
+    
+
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Aug 19, 2023</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 2 分钟
+                </time>
+            </div>
+        
+    </footer>
+    
+</div>
+</header>
+
+    <section class="article-content">
+    
+    
+    <p>先来展示个 cmake 包模板。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lua" data-lang="lua"><span style="display:flex;"><span>package(<span style="color:#f1fa8c">&#34;xxx&#34;</span>)
+</span></span><span style="display:flex;"><span>    set_homepage(<span style="color:#f1fa8c">&#34;https://github.com/xxx/yyy&#34;</span>)
+</span></span><span style="display:flex;"><span>    set_description(<span style="color:#f1fa8c">&#34;&#34;</span>)
+</span></span><span style="display:flex;"><span>    set_license(<span style="color:#f1fa8c">&#34;&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    add_urls(<span style="color:#f1fa8c">&#34;https://github.com/xxx/yyy/archive/refs/tags/$(version).tar.gz&#34;</span>,
+</span></span><span style="display:flex;"><span>             <span style="color:#f1fa8c">&#34;https://github.com/xxx/yyy.git&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    add_versions(<span style="color:#f1fa8c">&#34;v1.0.0&#34;</span>, <span style="color:#f1fa8c">&#34;sha256&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    add_deps(<span style="color:#f1fa8c">&#34;cmake&#34;</span>, <span style="color:#f1fa8c">&#34;ninja&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    on_install(<span style="color:#ff79c6">function</span> (package)
+</span></span><span style="display:flex;"><span>        <span style="color:#8be9fd;font-style:italic">local</span> configs <span style="color:#ff79c6">=</span> {}
+</span></span><span style="display:flex;"><span>        table.insert(configs, <span style="color:#f1fa8c">&#34;-DCMAKE_BUILD_TYPE=&#34;</span> <span style="color:#ff79c6">..</span> (package:is_debug() <span style="color:#ff79c6">and</span> <span style="color:#f1fa8c">&#34;Debug&#34;</span> <span style="color:#ff79c6">or</span> <span style="color:#f1fa8c">&#34;Release&#34;</span>))
+</span></span><span style="display:flex;"><span>        table.insert(configs, <span style="color:#f1fa8c">&#34;-DBUILD_SHARED_LIBS=&#34;</span> <span style="color:#ff79c6">..</span> (package:config(<span style="color:#f1fa8c">&#34;shared&#34;</span>) <span style="color:#ff79c6">and</span> <span style="color:#f1fa8c">&#34;ON&#34;</span> <span style="color:#ff79c6">or</span> <span style="color:#f1fa8c">&#34;OFF&#34;</span>))
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">if</span> package:is_plat(<span style="color:#f1fa8c">&#34;windows&#34;</span>) <span style="color:#ff79c6">and</span> package:config(<span style="color:#f1fa8c">&#34;shared&#34;</span>) <span style="color:#ff79c6">then</span>
+</span></span><span style="display:flex;"><span>            table.insert(configs, <span style="color:#f1fa8c">&#34;-DCMAKE_WINDOWS_EXPORT_ALL_SYMBOLS=ON&#34;</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">end</span>
+</span></span><span style="display:flex;"><span>        io.replace(<span style="color:#f1fa8c">&#34;CMakeLists.txt&#34;</span>, <span style="color:#f1fa8c">&#34;xxx&#34;</span>, <span style="color:#f1fa8c">&#34;&#34;</span>, {plain <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">true</span>})
+</span></span><span style="display:flex;"><span>        import(<span style="color:#f1fa8c">&#34;package.tools.cmake&#34;</span>).install(package, configs, {cmake_generator <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#34;Ninja&#34;</span>})
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">end</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    on_test(<span style="color:#ff79c6">function</span> (package)
+</span></span><span style="display:flex;"><span>        assert(package:has_cxxfuncs(<span style="color:#f1fa8c">&#34;xxx&#34;</span>, {includes <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#34;yyy.h&#34;</span>}))
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">end</span>)
+</span></span></code></pre></div><p>观察发现，这其实和写 target 差不多，不过 api 的语义不一样而已。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>git clone https://github.com/xmake-io/xmake-repo
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># 使用脚本生成模板</span>
+</span></span><span style="display:flex;"><span>xmake l scripts/new.lua github:yyy/xxx
+</span></span></code></pre></div><p>在本地测试包。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>xmake l scripts/test.lua -vD --shallow xxx
+</span></span></code></pre></div><p>可以添加 <code>-p mingw</code> 或 <code>-k shared</code> 等参数来测试不同的平台 和 configs。</p>
+<p>测试成功后，可以提交 pr。注意要 push 到 dev 分支才能触发 ci 的检测。</p>
+<blockquote>
+<p>其实选错分支也没关系，可以重新选择，然后先 close pr 再 open 来触发 ci。</p>
+</blockquote>
+<h2 id="api-解读">API 解读</h2>
+<h2 id="名字">名字</h2>
+<p>包名一律统一为<strong>小写</strong>，这是规定。这是为了适配不同系统环境下，系统库的查找。</p>
+<h3 id="version">version</h3>
+<p>通常情况下，使用 git tag 作为包的版本号。如果下载 <code>tar.gz</code> 压缩包失败，只要 url 中添加了库的 git 地址，xmake 就可以使用 git clone 并根据 tag 号切换。</p>
+<p>有些库版本号不是以 x.y.z 的形式来命名，这样 xmake 会解析失败，需要我们转换版本号。</p>
+<p>比如 directx 相关的包都是用月份+年份来命名，我们需要把他转换成用点和数字表示的日期。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lua" data-lang="lua"><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">local</span> tag <span style="color:#ff79c6">=</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    [<span style="color:#f1fa8c">&#34;2023.06&#34;</span>] <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#34;jun2023&#34;</span>,
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">local</span> version <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">function</span> (version) <span style="color:#ff79c6">return</span> tag[tostring(version)] <span style="color:#ff79c6">end</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>add_versions(<span style="color:#f1fa8c">&#34;2023.06&#34;</span>, <span style="color:#f1fa8c">&#34;sha256&#34;</span>)
+</span></span></code></pre></div><h3 id="configs">configs</h3>
+<p>对应库的构建选项。如果一些内置选项支持不完善，比如 <code>shared</code>，就会打上 <code>readonly</code>，表示不可修改，只能使用默认配置。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lua" data-lang="lua"><span style="display:flex;"><span>add_configs(<span style="color:#f1fa8c">&#34;shared&#34;</span>, {description <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#34;Build shared library.&#34;</span>, default <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">true</span>, type <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#34;boolean&#34;</span>, readonly <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">true</span>})
+</span></span></code></pre></div><p>需要打上 <code>readonly</code> 的情况各有不同，比如库根本就不支持，或构建的时候有问题，打包者处理不了。</p>
+<h3 id="on_install">on_install</h3>
+<p>这一步需要调用构建系统对库 配置 -&gt; 构建 -&gt; 安装。</p>
+<p>最简单的，直接把 debug/release 和 shared/static 等选项传给构建系统。如果库在 Windows 上没支持动态库，我们可以尝试使用 cmake 的导出符号来支持。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lua" data-lang="lua"><span style="display:flex;"><span><span style="color:#ff79c6">if</span> package:is_plat(<span style="color:#f1fa8c">&#34;windows&#34;</span>) <span style="color:#ff79c6">and</span> package:config(<span style="color:#f1fa8c">&#34;shared&#34;</span>) <span style="color:#ff79c6">then</span>
+</span></span><span style="display:flex;"><span>    table.insert(configs, <span style="color:#f1fa8c">&#34;-DCMAKE_WINDOWS_EXPORT_ALL_SYMBOLS=ON&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">end</span>
+</span></span></code></pre></div><p>xmake 包默认是不保留例子和测试的，所以需要打包者添加构建选项取消。然而有些库根本没有这些选项，我们可以适当优化，比如使用 <code>io.replace</code> 修改 cmakelists，把 <code>add_subdirectory(test)</code> 等删掉，或者直接打个 patch 修改。</p>
+<h3 id="on_test">on_test</h3>
+<p>平时用 <code>has_cxxfuncs</code> 系列既可以保持简洁，又可以检测到依赖的<strong>静态库</strong>/<strong>动态库</strong>有没有被正常链接上。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lua" data-lang="lua"><span style="display:flex;"><span>on_test(<span style="color:#ff79c6">function</span> (package)
+</span></span><span style="display:flex;"><span>    assert(package:has_cxxfuncs(<span style="color:#f1fa8c">&#34;xxx&#34;</span>, {includes <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#34;yyy.h&#34;</span>}))
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">end</span>)
+</span></span></code></pre></div><p>有些 C++ 库只暴露出类接口，只能通过写相关代码进行测试。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lua" data-lang="lua"><span style="display:flex;"><span>on_test(<span style="color:#ff79c6">function</span> (package)
+</span></span><span style="display:flex;"><span>    assert(package:check_cxxsnippets({test <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">[[
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">        #include &lt;xxx/yyy.hpp&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">        void test() {
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">            auto var = xxx();
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">        }
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">    ]]</span>}, {configs <span style="color:#ff79c6">=</span> {languages <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#34;c++17&#34;</span>}}))
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">end</span>)
+</span></span></code></pre></div><h2 id="优化库的构建">优化库的构建</h2>
+<h3 id="本地测试">本地测试</h3>
+<p>因为要保持 xmake 包最小化依赖原则，实际上 cmake 包只使用系统默认的构建系统，而不是 ninja。但打包者依然可以在测试中使用 ninja 加速编译。</p>
+<h3 id="头文件库">头文件库</h3>
+<p>设置 <code>headeronly</code> 类型后，build hash 会唯一，避免浪费硬盘。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lua" data-lang="lua"><span style="display:flex;"><span>set_kind(<span style="color:#f1fa8c">&#34;library&#34;</span>, {headeronly <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">true</span>})
+</span></span></code></pre></div><p>有些库可能支持非头文件模式编译，通常使用 <code>header_only</code> 来命名 config，然后 <code>on_load</code> 和 <code>on_install</code> 需要做对应处理。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lua" data-lang="lua"><span style="display:flex;"><span>add_configs(<span style="color:#f1fa8c">&#34;header_only&#34;</span>, {description <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#34;Use header only version.&#34;</span>, default <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">true</span>, type <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#34;boolean&#34;</span>})
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>on_load(<span style="color:#ff79c6">function</span> (package)
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">if</span> package:config(<span style="color:#f1fa8c">&#34;header_only&#34;</span>) <span style="color:#ff79c6">then</span>
+</span></span><span style="display:flex;"><span>        package:set(<span style="color:#f1fa8c">&#34;library&#34;</span>, {headeronly <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">true</span>})
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">end</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">end</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>on_install(<span style="color:#ff79c6">function</span> (package)
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">if</span> package:config(<span style="color:#f1fa8c">&#34;header_only&#34;</span>) <span style="color:#ff79c6">then</span>
+</span></span><span style="display:flex;"><span>        os.cp(<span style="color:#f1fa8c">&#34;include&#34;</span>, package:installdir())
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">return</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">end</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">-- 非头文件模式编译</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">end</span>)
+</span></span></code></pre></div><p>有些库会提供构建系统来安装头文件库，那么就要优先使用构建系统安装头文件，而不是手动拷贝。</p>
+<h3 id="port使用-xmake-构建">port（使用 xmake 构建）</h3>
+<p>当一些库没有构建系统，或者库使用的构建系统，在尝试多次但都构建失败，那么需要考虑用 xmake 本身来编译该库，这对打包者来说是一个挑战。</p>
+<p>这里先给出模板。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lua" data-lang="lua"><span style="display:flex;"><span>on_install(<span style="color:#ff79c6">function</span> (package)
+</span></span><span style="display:flex;"><span>    io.writefile(<span style="color:#f1fa8c">&#34;xmake.lua&#34;</span>, <span style="color:#f1fa8c">[[
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">        add_rules(&#34;mode.debug&#34;, &#34;mode.release&#34;)
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">        set_languages(&#34;c++17&#34;)
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">        target(&#34;xxx&#34;)
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">            set_kind(&#34;$(kind)&#34;)
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">            add_files(&#34;src/**.cpp&#34;)
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">            add_headerfiles(&#34;include/**.h&#34;)
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">            if is_plat(&#34;windows&#34;) and is_kind(&#34;shared&#34;) then
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">                add_rules(&#34;utils.symbols.export_all&#34;, {export_classes = true})
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">            end
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">    ]]</span>)
+</span></span><span style="display:flex;"><span>    import(<span style="color:#f1fa8c">&#34;package.tools.xmake&#34;</span>).install(package)
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">end</span>)
+</span></span></code></pre></div><p>有时候 <code>xmake.lua</code> 太大，影响包描述文件的简洁性，可以在包目录新建一个 <code>port/xmake.lua</code>，然后描述文件这样写：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lua" data-lang="lua"><span style="display:flex;"><span>on_install(<span style="color:#ff79c6">function</span> (package)
+</span></span><span style="display:flex;"><span>    os.cp(path.join(package:scriptdir(), <span style="color:#f1fa8c">&#34;port&#34;</span>, <span style="color:#f1fa8c">&#34;xmake.lua&#34;</span>), <span style="color:#f1fa8c">&#34;xmake.lua&#34;</span>)
+</span></span><span style="display:flex;"><span>    import(<span style="color:#f1fa8c">&#34;package.tools.xmake&#34;</span>).install(package)
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">end</span>)
+</span></span></code></pre></div>
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/c&#43;&#43;/">C&#43;&#43;</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+</article>
+
+    
+
+    <aside class="related-contents--wrapper">
+    
+    
+</aside>
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2022 - 
+        
+        2023 恒星的小站
+    </section>
+    
+    <section class="powerby">
+         <br />
+        
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css"integrity="sha256-c0uckgykQ9v5k&#43;IqViZOZKc47Jn7KQil4/MP3ySA3F8="crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css"integrity="sha256-SBLU4vv6CA6lHsZ1XyTdhyjJxCjPif/TRkjnsyGAGnE="crossorigin="anonymous"
+            >
+
+            </main>
+    
+        <aside class="sidebar right-sidebar sticky">
+            <section class="widget archives">
+                <div class="widget-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+                </div>
+                <h2 class="widget-title section-title">目录</h2>
+                
+                <div class="widget--toc">
+                    <nav id="TableOfContents">
+  <ol>
+    <li><a href="#api-解读">API 解读</a></li>
+    <li><a href="#名字">名字</a>
+      <ol>
+        <li><a href="#version">version</a></li>
+        <li><a href="#configs">configs</a></li>
+        <li><a href="#on_install">on_install</a></li>
+        <li><a href="#on_test">on_test</a></li>
+      </ol>
+    </li>
+    <li><a href="#优化库的构建">优化库的构建</a>
+      <ol>
+        <li><a href="#本地测试">本地测试</a></li>
+        <li><a href="#头文件库">头文件库</a></li>
+        <li><a href="#port使用-xmake-构建">port（使用 xmake 构建）</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+                </div>
+            </section>
+        </aside>
+    
+
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js"integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>
