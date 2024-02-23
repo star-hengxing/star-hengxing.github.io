@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="zh-cn"><head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+   <meta name="description" content="基本软件 工具 名字 display manager lightdm desktop environment xfce4 文本编辑器 vscode/vim/emacs 程序启动器 rofi 输入法 fcitx5 browser microsoft-edge-dev(AUR) 多线程下载 aria2 压缩包解压/查看 ark proxy clash for window(AUR) RSS fluent-reader shell zsh PDF zathura 命令行软件 描述 名字 显示目录大小 ncdu 高级版top gotop(AUR)/htop 打印彩色的十六进制 hexyl 语法高亮和行号的cat&#43;less bat 统计目录代码量 loc 文件浏览器 ranger 比tmux更好用的单窗口多终端 zellij 新建用户 useradd -m -G wheel username passwd username ln -s /usr/bin/vim /usr/bin/vi visudo 找到# %wheel ALL=(ALL)ALL取消注释
+硬件 网卡 万物起源先上网，但有些网卡需要手动装驱动(比如我笔记本的博通网卡)
+sudo pacman -S linux-headers broadcom-wl-dkms reboot dkms status 声卡 sudo pacman -S alsa-utils pulseaudio-alsa 蓝牙 sudo pacman -S bluez bluez-utils /etc/bluetooth/main.">  
+
+  <title>
+    
+      Linux配置
+    
+  </title>
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/" />
+  
+  
+  
+  <link rel="stylesheet" href="/css/main.c5af9bae99b4a3d315b9f39305ffff27e9c3383fbbfd8b5fcaf2237667021a333a982fb958d1813a720b0a660b14022337553ae1ca93ef2ee17c4ae628ac19cb.css" integrity="sha512-xa&#43;brpm0o9MVufOTBf//J&#43;nDOD&#43;7/YtfyvIjdmcCGjM6mC&#43;5WNGBOnILCmYLFAIjN1U64cqT7y7hfErmKKwZyw==" />
+  
+</head>
+<body a="auto">
+        <main class="page-content" aria-label="Content">
+            <div class="w">
+<a href="/">back</a>
+
+
+<article>
+    <p class="post-meta">
+        <time datetime="2022-01-29 00:00:00 &#43;0000 UTC">
+            2022-01-29
+        </time>
+    </p>
+
+    <h1>Linux配置</h1>
+
+    
+
+    <h2 id="基本软件">基本软件</h2>
+<table>
+<thead>
+<tr>
+<th>工具</th>
+<th>名字</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>display manager</td>
+<td>lightdm</td>
+</tr>
+<tr>
+<td>desktop environment</td>
+<td>xfce4</td>
+</tr>
+<tr>
+<td>文本编辑器</td>
+<td>vscode/vim/emacs</td>
+</tr>
+<tr>
+<td>程序启动器</td>
+<td>rofi</td>
+</tr>
+<tr>
+<td>输入法</td>
+<td>fcitx5</td>
+</tr>
+<tr>
+<td>browser</td>
+<td>microsoft-edge-dev(AUR)</td>
+</tr>
+<tr>
+<td>多线程下载</td>
+<td>aria2</td>
+</tr>
+<tr>
+<td>压缩包解压/查看</td>
+<td>ark</td>
+</tr>
+<tr>
+<td>proxy</td>
+<td>clash for window(AUR)</td>
+</tr>
+<tr>
+<td>RSS</td>
+<td>fluent-reader</td>
+</tr>
+<tr>
+<td>shell</td>
+<td>zsh</td>
+</tr>
+<tr>
+<td>PDF</td>
+<td>zathura</td>
+</tr>
+</tbody>
+</table>
+<h2 id="命令行软件">命令行软件</h2>
+<table>
+<thead>
+<tr>
+<th>描述</th>
+<th>名字</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>显示目录大小</td>
+<td>ncdu</td>
+</tr>
+<tr>
+<td>高级版top</td>
+<td>gotop(AUR)/htop</td>
+</tr>
+<tr>
+<td>打印彩色的十六进制</td>
+<td>hexyl</td>
+</tr>
+<tr>
+<td>语法高亮和行号的cat+less</td>
+<td>bat</td>
+</tr>
+<tr>
+<td>统计目录代码量</td>
+<td>loc</td>
+</tr>
+<tr>
+<td>文件浏览器</td>
+<td>ranger</td>
+</tr>
+<tr>
+<td>比tmux更好用的单窗口多终端</td>
+<td>zellij</td>
+</tr>
+</tbody>
+</table>
+<h2 id="新建用户">新建用户</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>    useradd -m -G wheel username
+</span></span><span style="display:flex;"><span>    passwd username
+</span></span><span style="display:flex;"><span>    ln -s /usr/bin/vim /usr/bin/vi
+</span></span><span style="display:flex;"><span>    visudo
+</span></span></code></pre></div><p>找到<code># %wheel ALL=(ALL)ALL</code>取消注释</p>
+<h2 id="硬件">硬件</h2>
+<h3 id="网卡">网卡</h3>
+<p>万物起源先上网，但有些网卡需要手动装驱动(比如我笔记本的博通网卡)</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>    sudo pacman -S linux-headers broadcom-wl-dkms
+</span></span><span style="display:flex;"><span>    reboot
+</span></span><span style="display:flex;"><span>    dkms status
+</span></span></code></pre></div><h3 id="声卡">声卡</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>    sudo pacman -S alsa-utils pulseaudio-alsa
+</span></span></code></pre></div><h3 id="蓝牙">蓝牙</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>    sudo pacman -S bluez bluez-utils
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    /etc/bluetooth/main.conf
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    [Policy]
+</span></span><span style="display:flex;"><span>    <span style="color:#eedd82">AutoEnable</span>=true <span style="color:#0f0"># 开机自启</span>
+</span></span></code></pre></div><h2 id="联网">联网</h2>
+<p>启动之前安装的<a href="https://wiki.archlinux.org/title/NetworkManager">NetworkManager</a></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>    systemctl enable NetworkManager
+</span></span></code></pre></div><h2 id="图形界面">图形界面</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>    sudo pacman -S xf86-video-intel
+</span></span><span style="display:flex;"><span>    sudo pacman -S xorg
+</span></span><span style="display:flex;"><span>    sudo pacman -S xfce4 xfce4-goodies
+</span></span><span style="display:flex;"><span>    sudo pacman -S lightdm lightdm-gtk-greeter
+</span></span><span style="display:flex;"><span>    sudo systemctl enable lightdm
+</span></span></code></pre></div><h2 id="aur">AUR</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>    sudo pacman -S paru 
+</span></span></code></pre></div><h2 id="bash">bash</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>    sudo pacman -S zsh
+</span></span><span style="display:flex;"><span>    sudo chsh -s /bin/zsh username
+</span></span></code></pre></div><h2 id="中文字体输入法">中文字体/输入法</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>    sudo pacman -S fcitx5-im fcitx5-chinese-addons fcitx5-rime
+</span></span></code></pre></div><h2 id="下载">下载</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>    sudo pacman -S aria2
+</span></span><span style="display:flex;"><span>    <span style="color:#0f0"># web前端(还有很多前端可供挑选)</span>
+</span></span><span style="display:flex;"><span>    paru ariang-allinone
+</span></span><span style="display:flex;"><span>    <span style="color:#0f0"># copy 大佬的配置</span>
+</span></span><span style="display:flex;"><span>    git clone https://github.com/P3TERX/aria2.conf
+</span></span><span style="display:flex;"><span>    mkdir ~/.aria2
+</span></span><span style="display:flex;"><span>    mv aria2.conf ~/.aria2/
+</span></span><span style="display:flex;"><span>    touch ~/.aria2/aria2.session
+</span></span></code></pre></div><ul>
+<li>看aria2.conf注释配置路径</li>
+<li>看<a href="https://wiki.archlinux.org/title/Aria2">wiki</a>配置开机自启</li>
+</ul>
+<h1 id="reference">Reference</h1>
+<ol>
+<li><a href="https://archlinuxstudio.github.io/ArchLinuxTutorial/">Arch Linux 安装使用教程 - ArchTutorial - Arch Linux Studio </a></li>
+</ol>
+
+</article>
+
+            </div>
+        </main>
+    </body>
+</html>

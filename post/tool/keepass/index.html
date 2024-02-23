@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh-cn"><head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+   <meta name="description" content="最近超星学习通数据泄露大家应该都知道吧，全国上下学生很多都依赖这么一个中心化的网课平台。而且学习通可能还是明文存储密码，这下坏事了，直接撞库
+撞库攻击是网络犯罪分子试图使用一组帐密同时访问多个帐户
+我很久以前就知道有密码管理器的存在，但我是懒鬼，所以没弄过。这次事件提醒了我，还是别偷懒了（
+Getting started KeePass是什么呢
+KeePass is an encrypted password database format. It is an alternative to online password managers and is supported on all major platforms.
+我这里推荐使用跨平台的KeePassXC客户端，原始KeePass客户端实在太丑陋了
+下载客户端后，新建数据库需要一个主密码，这个密码需要你记忆
+我们先来看一个图，来自xkcd 那如何根据上图思路创建一个好密码呢，这里可以看一下diceware的方法
+这个网站根据diceware方法提供在线生成随机英语单词
+如果想要生成随机中文词语，可以在此网页找到 使用diceware构造好的密码
+创建好数据库后，保存在本地随便一个目录，然后我们去KeePassXC设置面板开启浏览器集成，下载对应浏览器插件
+浏览器插件启动后需要连接KeePassXC客户端
+在网站登录页面，如果数据库里没有对应网站url或者已存在，会提示你为该网站新建/更新账号密码。如果没有提示，可以手动使用插件，或者直接在KeePassXC客户端手动录入
+KeePassXC里随手就可以生成一个密码，无论是大小写字母数字还是各种特殊符号。如果想使用密码，Ctrl-C会自动复制到你剪切板上，然后在10秒后清除
+如果手机也要密码管理，安卓客户端可以在f-droid上下载keepassdx
+同步 所有信息都在keepass创建的数据库里，这里可以使用一些文件传输软件进行备份同步，或者存github也没啥问题">  
+
+  <title>
+    
+      使用KeePass作为密码管理器
+    
+  </title>
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/" />
+  
+  
+  
+  <link rel="stylesheet" href="/css/main.c5af9bae99b4a3d315b9f39305ffff27e9c3383fbbfd8b5fcaf2237667021a333a982fb958d1813a720b0a660b14022337553ae1ca93ef2ee17c4ae628ac19cb.css" integrity="sha512-xa&#43;brpm0o9MVufOTBf//J&#43;nDOD&#43;7/YtfyvIjdmcCGjM6mC&#43;5WNGBOnILCmYLFAIjN1U64cqT7y7hfErmKKwZyw==" />
+  
+</head>
+<body a="auto">
+        <main class="page-content" aria-label="Content">
+            <div class="w">
+<a href="/">back</a>
+
+
+<article>
+    <p class="post-meta">
+        <time datetime="2022-06-27 00:00:00 &#43;0000 UTC">
+            2022-06-27
+        </time>
+    </p>
+
+    <h1>使用KeePass作为密码管理器</h1>
+
+    
+
+    <p>最近超星学习通数据泄露大家应该都知道吧，全国上下学生很多都依赖这么一个中心化的网课平台。而且学习通可能还是<strong>明文存储密码</strong>，这下坏事了，直接撞库</p>
+<blockquote>
+<p>撞库攻击是网络犯罪分子试图使用一组帐密同时访问多个帐户</p>
+</blockquote>
+<p>我很久以前就知道有密码管理器的存在，但我是懒鬼，所以没弄过。这次事件提醒了我，还是别偷懒了（</p>
+<h2 id="getting-started">Getting started</h2>
+<p>KeePass是什么呢</p>
+<blockquote>
+<p>KeePass is an encrypted password database format. It is an alternative to online password managers and is supported on all major platforms.</p>
+</blockquote>
+<p>我这里推荐使用跨平台的<strong>KeePassXC</strong>客户端，原始KeePass客户端实在太丑陋了</p>
+<p>下载客户端后，新建数据库需要一个<strong>主密码</strong>，这个密码需要你记忆</p>
+<p>我们先来看一个图，来自<a href="https://xkcd.com/936/">xkcd</a>
+<img src="https://xkcd.in/resources/compiled_cn/d4a068052cf9c7255c0b4c4643ac0b5b.jpg" alt="密码强度"></p>
+<p>那如何根据上图思路创建一个好密码呢，这里可以看一下<a href="https://theworld.com/~reinhold/diceware.html">diceware</a>的方法</p>
+<p>这个网站根据diceware方法提供<a href="https://diceware.dmuth.org/">在线生成随机英语单词</a></p>
+<p>如果想要生成随机中文词语，可以在此网页找到
+<a href="https://pincong.rocks/article/5582">使用diceware构造好的密码</a></p>
+<p>创建好数据库后，保存在本地随便一个目录，然后我们去<strong>KeePassXC</strong>设置面板开启浏览器集成，下载对应浏览器插件</p>
+<blockquote>
+<p>浏览器插件启动后需要连接<strong>KeePassXC</strong>客户端</p>
+</blockquote>
+<p>在网站登录页面，如果数据库里没有对应网站url或者已存在，会提示你为该网站<code>新建/更新</code>账号密码。如果没有提示，可以手动使用插件，或者直接在<strong>KeePassXC</strong>客户端手动录入</p>
+<p><strong>KeePassXC</strong>里随手就可以生成一个密码，无论是大小写字母数字还是各种特殊符号。如果想使用密码，<code>Ctrl-C</code>会自动复制到你剪切板上，然后在10秒后清除</p>
+<p>如果手机也要密码管理，安卓客户端可以在<strong>f-droid</strong>上下载<strong>keepassdx</strong></p>
+<h2 id="同步">同步</h2>
+<p>所有信息都在keepass创建的数据库里，这里可以使用一些文件传输软件进行备份同步，或者存github也没啥问题</p>
+
+</article>
+
+            </div>
+        </main>
+    </body>
+</html>

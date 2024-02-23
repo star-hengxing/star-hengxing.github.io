@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="zh-cn"><head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+   <meta name="description" content="前置知识 编译链接到可执行程序一系列流程 x86架构的一些寄存器 elf头 下面工具的使用 环境配置 os: Linux
+可能会用到的工具:
+gcc(编译) ld(链接) objcopy(提取二进制) dd(写入虚拟镜像) gdb(调试) make(自动化构建) qemu(虚拟机) 大部分linux发行版都会自带大部分工具，自行安装最新版本即可
+基本介绍 目标是实现一个不依赖操作系统就能运行的二进制程序，在虚拟机屏幕显示hello world
+计算机启动，按下电源开关通电启动bios，检查硬件，没啥问题的话，bios会加载该储存设备第一个扇区的512字节(MBR)到物理内存0x7C00
+如果扇区最后两个字节是0x55和0xAA，那么说明是启动设备，否则bios会跳过该扇区
+如果装过系统的话，会发现这就是BIOS&#43;MBR传统启动计算机方式，而现在比较“先进”的方式是UEFI启动
+最后bios使用命令jmp 0x7c00跳到我们代码，我们旅程就这样开始了
+实现 coding 汇编大体上两种语法，intel和AT&amp;T，这里选择AT&amp;T，如果是用intel语法，可以去找nasm等汇编器编译
+附上两个伪指令，表明是16位代码和程序开头在main
+.globl main.code16然后设置段寄存器为零，异或清零是常用的手法。为什么要清零，因为此时cpu在实模式下(real mode)，物理内存寻址是采用 段：偏移，计算方式如下
+物理地址 = 段 * 16 &#43; 偏移
+如果我们直接设零，那么偏移量直接等于物理地址
+xorw %ax, %axmovw %ax, %dsmovw %ax, %esmovw %ax, %ss因为现代操作系统是分页管理内存，段管理内存已经不再使用，但有时候他会以某种方式出现我们眼前
+比如：平时写C/C&#43;&#43;程序遇到的Segmentation fault
+如何在屏幕上输出字符串呢，答案是使用bios中断
+bios中断没必要深究，当成api使用即可，使用方法就是在指定寄存器赋值，然后使用int指令和对应中断号
+这里看0x10中断指令的用法
+中断返回后，可以看到字符串按照我们的格式输出在屏幕上
+编译 这里我们使用make来管理编译流程
+gcc/ld/objcopy/dd等使用方法参考我的makefile
+编译汇编源文件为.o文件 指定程序入口函数和地址，链接成elf文件 将elf文件中代码和数据提取成纯二进制文件 然后使用dd拼接512字节的MBR
+生成全为零的512字节文件 开头刻录我们的二进制文件 最后两个字节刻录魔数 这里使用其他工具或python脚本也可以完成">  
+
+  <title>
+    
+      裸机运行Hello world
+    
+  </title>
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/" />
+  
+  
+  
+  <link rel="stylesheet" href="/css/main.c5af9bae99b4a3d315b9f39305ffff27e9c3383fbbfd8b5fcaf2237667021a333a982fb958d1813a720b0a660b14022337553ae1ca93ef2ee17c4ae628ac19cb.css" integrity="sha512-xa&#43;brpm0o9MVufOTBf//J&#43;nDOD&#43;7/YtfyvIjdmcCGjM6mC&#43;5WNGBOnILCmYLFAIjN1U64cqT7y7hfErmKKwZyw==" />
+  
+</head>
+<body a="auto">
+        <main class="page-content" aria-label="Content">
+            <div class="w">
+<a href="/">back</a>
+
+
+<article>
+    <p class="post-meta">
+        <time datetime="2021-10-12 00:00:00 &#43;0000 UTC">
+            2021-10-12
+        </time>
+    </p>
+
+    <h1>裸机运行Hello world</h1>
+
+    
+
+    <h2 id="前置知识">前置知识</h2>
+<ul>
+<li>编译链接到可执行程序一系列流程</li>
+<li>x86架构的一些寄存器</li>
+<li>elf头</li>
+<li>下面工具的使用</li>
+</ul>
+<h2 id="环境配置">环境配置</h2>
+<p>os: Linux</p>
+<p>可能会用到的工具:</p>
+<ul>
+<li>gcc(编译)</li>
+<li>ld(链接)</li>
+<li>objcopy(提取二进制)</li>
+<li>dd(写入虚拟镜像)</li>
+<li>gdb(调试)</li>
+<li>make(自动化构建)</li>
+<li>qemu(虚拟机)</li>
+</ul>
+<p>大部分linux发行版都会自带大部分工具，自行安装最新版本即可</p>
+<h2 id="基本介绍">基本介绍</h2>
+<p>目标是实现一个不依赖操作系统就能运行的二进制程序，在虚拟机屏幕显示hello world</p>
+<p>计算机启动，按下电源开关通电启动bios，检查硬件，没啥问题的话，bios会加载该储存设备第一个扇区的512字节(MBR)到物理内存0x7C00</p>
+<p>如果扇区最后两个字节是0x55和0xAA，那么说明是启动设备，否则bios会跳过该扇区</p>
+<p>如果装过系统的话，会发现这就是BIOS+MBR传统启动计算机方式，而现在比较“先进”的方式是UEFI启动</p>
+<p>最后bios使用命令jmp 0x7c00跳到我们代码，我们旅程就这样开始了</p>
+<h2 id="实现">实现</h2>
+<h3 id="coding">coding</h3>
+<p>汇编大体上两种语法，intel和AT&amp;T，这里选择AT&amp;T，如果是用intel语法，可以去找nasm等汇编器编译</p>
+<p>附上两个伪指令，表明是16位代码和程序开头在main</p>
+<pre><code>.globl main
+.code16
+</code></pre>
+<p>然后设置段寄存器为零，异或清零是常用的手法。为什么要清零，因为此时cpu在实模式下(real mode)，物理内存寻址是采用 段：偏移，计算方式如下</p>
+<p>物理地址 = 段 * 16 + 偏移</p>
+<p>如果我们直接设零，那么偏移量直接等于物理地址</p>
+<pre><code>xorw %ax, %ax
+movw %ax, %ds
+movw %ax, %es
+movw %ax, %ss
+</code></pre>
+<p>因为现代操作系统是分页管理内存，段管理内存已经不再使用，但有时候他会以某种方式出现我们眼前</p>
+<p>比如：平时写C/C++程序遇到的<em>Segmentation fault</em></p>
+<p>如何在屏幕上输出字符串呢，答案是使用bios中断</p>
+<p>bios中断没必要深究，当成api使用即可，使用方法就是在指定寄存器赋值，然后使用<strong>int</strong>指令和对应中断号</p>
+<p>这里看<a href="https://en.wikipedia.org/wiki/INT_10H">0x10中断指令</a>的用法</p>
+<p>中断返回后，可以看到字符串按照我们的格式输出在屏幕上</p>
+<h3 id="编译">编译</h3>
+<p>这里我们使用make来管理编译流程</p>
+<p>gcc/ld/objcopy/dd等使用方法参考我的makefile</p>
+<ol>
+<li>编译汇编源文件为.o文件</li>
+<li>指定程序入口函数和地址，链接成elf文件</li>
+<li>将elf文件中代码和数据提取成纯二进制文件</li>
+</ol>
+<p>然后使用dd拼接512字节的MBR</p>
+<ol>
+<li>生成全为零的512字节文件</li>
+<li>开头刻录我们的二进制文件</li>
+<li>最后两个字节刻录魔数</li>
+</ol>
+<p>这里使用其他工具或python脚本也可以完成</p>
+<h3 id="运行">运行</h3>
+<pre><code>qemu-system-x86_64 -no-shutdown -no-reboot -m 128M -hda &lt;你的镜像&gt;
+</code></pre>
+<h3 id="debug">debug</h3>
+<p>加上debug参数的启动命令</p>
+<pre><code>qemu-system-x86_64 -S -s -no-shutdown -no-reboot -m 128M -hda &lt;你的镜像&gt;
+</code></pre>
+<p>gdb脚本解读：设置架构-远程链接虚拟机-debug文件-在main函数打断点-显示汇编和寄存器-运行</p>
+<pre><code>set architecture i386:x86-64
+
+target remote:1234
+
+file build/debug/hello.elf
+
+break main
+layout asm
+layout regs
+
+continue
+</code></pre>
+<p>使用gdb脚本</p>
+<pre><code>gdb -q -x kernel.gdbinit
+</code></pre>
+<p>输入si执行单条汇编指令，观察寄存器变化</p>
+<h1 id="reference">Reference</h1>
+<ol>
+<li><a href="https://en.wikipedia.org/wiki/INT_10H">INT 10H</a></li>
+<li><a href="https://developer.amd.com/resources/developer-guides-manuals/">AMD64 Architecture Programmer’s Manual Volume 3: General Purpose and System Instructions</a></li>
+</ol>
+
+</article>
+
+            </div>
+        </main>
+    </body>
+</html>

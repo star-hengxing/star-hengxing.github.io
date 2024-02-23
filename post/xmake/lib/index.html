@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="zh-cn"><head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+   <meta name="description" content="前言 当前环境在 Windows，默认了解 C/C&#43;&#43; 编译流程。 不一定是最佳实践。 静态库 target 下直接考虑用set_kind(&quot;static&quot;)即可。
+有一个可以注意的地方，可以使用set_policy(&quot;build.merge_archive&quot;, true)来合并所有静态库。（大概是用在分发二进制的时候？）
+动态库 考虑到 windows dll 要在函数声明__declspec(dllexport)导出接口（也可以用.def文件）。
+手动给每个符号声明很麻烦，需要 build system 来自动化。
+xmake 对此做了支持，只需要在 target 下添加：
+-- C add_rules(&#34;utils.symbols.export_all&#34;) -- C&#43;&#43; add_rules(&#34;utils.symbols.export_all&#34;, {export_classes = true}) 就会生成正确 dll 文件了。
+如果想要自定义导出符号，使用utils.symbols.export_list。
+直接配置 假设test目录下是一个库，把上面静态库和动态库的用法结合起来：
+add_includedirs(&#34;include&#34;, {public = true}) target(&#34;add&#34;) set_kind(&#34;$(kind)&#34;) add_files(&#34;src/add.cpp&#34;) if is_kind(&#34;shared&#34;) and is_plat(&#34;windows&#34;) then add_rules(&#34;utils.symbols.export_all&#34;, {export_classes = true}) end target(&#34;sub&#34;) set_kind(&#34;$(kind)&#34;) add_files(&#34;src/sub.cpp&#34;) if is_kind(&#34;shared&#34;) and is_plat(&#34;windows&#34;) then add_rules(&#34;utils.symbols.export_all&#34;, {export_classes = true}) end target(&#34;test&#34;) set_kind(&#34;$(kind)&#34;) add_files(&#34;src/test.">  
+
+  <title>
+    
+      使用 Xmake 生成静态和动态库
+    
+  </title>
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/" />
+  
+  
+  
+  <link rel="stylesheet" href="/css/main.c5af9bae99b4a3d315b9f39305ffff27e9c3383fbbfd8b5fcaf2237667021a333a982fb958d1813a720b0a660b14022337553ae1ca93ef2ee17c4ae628ac19cb.css" integrity="sha512-xa&#43;brpm0o9MVufOTBf//J&#43;nDOD&#43;7/YtfyvIjdmcCGjM6mC&#43;5WNGBOnILCmYLFAIjN1U64cqT7y7hfErmKKwZyw==" />
+  
+</head>
+<body a="auto">
+        <main class="page-content" aria-label="Content">
+            <div class="w">
+<a href="/">back</a>
+
+
+<article>
+    <p class="post-meta">
+        <time datetime="2023-01-04 00:00:00 &#43;0000 UTC">
+            2023-01-04
+        </time>
+    </p>
+
+    <h1>使用 Xmake 生成静态和动态库</h1>
+
+    
+
+    <h2 id="前言">前言</h2>
+<ul>
+<li>当前环境在 Windows，默认了解 C/C++ 编译流程。</li>
+<li>不一定是最佳实践。</li>
+</ul>
+<h2 id="静态库">静态库</h2>
+<p>target 下直接考虑用<code>set_kind(&quot;static&quot;)</code>即可。</p>
+<p>有一个可以注意的地方，可以使用<code>set_policy(&quot;build.merge_archive&quot;, true)</code>来合并所有静态库。（大概是用在分发二进制的时候？）</p>
+<h2 id="动态库">动态库</h2>
+<p>考虑到 windows dll 要在函数声明<code>__declspec(dllexport)</code>导出接口（也可以用<code>.def</code>文件）。</p>
+<p>手动给每个符号声明很麻烦，需要 build system 来自动化。</p>
+<p>xmake 对此做了支持，只需要在 target 下添加：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lua" data-lang="lua"><span style="display:flex;"><span><span style="color:#0f0">-- C</span>
+</span></span><span style="display:flex;"><span>add_rules(<span style="color:#87ceeb">&#34;utils.symbols.export_all&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#0f0">-- C++</span>
+</span></span><span style="display:flex;"><span>add_rules(<span style="color:#87ceeb">&#34;utils.symbols.export_all&#34;</span>, {export_classes = <span style="color:#f00">true</span>})
+</span></span></code></pre></div><p>就会生成正确 dll 文件了。</p>
+<p>如果想要自定义导出符号，使用<a href="https://xmake.io/#/zh-cn/manual/custom_rule?id=utilssymbolsexport_list">utils.symbols.export_list</a>。</p>
+<h2 id="直接配置">直接配置</h2>
+<p>假设<code>test</code>目录下是一个库，把上面静态库和动态库的用法结合起来：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lua" data-lang="lua"><span style="display:flex;"><span>add_includedirs(<span style="color:#87ceeb">&#34;include&#34;</span>, {public = <span style="color:#f00">true</span>})
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>target(<span style="color:#87ceeb">&#34;add&#34;</span>)
+</span></span><span style="display:flex;"><span>    set_kind(<span style="color:#87ceeb">&#34;$(kind)&#34;</span>)
+</span></span><span style="display:flex;"><span>    add_files(<span style="color:#87ceeb">&#34;src/add.cpp&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f00">if</span> is_kind(<span style="color:#87ceeb">&#34;shared&#34;</span>) and is_plat(<span style="color:#87ceeb">&#34;windows&#34;</span>) <span style="color:#f00">then</span>
+</span></span><span style="display:flex;"><span>        add_rules(<span style="color:#87ceeb">&#34;utils.symbols.export_all&#34;</span>, {export_classes = <span style="color:#f00">true</span>})
+</span></span><span style="display:flex;"><span>    <span style="color:#f00">end</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>target(<span style="color:#87ceeb">&#34;sub&#34;</span>)
+</span></span><span style="display:flex;"><span>    set_kind(<span style="color:#87ceeb">&#34;$(kind)&#34;</span>)
+</span></span><span style="display:flex;"><span>    add_files(<span style="color:#87ceeb">&#34;src/sub.cpp&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f00">if</span> is_kind(<span style="color:#87ceeb">&#34;shared&#34;</span>) and is_plat(<span style="color:#87ceeb">&#34;windows&#34;</span>) <span style="color:#f00">then</span>
+</span></span><span style="display:flex;"><span>        add_rules(<span style="color:#87ceeb">&#34;utils.symbols.export_all&#34;</span>, {export_classes = <span style="color:#f00">true</span>})
+</span></span><span style="display:flex;"><span>    <span style="color:#f00">end</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>target(<span style="color:#87ceeb">&#34;test&#34;</span>)
+</span></span><span style="display:flex;"><span>    set_kind(<span style="color:#87ceeb">&#34;$(kind)&#34;</span>)
+</span></span><span style="display:flex;"><span>    add_files(<span style="color:#87ceeb">&#34;src/test.cpp&#34;</span>)
+</span></span><span style="display:flex;"><span>    add_deps(<span style="color:#87ceeb">&#34;add&#34;</span>, <span style="color:#87ceeb">&#34;sub&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f00">if</span> is_kind(<span style="color:#87ceeb">&#34;shared&#34;</span>) and is_plat(<span style="color:#87ceeb">&#34;windows&#34;</span>) <span style="color:#f00">then</span>
+</span></span><span style="display:flex;"><span>        add_rules(<span style="color:#87ceeb">&#34;utils.symbols.export_all&#34;</span>, {export_classes = <span style="color:#f00">true</span>})
+</span></span><span style="display:flex;"><span>    <span style="color:#f00">elseif</span> is_kind(<span style="color:#87ceeb">&#34;static&#34;</span>) <span style="color:#f00">then</span>
+</span></span><span style="display:flex;"><span>        set_policy(<span style="color:#87ceeb">&#34;build.merge_archive&#34;</span>, <span style="color:#f00">true</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#f00">end</span>
+</span></span></code></pre></div><p>使用不同类型的库只要<code>xmake f -k shared/static</code>就行了。</p>
+<h2 id="使用规则">使用规则</h2>
+<p>上面只是临时用法，实际在工程中，我推荐使用规则。下面代码和上面效果是一样的。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lua" data-lang="lua"><span style="display:flex;"><span>rule(<span style="color:#87ceeb">&#34;module&#34;</span>)
+</span></span><span style="display:flex;"><span>    on_load(<span style="color:#f00">function</span> (target)
+</span></span><span style="display:flex;"><span>        <span style="color:#f00">if</span> is_mode(<span style="color:#87ceeb">&#34;debug&#34;</span>, <span style="color:#87ceeb">&#34;releasedbg&#34;</span>) <span style="color:#f00">then</span>
+</span></span><span style="display:flex;"><span>            target:set(<span style="color:#87ceeb">&#34;kind&#34;</span>, <span style="color:#87ceeb">&#34;shared&#34;</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#f00">if</span> is_plat(<span style="color:#87ceeb">&#34;windows&#34;</span>) <span style="color:#f00">then</span>
+</span></span><span style="display:flex;"><span>                import(<span style="color:#87ceeb">&#34;core.project.rule&#34;</span>)
+</span></span><span style="display:flex;"><span>                <span style="color:#f00">local</span> rule = rule.rule(<span style="color:#87ceeb">&#34;utils.symbols.export_all&#34;</span>)
+</span></span><span style="display:flex;"><span>                target:rule_add(rule)
+</span></span><span style="display:flex;"><span>                target:extraconf_set(<span style="color:#87ceeb">&#34;rules&#34;</span>, <span style="color:#87ceeb">&#34;utils.symbols.export_all&#34;</span>, {export_classes = <span style="color:#f00">true</span>})
+</span></span><span style="display:flex;"><span>            <span style="color:#f00">end</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f00">elseif</span> is_mode(<span style="color:#87ceeb">&#34;release&#34;</span>) <span style="color:#f00">then</span>
+</span></span><span style="display:flex;"><span>            target:set(<span style="color:#87ceeb">&#34;kind&#34;</span>, <span style="color:#87ceeb">&#34;static&#34;</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#f00">else</span>
+</span></span><span style="display:flex;"><span>            assert(<span style="color:#f00">false</span>, <span style="color:#87ceeb">&#34;Unknown build kind&#34;</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#f00">end</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f00">end</span>)
+</span></span><span style="display:flex;"><span>rule_end()
+</span></span></code></pre></div><ul>
+<li>开发时(debug mode)，全编译为动态库，加速链接。</li>
+<li>发布时(release mode)，全编译为静态库，生成单个可执行程序文件。</li>
+</ul>
+<p>使用：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lua" data-lang="lua"><span style="display:flex;"><span>target(<span style="color:#87ceeb">&#34;test&#34;</span>)
+</span></span><span style="display:flex;"><span>    set_kind(<span style="color:#87ceeb">&#34;$(kind)&#34;</span>)
+</span></span><span style="display:flex;"><span>    add_files(<span style="color:#87ceeb">&#34;src/test.cpp&#34;</span>)
+</span></span><span style="display:flex;"><span>    add_deps(<span style="color:#87ceeb">&#34;add&#34;</span>, <span style="color:#87ceeb">&#34;sub&#34;</span>)
+</span></span><span style="display:flex;"><span>    add_rules(<span style="color:#87ceeb">&#34;module&#34;</span>)
+</span></span></code></pre></div>
+</article>
+
+            </div>
+        </main>
+    </body>
+</html>

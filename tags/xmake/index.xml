@@ -1,78 +1,40 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Xmake on 恒星的小站</title>
+    <title>Xmake on Heng Xing Blog</title>
     <link>https://star-hengxing.github.io/tags/xmake/</link>
-    <description>Recent content in Xmake on 恒星的小站</description>
+    <description>Recent content in Xmake on Heng Xing Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Fri, 30 Jun 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://star-hengxing.github.io/tags/xmake/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 21 Aug 2023 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://star-hengxing.github.io/tags/xmake/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Xmake 新手教程</title>
-      <link>https://star-hengxing.github.io/p/xmake-%E6%96%B0%E6%89%8B%E6%95%99%E7%A8%8B/</link>
+      <link>https://star-hengxing.github.io/post/xmake/xmake-tutorial/</link>
       <pubDate>Fri, 30 Jun 2023 00:00:00 +0000</pubDate>
-      
-      <guid>https://star-hengxing.github.io/p/xmake-%E6%96%B0%E6%89%8B%E6%95%99%E7%A8%8B/</guid>
-      <description>构建系统的文档好像都有一个老毛病，就是不太适合新手去阅读（官方教程过于简短）。一些人认为文档写得很混乱，cmake/xmake/meson 都是如此，因此有了这个教程。
-新手，是指了解 c/c++ 基础的编译链接，并不是对计算机科学（用过至少一门编程语言）一无所知的萌新。
-这里还有两份教程可以互相参考。
-A Tour of xmake 一份非官方的xmake教程 xmake从入门到精通1：安装和更新 如果想看类似于 meson 的 How do I do X in Meson? 和 Frequently Asked Questions，请看另一篇文章： Xmake 常见问题解答。
-xmake 的官方交流群，可以查看文档自行添加。
-安装 这部分文档写得很清楚，在各自的平台用对应的包管理安装即可，另外使用 Windows 系统的读者需要注意两点：
-自行下载压缩包然后解压到某个目录，确保该目录没有其他东西。 曾有人解压到了软件目录，里面有其他软件，然后卸载 xmake 的时候，把其他软件也删了。
-想通过源码的方式编译安装，需要提前装好一个 xmake，因为 xmake 源码由 c + lua 组成，c 源码需要 xmake 自己编译，也就是&amp;quot;自举&amp;quot;。 打开命令行，输入xmake --version验证一下是否正确安装。
-Hello world 这里先介绍怎么编译一个 hello world 工程。
-打开命令行，输入xmake create hello，用 xmake 生成自带的 hello world 模板。
-$ xmake create hello create hello .</description>
+      <guid>https://star-hengxing.github.io/post/xmake/xmake-tutorial/</guid>
+      <description>构建系统的文档好像都有一个老毛病，就是不太适合新手去阅读（官方教程过于简短）。一些人认为文档写得很混乱，cmake/xmake/meson 都是如此，因此有了这个教程。&#xA;新手，是指了解 c/c++ 基础的编译链接，并不是对计算机科学（用过至少一门编程语言）一无所知的萌新。&#xA;这里还有两份教程可以互相参考。&#xA;A Tour of xmake 一份非官方的xmake教程 xmake从入门到精通1：安装和更新 如果想看类似于 meson 的 How do I do X in Meson? 和 Frequently Asked Questions，请看另一篇文章： Xmake 常见问题解答。&#xA;xmake 的官方交流群，可以查看文档自行添加。&#xA;安装 这部分文档写得很清楚，在各自的平台用对应的包管理安装即可，另外使用 Windows 系统的读者需要注意两点：&#xA;自行下载压缩包然后解压到某个目录，确保该目录没有其他东西。 曾有人解压到了软件目录，里面有其他软件，然后卸载 xmake 的时候，把其他软件也删了。&#xA;想通过源码的方式编译安装，需要提前装好一个 xmake，因为 xmake 源码由 c + lua 组成，c 源码需要 xmake 自己编译，也就是&amp;quot;自举&amp;quot;。 打开命令行，输入xmake --version验证一下是否正确安装。&#xA;Hello world 这里先介绍怎么编译一个 hello world 工程。&#xA;打开命令行，输入xmake create hello，用 xmake 生成自带的 hello world 模板。&#xA;$ xmake create hello create hello .</description>
     </item>
-    
     <item>
       <title>Xmake 常见问题解答</title>
-      <link>https://star-hengxing.github.io/p/xmake-%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E8%A7%A3%E7%AD%94/</link>
+      <link>https://star-hengxing.github.io/post/xmake/xmake-fqa/</link>
       <pubDate>Sat, 04 Mar 2023 00:00:00 +0000</pubDate>
-      
-      <guid>https://star-hengxing.github.io/p/xmake-%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E8%A7%A3%E7%AD%94/</guid>
-      <description>如果在本文没找到解答，可以去 github 提 issue 和讨论区搜索。
-如果是官方包管理的问题，或者想请求加入一些包，去 xmake-repo 提 issue。
-提 issue 请附带 log，xmake -vD命令可以输出详细的 log 信息。
-基础 避免外网访问 xmake 很多操作需要访问 github（拉取 xmake-repo/build-artifact），而在公司内网开发是不需要这些操作的。
-xmake g --network=private 参考：
-https://github.com/xmake-io/xmake/issues/947 Windows 上 Qt 项目控制台没有输出 使用：
-add_ldflags(&amp;#34;/subsystem:console&amp;#34;) xmake 的 qt rule 里会检测 ldflags 里有没有/subsystem，如果没有就默认/subsystem:windows。
-给单独源文件添加参数 add_files(&amp;#34;test/*.c&amp;#34;, &amp;#34;test2/test2.c&amp;#34;, {defines = &amp;#34;TEST2&amp;#34;, languages = &amp;#34;c99&amp;#34;, includedirs = &amp;#34;.&amp;#34;, cflags = &amp;#34;-O0&amp;#34;}) -- 强制禁用 cxflags,cflags 等编译选项的自动检测 add_files(&amp;#34;src/*.c&amp;#34;, {force = {cxflags = &amp;#34;-DTEST&amp;#34;, mflags = &amp;#34;-framework xxx&amp;#34;}}) 给指定文件添加 config target(&amp;#34;test&amp;#34;) add_files(&amp;#34;test/*.</description>
+      <guid>https://star-hengxing.github.io/post/xmake/xmake-fqa/</guid>
+      <description>如果在本文没找到解答，可以去 github 提 issue 和讨论区搜索。&#xA;如果是官方包管理的问题，或者想请求加入一些包，去 xmake-repo 提 issue。&#xA;提 issue 请附带 log，xmake -vD命令可以输出详细的 log 信息。&#xA;基础 避免外网访问 xmake 很多操作需要访问 github（拉取 xmake-repo/build-artifact），而在公司内网开发是不需要这些操作的。&#xA;xmake g --network=private 参考：&#xA;https://github.com/xmake-io/xmake/issues/947 Windows 上 Qt 项目控制台没有输出 使用：&#xA;add_ldflags(&amp;#34;/subsystem:console&amp;#34;) xmake 的 qt rule 里会检测 ldflags 里有没有/subsystem，如果没有就默认/subsystem:windows。&#xA;给单独源文件添加参数 add_files(&amp;#34;test/*.c&amp;#34;, &amp;#34;test2/test2.c&amp;#34;, {defines = &amp;#34;TEST2&amp;#34;, languages = &amp;#34;c99&amp;#34;, includedirs = &amp;#34;.&amp;#34;, cflags = &amp;#34;-O0&amp;#34;}) -- 强制禁用 cxflags,cflags 等编译选项的自动检测 add_files(&amp;#34;src/*.c&amp;#34;, {force = {cxflags = &amp;#34;-DTEST&amp;#34;, mflags = &amp;#34;-framework xxx&amp;#34;}}) 给指定文件添加 config target(&amp;#34;test&amp;#34;) add_files(&amp;#34;test/*.</description>
     </item>
-    
     <item>
       <title>使用 Xmake 生成静态和动态库</title>
-      <link>https://star-hengxing.github.io/p/%E4%BD%BF%E7%94%A8-xmake-%E7%94%9F%E6%88%90%E9%9D%99%E6%80%81%E5%92%8C%E5%8A%A8%E6%80%81%E5%BA%93/</link>
+      <link>https://star-hengxing.github.io/post/xmake/lib/</link>
       <pubDate>Wed, 04 Jan 2023 00:00:00 +0000</pubDate>
-      
-      <guid>https://star-hengxing.github.io/p/%E4%BD%BF%E7%94%A8-xmake-%E7%94%9F%E6%88%90%E9%9D%99%E6%80%81%E5%92%8C%E5%8A%A8%E6%80%81%E5%BA%93/</guid>
-      <description>前言 当前环境在 Windows，默认了解 C/C++ 编译流程。 不一定是最佳实践。 静态库 target 下直接考虑用set_kind(&amp;quot;static&amp;quot;)即可。
-有一个可以注意的地方，可以使用set_policy(&amp;quot;build.merge_archive&amp;quot;, true)来合并所有静态库。（大概是用在分发二进制的时候？）
-动态库 考虑到 windows dll 要在函数声明__declspec(dllexport)导出接口（也可以用.def文件）。
-手动给每个符号声明很麻烦，需要 build system 来自动化。
-xmake 对此做了支持，只需要在 target 下添加：
--- C add_rules(&amp;#34;utils.symbols.export_all&amp;#34;) -- C++ add_rules(&amp;#34;utils.symbols.export_all&amp;#34;, {export_classes = true}) 就会生成正确 dll 文件了。
-如果想要自定义导出符号，使用utils.symbols.export_list。
-直接配置 假设test目录下是一个库，把上面静态库和动态库的用法结合起来：
-add_includedirs(&amp;#34;include&amp;#34;, {public = true}) target(&amp;#34;add&amp;#34;) set_kind(&amp;#34;$(kind)&amp;#34;) add_files(&amp;#34;src/add.cpp&amp;#34;) if is_kind(&amp;#34;shared&amp;#34;) and is_plat(&amp;#34;windows&amp;#34;) then add_rules(&amp;#34;utils.symbols.export_all&amp;#34;, {export_classes = true}) end target(&amp;#34;sub&amp;#34;) set_kind(&amp;#34;$(kind)&amp;#34;) add_files(&amp;#34;src/sub.cpp&amp;#34;) if is_kind(&amp;#34;shared&amp;#34;) and is_plat(&amp;#34;windows&amp;#34;) then add_rules(&amp;#34;utils.symbols.export_all&amp;#34;, {export_classes = true}) end target(&amp;#34;test&amp;#34;) set_kind(&amp;#34;$(kind)&amp;#34;) add_files(&amp;#34;src/test.</description>
+      <guid>https://star-hengxing.github.io/post/xmake/lib/</guid>
+      <description>前言 当前环境在 Windows，默认了解 C/C++ 编译流程。 不一定是最佳实践。 静态库 target 下直接考虑用set_kind(&amp;quot;static&amp;quot;)即可。&#xA;有一个可以注意的地方，可以使用set_policy(&amp;quot;build.merge_archive&amp;quot;, true)来合并所有静态库。（大概是用在分发二进制的时候？）&#xA;动态库 考虑到 windows dll 要在函数声明__declspec(dllexport)导出接口（也可以用.def文件）。&#xA;手动给每个符号声明很麻烦，需要 build system 来自动化。&#xA;xmake 对此做了支持，只需要在 target 下添加：&#xA;-- C add_rules(&amp;#34;utils.symbols.export_all&amp;#34;) -- C++ add_rules(&amp;#34;utils.symbols.export_all&amp;#34;, {export_classes = true}) 就会生成正确 dll 文件了。&#xA;如果想要自定义导出符号，使用utils.symbols.export_list。&#xA;直接配置 假设test目录下是一个库，把上面静态库和动态库的用法结合起来：&#xA;add_includedirs(&amp;#34;include&amp;#34;, {public = true}) target(&amp;#34;add&amp;#34;) set_kind(&amp;#34;$(kind)&amp;#34;) add_files(&amp;#34;src/add.cpp&amp;#34;) if is_kind(&amp;#34;shared&amp;#34;) and is_plat(&amp;#34;windows&amp;#34;) then add_rules(&amp;#34;utils.symbols.export_all&amp;#34;, {export_classes = true}) end target(&amp;#34;sub&amp;#34;) set_kind(&amp;#34;$(kind)&amp;#34;) add_files(&amp;#34;src/sub.cpp&amp;#34;) if is_kind(&amp;#34;shared&amp;#34;) and is_plat(&amp;#34;windows&amp;#34;) then add_rules(&amp;#34;utils.symbols.export_all&amp;#34;, {export_classes = true}) end target(&amp;#34;test&amp;#34;) set_kind(&amp;#34;$(kind)&amp;#34;) add_files(&amp;#34;src/test.</description>
     </item>
-    
     <item>
       <title>使用 Xmake 作为 CS149 作业的 bulild system</title>
-      <link>https://star-hengxing.github.io/p/%E4%BD%BF%E7%94%A8-xmake-%E4%BD%9C%E4%B8%BA-cs149-%E4%BD%9C%E4%B8%9A%E7%9A%84-bulild-system/</link>
+      <link>https://star-hengxing.github.io/post/xmake/cs149/</link>
       <pubDate>Sun, 18 Dec 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://star-hengxing.github.io/p/%E4%BD%BF%E7%94%A8-xmake-%E4%BD%9C%E4%B8%BA-cs149-%E4%BD%9C%E4%B8%9A%E7%9A%84-bulild-system/</guid>
-      <description>前言 CS149 是一个教并行编程的课程，课程作业使用了 makefile 作为 build system。
-本文通过改造 build system 来讲述一些xmake的使用方法。
-分析 这个课程主要有四个作业，那么是一个多target工程，考虑用多级配置。
-作业里用到了很多工具，xmake都支持这些工具链。不过有些作业不跨平台（只能在 Linux 下运行），所以尽可能地将作业移植到 windows 上。
-改造 完整配置在GitHub上，这里选讲几个部分。
-根目录配置 最小xmake版本。 set_xmakever(&amp;#34;2.7.5&amp;#34;) 跨平台首选clang作为 C++ 编译器，在 windows 下使用clang-cl接受 msvc 风格的参数。 在开发环境下，链接动态库可以减少二进制体积，加速链接。 添加宏定义处理一些 windows 的屎。 if is_plat(&amp;#34;windows&amp;#34;) then -- set_toolchains(&amp;#34;clang-cl&amp;#34;) set_runtimes(&amp;#34;MD&amp;#34;) add_defines(&amp;#34;_CRT_SECURE_NO_WARNINGS&amp;#34;, &amp;#34;NOMINMAX&amp;#34;) else -- set_toolchains(&amp;#34;clang&amp;#34;) end 源码目录配置 考虑到 windows 没有getopt.h，这里在 github 上随便找了一个库代替，并开放头文件权限给依赖此库的target使用。 if is_plat(&amp;#34;windows&amp;#34;) then target(&amp;#34;getopt&amp;#34;) set_kind(&amp;#34;static&amp;#34;) add_includedirs(&amp;#34;getopt-for-windows&amp;#34;, {public = true}) add_files(&amp;#34;getopt-for-windows/getopt.c&amp;#34;) target_end() end 作业1 作业有多个target，其实可以考虑每个给每个target单独一个配置，不过这里选择把多个target都放在同一个xmake.lua中。
-根据原始 makefile 参数，处理一些跨平台配置。 考虑到作业会生成 ppm 格式的图片，所以改变该target的运行目录。 target(&amp;#34;mandelbrot&amp;#34;) set_kind(&amp;#34;binary&amp;#34;) add_files(&amp;#34;prog1_mandelbrot_threads/*.</description>
+      <guid>https://star-hengxing.github.io/post/xmake/cs149/</guid>
+      <description>前言 CS149 是一个教并行编程的课程，课程作业使用了 makefile 作为 build system。&#xA;本文通过改造 build system 来讲述一些xmake的使用方法。&#xA;分析 这个课程主要有四个作业，那么是一个多target工程，考虑用多级配置。&#xA;作业里用到了很多工具，xmake都支持这些工具链。不过有些作业不跨平台（只能在 Linux 下运行），所以尽可能地将作业移植到 windows 上。&#xA;改造 完整配置在GitHub上，这里选讲几个部分。&#xA;根目录配置 最小xmake版本。 set_xmakever(&amp;#34;2.7.5&amp;#34;) 跨平台首选clang作为 C++ 编译器，在 windows 下使用clang-cl接受 msvc 风格的参数。 在开发环境下，链接动态库可以减少二进制体积，加速链接。 添加宏定义处理一些 windows 的屎。 if is_plat(&amp;#34;windows&amp;#34;) then -- set_toolchains(&amp;#34;clang-cl&amp;#34;) set_runtimes(&amp;#34;MD&amp;#34;) add_defines(&amp;#34;_CRT_SECURE_NO_WARNINGS&amp;#34;, &amp;#34;NOMINMAX&amp;#34;) else -- set_toolchains(&amp;#34;clang&amp;#34;) end 源码目录配置 考虑到 windows 没有getopt.h，这里在 github 上随便找了一个库代替，并开放头文件权限给依赖此库的target使用。 if is_plat(&amp;#34;windows&amp;#34;) then target(&amp;#34;getopt&amp;#34;) set_kind(&amp;#34;static&amp;#34;) add_includedirs(&amp;#34;getopt-for-windows&amp;#34;, {public = true}) add_files(&amp;#34;getopt-for-windows/getopt.c&amp;#34;) target_end() end 作业1 作业有多个target，其实可以考虑每个给每个target单独一个配置，不过这里选择把多个target都放在同一个xmake.lua中。&#xA;根据原始 makefile 参数，处理一些跨平台配置。 考虑到作业会生成 ppm 格式的图片，所以改变该target的运行目录。 target(&amp;#34;mandelbrot&amp;#34;) set_kind(&amp;#34;binary&amp;#34;) add_files(&amp;#34;prog1_mandelbrot_threads/*.</description>
     </item>
-    
   </channel>
 </rss>

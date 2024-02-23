@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="zh-cn"><head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+   <meta name="description" content="在一些基础的光线追踪教程中，光线求交通常发生在世界空间(world space)
+但在离线渲染器中(比如PBRT)，光线求交发生在几何图形自己的局部空间(local/object/model space)
+这是有好处的，比如说简化求交代码，相交表面的normal和uv也很容易计算
+下面就记录一些几何求交的做法，自身经验有限，如有错误请指出
+前提 这里采用的是y轴朝上的右手坐标系，-z轴指向屏幕里，x轴在右手 默认光线已经变换到对象的局部空间 使用几何体的变换矩阵和其逆矩阵，求交时将光线变换到对象空间
+$$ Ray(t)=o&#43;td (t &gt; 0) $$
+$$ Ray_{object}=M^{-1}Ray_{world} $$
+矩形(Rectangle) 假设矩形高度为0，躺在xz平面上。长和宽控制矩形大小
+忽略平行于平面的光线
+if(is_zero(ray.direction.y)) return false; 使用高度计算相交点 $$ t=\frac{0 - o_{y}}{d_{y}} $$
+const auto t = ray.inv_at&lt;Axis::Y&gt;(0); const auto [x, y, z] = ray.at(t); 在矩形范围内的点才算相交成功
+if(std::abs(x) &gt; length || std::abs(z) &gt; width) return false; 球(Sphere) 假设球心在原点，半径控制球的大小
+三维空间中球的一般方程 $$ x^{2}&#43;y^{2}&#43;z^{2}=r^{2} $$
+将光线代入方程 $$ (o&#43;td)^{2}=r^{2} $$
+整理可得关于t的一元二次方程 $$ d^{2}t^{2}&#43;2odt&#43;o^{2}-r^{2}=0\ \begin{align*} &amp; a=d^{2}\ &amp; b=2od\ &amp; c=o^{2}-r^{2} \end{align*} $$">  
+
+  <title>
+    
+      光线与各种几何图形求交
+    
+  </title>
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/" />
+  
+  
+  
+  <link rel="stylesheet" href="/css/main.c5af9bae99b4a3d315b9f39305ffff27e9c3383fbbfd8b5fcaf2237667021a333a982fb958d1813a720b0a660b14022337553ae1ca93ef2ee17c4ae628ac19cb.css" integrity="sha512-xa&#43;brpm0o9MVufOTBf//J&#43;nDOD&#43;7/YtfyvIjdmcCGjM6mC&#43;5WNGBOnILCmYLFAIjN1U64cqT7y7hfErmKKwZyw==" />
+   <script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$','$$'], ['\\[', '\\]']],
+      processEscapes: true,
+      processEnvironments: true
+    },
+    options: {
+      skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+    }
+  };
+
+  window.addEventListener('load', (event) => {
+      document.querySelectorAll("mjx-container").forEach(function(x){
+        x.parentElement.classList += 'has-jax'})
+    });
+
+</script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+ 
+</head>
+<body a="auto">
+        <main class="page-content" aria-label="Content">
+            <div class="w">
+<a href="/">back</a>
+
+
+<article>
+    <p class="post-meta">
+        <time datetime="2021-04-11 00:00:00 &#43;0000 UTC">
+            2021-04-11
+        </time>
+    </p>
+
+    <h1>光线与各种几何图形求交</h1>
+
+    
+
+    <p>在一些基础的光线追踪教程中，光线求交通常发生在<strong>世界空间(world space)</strong></p>
+<p>但在离线渲染器中(比如PBRT)，光线求交发生在几何图形自己的<strong>局部空间(local/object/model space)</strong></p>
+<p>这是有好处的，比如说简化求交代码，相交表面的<code>normal</code>和<code>uv</code>也很容易计算</p>
+<p>下面就记录一些几何求交的做法，自身经验有限，如有错误请指出</p>
+<h2 id="前提">前提</h2>
+<ul>
+<li>这里采用的是y轴朝上的右手坐标系，-z轴指向屏幕里，x轴在右手</li>
+<li>默认光线已经变换到对象的局部空间</li>
+</ul>
+<p>使用几何体的变换矩阵和其逆矩阵，求交时将光线变换到对象空间</p>
+<p>$$
+Ray(t)=o+td (t &gt; 0)
+$$</p>
+<p>$$
+Ray_{object}=M^{-1}Ray_{world}
+$$</p>
+<h2 id="矩形rectangle">矩形(Rectangle)</h2>
+<p>假设矩形高度为<code>0</code>，躺在<code>xz</code>平面上。<code>长</code>和<code>宽</code>控制矩形大小</p>
+<p>忽略平行于平面的光线</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#f00">if</span>(is_zero(ray.direction.y)) <span style="color:#f00">return</span> false;
+</span></span></code></pre></div><p>使用高度计算相交点
+$$
+t=\frac{0 - o_{y}}{d_{y}}
+$$</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#f00">const</span> <span style="color:#f00">auto</span> t = ray.inv_at&lt;Axis::Y&gt;(<span style="color:#f60">0</span>);
+</span></span><span style="display:flex;"><span><span style="color:#f00">const</span> <span style="color:#f00">auto</span> [x, y, z] = ray.at(t);
+</span></span></code></pre></div><p>在矩形范围内的点才算相交成功</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#f00">if</span>(std::abs(x) &gt; length || std::abs(z) &gt; width) <span style="color:#f00">return</span> false;
+</span></span></code></pre></div><h2 id="球sphere">球(Sphere)</h2>
+<p>假设球心在<strong>原点</strong>，<strong>半径</strong>控制球的大小</p>
+<p>三维空间中球的一般方程
+$$
+x^{2}+y^{2}+z^{2}=r^{2}
+$$</p>
+<p>将光线代入方程
+$$
+(o+td)^{2}=r^{2}
+$$</p>
+<p>整理可得关于t的一元二次方程
+$$
+d^{2}t^{2}+2odt+o^{2}-r^{2}=0\
+\begin{align*}
+&amp; a=d^{2}\
+&amp; b=2od\
+&amp; c=o^{2}-r^{2}
+\end{align*}
+$$</p>
+<p>假如光线的方向向量已经归一化，那么
+$$
+|\overrightarrow{d}|^{2}=1
+$$</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#f00">const</span> <span style="color:#f00">auto</span> a = <span style="color:#f60">1</span>;
+</span></span><span style="display:flex;"><span><span style="color:#f00">const</span> <span style="color:#f00">auto</span> b = <span style="color:#f60">2</span> * dot(ray.origin, ray.direction);
+</span></span><span style="display:flex;"><span><span style="color:#f00">const</span> <span style="color:#f00">auto</span> c = dot(ray.origin, ray.origin) - radius * radius;
+</span></span></code></pre></div><p>解一元二次方程，没有解则求交失败</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#f00">const</span> <span style="color:#f00">auto</span> result = quadratic(a, b, c);
+</span></span><span style="display:flex;"><span><span style="color:#f00">if</span>(!result) <span style="color:#f00">return</span> false;
+</span></span></code></pre></div><p>有解则找到最近的交点</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#f00">const</span> <span style="color:#f00">auto</span> [x1, x2] = result.value();
+</span></span><span style="display:flex;"><span><span style="color:#f00">const</span> <span style="color:#f00">auto</span> t = min(x1, x2);
+</span></span></code></pre></div><h2 id="圆柱cylinder">圆柱(Cylinder)</h2>
+<p>假设圆柱底面在<code>xz</code>平面，底面圆心在<strong>原点</strong>，<strong>半径</strong>和<strong>高度</strong>控制圆柱大小和长度，<code>phi</code>表示圆柱曲面的完整度</p>
+<p>首先忽略y轴，求出相交点是否在圆柱底面</p>
+<p>圆柱底面的一般方程
+$$
+x^{2}+z^{2}=r^{2}
+$$</p>
+<p>将光线代入，同理可得
+$$
+(d_{x}^{2}+d_{z}^{2})t^{2}+2(o_{x}d_{x}+o_{z}d_{z})t+o_{x}^{2}+o_{z}^{2}-r^{2}=0
+$$</p>
+<p>日常解一元二次方程</p>
+<p>$$
+\begin{align*}
+&amp; a = d_{x}^{2}+d_{z}^{2}\
+&amp; b = 2(o_{x}d_{x}+o_{z}d_{z})\
+&amp; c = o_{x}^{2}+o_{z}^{2}-r^{2}
+\end{align*}
+$$</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#f00">const</span> <span style="color:#f00">auto</span> a = dx * dx + dz * dz;
+</span></span><span style="display:flex;"><span><span style="color:#f00">const</span> <span style="color:#f00">auto</span> b = <span style="color:#f60">2</span> * (ox * dx + oz * dz);
+</span></span><span style="display:flex;"><span><span style="color:#f00">const</span> <span style="color:#f00">auto</span> c = ox * ox + oz * oz - radius * radius;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f00">const</span> <span style="color:#f00">auto</span> result = quadratic(a, b, c);
+</span></span><span style="display:flex;"><span><span style="color:#f00">if</span>(!result) <span style="color:#f00">return</span> false;
+</span></span></code></pre></div><p>计算相交点高度判断是否在范围内，先从最小<code>t</code>开始</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#f00">auto</span> [x1, x2] = result.value();
+</span></span><span style="display:flex;"><span><span style="color:#f00">if</span>(x1 &gt; x2) std::swap(x1, x2);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f00">auto</span> t = x1;
+</span></span><span style="display:flex;"><span><span style="color:#f00">auto</span> [x, y, z] = ray.at(t);
+</span></span><span style="display:flex;"><span><span style="color:#f00">auto</span> phi = std::atan2(z, x);
+</span></span><span style="display:flex;"><span><span style="color:#f00">if</span>(phi &lt; <span style="color:#f60">0</span>) phi += <span style="color:#f60">2</span> * PI&lt;f32&gt;;
+</span></span></code></pre></div><p>假如第一个<code>x1</code>不符合条件，需要对<code>x2</code>继续进行判断</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#f00">if</span>(y &lt; min_height || y &gt; max_height || phi &gt; max_angle)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    t = x2;
+</span></span><span style="display:flex;"><span>    <span style="color:#f00">auto</span> [x, y, z] = ray.at(t);
+</span></span><span style="display:flex;"><span>    phi = std::atan2(z, x);
+</span></span><span style="display:flex;"><span>    <span style="color:#f00">if</span>(phi &lt; <span style="color:#f60">0</span>) phi += <span style="color:#f60">2</span> * PI&lt;f32&gt;;
+</span></span><span style="display:flex;"><span>    <span style="color:#f00">if</span>(y &lt; min_height || y &gt; max_height || phi &gt; max_angle)
+</span></span><span style="display:flex;"><span>        <span style="color:#f00">return</span> false;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>小提示：当圆柱曲面不是<strong>封闭</strong>的时候，所求相交点有可能在圆柱内部，这时需要反转(flip)法线才能进行正确的着色</p>
+<h3 id="顶盖和底盖cap">顶盖和底盖(Cap)</h3>
+<p>这时候圆柱求交算是基本完成了，但渲染的时候又发现一个问题，圆柱没有顶盖和底盖，也就是二维曲面并不是封闭的，因为圆柱体是一个退化的二维曲面</p>
+<p>这时候相当于加入了两个圆盘(Disk)</p>
+<p>如果在之前与圆柱曲面相交了，需要传入<code>t</code>与这次求交所得<code>cap_t</code>判断哪个最近</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#f00">const</span> <span style="color:#f00">auto</span> intersect = [&amp;](f32 cap_t)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#f00">if</span>(cap_t &gt;= t || cap_t &lt;= <span style="color:#f60">0</span>) <span style="color:#f00">return</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f00">if</span>(!check_cap(ray, cap_t)) <span style="color:#f00">return</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    t = cap_t;
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><p>我们可以增加一个枚举变量<code>cylinder_shape</code>，来表示需要圆柱的顶面/底面，或者说<del>我全都要</del>也行</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#f00">if</span>(cylinder_shape &amp; cylinder_top)
+</span></span><span style="display:flex;"><span>    intersect(ray.inv_at&lt;Axis::Y&gt;(max_height));
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f00">if</span>(cylinder_shape &amp; cylinder_bottom)
+</span></span><span style="display:flex;"><span>    intersect(ray.inv_at&lt;Axis::Y&gt;(min_height));
+</span></span></code></pre></div><p>圆盘求交也很简单
+$$
+x^{2}+z^{2} \leq r^{2}
+$$</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#ee82ee">bool</span> Cylinder::check_cap(<span style="color:#f00">const</span> Ray3f&amp; ray, f32 t) <span style="color:#f00">const</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#f00">const</span> <span style="color:#f00">auto</span> x = ray.at&lt;Axis::X&gt;(t);
+</span></span><span style="display:flex;"><span>    <span style="color:#f00">const</span> <span style="color:#f00">auto</span> z = ray.at&lt;Axis::Z&gt;(t);
+</span></span><span style="display:flex;"><span>    <span style="color:#f00">return</span> (x * x + z * z) &lt;= radius * radius;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h2 id="reference">Reference</h2>
+<ol>
+<li>Physically Based Rendering: From Theory to Implementation</li>
+<li>The Ray Tracer Challenge</li>
+</ol>
+
+</article>
+
+            </div>
+        </main>
+    </body>
+</html>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="zh-cn"><head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+   <meta name="description" content="某些 STL 容器 在刷 leetcode，其中某道题中的代码片段是这样的
+string res; res.resize(size - i); // res.reserve(size - i); for (int j = 0; i &lt; size; i &#43;= 1, j &#43;= 1) { res[j] = arr[i] &#43; &#39;0&#39;; // res.push_back(arr[i] &#43; &#39;0&#39;); } 没注释的代码比注释的快了几ms，原因如下
+因为容器一开始是空的，不需要考虑拷贝原来的元素
+resize 重新分配内存并且默认初始化，size 改变（大概开销 malloc &#43; memset） reserve 重新分配了内存，不初始化，size 不变 push_back 需要检查 size 有没有大于 capacity，多了分支的开销 然而这里代码也不是最快的，思考一下，这里 resize 还多了一个 memset 的开销，所以最优解应该是，用自己写的 vector（逃
+不知道是历史原因还是标准委员会根本没考虑到，应该加多几个函数来表示需不需要初始化
+改造容器 这里先看一个别人家的 vector：Less
+看一下某个代码片段
+struct default_init_t {}; inline constexpr default_init_t default_init; struct with_capacity_t {}; inline constexpr with_capacity_t with_capacity; vector(default_init_t, size_type const size) { this-&gt;construct(size, size, [](auto p, auto) { new (p, placement_tag) T; }); } vector(size_type size) { this-&gt;construct(size, size, [](auto p, auto) { new (p, placement_tag) T(); }); } vector(with_capacity_t, size_type const capacity) { this-&gt;construct(0u, capacity, [](auto, auto) {}); } vector(size_type size, T const&amp; value) { this-&gt;construct(size, size, [&amp;](auto p, auto) { new (p, placement_tag) T(value); }); } 思考🤔，直接把一个结构体类型作为参数？算了直接去 c&#43;&#43; 群问一下">  
+
+  <title>
+    
+      C&#43;&#43; 胡言乱语X1
+    
+  </title>
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/" />
+  
+  
+  
+  <link rel="stylesheet" href="/css/main.c5af9bae99b4a3d315b9f39305ffff27e9c3383fbbfd8b5fcaf2237667021a333a982fb958d1813a720b0a660b14022337553ae1ca93ef2ee17c4ae628ac19cb.css" integrity="sha512-xa&#43;brpm0o9MVufOTBf//J&#43;nDOD&#43;7/YtfyvIjdmcCGjM6mC&#43;5WNGBOnILCmYLFAIjN1U64cqT7y7hfErmKKwZyw==" />
+  
+</head>
+<body a="auto">
+        <main class="page-content" aria-label="Content">
+            <div class="w">
+<a href="/">back</a>
+
+
+<article>
+    <p class="post-meta">
+        <time datetime="2022-09-19 00:00:00 &#43;0000 UTC">
+            2022-09-19
+        </time>
+    </p>
+
+    <h1>C&#43;&#43; 胡言乱语X1</h1>
+
+    
+
+    <h2 id="某些-stl-容器">某些 STL 容器</h2>
+<p>在刷 leetcode，其中某道题中的代码片段是这样的</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span>string res;
+</span></span><span style="display:flex;"><span>res.resize(size - i);
+</span></span><span style="display:flex;"><span><span style="color:#0f0">// res.reserve(size - i);
+</span></span></span><span style="display:flex;"><span><span style="color:#0f0"></span>
+</span></span><span style="display:flex;"><span><span style="color:#f00">for</span> (<span style="color:#ee82ee">int</span> j = <span style="color:#f60">0</span>; i &lt; size; i += <span style="color:#f60">1</span>, j += <span style="color:#f60">1</span>)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    res[j] = arr[i] + <span style="color:#87ceeb">&#39;0&#39;</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#0f0">// res.push_back(arr[i] + &#39;0&#39;);
+</span></span></span><span style="display:flex;"><span><span style="color:#0f0"></span>}
+</span></span></code></pre></div><p>没注释的代码比注释的快了几ms，原因如下</p>
+<p>因为容器一开始是空的，不需要考虑拷贝原来的元素</p>
+<ol>
+<li>resize 重新分配内存并且默认初始化，size 改变（大概开销 malloc + memset）</li>
+<li>reserve 重新分配了内存，不初始化，size 不变</li>
+<li>push_back 需要检查 size 有没有大于 capacity，多了分支的开销</li>
+</ol>
+<p>然而这里代码也不是最快的，思考一下，这里 resize 还多了一个 memset 的开销，所以最优解应该是，用自己写的 vector（逃</p>
+<p>不知道是历史原因还是标准委员会根本没考虑到，应该加多几个函数来表示需不需要初始化</p>
+<h2 id="改造容器">改造容器</h2>
+<p>这里先看一个别人家的 vector：<a href="https://github.com/cmazakas/less/">Less</a></p>
+<p>看一下某个代码片段</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#f00">struct</span> default_init_t {};
+</span></span><span style="display:flex;"><span><span style="color:#f00">inline</span> <span style="color:#f00">constexpr</span> default_init_t default_init;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f00">struct</span> with_capacity_t {};
+</span></span><span style="display:flex;"><span><span style="color:#f00">inline</span> <span style="color:#f00">constexpr</span> with_capacity_t with_capacity;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>vector(default_init_t, size_type <span style="color:#f00">const</span> size)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span> <span style="color:#f00">this</span>-&gt;construct(size, size, [](<span style="color:#f00">auto</span> p, <span style="color:#f00">auto</span>) { <span style="color:#f00">new</span> (p, placement_tag) T; });
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>vector(size_type size)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span> <span style="color:#f00">this</span>-&gt;construct(size, size,
+</span></span><span style="display:flex;"><span>                 [](<span style="color:#f00">auto</span> p, <span style="color:#f00">auto</span>) { <span style="color:#f00">new</span> (p, placement_tag) T(); });
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>vector(with_capacity_t, size_type <span style="color:#f00">const</span> capacity)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span> <span style="color:#f00">this</span>-&gt;construct(<span style="color:#f60">0u</span>, capacity, [](<span style="color:#f00">auto</span>, <span style="color:#f00">auto</span>) {});
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>vector(size_type size, T <span style="color:#f00">const</span>&amp; value)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span> <span style="color:#f00">this</span>-&gt;construct(size, size,
+</span></span><span style="display:flex;"><span>                 [&amp;](<span style="color:#f00">auto</span> p, <span style="color:#f00">auto</span>) { <span style="color:#f00">new</span> (p, placement_tag) T(value); });
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>思考🤔，直接把一个结构体类型作为参数？算了直接去 c++ 群问一下</p>
+<p>哦，原来这个叫<code>tag dispatch</code>，才发现这语法在（MSVC STL）到处都是，感觉不如多写个 make 系列函数，而不是重载构造函数</p>
+<p>我觉得更好的实践应该是：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#0f0">// 分配内存，size 改变，默认初始化
+</span></span></span><span style="display:flex;"><span><span style="color:#0f0"></span><span style="color:#f00">static</span> vector&lt;T&gt; make_default_init(std::size_t size, <span style="color:#f00">const</span> T&amp; val = T{});
+</span></span><span style="display:flex;"><span><span style="color:#0f0">// 分配内存，size 改变，不进行初始化
+</span></span></span><span style="display:flex;"><span><span style="color:#0f0"></span><span style="color:#f00">static</span> vector&lt;T&gt; make_default_without_init(std::size_t size);
+</span></span><span style="display:flex;"><span><span style="color:#0f0">// 分配内存，size 不变，不进行初始化
+</span></span></span><span style="display:flex;"><span><span style="color:#0f0"></span><span style="color:#f00">static</span> vector&lt;T&gt; make_with_capacity(std::size_t size);
+</span></span><span style="display:flex;"><span><span style="color:#0f0">// 重新分配内存，size 改变，不进行初始化
+</span></span></span><span style="display:flex;"><span><span style="color:#0f0"></span><span style="color:#ee82ee">void</span> <span style="color:#ff0">resize_without_init</span>(std::size_t size);
+</span></span></code></pre></div><hr>
+<p>这个库还有个设计是，抛弃 std::allocator，使用自定义 new 和 delete</p>
+<p>std::allocator 这玩意设计有误，扔掉很正常，至于为什么，看<a href="https://www.zhihu.com/question/50997867/answer/2212678027">这个</a></p>
+<h2 id="自增运算符">自增运算符</h2>
+<p>在最上面的代码，里面自增1都是使用<code>+=</code>，这是好的代码风格</p>
+<p>有时候你会看见这种代码：<code>++array[index++]</code></p>
+<p>前缀/后缀自增运算符赶紧死一死，后出世的语言基本都没有<code>++</code>这个语法了</p>
+<p>更让我觉得恶心的是，群友在 AMD 的笔试说考<code>i+++++i</code>这种题，就算是外企我也想开喷：中国本土化了这是，真接“谭教授”的地气啊</p>
+<p>别说能考你 体系结构/操作系统/编译器 的知识，首先有一个大前提就是，<a href="https://en.cppreference.com/w/cpp/language/ub">ub</a> 不能拿来做题目</p>
+
+</article>
+
+            </div>
+        </main>
+    </body>
+</html>

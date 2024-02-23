@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="zh-cn"><head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+   <meta name="description" content="前提 目前来说 Rider 还是最好的 UE IDE，本文只是提供多一种选项来写 UE 代码。
+环境 vscode 插件 clangd clang Windows 推荐使用 scoop 下载 clang。
+scoop install llvm 部署 用 vscode 打开 UE 项目目录，新建.vscode目录。
+新建.vscode/settings.json文件，写入下面内容。
+{ &#34;clangd.arguments&#34;: [ &#34;--background-index&#34;, &#34;--compile-commands-dir=.vscode&#34;, // completion &#34;--header-insertion=never&#34;, &#34;--completion-style=bundled&#34;, &#34;--function-arg-placeholders=false&#34;, // effective &#34;--pch-storage=memory&#34;, &#34;-j=16&#34;, // coding &#34;--clang-tidy&#34;, // misc &#34;--log=error&#34; ] } 在项目目录新建.clang-format文件，谷歌一下 UE clang-format，随便找一个复制下来。这里用来格式化代码。
+使用脚本生成反射信息和compile_commands.json
+compile_commands.json成功生成后，打开 cpp 文件，clangd 就会自动运行。
+UE 的 Unreal Build Tool 可以生成compile_commands.json，需要 clang 辅助。不过 UBT 写的比较奇葩，在命令行直接clang -v有结果，但 UBT 还是找不到，在论坛看了一遍 Linux/Windows 都是这样。">  
+
+  <title>
+    
+      用 vscode 写 UE 代码
+    
+  </title>
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/" />
+  
+  
+  
+  <link rel="stylesheet" href="/css/main.c5af9bae99b4a3d315b9f39305ffff27e9c3383fbbfd8b5fcaf2237667021a333a982fb958d1813a720b0a660b14022337553ae1ca93ef2ee17c4ae628ac19cb.css" integrity="sha512-xa&#43;brpm0o9MVufOTBf//J&#43;nDOD&#43;7/YtfyvIjdmcCGjM6mC&#43;5WNGBOnILCmYLFAIjN1U64cqT7y7hfErmKKwZyw==" />
+  
+</head>
+<body a="auto">
+        <main class="page-content" aria-label="Content">
+            <div class="w">
+<a href="/">back</a>
+
+
+<article>
+    <p class="post-meta">
+        <time datetime="2022-11-25 00:00:00 &#43;0000 UTC">
+            2022-11-25
+        </time>
+    </p>
+
+    <h1>用 vscode 写 UE 代码</h1>
+
+    
+
+    <h2 id="前提">前提</h2>
+<p>目前来说 Rider 还是最好的 UE IDE，本文只是提供多一种选项来写 UE 代码。</p>
+<h2 id="环境">环境</h2>
+<ul>
+<li>vscode 插件 clangd</li>
+<li>clang</li>
+</ul>
+<p>Windows 推荐使用 scoop 下载 clang。</p>
+<pre tabindex="0"><code>scoop install llvm
+</code></pre><h2 id="部署">部署</h2>
+<ol>
+<li>
+<p>用 vscode 打开 UE 项目目录，新建<code>.vscode</code>目录。</p>
+</li>
+<li>
+<p>新建<code>.vscode/settings.json</code>文件，写入下面内容。</p>
+</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    &#34;clangd.arguments&#34;: [
+</span></span><span style="display:flex;"><span>        <span style="color:#87ceeb">&#34;--background-index&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#87ceeb">&#34;--compile-commands-dir=.vscode&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#0f0">// completion
+</span></span></span><span style="display:flex;"><span><span style="color:#0f0"></span>        <span style="color:#87ceeb">&#34;--header-insertion=never&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#87ceeb">&#34;--completion-style=bundled&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#87ceeb">&#34;--function-arg-placeholders=false&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#0f0">// effective
+</span></span></span><span style="display:flex;"><span><span style="color:#0f0"></span>        <span style="color:#87ceeb">&#34;--pch-storage=memory&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#87ceeb">&#34;-j=16&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#0f0">// coding
+</span></span></span><span style="display:flex;"><span><span style="color:#0f0"></span>        <span style="color:#87ceeb">&#34;--clang-tidy&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#0f0">// misc
+</span></span></span><span style="display:flex;"><span><span style="color:#0f0"></span>        <span style="color:#87ceeb">&#34;--log=error&#34;</span>
+</span></span><span style="display:flex;"><span>    ]
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ol start="3">
+<li>
+<p>在项目目录新建<code>.clang-format</code>文件，谷歌一下 UE clang-format，随便找一个复制下来。这里用来格式化代码。</p>
+</li>
+<li>
+<p>使用脚本生成反射信息和<code>compile_commands.json</code></p>
+</li>
+</ol>
+<blockquote>
+<p><code>compile_commands.json</code>成功生成后，打开 cpp 文件，clangd 就会自动运行。</p>
+</blockquote>
+<p>UE 的 Unreal Build Tool 可以生成<code>compile_commands.json</code>，需要 clang 辅助。不过 UBT 写的比较奇葩，在命令行直接<code>clang -v</code>有结果，但 UBT 还是找不到，在论坛看了一遍 Linux/Windows 都是这样。</p>
+<p>但 Windows 还是能找到 clang 的，不过需要把 LLVM 工具链放在这里。</p>
+<pre tabindex="0"><code>C:/Program Files/LLVM
+</code></pre><p>这里建议弄一个目录软链接，或者直接拷贝过来。不会用 mklink 可以看看这篇文章：<a href="https://blog.walterlv.com/post/ntfs-link-comparisons.html">比较 Windows 上四种不同的文件（夹）链接方式（NTFS 的硬链接、目录联接、符号链接，和大家熟知的快捷方式）
+</a></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span><span style="color:#0f0"># C:/Program Files/</span>
+</span></span><span style="display:flex;"><span>cmd /c mklink /J LLVM &lt;LLVM_PATH&gt;
+</span></span></code></pre></div><p>然后这里需要一个脚本来调用 UBT，可以考虑用 vscode 内置的 tasks，也可也用 python 等脚本语言，假如要用 vsocde tasks：</p>
+<ul>
+<li>新建文件<code>.vscode/tasks.json</code></li>
+</ul>
+<p>假设 UE 目录在 <code>C:/Program Files/Epic Games/UE_4.27</code>，新建项目名称为<code>demo</code>。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    &#34;version&#34;: <span style="color:#87ceeb">&#34;2.0.0&#34;</span>,
+</span></span><span style="display:flex;"><span>    &#34;tasks&#34;: [
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            &#34;type&#34;: <span style="color:#87ceeb">&#34;shell&#34;</span>,
+</span></span><span style="display:flex;"><span>            &#34;label&#34;: <span style="color:#87ceeb">&#34;Gen Generated Code&#34;</span>,
+</span></span><span style="display:flex;"><span>            &#34;group&#34;: <span style="color:#87ceeb">&#34;none&#34;</span>,
+</span></span><span style="display:flex;"><span>            &#34;command&#34;: <span style="color:#87ceeb">&#34;Engine/Binaries/DotNET/UnrealBuildTool.exe&#34;</span>,
+</span></span><span style="display:flex;"><span>            &#34;args&#34;: [
+</span></span><span style="display:flex;"><span>                <span style="color:#87ceeb">&#34;demoEditor&#34;</span>, <span style="color:#0f0">// &lt;project name&gt;Editor
+</span></span></span><span style="display:flex;"><span><span style="color:#0f0"></span>                <span style="color:#87ceeb">&#34;Win64&#34;</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#87ceeb">&#34;DebugGame&#34;</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#87ceeb">&#34;-SkipBuild&#34;</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#87ceeb">&#34;-project=${workspaceFolder}/demo.uproject&#34;</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#87ceeb">&#34;-game&#34;</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#87ceeb">&#34;-engine&#34;</span>
+</span></span><span style="display:flex;"><span>            ],
+</span></span><span style="display:flex;"><span>            &#34;options&#34;: {
+</span></span><span style="display:flex;"><span>                &#34;cwd&#34;: <span style="color:#87ceeb">&#34;C:/Program Files/Epic Games/UE_4.27&#34;</span>
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        },
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            &#34;type&#34;: <span style="color:#87ceeb">&#34;shell&#34;</span>,
+</span></span><span style="display:flex;"><span>            &#34;label&#34;: <span style="color:#87ceeb">&#34;Subtask:GenClangDatabase&#34;</span>,
+</span></span><span style="display:flex;"><span>            &#34;group&#34;: <span style="color:#87ceeb">&#34;none&#34;</span>,
+</span></span><span style="display:flex;"><span>            &#34;command&#34;: <span style="color:#87ceeb">&#34;Engine/Binaries/DotNET/UnrealBuildTool.exe&#34;</span>,
+</span></span><span style="display:flex;"><span>            &#34;args&#34;: [
+</span></span><span style="display:flex;"><span>                <span style="color:#87ceeb">&#34;demoEditor&#34;</span>, <span style="color:#0f0">// &lt;project name&gt;Editor
+</span></span></span><span style="display:flex;"><span><span style="color:#0f0"></span>                <span style="color:#87ceeb">&#34;Win64&#34;</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#87ceeb">&#34;DebugGame&#34;</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#87ceeb">&#34;-SkipBuild&#34;</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#87ceeb">&#34;-project=${workspaceFolder}/demo.uproject&#34;</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#87ceeb">&#34;-game&#34;</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#87ceeb">&#34;-engine&#34;</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#87ceeb">&#34;-mode=GenerateClangDatabase&#34;</span>
+</span></span><span style="display:flex;"><span>            ],
+</span></span><span style="display:flex;"><span>            &#34;options&#34;: {
+</span></span><span style="display:flex;"><span>                &#34;cwd&#34;: <span style="color:#87ceeb">&#34;C:/Program Files/Epic Games/UE_4.27&#34;</span>
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        },
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            &#34;type&#34;: <span style="color:#87ceeb">&#34;shell&#34;</span>,
+</span></span><span style="display:flex;"><span>            &#34;label&#34;: <span style="color:#87ceeb">&#34;Subtask:MoveCompileCommands&#34;</span>,
+</span></span><span style="display:flex;"><span>            &#34;group&#34;: <span style="color:#87ceeb">&#34;none&#34;</span>,
+</span></span><span style="display:flex;"><span>            &#34;command&#34;: <span style="color:#87ceeb">&#34;move&#34;</span>,
+</span></span><span style="display:flex;"><span>            &#34;args&#34;: [
+</span></span><span style="display:flex;"><span>                <span style="color:#87ceeb">&#34;-Force&#34;</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#87ceeb">&#34;compile_commands.json&#34;</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#87ceeb">&#34;${workspaceFolder}/.vscode&#34;</span>
+</span></span><span style="display:flex;"><span>            ],
+</span></span><span style="display:flex;"><span>            &#34;options&#34;: {
+</span></span><span style="display:flex;"><span>                &#34;cwd&#34;: <span style="color:#87ceeb">&#34;C:/Program Files/Epic Games/UE_4.27&#34;</span>
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        },
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            &#34;label&#34;: <span style="color:#87ceeb">&#34;Gen Compile Commands&#34;</span>,
+</span></span><span style="display:flex;"><span>            &#34;group&#34;: <span style="color:#87ceeb">&#34;none&#34;</span>,
+</span></span><span style="display:flex;"><span>            &#34;dependsOn&#34;: [
+</span></span><span style="display:flex;"><span>                <span style="color:#87ceeb">&#34;Subtask:GenClangDatabase&#34;</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#87ceeb">&#34;Subtask:MoveCompileCommands&#34;</span>
+</span></span><span style="display:flex;"><span>            ],
+</span></span><span style="display:flex;"><span>            &#34;dependsOrder&#34;: <span style="color:#87ceeb">&#34;sequence&#34;</span>
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    ]
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h2 id="reference">Reference</h2>
+<ul>
+<li><a href="https://zhuanlan.zhihu.com/p/507625365">Windows 下使用 Vscode + Clangd 搭建 UE4 开发环境</a></li>
+</ul>
+
+</article>
+
+            </div>
+        </main>
+    </body>
+</html>

@@ -1,164 +1,75 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>C&#43;&#43; on 恒星的小站</title>
+    <title>C&#43;&#43; on Heng Xing Blog</title>
     <link>https://star-hengxing.github.io/tags/c&#43;&#43;/</link>
-    <description>Recent content in C&#43;&#43; on 恒星的小站</description>
+    <description>Recent content in C&#43;&#43; on Heng Xing Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sat, 19 Aug 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://star-hengxing.github.io/tags/c++/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 25 Aug 2023 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://star-hengxing.github.io/tags/c++/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>如何给 Xmake 打包</title>
-      <link>https://star-hengxing.github.io/p/%E5%A6%82%E4%BD%95%E7%BB%99-xmake-%E6%89%93%E5%8C%85/</link>
+      <link>https://star-hengxing.github.io/post/xmake/xmake-package/</link>
       <pubDate>Sat, 19 Aug 2023 00:00:00 +0000</pubDate>
-      
-      <guid>https://star-hengxing.github.io/p/%E5%A6%82%E4%BD%95%E7%BB%99-xmake-%E6%89%93%E5%8C%85/</guid>
-      <description>先来展示个 cmake 包模板。
-package(&amp;#34;xxx&amp;#34;) set_homepage(&amp;#34;https://github.com/xxx/yyy&amp;#34;) set_description(&amp;#34;&amp;#34;) set_license(&amp;#34;&amp;#34;) add_urls(&amp;#34;https://github.com/xxx/yyy/archive/refs/tags/$(version).tar.gz&amp;#34;, &amp;#34;https://github.com/xxx/yyy.git&amp;#34;) add_versions(&amp;#34;v1.0.0&amp;#34;, &amp;#34;sha256&amp;#34;) add_deps(&amp;#34;cmake&amp;#34;, &amp;#34;ninja&amp;#34;) on_install(function (package) local configs = {} table.insert(configs, &amp;#34;-DCMAKE_BUILD_TYPE=&amp;#34; .. (package:is_debug() and &amp;#34;Debug&amp;#34; or &amp;#34;Release&amp;#34;)) table.insert(configs, &amp;#34;-DBUILD_SHARED_LIBS=&amp;#34; .. (package:config(&amp;#34;shared&amp;#34;) and &amp;#34;ON&amp;#34; or &amp;#34;OFF&amp;#34;)) if package:is_plat(&amp;#34;windows&amp;#34;) and package:config(&amp;#34;shared&amp;#34;) then table.insert(configs, &amp;#34;-DCMAKE_WINDOWS_EXPORT_ALL_SYMBOLS=ON&amp;#34;) end io.replace(&amp;#34;CMakeLists.txt&amp;#34;, &amp;#34;xxx&amp;#34;, &amp;#34;&amp;#34;, {plain = true}) import(&amp;#34;package.tools.cmake&amp;#34;).install(package, configs, {cmake_generator = &amp;#34;Ninja&amp;#34;}) end) on_test(function (package) assert(package:has_cxxfuncs(&amp;#34;xxx&amp;#34;, {includes = &amp;#34;yyy.h&amp;#34;})) end) 观察发现，这其实和写 target 差不多，不过 api 的语义不一样而已。
-git clone https://github.com/xmake-io/xmake-repo # 使用脚本生成模板 xmake l scripts/new.</description>
+      <guid>https://star-hengxing.github.io/post/xmake/xmake-package/</guid>
+      <description>先来展示个 cmake 包模板。&#xA;package(&amp;#34;xxx&amp;#34;) set_homepage(&amp;#34;https://github.com/xxx/yyy&amp;#34;) set_description(&amp;#34;&amp;#34;) set_license(&amp;#34;&amp;#34;) add_urls(&amp;#34;https://github.com/xxx/yyy/archive/refs/tags/$(version).tar.gz&amp;#34;, &amp;#34;https://github.com/xxx/yyy.git&amp;#34;) add_versions(&amp;#34;v1.0.0&amp;#34;, &amp;#34;sha256&amp;#34;) add_deps(&amp;#34;cmake&amp;#34;, &amp;#34;ninja&amp;#34;) on_install(function (package) local configs = {} table.insert(configs, &amp;#34;-DCMAKE_BUILD_TYPE=&amp;#34; .. (package:is_debug() and &amp;#34;Debug&amp;#34; or &amp;#34;Release&amp;#34;)) table.insert(configs, &amp;#34;-DBUILD_SHARED_LIBS=&amp;#34; .. (package:config(&amp;#34;shared&amp;#34;) and &amp;#34;ON&amp;#34; or &amp;#34;OFF&amp;#34;)) if package:is_plat(&amp;#34;windows&amp;#34;) and package:config(&amp;#34;shared&amp;#34;) then table.insert(configs, &amp;#34;-DCMAKE_WINDOWS_EXPORT_ALL_SYMBOLS=ON&amp;#34;) end io.replace(&amp;#34;CMakeLists.txt&amp;#34;, &amp;#34;xxx&amp;#34;, &amp;#34;&amp;#34;, {plain = true}) import(&amp;#34;package.tools.cmake&amp;#34;).install(package, configs, {cmake_generator = &amp;#34;Ninja&amp;#34;}) end) on_test(function (package) assert(package:has_cxxfuncs(&amp;#34;xxx&amp;#34;, {includes = &amp;#34;yyy.h&amp;#34;})) end) 观察发现，这其实和写 target 差不多，不过 api 的语义不一样而已。&#xA;git clone https://github.com/xmake-io/xmake-repo # 使用脚本生成模板 xmake l scripts/new.</description>
     </item>
-    
     <item>
       <title>C&#43;&#43; 胡言乱语X3</title>
-      <link>https://star-hengxing.github.io/p/c-%E8%83%A1%E8%A8%80%E4%B9%B1%E8%AF%ADx3/</link>
+      <link>https://star-hengxing.github.io/post/cpp/article3/</link>
       <pubDate>Tue, 15 Aug 2023 00:00:00 +0000</pubDate>
-      
-      <guid>https://star-hengxing.github.io/p/c-%E8%83%A1%E8%A8%80%E4%B9%B1%E8%AF%ADx3/</guid>
-      <description>子标题：一个第三方库需要哪些构建选项。
-C Runtime 在 Linux 下编译，基本都是动态链接 glibc 吧，如果你想静态链接，或者静态链接其他 libc (如 musl)。 在 Windows 下，通常都是链接 UCRT，那问题来了，应该有个选项选择 MT/MTd/MD/MDd 吧。 生成动态/静态库 这貌似是一个很基础的选项，没必要提出来，但事实上还是有很多开发者根本不处理（也许别人没考虑过 Windows 平台）。
-比如在编译静态库时用了 #define EXPORT __declspec(dllexport)，但根本不需要这玩意。
-对编译不负责任就算了，实在偷懒可以用构建系统自带的导出符号。
-测试/例子 一个库总会有测试和例子，那问题来了，你不提供选项，内部也没处理，编译的时候还得顺带编译这一坨东西，但我最终只是想用 bin/lib/include 作为开发而已。
-依赖管理 现在的项目管理外部依赖，通常考虑集成第三方库源码在项目里或者通过包管理下载（vcpkg/conan/CPM/FetchContent etc&amp;hellip;）。
-应该有一些构建选项可以让用户选择，自行下载依赖库还是使用集成在项目里的源码。但也有例外，有些项目的 cmakelists 里没有相关逻辑去选择，会直接用 CPM/FetchContent 下载依赖，直接打满硬盘空间，这就很可怕。不过这点可以通过加硬盘处理。
-但要命的是，有时候会出现几个依赖库，本身也依赖了同一个库的情况，项目在编译链接的时候大概率报错失败，因为违反了 odr 原则，符号冲突了。不过大部分包管理也很难解决级联依赖的冲突，所以还是要要自己手工处理依赖，而依赖库可以提供选择自行下载依赖选项就好了。
-Address Sanitizer 现在编译器已经普及了这一技术，然而很多开发者根本不知道有这玩意，或者知道了但没去开启 asan 。除了自己代码开 asan，所依赖的库最好也开启 asan 编译效果才最佳，否则有机率会出现 &amp;ldquo;假阳性&amp;rdquo;。
-未完待续 </description>
+      <guid>https://star-hengxing.github.io/post/cpp/article3/</guid>
+      <description>子标题：一个第三方库需要哪些构建选项。&#xA;C Runtime 在 Linux 下编译，基本都是动态链接 glibc 吧，如果你想静态链接，或者静态链接其他 libc (如 musl)。 在 Windows 下，通常都是链接 UCRT，那问题来了，应该有个选项选择 MT/MTd/MD/MDd 吧。 生成动态/静态库 这貌似是一个很基础的选项，没必要提出来，但事实上还是有很多开发者根本不处理（也许别人没考虑过 Windows 平台）。&#xA;比如在编译静态库时用了 #define EXPORT __declspec(dllexport)，但根本不需要这玩意。&#xA;对编译不负责任就算了，实在偷懒可以用构建系统自带的导出符号。&#xA;测试/例子 一个库总会有测试和例子，那问题来了，你不提供选项，内部也没处理，编译的时候还得顺带编译这一坨东西，但我最终只是想用 bin/lib/include 作为开发而已。&#xA;依赖管理 现在的项目管理外部依赖，通常考虑集成第三方库源码在项目里或者通过包管理下载（vcpkg/conan/CPM/FetchContent etc&amp;hellip;）。&#xA;应该有一些构建选项可以让用户选择，自行下载依赖库还是使用集成在项目里的源码。但也有例外，有些项目的 cmakelists 里没有相关逻辑去选择，会直接用 CPM/FetchContent 下载依赖，直接打满硬盘空间，这就很可怕。不过这点可以通过加硬盘处理。&#xA;但要命的是，有时候会出现几个依赖库，本身也依赖了同一个库的情况，项目在编译链接的时候大概率报错失败，因为违反了 odr 原则，符号冲突了。不过大部分包管理也很难解决级联依赖的冲突，所以还是要要自己手工处理依赖，而依赖库可以提供选择自行下载依赖选项就好了。&#xA;Address Sanitizer 现在编译器已经普及了这一技术，然而很多开发者根本不知道有这玩意，或者知道了但没去开启 asan 。除了自己代码开 asan，所依赖的库最好也开启 asan 编译效果才最佳，否则有机率会出现 &amp;ldquo;假阳性&amp;rdquo;。&#xA;未完待续 </description>
     </item>
-    
     <item>
       <title>Xmake 新手教程</title>
-      <link>https://star-hengxing.github.io/p/xmake-%E6%96%B0%E6%89%8B%E6%95%99%E7%A8%8B/</link>
+      <link>https://star-hengxing.github.io/post/xmake/xmake-tutorial/</link>
       <pubDate>Fri, 30 Jun 2023 00:00:00 +0000</pubDate>
-      
-      <guid>https://star-hengxing.github.io/p/xmake-%E6%96%B0%E6%89%8B%E6%95%99%E7%A8%8B/</guid>
-      <description>构建系统的文档好像都有一个老毛病，就是不太适合新手去阅读（官方教程过于简短）。一些人认为文档写得很混乱，cmake/xmake/meson 都是如此，因此有了这个教程。
-新手，是指了解 c/c++ 基础的编译链接，并不是对计算机科学（用过至少一门编程语言）一无所知的萌新。
-这里还有两份教程可以互相参考。
-A Tour of xmake 一份非官方的xmake教程 xmake从入门到精通1：安装和更新 如果想看类似于 meson 的 How do I do X in Meson? 和 Frequently Asked Questions，请看另一篇文章： Xmake 常见问题解答。
-xmake 的官方交流群，可以查看文档自行添加。
-安装 这部分文档写得很清楚，在各自的平台用对应的包管理安装即可，另外使用 Windows 系统的读者需要注意两点：
-自行下载压缩包然后解压到某个目录，确保该目录没有其他东西。 曾有人解压到了软件目录，里面有其他软件，然后卸载 xmake 的时候，把其他软件也删了。
-想通过源码的方式编译安装，需要提前装好一个 xmake，因为 xmake 源码由 c + lua 组成，c 源码需要 xmake 自己编译，也就是&amp;quot;自举&amp;quot;。 打开命令行，输入xmake --version验证一下是否正确安装。
-Hello world 这里先介绍怎么编译一个 hello world 工程。
-打开命令行，输入xmake create hello，用 xmake 生成自带的 hello world 模板。
-$ xmake create hello create hello .</description>
+      <guid>https://star-hengxing.github.io/post/xmake/xmake-tutorial/</guid>
+      <description>构建系统的文档好像都有一个老毛病，就是不太适合新手去阅读（官方教程过于简短）。一些人认为文档写得很混乱，cmake/xmake/meson 都是如此，因此有了这个教程。&#xA;新手，是指了解 c/c++ 基础的编译链接，并不是对计算机科学（用过至少一门编程语言）一无所知的萌新。&#xA;这里还有两份教程可以互相参考。&#xA;A Tour of xmake 一份非官方的xmake教程 xmake从入门到精通1：安装和更新 如果想看类似于 meson 的 How do I do X in Meson? 和 Frequently Asked Questions，请看另一篇文章： Xmake 常见问题解答。&#xA;xmake 的官方交流群，可以查看文档自行添加。&#xA;安装 这部分文档写得很清楚，在各自的平台用对应的包管理安装即可，另外使用 Windows 系统的读者需要注意两点：&#xA;自行下载压缩包然后解压到某个目录，确保该目录没有其他东西。 曾有人解压到了软件目录，里面有其他软件，然后卸载 xmake 的时候，把其他软件也删了。&#xA;想通过源码的方式编译安装，需要提前装好一个 xmake，因为 xmake 源码由 c + lua 组成，c 源码需要 xmake 自己编译，也就是&amp;quot;自举&amp;quot;。 打开命令行，输入xmake --version验证一下是否正确安装。&#xA;Hello world 这里先介绍怎么编译一个 hello world 工程。&#xA;打开命令行，输入xmake create hello，用 xmake 生成自带的 hello world 模板。&#xA;$ xmake create hello create hello .</description>
     </item>
-    
     <item>
       <title>Xmake 常见问题解答</title>
-      <link>https://star-hengxing.github.io/p/xmake-%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E8%A7%A3%E7%AD%94/</link>
+      <link>https://star-hengxing.github.io/post/xmake/xmake-fqa/</link>
       <pubDate>Sat, 04 Mar 2023 00:00:00 +0000</pubDate>
-      
-      <guid>https://star-hengxing.github.io/p/xmake-%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E8%A7%A3%E7%AD%94/</guid>
-      <description>如果在本文没找到解答，可以去 github 提 issue 和讨论区搜索。
-如果是官方包管理的问题，或者想请求加入一些包，去 xmake-repo 提 issue。
-提 issue 请附带 log，xmake -vD命令可以输出详细的 log 信息。
-基础 避免外网访问 xmake 很多操作需要访问 github（拉取 xmake-repo/build-artifact），而在公司内网开发是不需要这些操作的。
-xmake g --network=private 参考：
-https://github.com/xmake-io/xmake/issues/947 Windows 上 Qt 项目控制台没有输出 使用：
-add_ldflags(&amp;#34;/subsystem:console&amp;#34;) xmake 的 qt rule 里会检测 ldflags 里有没有/subsystem，如果没有就默认/subsystem:windows。
-给单独源文件添加参数 add_files(&amp;#34;test/*.c&amp;#34;, &amp;#34;test2/test2.c&amp;#34;, {defines = &amp;#34;TEST2&amp;#34;, languages = &amp;#34;c99&amp;#34;, includedirs = &amp;#34;.&amp;#34;, cflags = &amp;#34;-O0&amp;#34;}) -- 强制禁用 cxflags,cflags 等编译选项的自动检测 add_files(&amp;#34;src/*.c&amp;#34;, {force = {cxflags = &amp;#34;-DTEST&amp;#34;, mflags = &amp;#34;-framework xxx&amp;#34;}}) 给指定文件添加 config target(&amp;#34;test&amp;#34;) add_files(&amp;#34;test/*.</description>
+      <guid>https://star-hengxing.github.io/post/xmake/xmake-fqa/</guid>
+      <description>如果在本文没找到解答，可以去 github 提 issue 和讨论区搜索。&#xA;如果是官方包管理的问题，或者想请求加入一些包，去 xmake-repo 提 issue。&#xA;提 issue 请附带 log，xmake -vD命令可以输出详细的 log 信息。&#xA;基础 避免外网访问 xmake 很多操作需要访问 github（拉取 xmake-repo/build-artifact），而在公司内网开发是不需要这些操作的。&#xA;xmake g --network=private 参考：&#xA;https://github.com/xmake-io/xmake/issues/947 Windows 上 Qt 项目控制台没有输出 使用：&#xA;add_ldflags(&amp;#34;/subsystem:console&amp;#34;) xmake 的 qt rule 里会检测 ldflags 里有没有/subsystem，如果没有就默认/subsystem:windows。&#xA;给单独源文件添加参数 add_files(&amp;#34;test/*.c&amp;#34;, &amp;#34;test2/test2.c&amp;#34;, {defines = &amp;#34;TEST2&amp;#34;, languages = &amp;#34;c99&amp;#34;, includedirs = &amp;#34;.&amp;#34;, cflags = &amp;#34;-O0&amp;#34;}) -- 强制禁用 cxflags,cflags 等编译选项的自动检测 add_files(&amp;#34;src/*.c&amp;#34;, {force = {cxflags = &amp;#34;-DTEST&amp;#34;, mflags = &amp;#34;-framework xxx&amp;#34;}}) 给指定文件添加 config target(&amp;#34;test&amp;#34;) add_files(&amp;#34;test/*.</description>
     </item>
-    
     <item>
       <title>C&#43;&#43; 胡言乱语X2</title>
-      <link>https://star-hengxing.github.io/p/c-%E8%83%A1%E8%A8%80%E4%B9%B1%E8%AF%ADx2/</link>
+      <link>https://star-hengxing.github.io/post/cpp/article2/</link>
       <pubDate>Sat, 25 Feb 2023 00:00:00 +0000</pubDate>
-      
-      <guid>https://star-hengxing.github.io/p/c-%E8%83%A1%E8%A8%80%E4%B9%B1%E8%AF%ADx2/</guid>
-      <description>子标题：理解 std::move 和所有权。
-前言 关于 std::move 其实也有很多文章了，不过为了给群友解释，再造一次轮子。
-std::move 我们打开 std::move 的实现，发现里面是一个强制类型转换（随便找的代码）。
-template &amp;lt;typename T&amp;gt; typename remove_reference&amp;lt;T&amp;gt;::type&amp;amp;&amp;amp; move(T&amp;amp;&amp;amp; arg) { return static_cast&amp;lt;typename remove_reference&amp;lt;T&amp;gt;::type&amp;amp;&amp;amp;&amp;gt;(arg); } 使用：
-Object A; Object B = std::move(A); 这右值有啥用啊？假设 Object 类有以下构造函数：
-// 函数1 Object(const Object&amp;amp; object); // 函数2 Object(Object&amp;amp;&amp;amp; object); 如果没有std::move(A)这一步，那么B将会调用函数1进行构造，反之调用函数2。
-但分开两个构造函数是干什么呢，这里就牵涉到一个资源分配和所有权问题。
-所有权 假如你是A，你从宠物商店买了一只仓鼠回来（仓鼠挺可爱的），那你就成为了这只仓鼠的主人。
-B是你的好朋友，他经常到你家玩。他觉得你的仓鼠很可爱，于是他也想买一只，但是他没有足够的钱。
-分支路线1： 可是突然有一天，你不想养这只仓鼠了，就想找个人帮你继续养下去。你知道B也想养一只属于自己的仓鼠，但没有钱去买。于是你找来了B，将仓鼠送给了他。
-那么B从这天起，就成为了仓鼠的第二任主人了。
-分支路线2： 有一天B打工赚了许多钱，于是他去问你这只仓鼠是什么品种，然后自己到宠物商店买了一只差不多一样的。
-现在又有一只小仓鼠找到了新家了。
-回到主题，在上面，抽象来讲，买了一只仓鼠，其实就是分配了一个资源，你就拥有了他的使用权（所有权）。
-分支路线1中，A把仓鼠送给了B，这就是转移了仓鼠的所有权，主人从A变成了B，对应Object(Object&amp;amp;&amp;amp; object)。
-分支路线2中，B也买了一只仓鼠，这样两只仓鼠，都有了各自的主人，对应Object(const Object&amp;amp; object)。
-要知道买一只新仓鼠是要花钱的，所以在某些场景用 std::move 来节省这个资源的开销。
-但仓鼠毕竟是别人养过的，想要一只独一无二属于自己的小仓鼠，那就买一只新的吧，所以就需要申请一份新的资源。
-后记 理解所有权后，就像学数据结构学会了链表。学习新的知识，第一步总是最难的。</description>
+      <guid>https://star-hengxing.github.io/post/cpp/article2/</guid>
+      <description>子标题：理解 std::move 和所有权。&#xA;前言 关于 std::move 其实也有很多文章了，不过为了给群友解释，再造一次轮子。&#xA;std::move 我们打开 std::move 的实现，发现里面是一个强制类型转换（随便找的代码）。&#xA;template &amp;lt;typename T&amp;gt; typename remove_reference&amp;lt;T&amp;gt;::type&amp;amp;&amp;amp; move(T&amp;amp;&amp;amp; arg) { return static_cast&amp;lt;typename remove_reference&amp;lt;T&amp;gt;::type&amp;amp;&amp;amp;&amp;gt;(arg); } 使用：&#xA;Object A; Object B = std::move(A); 这右值有啥用啊？假设 Object 类有以下构造函数：&#xA;// 函数1 Object(const Object&amp;amp; object); // 函数2 Object(Object&amp;amp;&amp;amp; object); 如果没有std::move(A)这一步，那么B将会调用函数1进行构造，反之调用函数2。&#xA;但分开两个构造函数是干什么呢，这里就牵涉到一个资源分配和所有权问题。&#xA;所有权 假如你是A，你从宠物商店买了一只仓鼠回来（仓鼠挺可爱的），那你就成为了这只仓鼠的主人。&#xA;B是你的好朋友，他经常到你家玩。他觉得你的仓鼠很可爱，于是他也想买一只，但是他没有足够的钱。&#xA;分支路线1： 可是突然有一天，你不想养这只仓鼠了，就想找个人帮你继续养下去。你知道B也想养一只属于自己的仓鼠，但没有钱去买。于是你找来了B，将仓鼠送给了他。&#xA;那么B从这天起，就成为了仓鼠的第二任主人了。&#xA;分支路线2： 有一天B打工赚了许多钱，于是他去问你这只仓鼠是什么品种，然后自己到宠物商店买了一只差不多一样的。&#xA;现在又有一只小仓鼠找到了新家了。&#xA;回到主题，在上面，抽象来讲，买了一只仓鼠，其实就是分配了一个资源，你就拥有了他的使用权（所有权）。&#xA;分支路线1中，A把仓鼠送给了B，这就是转移了仓鼠的所有权，主人从A变成了B，对应Object(Object&amp;amp;&amp;amp; object)。&#xA;分支路线2中，B也买了一只仓鼠，这样两只仓鼠，都有了各自的主人，对应Object(const Object&amp;amp; object)。&#xA;要知道买一只新仓鼠是要花钱的，所以在某些场景用 std::move 来节省这个资源的开销。&#xA;但仓鼠毕竟是别人养过的，想要一只独一无二属于自己的小仓鼠，那就买一只新的吧，所以就需要申请一份新的资源。&#xA;后记 理解所有权后，就像学数据结构学会了链表。学习新的知识，第一步总是最难的。</description>
     </item>
-    
     <item>
       <title>使用 Xmake 作为 CS149 作业的 bulild system</title>
-      <link>https://star-hengxing.github.io/p/%E4%BD%BF%E7%94%A8-xmake-%E4%BD%9C%E4%B8%BA-cs149-%E4%BD%9C%E4%B8%9A%E7%9A%84-bulild-system/</link>
+      <link>https://star-hengxing.github.io/post/xmake/cs149/</link>
       <pubDate>Sun, 18 Dec 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://star-hengxing.github.io/p/%E4%BD%BF%E7%94%A8-xmake-%E4%BD%9C%E4%B8%BA-cs149-%E4%BD%9C%E4%B8%9A%E7%9A%84-bulild-system/</guid>
-      <description>前言 CS149 是一个教并行编程的课程，课程作业使用了 makefile 作为 build system。
-本文通过改造 build system 来讲述一些xmake的使用方法。
-分析 这个课程主要有四个作业，那么是一个多target工程，考虑用多级配置。
-作业里用到了很多工具，xmake都支持这些工具链。不过有些作业不跨平台（只能在 Linux 下运行），所以尽可能地将作业移植到 windows 上。
-改造 完整配置在GitHub上，这里选讲几个部分。
-根目录配置 最小xmake版本。 set_xmakever(&amp;#34;2.7.5&amp;#34;) 跨平台首选clang作为 C++ 编译器，在 windows 下使用clang-cl接受 msvc 风格的参数。 在开发环境下，链接动态库可以减少二进制体积，加速链接。 添加宏定义处理一些 windows 的屎。 if is_plat(&amp;#34;windows&amp;#34;) then -- set_toolchains(&amp;#34;clang-cl&amp;#34;) set_runtimes(&amp;#34;MD&amp;#34;) add_defines(&amp;#34;_CRT_SECURE_NO_WARNINGS&amp;#34;, &amp;#34;NOMINMAX&amp;#34;) else -- set_toolchains(&amp;#34;clang&amp;#34;) end 源码目录配置 考虑到 windows 没有getopt.h，这里在 github 上随便找了一个库代替，并开放头文件权限给依赖此库的target使用。 if is_plat(&amp;#34;windows&amp;#34;) then target(&amp;#34;getopt&amp;#34;) set_kind(&amp;#34;static&amp;#34;) add_includedirs(&amp;#34;getopt-for-windows&amp;#34;, {public = true}) add_files(&amp;#34;getopt-for-windows/getopt.c&amp;#34;) target_end() end 作业1 作业有多个target，其实可以考虑每个给每个target单独一个配置，不过这里选择把多个target都放在同一个xmake.lua中。
-根据原始 makefile 参数，处理一些跨平台配置。 考虑到作业会生成 ppm 格式的图片，所以改变该target的运行目录。 target(&amp;#34;mandelbrot&amp;#34;) set_kind(&amp;#34;binary&amp;#34;) add_files(&amp;#34;prog1_mandelbrot_threads/*.</description>
+      <guid>https://star-hengxing.github.io/post/xmake/cs149/</guid>
+      <description>前言 CS149 是一个教并行编程的课程，课程作业使用了 makefile 作为 build system。&#xA;本文通过改造 build system 来讲述一些xmake的使用方法。&#xA;分析 这个课程主要有四个作业，那么是一个多target工程，考虑用多级配置。&#xA;作业里用到了很多工具，xmake都支持这些工具链。不过有些作业不跨平台（只能在 Linux 下运行），所以尽可能地将作业移植到 windows 上。&#xA;改造 完整配置在GitHub上，这里选讲几个部分。&#xA;根目录配置 最小xmake版本。 set_xmakever(&amp;#34;2.7.5&amp;#34;) 跨平台首选clang作为 C++ 编译器，在 windows 下使用clang-cl接受 msvc 风格的参数。 在开发环境下，链接动态库可以减少二进制体积，加速链接。 添加宏定义处理一些 windows 的屎。 if is_plat(&amp;#34;windows&amp;#34;) then -- set_toolchains(&amp;#34;clang-cl&amp;#34;) set_runtimes(&amp;#34;MD&amp;#34;) add_defines(&amp;#34;_CRT_SECURE_NO_WARNINGS&amp;#34;, &amp;#34;NOMINMAX&amp;#34;) else -- set_toolchains(&amp;#34;clang&amp;#34;) end 源码目录配置 考虑到 windows 没有getopt.h，这里在 github 上随便找了一个库代替，并开放头文件权限给依赖此库的target使用。 if is_plat(&amp;#34;windows&amp;#34;) then target(&amp;#34;getopt&amp;#34;) set_kind(&amp;#34;static&amp;#34;) add_includedirs(&amp;#34;getopt-for-windows&amp;#34;, {public = true}) add_files(&amp;#34;getopt-for-windows/getopt.c&amp;#34;) target_end() end 作业1 作业有多个target，其实可以考虑每个给每个target单独一个配置，不过这里选择把多个target都放在同一个xmake.lua中。&#xA;根据原始 makefile 参数，处理一些跨平台配置。 考虑到作业会生成 ppm 格式的图片，所以改变该target的运行目录。 target(&amp;#34;mandelbrot&amp;#34;) set_kind(&amp;#34;binary&amp;#34;) add_files(&amp;#34;prog1_mandelbrot_threads/*.</description>
     </item>
-    
     <item>
       <title>C&#43;&#43; 胡言乱语X1</title>
-      <link>https://star-hengxing.github.io/p/c-%E8%83%A1%E8%A8%80%E4%B9%B1%E8%AF%ADx1/</link>
+      <link>https://star-hengxing.github.io/post/cpp/article1/</link>
       <pubDate>Mon, 19 Sep 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://star-hengxing.github.io/p/c-%E8%83%A1%E8%A8%80%E4%B9%B1%E8%AF%ADx1/</guid>
-      <description>某些 STL 容器 在刷 leetcode，其中某道题中的代码片段是这样的
-string res; res.resize(size - i); // res.reserve(size - i); for (int j = 0; i &amp;lt; size; i += 1, j += 1) { res[j] = arr[i] + &amp;#39;0&amp;#39;; // res.push_back(arr[i] + &amp;#39;0&amp;#39;); } 没注释的代码比注释的快了几ms，原因如下
-因为容器一开始是空的，不需要考虑拷贝原来的元素
-resize 重新分配内存并且默认初始化，size 改变（大概开销 malloc + memset） reserve 重新分配了内存，不初始化，size 不变 push_back 需要检查 size 有没有大于 capacity，多了分支的开销 然而这里代码也不是最快的，思考一下，这里 resize 还多了一个 memset 的开销，所以最优解应该是，用自己写的 vector（逃
-不知道是历史原因还是标准委员会根本没考虑到，应该加多几个函数来表示需不需要初始化
-改造容器 这里先看一个别人家的 vector：Less
-看一下某个代码片段
-struct default_init_t {}; inline constexpr default_init_t default_init; struct with_capacity_t {}; inline constexpr with_capacity_t with_capacity; vector(default_init_t, size_type const size) { this-&amp;gt;construct(size, size, [](auto p, auto) { new (p, placement_tag) T; }); } vector(size_type size) { this-&amp;gt;construct(size, size, [](auto p, auto) { new (p, placement_tag) T(); }); } vector(with_capacity_t, size_type const capacity) { this-&amp;gt;construct(0u, capacity, [](auto, auto) {}); } vector(size_type size, T const&amp;amp; value) { this-&amp;gt;construct(size, size, [&amp;amp;](auto p, auto) { new (p, placement_tag) T(value); }); } 思考🤔，直接把一个结构体类型作为参数？算了直接去 c++ 群问一下</description>
+      <guid>https://star-hengxing.github.io/post/cpp/article1/</guid>
+      <description>某些 STL 容器 在刷 leetcode，其中某道题中的代码片段是这样的&#xA;string res; res.resize(size - i); // res.reserve(size - i); for (int j = 0; i &amp;lt; size; i += 1, j += 1) { res[j] = arr[i] + &amp;#39;0&amp;#39;; // res.push_back(arr[i] + &amp;#39;0&amp;#39;); } 没注释的代码比注释的快了几ms，原因如下&#xA;因为容器一开始是空的，不需要考虑拷贝原来的元素&#xA;resize 重新分配内存并且默认初始化，size 改变（大概开销 malloc + memset） reserve 重新分配了内存，不初始化，size 不变 push_back 需要检查 size 有没有大于 capacity，多了分支的开销 然而这里代码也不是最快的，思考一下，这里 resize 还多了一个 memset 的开销，所以最优解应该是，用自己写的 vector（逃&#xA;不知道是历史原因还是标准委员会根本没考虑到，应该加多几个函数来表示需不需要初始化&#xA;改造容器 这里先看一个别人家的 vector：Less&#xA;看一下某个代码片段&#xA;struct default_init_t {}; inline constexpr default_init_t default_init; struct with_capacity_t {}; inline constexpr with_capacity_t with_capacity; vector(default_init_t, size_type const size) { this-&amp;gt;construct(size, size, [](auto p, auto) { new (p, placement_tag) T; }); } vector(size_type size) { this-&amp;gt;construct(size, size, [](auto p, auto) { new (p, placement_tag) T(); }); } vector(with_capacity_t, size_type const capacity) { this-&amp;gt;construct(0u, capacity, [](auto, auto) {}); } vector(size_type size, T const&amp;amp; value) { this-&amp;gt;construct(size, size, [&amp;amp;](auto p, auto) { new (p, placement_tag) T(value); }); } 思考🤔，直接把一个结构体类型作为参数？算了直接去 c++ 群问一下</description>
     </item>
-    
     <item>
       <title>多态</title>
-      <link>https://star-hengxing.github.io/p/%E5%A4%9A%E6%80%81/</link>
+      <link>https://star-hengxing.github.io/post/pl/</link>
       <pubDate>Mon, 25 Jul 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://star-hengxing.github.io/p/%E5%A4%9A%E6%80%81/</guid>
-      <description>起因 在实现我的离线渲染器中，用到了大量oop（其实就是基类然后继承）
-我有一个Shape基类，里面接口全声明为标准的纯虚函数接口
-virtual TYPE FUNCTION() const = 0; 当你继承这个类后，继承类必须实现这个接口，不然编译报错
-一开始还没有写实现，但类已经继承了，没办法，在接口开个洞（真难看啊
-virtual TYPE FUNCTION() const {} 于是我基于 C++20 标准库的source_location写了一个
-[[noreturn]] inline void unimplemented(const std::source_location location = std::source_location::current()) { std::cerr &amp;lt;&amp;lt; &amp;#39;\n&amp;#39; &amp;lt;&amp;lt; &amp;#39;[&amp;#39; &amp;lt;&amp;lt; location.file_name() &amp;lt;&amp;lt; &amp;#39;:&amp;#39; &amp;lt;&amp;lt; location.line() &amp;lt;&amp;lt; &amp;#34;] &amp;#34; &amp;lt;&amp;lt; location.function_name() &amp;lt;&amp;lt; &amp;#34; unimplemented!\n&amp;#34;; exit(-1); } 还没有实现接口的时候留下unimplemented，然后运行时报错
-source_location暂时只有clang不支持（clang对C++20支持太慢了
-网上冲浪时看到有人说，接口虚函数实现动态多态是一种糟糕实践，优雅的做法是Existential Type，在C++社区称为sean parent polymorphism
-详细可以看这个视频
-John Bandela “Polymorphism != Virtual: Easy, Flexible Runtime Polymorphism Without Inheritance”
-reddit上的关于该视频的讨论
-什么是多态 特定多态 Ad hoc polymorphism</description>
+      <guid>https://star-hengxing.github.io/post/pl/</guid>
+      <description>起因 在实现我的离线渲染器中，用到了大量oop（其实就是基类然后继承）&#xA;我有一个Shape基类，里面接口全声明为标准的纯虚函数接口&#xA;virtual TYPE FUNCTION() const = 0; 当你继承这个类后，继承类必须实现这个接口，不然编译报错&#xA;一开始还没有写实现，但类已经继承了，没办法，在接口开个洞（真难看啊&#xA;virtual TYPE FUNCTION() const {} 于是我基于 C++20 标准库的source_location写了一个&#xA;[[noreturn]] inline void unimplemented(const std::source_location location = std::source_location::current()) { std::cerr &amp;lt;&amp;lt; &amp;#39;\n&amp;#39; &amp;lt;&amp;lt; &amp;#39;[&amp;#39; &amp;lt;&amp;lt; location.file_name() &amp;lt;&amp;lt; &amp;#39;:&amp;#39; &amp;lt;&amp;lt; location.line() &amp;lt;&amp;lt; &amp;#34;] &amp;#34; &amp;lt;&amp;lt; location.function_name() &amp;lt;&amp;lt; &amp;#34; unimplemented!\n&amp;#34;; exit(-1); } 还没有实现接口的时候留下unimplemented，然后运行时报错&#xA;source_location暂时只有clang不支持（clang对C++20支持太慢了&#xA;网上冲浪时看到有人说，接口虚函数实现动态多态是一种糟糕实践，优雅的做法是Existential Type，在C++社区称为sean parent polymorphism&#xA;详细可以看这个视频&#xA;John Bandela “Polymorphism != Virtual: Easy, Flexible Runtime Polymorphism Without Inheritance”&#xA;reddit上的关于该视频的讨论&#xA;什么是多态 特定多态 Ad hoc polymorphism</description>
     </item>
-    
     <item>
       <title>一个函数打印STL容器</title>
-      <link>https://star-hengxing.github.io/p/%E4%B8%80%E4%B8%AA%E5%87%BD%E6%95%B0%E6%89%93%E5%8D%B0stl%E5%AE%B9%E5%99%A8/</link>
+      <link>https://star-hengxing.github.io/post/cpp/print_container/</link>
       <pubDate>Tue, 11 Jan 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://star-hengxing.github.io/p/%E4%B8%80%E4%B8%AA%E5%87%BD%E6%95%B0%E6%89%93%E5%8D%B0stl%E5%AE%B9%E5%99%A8/</guid>
-      <description>满足range这个concept就可以使用该函数
-#include &amp;lt;iostream&amp;gt; #include &amp;lt;numeric&amp;gt; #include &amp;lt;ranges&amp;gt; #include &amp;lt;vector&amp;gt; #include &amp;lt;array&amp;gt; template &amp;lt;std::ranges::range T&amp;gt; void println(const T&amp;amp; args) { for(const auto&amp;amp; v : args) { std::cout &amp;lt;&amp;lt; v &amp;lt;&amp;lt; &amp;#39; &amp;#39;; } std::cout &amp;lt;&amp;lt; &amp;#39;\n&amp;#39;; } template &amp;lt;std::ranges::range... Ts&amp;gt; void print(Ts... args) { (println(args), ...); } int main() { std::array&amp;lt;int, 10&amp;gt; arr; std::iota(arr.begin(), arr.end(), 0); std::vector&amp;lt;int&amp;gt; vec(10); std::iota(vec.begin(), vec.end(), -10); print(arr, vec); } 输出
-0 1 2 3 4 5 6 7 8 9-10 -9 -8 -7 -6 -5 -4 -3 -2 -1</description>
+      <guid>https://star-hengxing.github.io/post/cpp/print_container/</guid>
+      <description>满足range这个concept就可以使用该函数&#xA;#include &amp;lt;iostream&amp;gt; #include &amp;lt;numeric&amp;gt; #include &amp;lt;ranges&amp;gt; #include &amp;lt;vector&amp;gt; #include &amp;lt;array&amp;gt; template &amp;lt;std::ranges::range T&amp;gt; void println(const T&amp;amp; args) { for(const auto&amp;amp; v : args) { std::cout &amp;lt;&amp;lt; v &amp;lt;&amp;lt; &amp;#39; &amp;#39;; } std::cout &amp;lt;&amp;lt; &amp;#39;\n&amp;#39;; } template &amp;lt;std::ranges::range... Ts&amp;gt; void print(Ts... args) { (println(args), ...); } int main() { std::array&amp;lt;int, 10&amp;gt; arr; std::iota(arr.begin(), arr.end(), 0); std::vector&amp;lt;int&amp;gt; vec(10); std::iota(vec.begin(), vec.end(), -10); print(arr, vec); } 输出&#xA;0 1 2 3 4 5 6 7 8 9&#xD;-10 -9 -8 -7 -6 -5 -4 -3 -2 -1&#xD;</description>
     </item>
-    
   </channel>
 </rss>

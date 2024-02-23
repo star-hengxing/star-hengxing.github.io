@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="zh-cn"><head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+   <meta name="description" content="如果在本文没找到解答，可以去 github 提 issue 和讨论区搜索。
+如果是官方包管理的问题，或者想请求加入一些包，去 xmake-repo 提 issue。
+提 issue 请附带 log，xmake -vD命令可以输出详细的 log 信息。
+基础 避免外网访问 xmake 很多操作需要访问 github（拉取 xmake-repo/build-artifact），而在公司内网开发是不需要这些操作的。
+xmake g --network=private 参考：
+https://github.com/xmake-io/xmake/issues/947 Windows 上 Qt 项目控制台没有输出 使用：
+add_ldflags(&#34;/subsystem:console&#34;) xmake 的 qt rule 里会检测 ldflags 里有没有/subsystem，如果没有就默认/subsystem:windows。
+给单独源文件添加参数 add_files(&#34;test/*.c&#34;, &#34;test2/test2.c&#34;, {defines = &#34;TEST2&#34;, languages = &#34;c99&#34;, includedirs = &#34;.&#34;, cflags = &#34;-O0&#34;}) -- 强制禁用 cxflags,cflags 等编译选项的自动检测 add_files(&#34;src/*.c&#34;, {force = {cxflags = &#34;-DTEST&#34;, mflags = &#34;-framework xxx&#34;}}) 给指定文件添加 config target(&#34;test&#34;) add_files(&#34;test/*.">  
+
+  <title>
+    
+      Xmake 常见问题解答
+    
+  </title>
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/" />
+  
+  
+  
+  <link rel="stylesheet" href="/css/main.c5af9bae99b4a3d315b9f39305ffff27e9c3383fbbfd8b5fcaf2237667021a333a982fb958d1813a720b0a660b14022337553ae1ca93ef2ee17c4ae628ac19cb.css" integrity="sha512-xa&#43;brpm0o9MVufOTBf//J&#43;nDOD&#43;7/YtfyvIjdmcCGjM6mC&#43;5WNGBOnILCmYLFAIjN1U64cqT7y7hfErmKKwZyw==" />
+  
+</head>
+<body a="auto">
+        <main class="page-content" aria-label="Content">
+            <div class="w">
+<a href="/">back</a>
+
+
+<article>
+    <p class="post-meta">
+        <time datetime="2023-03-04 00:00:00 &#43;0000 UTC">
+            2023-03-04
+        </time>
+    </p>
+
+    <h1>Xmake 常见问题解答</h1>
+
+    
+
+    <p><strong>如果在本文没找到解答，可以去 <a href="https://github.com/xmake-io/xmake/">github</a> 提 issue 和讨论区搜索。</strong></p>
+<p>如果是官方包管理的问题，或者想请求加入一些包，去 <a href="https://github.com/xmake-io/xmake-repo">xmake-repo</a> 提 issue。</p>
+<blockquote>
+<p>提 issue 请附带 log，<code>xmake -vD</code>命令可以输出详细的 log 信息。</p>
+</blockquote>
+<h2 id="基础">基础</h2>
+<h3 id="避免外网访问">避免外网访问</h3>
+<p>xmake 很多操作需要访问 github（拉取 xmake-repo/build-artifact），而在公司内网开发是不需要这些操作的。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>xmake g --network=private
+</span></span></code></pre></div><p>参考：</p>
+<ul>
+<li><a href="https://github.com/xmake-io/xmake/issues/947">https://github.com/xmake-io/xmake/issues/947</a></li>
+</ul>
+<h3 id="windows-上-qt-项目控制台没有输出">Windows 上 Qt 项目控制台没有输出</h3>
+<p>使用：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lua" data-lang="lua"><span style="display:flex;"><span>add_ldflags(<span style="color:#87ceeb">&#34;/subsystem:console&#34;</span>)
+</span></span></code></pre></div><p>xmake 的 qt rule 里会检测 ldflags 里有没有<code>/subsystem</code>，如果没有就默认<code>/subsystem:windows</code>。</p>
+<h3 id="给单独源文件添加参数">给单独源文件添加参数</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lua" data-lang="lua"><span style="display:flex;"><span>add_files(<span style="color:#87ceeb">&#34;test/*.c&#34;</span>, <span style="color:#87ceeb">&#34;test2/test2.c&#34;</span>, {defines = <span style="color:#87ceeb">&#34;TEST2&#34;</span>, languages = <span style="color:#87ceeb">&#34;c99&#34;</span>, includedirs = <span style="color:#87ceeb">&#34;.&#34;</span>, cflags = <span style="color:#87ceeb">&#34;-O0&#34;</span>})
+</span></span><span style="display:flex;"><span><span style="color:#0f0">-- 强制禁用 cxflags,cflags 等编译选项的自动检测</span>
+</span></span><span style="display:flex;"><span>add_files(<span style="color:#87ceeb">&#34;src/*.c&#34;</span>, {force = {cxflags = <span style="color:#87ceeb">&#34;-DTEST&#34;</span>, mflags = <span style="color:#87ceeb">&#34;-framework xxx&#34;</span>}})
+</span></span></code></pre></div><h3 id="给指定文件添加-config">给指定文件添加 config</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lua" data-lang="lua"><span style="display:flex;"><span>target(<span style="color:#87ceeb">&#34;test&#34;</span>)
+</span></span><span style="display:flex;"><span>    add_files(<span style="color:#87ceeb">&#34;test/*.cpp&#34;</span>, {foo = <span style="color:#f60">1</span>})
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    on_config(<span style="color:#f00">function</span> (target)
+</span></span><span style="display:flex;"><span>        <span style="color:#0f0">-- configs = {foo = 1}</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f00">local</span> configs = target:fileconfig(<span style="color:#87ceeb">&#34;src/main.cpp&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#f00">end</span>)
+</span></span></code></pre></div><h3 id="找不到-vs-工具链">找不到 vs 工具链</h3>
+<p>在 Visual Studio Installer 修改了配置后，清除全局缓存。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>xmake g -c
+</span></span><span style="display:flex;"><span>xmake f -c
+</span></span></code></pre></div><p>参考：</p>
+<ul>
+<li>显示找不到 Microsoft Visual Studio (x64) version
+<ul>
+<li><a href="https://github.com/xmake-io/xmake/issues/770">https://github.com/xmake-io/xmake/issues/770</a></li>
+<li><a href="https://github.com/xmake-io/xmake/discussions/3785">https://github.com/xmake-io/xmake/discussions/3785</a></li>
+</ul>
+</li>
+<li><a href="https://github.com/xmake-io/xmake/issues/2927">xmake can not find visual studio</a></li>
+<li><a href="https://github.com/xmake-io/xmake/issues/3229">XMake无法自动发现MSVC编译工具</a></li>
+</ul>
+<h3 id="指定-vs-版本">指定 vs 版本</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>xmake f --vs=<span style="color:#f60">2017</span> --vs_toolset=14.0 --vs_sdkver=10.0.15063.0
+</span></span></code></pre></div><h3 id="idevscodevs不显示头文件">IDE(vscode/vs)不显示头文件</h3>
+<p>给 target 加上<code>add_headerfiles(&quot;**.h&quot;)</code></p>
+<h3 id="终端不支持色彩输出">终端不支持色彩输出</h3>
+<p>切换<a href="https://xmake.io/#/zh-cn/theme/builtin_themes">主题</a>。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>xmake g --theme=plain
+</span></span></code></pre></div><h3 id="如何在脚本域添加文件">如何在脚本域添加文件</h3>
+<p>只能在<code>on_load</code>添加，并且需要确保路径正确。</p>
+<p>因为描述域的<code>add_files()</code>和脚本域的<code>target:add(&quot;files&quot;)</code>有一些差异，并不会做路径转换。</p>
+<p>后者接口可能会在任何地方使用，所以路径只能用<code>os.projectdir</code>或者<code>os.scriptdir</code>进行拼接路径。</p>
+<p>此外，需要确保该 target 已经应用了一个编译规则，否则不会根据后缀名去添加文件（可能会出现<code>error: unknown source file: xxx.cpp</code>）。</p>
+<p>比如你在脚本域添加 .cpp 文件，那么首先在描述域添加<code>add_rules(&quot;c++&quot;)</code>。</p>
+<h3 id="增量配置">增量配置</h3>
+<p>假如我们做以下操作：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>xmake f -m debug --test=y
+</span></span><span style="display:flex;"><span>xmake f --test=n
+</span></span></code></pre></div><p>你会发现当前<code>mode</code>又切换了为默认配置的<code>release</code>。</p>
+<p>xmake 暂时没有支持增量配置，<a href="https://github.com/xmake-io/xmake/issues/2401">这里</a>有过相关讨论。</p>
+<p>但我们也有解决的方法，使用<code>SirLynix</code>写的插件。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>xmake plugin --install https://github.com/SirLynix/xmake-plugins
+</span></span></code></pre></div><p>用<code>xmake config-update</code>或者<code>xmake cu</code>代替原来的<code>xmake config</code>或者<code>xmake f</code>。</p>
+<h3 id="在不同脚本域之间传递数据">在不同脚本域之间传递数据</h3>
+<ul>
+<li><code>memcache</code></li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lua" data-lang="lua"><span style="display:flex;"><span>target(<span style="color:#87ceeb">&#34;foo&#34;</span>)
+</span></span><span style="display:flex;"><span>    on_load(<span style="color:#f00">function</span> (target)
+</span></span><span style="display:flex;"><span>        import(<span style="color:#87ceeb">&#34;core.cache.memcache&#34;</span>)
+</span></span><span style="display:flex;"><span>        memcache.set(<span style="color:#87ceeb">&#34;cachename&#34;</span>, <span style="color:#87ceeb">&#34;key&#34;</span>, <span style="color:#87ceeb">&#34;value&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#f00">end</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>target(<span style="color:#87ceeb">&#34;bar&#34;</span>)
+</span></span><span style="display:flex;"><span>    on_load(<span style="color:#f00">function</span> (target)
+</span></span><span style="display:flex;"><span>        import(<span style="color:#87ceeb">&#34;core.cache.memcache&#34;</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#f00">local</span> memcache.get(<span style="color:#87ceeb">&#34;cachename&#34;</span>, <span style="color:#87ceeb">&#34;key&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#f00">end</span>)
+</span></span></code></pre></div><ul>
+<li><code>target:data()</code></li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lua" data-lang="lua"><span style="display:flex;"><span>target(<span style="color:#87ceeb">&#34;foo&#34;</span>)
+</span></span><span style="display:flex;"><span>    on_load(<span style="color:#f00">function</span> (target)
+</span></span><span style="display:flex;"><span>        target:data_set(<span style="color:#87ceeb">&#34;key&#34;</span>, <span style="color:#87ceeb">&#34;value&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#f00">end</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>target(<span style="color:#87ceeb">&#34;bar&#34;</span>)
+</span></span><span style="display:flex;"><span>    on_load(<span style="color:#f00">function</span> (target)
+</span></span><span style="display:flex;"><span>        import(<span style="color:#87ceeb">&#34;core.project.project&#34;</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#f00">local</span> foo = project.targets()[<span style="color:#87ceeb">&#34;foo&#34;</span>]
+</span></span><span style="display:flex;"><span>        <span style="color:#f00">local</span> value = foo:data(<span style="color:#87ceeb">&#34;key&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#f00">end</span>)
+</span></span></code></pre></div><ul>
+<li>单个脚本文件</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lua" data-lang="lua"><span style="display:flex;"><span>target(<span style="color:#87ceeb">&#34;foo&#34;</span>)
+</span></span><span style="display:flex;"><span>    on_load(<span style="color:#f00">function</span> (target)
+</span></span><span style="display:flex;"><span>          import(<span style="color:#87ceeb">&#34;load_module&#34;</span>).load_foo(target)
+</span></span><span style="display:flex;"><span>    <span style="color:#f00">end</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>target(<span style="color:#87ceeb">&#34;bar&#34;</span>)
+</span></span><span style="display:flex;"><span>    on_load(<span style="color:#f00">function</span> (target)
+</span></span><span style="display:flex;"><span>          import(<span style="color:#87ceeb">&#34;load_module&#34;</span>).load_bar(target)
+</span></span><span style="display:flex;"><span>    <span style="color:#f00">end</span>)
+</span></span></code></pre></div><p><code>load_module.lua</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lua" data-lang="lua"><span style="display:flex;"><span><span style="color:#f00">function</span> <span style="color:#ff0">load_foo</span>(target)
+</span></span><span style="display:flex;"><span>    _g.key = <span style="color:#87ceeb">&#34;value&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f00">end</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f00">function</span> <span style="color:#ff0">load_bar</span>(target)
+</span></span><span style="display:flex;"><span>    <span style="color:#f00">local</span> value = _g.key
+</span></span><span style="display:flex;"><span><span style="color:#f00">end</span>
+</span></span></code></pre></div><p>参考：</p>
+<ul>
+<li><a href="https://github.com/orgs/xmake-io/discussions/3926">https://github.com/orgs/xmake-io/discussions/3926</a></li>
+</ul>
+<h2 id="自动化">自动化</h2>
+<h3 id="如何一键编译运行">如何一键编译运行</h3>
+<p>2.8.3 版本以前：</p>
+<p>在 target 下加入以下代码：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lua" data-lang="lua"><span style="display:flex;"><span>before_run(<span style="color:#f00">function</span> (target)
+</span></span><span style="display:flex;"><span>    os.execv(<span style="color:#87ceeb">&#34;xmake build &#34;</span> .. target:name())
+</span></span><span style="display:flex;"><span><span style="color:#f00">end</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#0f0">-- xmake run target</span>
+</span></span></code></pre></div><p>2.8.3 版本以后：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>$ xmake g --policies=run.autobuild
+</span></span></code></pre></div><h3 id="vs-工程">vs 工程</h3>
+<ul>
+<li>自动更新 sln。</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lua" data-lang="lua"><span style="display:flex;"><span>add_rules(<span style="color:#87ceeb">&#34;plugin.vsxmake.autoupdate&#34;</span>)
+</span></span></code></pre></div><ul>
+<li>使用<code>add_filegroups</code>可以打平嵌套过深的目录树，可读性更高。</li>
+</ul>
+<h3 id="单元测试">单元测试</h3>
+<p>2.8.4 版本后官方支持单元测试，具体例子看：https://github.com/xmake-io/xmake/issues/3381</p>
+<p>以前的版本可以考虑这样写：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lua" data-lang="lua"><span style="display:flex;"><span>rule(<span style="color:#87ceeb">&#34;module.test&#34;</span>)
+</span></span><span style="display:flex;"><span>    on_load(<span style="color:#f00">function</span> (target)
+</span></span><span style="display:flex;"><span>        <span style="color:#f00">if</span> not has_config(<span style="color:#87ceeb">&#34;test&#34;</span>) <span style="color:#f00">then</span>
+</span></span><span style="display:flex;"><span>            target:set(<span style="color:#87ceeb">&#34;enabled&#34;</span>, <span style="color:#f00">false</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#f00">return</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f00">end</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        target:set(<span style="color:#87ceeb">&#34;policy&#34;</span>, <span style="color:#87ceeb">&#34;build.warning&#34;</span>, <span style="color:#f00">true</span>)
+</span></span><span style="display:flex;"><span>        target:set(<span style="color:#87ceeb">&#34;rundir&#34;</span>, <span style="color:#87ceeb">&#34;$(projectdir)&#34;</span>)
+</span></span><span style="display:flex;"><span>        target:set(<span style="color:#87ceeb">&#34;group&#34;</span>, <span style="color:#87ceeb">&#34;test&#34;</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#0f0">-- 选择你想要的单元测试库</span>
+</span></span><span style="display:flex;"><span>        target:add(<span style="color:#87ceeb">&#34;packages&#34;</span>, <span style="color:#87ceeb">&#34;gtest&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#f00">end</span>)
+</span></span><span style="display:flex;"><span>rule_end()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>add_rules(<span style="color:#87ceeb">&#34;module.test&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#0f0">-- 假设 test 目录下每个 cpp 文件都有自己的 main 函数</span>
+</span></span><span style="display:flex;"><span><span style="color:#f00">for</span> _, file <span style="color:#f00">in</span> ipairs(os.files(<span style="color:#87ceeb">&#34;test/*.cpp&#34;</span>)) <span style="color:#f00">do</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f00">local</span> name = path.basename(file)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    target(<span style="color:#87ceeb">&#34;test.&#34;</span> .. name)
+</span></span><span style="display:flex;"><span>        set_kind(<span style="color:#87ceeb">&#34;binary&#34;</span>)
+</span></span><span style="display:flex;"><span>        add_files(file)
+</span></span><span style="display:flex;"><span>    target_end()
+</span></span><span style="display:flex;"><span><span style="color:#f00">end</span>
+</span></span></code></pre></div><p>然后我们使用下面命令：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>xmake f -m debug --test=y
+</span></span><span style="display:flex;"><span>xmake build -g test
+</span></span><span style="display:flex;"><span>xmake run -g test
+</span></span></code></pre></div><p>如果想一行<code>xmake test</code>命令搞定，使用<code>task</code>。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lua" data-lang="lua"><span style="display:flex;"><span>task(<span style="color:#87ceeb">&#34;test&#34;</span>)
+</span></span><span style="display:flex;"><span>    on_run(<span style="color:#f00">function</span> ()
+</span></span><span style="display:flex;"><span>        os.exec(<span style="color:#87ceeb">&#34;xmake f -m debug --test=y&#34;</span>)
+</span></span><span style="display:flex;"><span>        os.exec(<span style="color:#87ceeb">&#34;xmake build -g test&#34;</span>)
+</span></span><span style="display:flex;"><span>        os.exec(<span style="color:#87ceeb">&#34;xmake run -g test&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#f00">end</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    set_menu{}
+</span></span></code></pre></div><h3 id="自定义检测行为">自定义检测行为</h3>
+<p>xmake 在检测各种工具、配置等等信息时都会有缓存，我们可以自定义一个检测行为并对其缓存。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lua" data-lang="lua"><span style="display:flex;"><span>on_config(<span style="color:#f00">function</span> (target)
+</span></span><span style="display:flex;"><span>    import(<span style="color:#87ceeb">&#34;core.cache.detectcache&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#f00">local</span> has_deprecated_key = <span style="color:#87ceeb">&#34;custom.has_deprecated&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f00">local</span> has_deprecated = detectcache:get(has_deprecated_key)
+</span></span><span style="display:flex;"><span>    <span style="color:#f00">if</span> not has_deprecated <span style="color:#f00">then</span>
+</span></span><span style="display:flex;"><span>        has_deprecated = target:check_csnippets({
+</span></span><span style="display:flex;"><span>            has_deprecated = <span style="color:#87ceeb">[[
+</span></span></span><span style="display:flex;"><span><span style="color:#87ceeb">            #define TEST __declspec(deprecated)
+</span></span></span><span style="display:flex;"><span><span style="color:#87ceeb">            int somefunc() { return 0; }
+</span></span></span><span style="display:flex;"><span><span style="color:#87ceeb">            int main() { return somefunc();}
+</span></span></span><span style="display:flex;"><span><span style="color:#87ceeb">        ]]</span>
+</span></span><span style="display:flex;"><span>        })
+</span></span><span style="display:flex;"><span>        detectcache:set(has_deprecated_key, has_deprecated)
+</span></span><span style="display:flex;"><span>        detectcache:save()
+</span></span><span style="display:flex;"><span>    <span style="color:#f00">end</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0f0">-- has_deprecated is now cached</span>
+</span></span><span style="display:flex;"><span><span style="color:#f00">end</span>)
+</span></span></code></pre></div><h2 id="包管理">包管理</h2>
+<h3 id="依赖同一个包多个版本">依赖同一个包多个版本</h3>
+<p>有依赖包 A 和 B，A 包依赖 1.0.0 版本的 C 包，B 包依赖 1.1.0 版本的 C 包，如果继续编译的话，可能会链接失败，解决方法就是打平依赖，只依赖 C 包同一个版本。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>add_requireconfs(<span style="color:#87ceeb">&#34;B.C&#34;</span>, {<span style="color:#eedd82">version</span> = <span style="color:#87ceeb">&#34;1.0.0&#34;</span>, <span style="color:#eedd82">override</span> = true})
+</span></span></code></pre></div><p>这里把 C 包统一到 1.0.0 版本。</p>
+<p>参考</p>
+<ul>
+<li><a href="https://github.com/xmake-io/xmake/issues/3868">https://github.com/xmake-io/xmake/issues/3868</a></li>
+<li><a href="https://github.com/orgs/xmake-io/discussions/2220">https://github.com/orgs/xmake-io/discussions/2220</a></li>
+</ul>
+<h3 id="vcpkg-包不会自动处理依赖">vcpkg 包不会自动处理依赖</h3>
+<p>暂时不支持，最好去用官方包</p>
+<p>参考</p>
+<ul>
+<li><a href="https://github.com/xmake-io/xmake/issues/3634">https://github.com/xmake-io/xmake/issues/3634</a></li>
+</ul>
+<h3 id="如何调试包源码">如何调试包源码</h3>
+<p>xmake 早期是保留源码的，但每次安装都保留源码和编译产物，容易把磁盘用满，所以现在优化了，不再保留。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span><span style="color:#0f0"># -d 指定源码覆盖安装，本地源码调试包</span>
+</span></span><span style="display:flex;"><span>xrepo install -m debug -d package_sourcedir xxx
+</span></span></code></pre></div><h3 id="有些远程包为什么没有拉预编译版本">有些远程包为什么没有拉预编译版本</h3>
+<p>众所周知 c++ 编译器编译出的二进制有 abi 问题，同一个编译器<strong>不同版本</strong>都可能不兼容，所以当预编译库的编译器版本（github ci 编译）和本地编译器版本<strong>不一致</strong>的时候，会拉取源码进行编译。</p>
+<p>有些库很大，编译需要很久，可以考虑下面方案：</p>
+<ul>
+<li>
+<p>比较推荐通过<code>set_base(&quot;package&quot;)</code>继承包，然后覆盖包的一些设置，跳过 xmake 的检查直接<a href="https://xmake.io/#/zh-cn/package/remote_package?id=%e5%ae%89%e8%a3%85%e4%ba%8c%e8%bf%9b%e5%88%b6%e5%8c%85">安装二进制包</a>。这里可能需要对 xmake 有一定的基础，不过完成后都是自动化，这是值得的。</p>
+</li>
+<li>
+<p>手动下载预编译包到本地包仓库</p>
+</li>
+</ul>
+<p>假设预编译包目录和<code>xmake.lua</code>同一个目录，使用<code>on_fetch</code>进行配置。</p>
+<p>这里拿 <a href="https://github.com/glfw/glfw/releases">glfw</a> 作为参考。</p>
+<p>我这里下载并解压了<code>glfw-3.3.8.bin.WIN64.zip</code>，然后在<code>xmake.lua</code>这样写：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lua" data-lang="lua"><span style="display:flex;"><span><span style="color:#0f0">-- 演示操作，不一定正确</span>
+</span></span><span style="display:flex;"><span>package(<span style="color:#87ceeb">&#34;glfw&#34;</span>)
+</span></span><span style="display:flex;"><span>    on_load(<span style="color:#f00">function</span> (package)
+</span></span><span style="display:flex;"><span>        <span style="color:#0f0">-- set package dir</span>
+</span></span><span style="display:flex;"><span>        package:set(<span style="color:#87ceeb">&#34;installdir&#34;</span>, path.join(os.scriptdir(), <span style="color:#87ceeb">&#34;glfw-3.3.8.bin.WIN64&#34;</span>))
+</span></span><span style="display:flex;"><span>    <span style="color:#f00">end</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    on_fetch(<span style="color:#f00">function</span> (package)
+</span></span><span style="display:flex;"><span>        <span style="color:#0f0">-- add dll</span>
+</span></span><span style="display:flex;"><span>        package:addenv(<span style="color:#87ceeb">&#34;PATH&#34;</span>, package:installdir(<span style="color:#87ceeb">&#34;lib-vc2022&#34;</span>))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f00">local</span> result = {}
+</span></span><span style="display:flex;"><span>        <span style="color:#f00">if</span> is_plat(<span style="color:#87ceeb">&#34;windows&#34;</span>) <span style="color:#f00">then</span>
+</span></span><span style="display:flex;"><span>            result.syslinks =  {<span style="color:#87ceeb">&#34;user32&#34;</span>, <span style="color:#87ceeb">&#34;shell32&#34;</span>, <span style="color:#87ceeb">&#34;gdi32&#34;</span>}
+</span></span><span style="display:flex;"><span>        <span style="color:#f00">end</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        result.links = {<span style="color:#87ceeb">&#34;glfw3&#34;</span>, <span style="color:#87ceeb">&#34;glfw3_mt&#34;</span>, <span style="color:#87ceeb">&#34;glfw3dll&#34;</span>}
+</span></span><span style="display:flex;"><span>        result.includedirs = package:installdir(<span style="color:#87ceeb">&#34;include&#34;</span>)
+</span></span><span style="display:flex;"><span>        result.linkdirs = package:installdir(<span style="color:#87ceeb">&#34;lib-vc2022&#34;</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#f00">return</span> result
+</span></span><span style="display:flex;"><span>    <span style="color:#f00">end</span>)
+</span></span><span style="display:flex;"><span>package_end()
+</span></span></code></pre></div><p>使用：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lua" data-lang="lua"><span style="display:flex;"><span>set_runtimes(<span style="color:#87ceeb">&#34;MD&#34;</span>)
+</span></span><span style="display:flex;"><span>add_requires(<span style="color:#87ceeb">&#34;glfw&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>target(<span style="color:#87ceeb">&#34;test&#34;</span>)
+</span></span><span style="display:flex;"><span>    set_kind(<span style="color:#87ceeb">&#34;binary&#34;</span>)
+</span></span><span style="display:flex;"><span>    add_files(<span style="color:#87ceeb">&#34;*.cpp&#34;</span>)
+</span></span><span style="display:flex;"><span>    add_packages(<span style="color:#87ceeb">&#34;glfw&#34;</span>)
+</span></span></code></pre></div><h2 id="其他">其他</h2>
+<h3 id="xmake-源码怎么看">xmake 源码怎么看</h3>
+<p>有一篇老文章可以看看 -&gt; <a href="https://tboox.org/cn/2017/09/28/xmake-sourcecode-arch/">xmake 源码架构剖析</a></p>
+<h3 id="定制-api">定制 api</h3>
+<p>参考一下这个 pr 是怎么写的：<a href="https://github.com/xmake-io/xmake/pull/4019">Add set_encodings api to set source/target encoding</a></p>
+
+</article>
+
+            </div>
+        </main>
+    </body>
+</html>

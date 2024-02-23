@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="zh-cn"><head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+   <meta name="description" content="随手记录的一些编译原理笔记。
+现代编译器分为前后端，为了进一步降低复杂度(模块化)，前端的流程通常是：
+词法分析 -&gt; 语法分析 -&gt; 语义分析 上一步的输出是下一步的输入。
+词法分析 常见的应用有正则表达式。
+先定义一个映射， tokens = map(字符串)
+这个token是啥呢，比如说我有下面这个算式：
+1 &#43; 2 * ３ 解析后：
+值 类型 １ 整数 &#43; 加号 2 整数 * 乘号 3 整数 我们暂时不知道有什么用，但现在我们解决了字符串里的空格，如果字符串里有奇怪的字符，比如#啥的，也可以报错。
+怎么解析其实也是个大问题，通常用自动机解决这个问题。
+语法分析 把词法分析输出的一堆token，组合成句子，检查句子的语法，最后生成抽象语法树(AST)
+AST用处广泛，比如：
+编辑器错误提示 代码格式化 代码高亮 代码自动补全 ">  
+
+  <title>
+    
+      从代码到程序
+    
+  </title>
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/" />
+  
+  
+  
+  <link rel="stylesheet" href="/css/main.c5af9bae99b4a3d315b9f39305ffff27e9c3383fbbfd8b5fcaf2237667021a333a982fb958d1813a720b0a660b14022337553ae1ca93ef2ee17c4ae628ac19cb.css" integrity="sha512-xa&#43;brpm0o9MVufOTBf//J&#43;nDOD&#43;7/YtfyvIjdmcCGjM6mC&#43;5WNGBOnILCmYLFAIjN1U64cqT7y7hfErmKKwZyw==" />
+  
+</head>
+<body a="auto">
+        <main class="page-content" aria-label="Content">
+            <div class="w">
+<a href="/">back</a>
+
+
+<article>
+    <p class="post-meta">
+        <time datetime="2022-05-29 00:00:00 &#43;0000 UTC">
+            2022-05-29
+        </time>
+    </p>
+
+    <h1>从代码到程序</h1>
+
+    
+
+    <p>随手记录的一些编译原理笔记。</p>
+<hr>
+<p>现代编译器分为前后端，为了进一步降低复杂度(模块化)，前端的流程通常是：</p>
+<pre tabindex="0"><code>词法分析 -&gt; 语法分析 -&gt; 语义分析
+</code></pre><p>上一步的输出是下一步的输入。</p>
+<h2 id="词法分析">词法分析</h2>
+<p>常见的应用有正则表达式。</p>
+<p>先定义一个映射， tokens = map(字符串)</p>
+<p>这个<code>token</code>是啥呢，比如说我有下面这个算式：</p>
+<pre tabindex="0"><code>1 + 2 * ３
+</code></pre><p>解析后：</p>
+<table>
+<thead>
+<tr>
+<th>值</th>
+<th>类型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>１</td>
+<td>整数</td>
+</tr>
+<tr>
+<td>+</td>
+<td>加号</td>
+</tr>
+<tr>
+<td>2</td>
+<td>整数</td>
+</tr>
+<tr>
+<td>*</td>
+<td>乘号</td>
+</tr>
+<tr>
+<td>3</td>
+<td>整数</td>
+</tr>
+</tbody>
+</table>
+<p>我们暂时不知道有什么用，但现在我们解决了字符串里的<strong>空格</strong>，如果字符串里有奇怪的字符，比如<code>#</code>啥的，也可以报错。</p>
+<p>怎么解析其实也是个大问题，通常用<strong>自动机</strong>解决这个问题。</p>
+<h2 id="语法分析">语法分析</h2>
+<p>把词法分析输出的一堆token，组合成句子，检查句子的语法，最后生成<strong>抽象语法树(AST)</strong></p>
+<p>AST用处广泛，比如：</p>
+<ul>
+<li>编辑器错误提示</li>
+<li>代码格式化</li>
+<li>代码高亮</li>
+<li>代码自动补全</li>
+</ul>
+
+</article>
+
+            </div>
+        </main>
+    </body>
+</html>

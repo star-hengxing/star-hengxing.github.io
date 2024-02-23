@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="zh-cn"><head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+   <meta name="description" content="配置 虚拟机: Oracle VM VirtualBox 笔记本：UEFI启动 镜像: 官网 前提 了解UEFI还是BIOS启动，不同的启动方式对应不同的步骤 基本的linux命令行操作和知识 足够耐心 善用archwiki 安装 联网 wifi配置麻烦，强烈建议网线或者手机usb联网
+ip link 然后ping查看联网是否成功
+ping baidu.com 更新系统时间 timedatectl set-ntp true timedatectl status # 检查服务状态 硬盘分区 硬盘分区工具有很多，推荐小白使用cfdisk
+查看硬盘用lsblk
+在分区前，需了解swap(分区)，区别linux根分区和windows盘符的概念
+如果是UEFI启动，需要分一个EFI区，而BIOS则不用
+分区步骤大概就是：new-&gt;分大小-&gt;改类型-&gt;保存-&gt;格式化-&gt;挂载
+EFI分区和正常分区格式化工具不一样
+根分区需要首先挂载
+swap区看需求分(格式化和挂载是单独命令使用)
+添加国内镜像加速 vim /etc/pacman.d/mirrorlist # 添加 Server = https://mirrors.tuna.tsinghua.edu.cn/archlinux/$repo/os/$arch Server = https://mirrors.zju.edu.cn/archlinux/$repo/os/$arch 安装基本包 pacstrap /mnt base linux linux-firmware 在此步骤可以考虑把常用软件装了(vim/networkmanager/sudo)
+配置Fstab genfstab -U /mnt &gt;&gt; /mnt/etc/fstab cat /mnt/etc/fstab # 检查 change root 切换到自己系统
+arch-chroot /mnt 设置时区 # Asia和Shanghai按需替换 ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime hwclock --systohc 设置Locale # 把需要用的注释取消 vim /etc/locale.">  
+
+  <title>
+    
+      记录安装arch的过程
+    
+  </title>
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/" />
+  
+  
+  
+  <link rel="stylesheet" href="/css/main.c5af9bae99b4a3d315b9f39305ffff27e9c3383fbbfd8b5fcaf2237667021a333a982fb958d1813a720b0a660b14022337553ae1ca93ef2ee17c4ae628ac19cb.css" integrity="sha512-xa&#43;brpm0o9MVufOTBf//J&#43;nDOD&#43;7/YtfyvIjdmcCGjM6mC&#43;5WNGBOnILCmYLFAIjN1U64cqT7y7hfErmKKwZyw==" />
+  
+</head>
+<body a="auto">
+        <main class="page-content" aria-label="Content">
+            <div class="w">
+<a href="/">back</a>
+
+
+<article>
+    <p class="post-meta">
+        <time datetime="2021-08-02 00:00:00 &#43;0000 UTC">
+            2021-08-02
+        </time>
+    </p>
+
+    <h1>记录安装arch的过程</h1>
+
+    
+
+    <h2 id="配置">配置</h2>
+<ul>
+<li>虚拟机: Oracle VM VirtualBox</li>
+<li>笔记本：UEFI启动</li>
+<li>镜像: <a href="https://archlinux.org/download/">官网</a></li>
+</ul>
+<h2 id="前提">前提</h2>
+<ul>
+<li>了解UEFI还是BIOS启动，不同的启动方式对应不同的步骤</li>
+<li>基本的linux命令行操作和知识</li>
+<li>足够耐心</li>
+<li>善用archwiki</li>
+</ul>
+<h2 id="安装">安装</h2>
+<h3 id="联网">联网</h3>
+<p>wifi配置麻烦，强烈建议网线或者手机usb联网</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>    ip link
+</span></span></code></pre></div><p>然后ping查看联网是否成功</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>    ping baidu.com
+</span></span></code></pre></div><h3 id="更新系统时间">更新系统时间</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>    timedatectl set-ntp true
+</span></span><span style="display:flex;"><span>    timedatectl status <span style="color:#0f0"># 检查服务状态</span>
+</span></span></code></pre></div><h3 id="硬盘分区">硬盘分区</h3>
+<p>硬盘分区工具有很多，推荐小白使用<code>cfdisk</code></p>
+<p>查看硬盘用<code>lsblk</code></p>
+<p>在分区前，需了解swap(分区)，区别linux根分区和windows盘符的概念</p>
+<p>如果是UEFI启动，需要分一个EFI区，而BIOS则不用</p>
+<p>分区步骤大概就是：new-&gt;分大小-&gt;改类型-&gt;保存-&gt;格式化-&gt;挂载</p>
+<p><strong>EFI分区和正常分区格式化工具不一样</strong></p>
+<p><strong>根分区需要首先挂载</strong></p>
+<p>swap区看需求分(格式化和挂载是单独命令使用)</p>
+<h3 id="添加国内镜像加速">添加国内镜像加速</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>    vim /etc/pacman.d/mirrorlist
+</span></span><span style="display:flex;"><span>    <span style="color:#0f0"># 添加</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#eedd82">Server</span> = https://mirrors.tuna.tsinghua.edu.cn/archlinux/<span style="color:#eedd82">$repo</span>/os/<span style="color:#eedd82">$arch</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#eedd82">Server</span> = https://mirrors.zju.edu.cn/archlinux/<span style="color:#eedd82">$repo</span>/os/<span style="color:#eedd82">$arch</span>
+</span></span></code></pre></div><h3 id="安装基本包">安装基本包</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>    pacstrap /mnt base linux linux-firmware
+</span></span></code></pre></div><p>在此步骤可以考虑把常用软件装了(vim/networkmanager/sudo)</p>
+<h3 id="配置fstab">配置Fstab</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>    genfstab -U /mnt &gt;&gt; /mnt/etc/fstab
+</span></span><span style="display:flex;"><span>    cat /mnt/etc/fstab <span style="color:#0f0"># 检查</span>
+</span></span></code></pre></div><h3 id="change-root">change root</h3>
+<p>切换到自己系统</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>    arch-chroot /mnt
+</span></span></code></pre></div><h3 id="设置时区">设置时区</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>    <span style="color:#0f0"># Asia和Shanghai按需替换</span>
+</span></span><span style="display:flex;"><span>    ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+</span></span><span style="display:flex;"><span>    hwclock --systohc
+</span></span></code></pre></div><h3 id="设置locale">设置Locale</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>    <span style="color:#0f0"># 把需要用的注释取消</span>
+</span></span><span style="display:flex;"><span>    vim /etc/locale.gen
+</span></span><span style="display:flex;"><span>    <span style="color:#0f0"># 当前使用的locale</span>
+</span></span><span style="display:flex;"><span>    echo <span style="color:#eedd82">LANG</span>=en_US.UTF-8 &gt;&gt; /etc/locale.conf
+</span></span><span style="display:flex;"><span>    <span style="color:#0f0"># 初始化</span>
+</span></span><span style="display:flex;"><span>    locale-gen
+</span></span></code></pre></div><h3 id="设置root密码">设置root密码</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>    passwd <span style="color:#0f0"># 密码不回显</span>
+</span></span></code></pre></div><h3 id="网络配置">网络配置</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>    <span style="color:#0f0"># myhostname替换自己主机名</span>
+</span></span><span style="display:flex;"><span>    echo myhostname &gt;&gt; /etc/hostname
+</span></span><span style="display:flex;"><span>    vim /etc/hosts
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    添加  
+</span></span><span style="display:flex;"><span>    127.0.0.1	localhost  
+</span></span><span style="display:flex;"><span>    ::1		    localhost  
+</span></span><span style="display:flex;"><span>    127.0.1.1	myhostname.localdomain	myhostname <span style="color:#0f0"># 主机名.本地域名 主机名</span>
+</span></span></code></pre></div><h3 id="安装引导程序">安装引导程序</h3>
+<ul>
+<li>grub</li>
+<li><a href="https://zhuanlan.zhihu.com/p/113615452">不使用grub启动</a></li>
+</ul>
+<p>ps:用这个方法前，假如你是intel-cpu，需要先安装intel-ucode</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>    bootctl install
+</span></span><span style="display:flex;"><span>    <span style="color:#0f0"># 添加</span>
+</span></span><span style="display:flex;"><span>    vim /boot/loader/loader.conf
+</span></span><span style="display:flex;"><span>    default arch
+</span></span><span style="display:flex;"><span>    timeout <span style="color:#f60">4</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0f0"># 添加</span>
+</span></span><span style="display:flex;"><span>    vim /boot/loader/entries/arch.conf
+</span></span><span style="display:flex;"><span>    title   Arch Linux
+</span></span><span style="display:flex;"><span>    linux   /vmlinuz-linux
+</span></span><span style="display:flex;"><span>    initrd  /intel-ucode.img
+</span></span><span style="display:flex;"><span>    initrd  /initramfs-linux.img
+</span></span><span style="display:flex;"><span>    options <span style="color:#eedd82">root</span>=根分区路径 rw <span style="color:#0f0"># 例如/dev/sda2</span>
+</span></span></code></pre></div><h3 id="重新启动">重新启动</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>    exit
+</span></span><span style="display:flex;"><span>    poweroff/reboot
+</span></span></code></pre></div><p>拔掉u盘，等待弹出tty终端，要求输入账户密码登录</p>
+<p>因为我是UEFI引导，所以笔记本需要更改启动方式为UEFI，而不使用BIOS，</p>
+<h1 id="reference">Reference</h1>
+<ol>
+<li><a href="https://www.viseator.com/2017/05/17/arch_install/">以官方Wiki的方式安装ArchLinux</a></li>
+</ol>
+
+</article>
+
+            </div>
+        </main>
+    </body>
+</html>

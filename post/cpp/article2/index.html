@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="zh-cn"><head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+   <meta name="description" content="子标题：理解 std::move 和所有权。
+前言 关于 std::move 其实也有很多文章了，不过为了给群友解释，再造一次轮子。
+std::move 我们打开 std::move 的实现，发现里面是一个强制类型转换（随便找的代码）。
+template &lt;typename T&gt; typename remove_reference&lt;T&gt;::type&amp;&amp; move(T&amp;&amp; arg) { return static_cast&lt;typename remove_reference&lt;T&gt;::type&amp;&amp;&gt;(arg); } 使用：
+Object A; Object B = std::move(A); 这右值有啥用啊？假设 Object 类有以下构造函数：
+// 函数1 Object(const Object&amp; object); // 函数2 Object(Object&amp;&amp; object); 如果没有std::move(A)这一步，那么B将会调用函数1进行构造，反之调用函数2。
+但分开两个构造函数是干什么呢，这里就牵涉到一个资源分配和所有权问题。
+所有权 假如你是A，你从宠物商店买了一只仓鼠回来（仓鼠挺可爱的），那你就成为了这只仓鼠的主人。
+B是你的好朋友，他经常到你家玩。他觉得你的仓鼠很可爱，于是他也想买一只，但是他没有足够的钱。
+分支路线1： 可是突然有一天，你不想养这只仓鼠了，就想找个人帮你继续养下去。你知道B也想养一只属于自己的仓鼠，但没有钱去买。于是你找来了B，将仓鼠送给了他。
+那么B从这天起，就成为了仓鼠的第二任主人了。
+分支路线2： 有一天B打工赚了许多钱，于是他去问你这只仓鼠是什么品种，然后自己到宠物商店买了一只差不多一样的。
+现在又有一只小仓鼠找到了新家了。
+回到主题，在上面，抽象来讲，买了一只仓鼠，其实就是分配了一个资源，你就拥有了他的使用权（所有权）。
+分支路线1中，A把仓鼠送给了B，这就是转移了仓鼠的所有权，主人从A变成了B，对应Object(Object&amp;&amp; object)。
+分支路线2中，B也买了一只仓鼠，这样两只仓鼠，都有了各自的主人，对应Object(const Object&amp; object)。
+要知道买一只新仓鼠是要花钱的，所以在某些场景用 std::move 来节省这个资源的开销。
+但仓鼠毕竟是别人养过的，想要一只独一无二属于自己的小仓鼠，那就买一只新的吧，所以就需要申请一份新的资源。
+后记 理解所有权后，就像学数据结构学会了链表。学习新的知识，第一步总是最难的。">  
+
+  <title>
+    
+      C&#43;&#43; 胡言乱语X2
+    
+  </title>
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/" />
+  
+  
+  
+  <link rel="stylesheet" href="/css/main.c5af9bae99b4a3d315b9f39305ffff27e9c3383fbbfd8b5fcaf2237667021a333a982fb958d1813a720b0a660b14022337553ae1ca93ef2ee17c4ae628ac19cb.css" integrity="sha512-xa&#43;brpm0o9MVufOTBf//J&#43;nDOD&#43;7/YtfyvIjdmcCGjM6mC&#43;5WNGBOnILCmYLFAIjN1U64cqT7y7hfErmKKwZyw==" />
+  
+</head>
+<body a="auto">
+        <main class="page-content" aria-label="Content">
+            <div class="w">
+<a href="/">back</a>
+
+
+<article>
+    <p class="post-meta">
+        <time datetime="2023-02-25 00:00:00 &#43;0000 UTC">
+            2023-02-25
+        </time>
+    </p>
+
+    <h1>C&#43;&#43; 胡言乱语X2</h1>
+
+    
+
+    <p>子标题：理解 std::move 和所有权。</p>
+<h2 id="前言">前言</h2>
+<p>关于 std::move 其实也有很多文章了，不过为了给群友解释，再造一次轮子。</p>
+<h2 id="stdmove">std::move</h2>
+<p>我们打开 std::move 的实现，发现里面是一个强制类型转换（随便找的代码）。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#f00">template</span> &lt;<span style="color:#f00">typename</span> T&gt;
+</span></span><span style="display:flex;"><span><span style="color:#f00">typename</span> remove_reference&lt;T&gt;::type&amp;&amp; move(T&amp;&amp; arg)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#f00">return</span> <span style="color:#f00">static_cast</span>&lt;<span style="color:#f00">typename</span> remove_reference&lt;T&gt;::type&amp;&amp;&gt;(arg);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>使用：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>Object A;
+</span></span><span style="display:flex;"><span>Object B = std::move(A);
+</span></span></code></pre></div><p>这右值有啥用啊？假设 Object 类有以下构造函数：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0f0">// 函数1
+</span></span></span><span style="display:flex;"><span><span style="color:#0f0"></span>Object(<span style="color:#f00">const</span> Object&amp; object);
+</span></span><span style="display:flex;"><span><span style="color:#0f0">// 函数2
+</span></span></span><span style="display:flex;"><span><span style="color:#0f0"></span>Object(Object&amp;&amp; object);
+</span></span></code></pre></div><p>如果没有<code>std::move(A)</code>这一步，那么B将会调用函数1进行构造，反之调用函数2。</p>
+<p>但分开两个构造函数是干什么呢，这里就牵涉到一个资源分配和所有权问题。</p>
+<h2 id="所有权">所有权</h2>
+<p>假如你是A，你从宠物商店买了一只仓鼠回来（仓鼠挺可爱的），那你就成为了这只仓鼠的主人。</p>
+<p>B是你的好朋友，他经常到你家玩。他觉得你的仓鼠很可爱，于是他也想买一只，但是他没有足够的钱。</p>
+<ul>
+<li>分支路线1：</li>
+</ul>
+<p>可是突然有一天，你不想养这只仓鼠了，就想找个人帮你继续养下去。你知道B也想养一只属于自己的仓鼠，但没有钱去买。于是你找来了B，将仓鼠送给了他。</p>
+<p>那么B从这天起，就成为了仓鼠的第二任主人了。</p>
+<ul>
+<li>分支路线2：</li>
+</ul>
+<p>有一天B打工赚了许多钱，于是他去问你这只仓鼠是什么品种，然后自己到宠物商店买了一只差不多一样的。</p>
+<p>现在又有一只小仓鼠找到了新家了。</p>
+<hr>
+<p>回到主题，在上面，抽象来讲，买了一只仓鼠，其实就是分配了一个资源，你就拥有了他的使用权（所有权）。</p>
+<p>分支路线1中，A把仓鼠送给了B，这就是转移了仓鼠的所有权，主人从A变成了B，对应<code>Object(Object&amp;&amp; object)</code>。</p>
+<p>分支路线2中，B也买了一只仓鼠，这样两只仓鼠，都有了各自的主人，对应<code>Object(const Object&amp; object)</code>。</p>
+<p>要知道买一只新仓鼠是要花钱的，所以在某些场景用 std::move 来节省这个<strong>资源</strong>的开销。</p>
+<p>但仓鼠毕竟是别人养过的，想要一只<strong>独一无二属于</strong>自己的小仓鼠，那就买一只新的吧，所以就需要申请一份<strong>新的资源</strong>。</p>
+<h2 id="后记">后记</h2>
+<p>理解所有权后，就像学数据结构学会了链表。学习新的知识，第一步总是最难的。</p>
+
+</article>
+
+            </div>
+        </main>
+    </body>
+</html>

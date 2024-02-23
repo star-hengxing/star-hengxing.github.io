@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="zh-cn"><head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+   <meta name="description" content="也可以是C&#43;&#43;小项目的配置
+开发环境构建 vscode&#43;xmake&#43;clang&#43;clangd
+如果在配置过程中有问题，可以先看一下文末的FQA
+C&#43;&#43;编译工具链 Visual Studio 2022 clang 构建系统 xmake
+Vulkan SDK https://www.lunarg.com/vulkan-sdk/
+假装IDE的文本编辑器 Visual Studio Code
+安装插件
+clangd XMake Getting started 上面列出来的工具下载完成后，新建一个目录，在目录下新建xmake.lua，写入下面内容
+set_project(&#34;vulkan&#34;) set_arch(&#34;x64&#34;) set_warnings(&#34;all&#34;) set_languages(&#34;c&#43;&#43;20&#34;) set_toolchains(&#34;clang&#34;) add_rules(&#34;mode.debug&#34;, &#34;mode.releasedbg&#34;, &#34;mode.release&#34;, &#34;mode.minsizerel&#34;) add_requires(&#34;vulkansdk&#34;, &#34;glfw&#34;, &#34;glm&#34;) target(&#34;main&#34;) set_default(true) set_kind(&#34;binary&#34;) add_files(&#34;src/main.cpp&#34;) add_packages(&#34;vulkansdk&#34;, &#34;glfw&#34;, &#34;glm&#34;) 依赖的 vulkansdk 在上面已经下载，如果用他的 installer 安装会自动设置环境变量，xmake 会根据环境变量自动探测编译器、vulkansdk 的正确位置，glm 和 glfw 由 xmake 的包管理处理
+编译 测试代码来自vulkan tutorial
+直接新建一个main.cpp，把代码复制下来
+一切配置好后，可以测试一下了
+xmake xmake run 出现窗口代表环境配置成功
+Intellisense xmake会在.vscode目录自动生成compile_commands.json
+所以我们在.vscode/settings.json给clangd加上参数
+{ &#34;clangd.arguments&#34;: [ &#34;--compile-commands-dir=.">  
+
+  <title>
+    
+      在 Windows 上使用 Xmake 配置 Vulkan 开发环境
+    
+  </title>
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/" />
+  
+  
+  
+  <link rel="stylesheet" href="/css/main.c5af9bae99b4a3d315b9f39305ffff27e9c3383fbbfd8b5fcaf2237667021a333a982fb958d1813a720b0a660b14022337553ae1ca93ef2ee17c4ae628ac19cb.css" integrity="sha512-xa&#43;brpm0o9MVufOTBf//J&#43;nDOD&#43;7/YtfyvIjdmcCGjM6mC&#43;5WNGBOnILCmYLFAIjN1U64cqT7y7hfErmKKwZyw==" />
+  
+</head>
+<body a="auto">
+        <main class="page-content" aria-label="Content">
+            <div class="w">
+<a href="/">back</a>
+
+
+<article>
+    <p class="post-meta">
+        <time datetime="2022-06-20 00:00:00 &#43;0000 UTC">
+            2022-06-20
+        </time>
+    </p>
+
+    <h1>在 Windows 上使用 Xmake 配置 Vulkan 开发环境</h1>
+
+    
+
+    <p><em>也可以是C++小项目的配置</em></p>
+<h2 id="开发环境构建">开发环境构建</h2>
+<blockquote>
+<p>vscode+xmake+clang+clangd</p>
+</blockquote>
+<p>如果在配置过程中有问题，可以先看一下文末的<strong>FQA</strong></p>
+<h3 id="c编译工具链">C++编译工具链</h3>
+<ul>
+<li><a href="https://visualstudio.microsoft.com/vs">Visual Studio 2022</a></li>
+<li><a href="https://github.com/llvm/llvm-project/tags">clang</a></li>
+</ul>
+<h3 id="构建系统">构建系统</h3>
+<p><a href="https://xmake.io">xmake</a></p>
+<h3 id="vulkan-sdk">Vulkan SDK</h3>
+<p><a href="https://www.lunarg.com/vulkan-sdk/">https://www.lunarg.com/vulkan-sdk/</a></p>
+<h3 id="假装ide的文本编辑器">假装IDE的文本编辑器</h3>
+<p><a href="https://code.visualstudio.com">Visual Studio Code</a></p>
+<p>安装插件</p>
+<ul>
+<li>clangd</li>
+<li>XMake</li>
+</ul>
+<h2 id="getting-started">Getting started</h2>
+<p>上面列出来的工具下载完成后，新建一个目录，在目录下新建<code>xmake.lua</code>，写入下面内容</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lua" data-lang="lua"><span style="display:flex;"><span>set_project(<span style="color:#87ceeb">&#34;vulkan&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>set_arch(<span style="color:#87ceeb">&#34;x64&#34;</span>)
+</span></span><span style="display:flex;"><span>set_warnings(<span style="color:#87ceeb">&#34;all&#34;</span>)
+</span></span><span style="display:flex;"><span>set_languages(<span style="color:#87ceeb">&#34;c++20&#34;</span>)
+</span></span><span style="display:flex;"><span>set_toolchains(<span style="color:#87ceeb">&#34;clang&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>add_rules(<span style="color:#87ceeb">&#34;mode.debug&#34;</span>, <span style="color:#87ceeb">&#34;mode.releasedbg&#34;</span>, <span style="color:#87ceeb">&#34;mode.release&#34;</span>, <span style="color:#87ceeb">&#34;mode.minsizerel&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>add_requires(<span style="color:#87ceeb">&#34;vulkansdk&#34;</span>, <span style="color:#87ceeb">&#34;glfw&#34;</span>, <span style="color:#87ceeb">&#34;glm&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>target(<span style="color:#87ceeb">&#34;main&#34;</span>)
+</span></span><span style="display:flex;"><span>    set_default(<span style="color:#f00">true</span>)
+</span></span><span style="display:flex;"><span>    set_kind(<span style="color:#87ceeb">&#34;binary&#34;</span>)
+</span></span><span style="display:flex;"><span>    add_files(<span style="color:#87ceeb">&#34;src/main.cpp&#34;</span>)
+</span></span><span style="display:flex;"><span>    add_packages(<span style="color:#87ceeb">&#34;vulkansdk&#34;</span>, <span style="color:#87ceeb">&#34;glfw&#34;</span>, <span style="color:#87ceeb">&#34;glm&#34;</span>)
+</span></span></code></pre></div><p>依赖的 vulkansdk 在上面已经下载，如果用他的 installer 安装会自动设置环境变量，xmake 会根据环境变量自动探测编译器、vulkansdk 的正确位置，glm 和 glfw 由 xmake 的包管理处理</p>
+<h3 id="编译">编译</h3>
+<p>测试代码来自<a href="https://vulkan-tutorial.com/Development_environment">vulkan tutorial</a></p>
+<p>直接新建一个<code>main.cpp</code>，把代码复制下来</p>
+<p>一切配置好后，可以测试一下了</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>xmake
+</span></span><span style="display:flex;"><span>xmake run
+</span></span></code></pre></div><p>出现窗口代表环境配置成功</p>
+<h3 id="intellisense">Intellisense</h3>
+<p>xmake会在<code>.vscode</code>目录自动生成<code>compile_commands.json</code></p>
+<p>所以我们在<code>.vscode/settings.json</code>给clangd加上参数</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    &#34;clangd.arguments&#34;: [
+</span></span><span style="display:flex;"><span>        <span style="color:#87ceeb">&#34;--compile-commands-dir=.vscode&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#87ceeb">&#34;--header-insertion=never&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#87ceeb">&#34;--completion-style=detailed&#34;</span>
+</span></span><span style="display:flex;"><span>    ]
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h2 id="fqa">FQA</h2>
+<p>Q: xmake下载包失败怎么办</p>
+<p>A: 查看文档<a href="https://xmake.io/#/zh-cn/package/remote_package?id=%e8%bf%9c%e7%a8%8b%e5%8c%85%e4%b8%8b%e8%bd%bd%e4%bc%98%e5%8c%96">使用远程包 - xmake</a></p>
+<p>Q: 编译失败怎么办</p>
+<p>A: 执行<code>xmake -v</code>，查看详细输出信息</p>
+<p>Q: 我想用vs写代码怎么办</p>
+<p>A: 执行<code>xmake project -k vsxmake -m &quot;debug,release&quot;</code>生成vs工程文件</p>
+
+</article>
+
+            </div>
+        </main>
+    </body>
+</html>

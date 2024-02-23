@@ -1,72 +1,40 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>工具 on 恒星的小站</title>
+    <title>工具 on Heng Xing Blog</title>
     <link>https://star-hengxing.github.io/tags/%E5%B7%A5%E5%85%B7/</link>
-    <description>Recent content in 工具 on 恒星的小站</description>
+    <description>Recent content in 工具 on Heng Xing Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sun, 06 Nov 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://star-hengxing.github.io/tags/%E5%B7%A5%E5%85%B7/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 06 Nov 2022 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://star-hengxing.github.io/tags/%E5%B7%A5%E5%85%B7/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>浏览器插件</title>
-      <link>https://star-hengxing.github.io/p/%E6%B5%8F%E8%A7%88%E5%99%A8%E6%8F%92%E4%BB%B6/</link>
+      <link>https://star-hengxing.github.io/post/tool/browser_extension/</link>
       <pubDate>Sun, 06 Nov 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://star-hengxing.github.io/p/%E6%B5%8F%E8%A7%88%E5%99%A8%E6%8F%92%E4%BB%B6/</guid>
-      <description>使用 edge，不需要科学上网就能在不同电脑同步插件
-整洁 清理广告 -&amp;gt; AdGuard 移除 cookies 提醒 -&amp;gt; I don&amp;rsquo;t care about cookies 移除 url 跟踪参数 -&amp;gt; ClearURLs 效率 生成目录 -&amp;gt; Smart TOC 浏览网页 -&amp;gt; Vimium C 鼠标悬停链接显示图像/视频 -&amp;gt; Imagus 贴心工具 网页截图 -&amp;gt; Awesome Screenshot 听歌 -&amp;gt; Listen 1 自定义个人主页 -&amp;gt; Custom New Tab URL 破解网页限制复制 -&amp;gt; SuperCopy github 代码文件树 -&amp;gt; Octotree 集成 Aria2 for Edge KeePassXC-Browser v2ex plus Tampermonkey B站增强 -&amp;gt; Bilibili Evolved 移除 url 跟踪参数 -&amp;gt; Bilibili 干净链接 秒传 -&amp;gt; rapidupload-userscript 给片假名显示原词 -&amp;gt; 片假名终结者 知乎增强 贴吧页面精简 护眼模式 </description>
+      <guid>https://star-hengxing.github.io/post/tool/browser_extension/</guid>
+      <description>使用 edge，不需要科学上网就能在不同电脑同步插件&#xA;整洁 清理广告 -&amp;gt; AdGuard 移除 cookies 提醒 -&amp;gt; I don&amp;rsquo;t care about cookies 移除 url 跟踪参数 -&amp;gt; ClearURLs 效率 生成目录 -&amp;gt; Smart TOC 浏览网页 -&amp;gt; Vimium C 鼠标悬停链接显示图像/视频 -&amp;gt; Imagus 贴心工具 网页截图 -&amp;gt; Awesome Screenshot 听歌 -&amp;gt; Listen 1 自定义个人主页 -&amp;gt; Custom New Tab URL 破解网页限制复制 -&amp;gt; SuperCopy github 代码文件树 -&amp;gt; Octotree 集成 Aria2 for Edge KeePassXC-Browser v2ex plus Tampermonkey B站增强 -&amp;gt; Bilibili Evolved 移除 url 跟踪参数 -&amp;gt; Bilibili 干净链接 秒传 -&amp;gt; rapidupload-userscript 给片假名显示原词 -&amp;gt; 片假名终结者 知乎增强 贴吧页面精简 护眼模式 </description>
     </item>
-    
     <item>
       <title>使用KeePass作为密码管理器</title>
-      <link>https://star-hengxing.github.io/p/%E4%BD%BF%E7%94%A8keepass%E4%BD%9C%E4%B8%BA%E5%AF%86%E7%A0%81%E7%AE%A1%E7%90%86%E5%99%A8/</link>
+      <link>https://star-hengxing.github.io/post/tool/keepass/</link>
       <pubDate>Mon, 27 Jun 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://star-hengxing.github.io/p/%E4%BD%BF%E7%94%A8keepass%E4%BD%9C%E4%B8%BA%E5%AF%86%E7%A0%81%E7%AE%A1%E7%90%86%E5%99%A8/</guid>
-      <description>最近超星学习通数据泄露大家应该都知道吧，全国上下学生很多都依赖这么一个中心化的网课平台。而且学习通可能还是明文存储密码，这下坏事了，直接撞库
-撞库攻击是网络犯罪分子试图使用一组帐密同时访问多个帐户
-我很久以前就知道有密码管理器的存在，但我是懒鬼，所以没弄过。这次事件提醒了我，还是别偷懒了（
-Getting started KeePass是什么呢
-KeePass is an encrypted password database format. It is an alternative to online password managers and is supported on all major platforms.
-我这里推荐使用跨平台的KeePassXC客户端，原始KeePass客户端实在太丑陋了
-下载客户端后，新建数据库需要一个主密码，这个密码需要你记忆
-我们先来看一个图，来自xkcd 那如何根据上图思路创建一个好密码呢，这里可以看一下diceware的方法
-这个网站根据diceware方法提供在线生成随机英语单词
-如果想要生成随机中文词语，可以在此网页找到 使用diceware构造好的密码
-创建好数据库后，保存在本地随便一个目录，然后我们去KeePassXC设置面板开启浏览器集成，下载对应浏览器插件
-浏览器插件启动后需要连接KeePassXC客户端
-在网站登录页面，如果数据库里没有对应网站url或者已存在，会提示你为该网站新建/更新账号密码。如果没有提示，可以手动使用插件，或者直接在KeePassXC客户端手动录入
-KeePassXC里随手就可以生成一个密码，无论是大小写字母数字还是各种特殊符号。如果想使用密码，Ctrl-C会自动复制到你剪切板上，然后在10秒后清除
-如果手机也要密码管理，安卓客户端可以在f-droid上下载keepassdx
-同步 所有信息都在keepass创建的数据库里，这里可以使用一些文件传输软件进行备份同步，或者存github也没啥问题</description>
+      <guid>https://star-hengxing.github.io/post/tool/keepass/</guid>
+      <description>最近超星学习通数据泄露大家应该都知道吧，全国上下学生很多都依赖这么一个中心化的网课平台。而且学习通可能还是明文存储密码，这下坏事了，直接撞库&#xA;撞库攻击是网络犯罪分子试图使用一组帐密同时访问多个帐户&#xA;我很久以前就知道有密码管理器的存在，但我是懒鬼，所以没弄过。这次事件提醒了我，还是别偷懒了（&#xA;Getting started KeePass是什么呢&#xA;KeePass is an encrypted password database format. It is an alternative to online password managers and is supported on all major platforms.&#xA;我这里推荐使用跨平台的KeePassXC客户端，原始KeePass客户端实在太丑陋了&#xA;下载客户端后，新建数据库需要一个主密码，这个密码需要你记忆&#xA;我们先来看一个图，来自xkcd 那如何根据上图思路创建一个好密码呢，这里可以看一下diceware的方法&#xA;这个网站根据diceware方法提供在线生成随机英语单词&#xA;如果想要生成随机中文词语，可以在此网页找到 使用diceware构造好的密码&#xA;创建好数据库后，保存在本地随便一个目录，然后我们去KeePassXC设置面板开启浏览器集成，下载对应浏览器插件&#xA;浏览器插件启动后需要连接KeePassXC客户端&#xA;在网站登录页面，如果数据库里没有对应网站url或者已存在，会提示你为该网站新建/更新账号密码。如果没有提示，可以手动使用插件，或者直接在KeePassXC客户端手动录入&#xA;KeePassXC里随手就可以生成一个密码，无论是大小写字母数字还是各种特殊符号。如果想使用密码，Ctrl-C会自动复制到你剪切板上，然后在10秒后清除&#xA;如果手机也要密码管理，安卓客户端可以在f-droid上下载keepassdx&#xA;同步 所有信息都在keepass创建的数据库里，这里可以使用一些文件传输软件进行备份同步，或者存github也没啥问题</description>
     </item>
-    
     <item>
       <title>使用Synapse自建聊天服务器</title>
-      <link>https://star-hengxing.github.io/p/%E4%BD%BF%E7%94%A8synapse%E8%87%AA%E5%BB%BA%E8%81%8A%E5%A4%A9%E6%9C%8D%E5%8A%A1%E5%99%A8/</link>
+      <link>https://star-hengxing.github.io/post/tool/synapse/</link>
       <pubDate>Sat, 29 Jan 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://star-hengxing.github.io/p/%E4%BD%BF%E7%94%A8synapse%E8%87%AA%E5%BB%BA%E8%81%8A%E5%A4%A9%E6%9C%8D%E5%8A%A1%E5%99%A8/</guid>
-      <description>我的系统是ArchLinux，所以看着archwiki一路配置比较舒服
-其他系统请看官方文档
-从安装到启动 my.domain.name替换成自己的域名就行
-sudo cd /var/lib/synapse sudo -u synapse python -m synapse.app.homeserver \ --server-name my.domain.name \ --config-path /etc/synapse/homeserver.yaml \ --generate-config \ --report-stats=yes sudo systemctl start synapse.service # 服务器至少要有一个用户 register_new_matrix_user -c /etc/synapse/homeserver.yaml http://127.0.0.1:8008 这时候应该就可以用一个matrix client来连接了，这里选择element</description>
+      <guid>https://star-hengxing.github.io/post/tool/synapse/</guid>
+      <description>我的系统是ArchLinux，所以看着archwiki一路配置比较舒服&#xA;其他系统请看官方文档&#xA;从安装到启动 my.domain.name替换成自己的域名就行&#xA;sudo cd /var/lib/synapse sudo -u synapse python -m synapse.app.homeserver \ --server-name my.domain.name \ --config-path /etc/synapse/homeserver.yaml \ --generate-config \ --report-stats=yes sudo systemctl start synapse.service # 服务器至少要有一个用户 register_new_matrix_user -c /etc/synapse/homeserver.yaml http://127.0.0.1:8008 这时候应该就可以用一个matrix client来连接了，这里选择element</description>
     </item>
-    
     <item>
       <title>使用命令行工具下载在线视频</title>
-      <link>https://star-hengxing.github.io/p/%E4%BD%BF%E7%94%A8%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%B7%A5%E5%85%B7%E4%B8%8B%E8%BD%BD%E5%9C%A8%E7%BA%BF%E8%A7%86%E9%A2%91/</link>
+      <link>https://star-hengxing.github.io/post/tool/download_online_video/</link>
       <pubDate>Sat, 29 Jan 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://star-hengxing.github.io/p/%E4%BD%BF%E7%94%A8%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%B7%A5%E5%85%B7%E4%B8%8B%E8%BD%BD%E5%9C%A8%E7%BA%BF%E8%A7%86%E9%A2%91/</guid>
-      <description>yt-dlp 一个命令行下载youtube视频软件，目前来说就他下载速度还行，其他同类工具被限速了
-TL;DR
-下载一个视频
-yt-dlp URL 不下载，查看视频下载的信息(选择画质)
-yt-dlp -F URL [BiliBili] 12Q4y1S73g: Downloading webpage [BiliBili] 12Q4y1S73g: Downloading video info page [info] Available formats for 12Q4y1S73g: format code extension resolution note 0 flv unknown 1 flv unknown 2 flv unknown 295.77MiB (best) 下载bilibili视频 Bilibili Evolved + aria2 下载视频
-Bilibili Evolved提供了几种视频下载方式，我这里选择aria2
-启动aria2后，在插件里选择aria2 rpc就可以自动下载视频了</description>
+      <guid>https://star-hengxing.github.io/post/tool/download_online_video/</guid>
+      <description>yt-dlp 一个命令行下载youtube视频软件，目前来说就他下载速度还行，其他同类工具被限速了&#xA;TL;DR&#xA;下载一个视频&#xA;yt-dlp URL 不下载，查看视频下载的信息(选择画质)&#xA;yt-dlp -F URL [BiliBili] 12Q4y1S73g: Downloading webpage [BiliBili] 12Q4y1S73g: Downloading video info page [info] Available formats for 12Q4y1S73g: format code extension resolution note 0 flv unknown 1 flv unknown 2 flv unknown 295.77MiB (best) 下载bilibili视频 Bilibili Evolved + aria2 下载视频&#xA;Bilibili Evolved提供了几种视频下载方式，我这里选择aria2&#xA;启动aria2后，在插件里选择aria2 rpc就可以自动下载视频了</description>
     </item>
-    
   </channel>
 </rss>

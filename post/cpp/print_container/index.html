@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-cn"><head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+   <meta name="description" content="满足range这个concept就可以使用该函数
+#include &lt;iostream&gt; #include &lt;numeric&gt; #include &lt;ranges&gt; #include &lt;vector&gt; #include &lt;array&gt; template &lt;std::ranges::range T&gt; void println(const T&amp; args) { for(const auto&amp; v : args) { std::cout &lt;&lt; v &lt;&lt; &#39; &#39;; } std::cout &lt;&lt; &#39;\n&#39;; } template &lt;std::ranges::range... Ts&gt; void print(Ts... args) { (println(args), ...); } int main() { std::array&lt;int, 10&gt; arr; std::iota(arr.begin(), arr.end(), 0); std::vector&lt;int&gt; vec(10); std::iota(vec.begin(), vec.end(), -10); print(arr, vec); } 输出
+0 1 2 3 4 5 6 7 8 9-10 -9 -8 -7 -6 -5 -4 -3 -2 -1">  
+
+  <title>
+    
+      一个函数打印STL容器
+    
+  </title>
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/" />
+  
+  
+  
+  <link rel="stylesheet" href="/css/main.c5af9bae99b4a3d315b9f39305ffff27e9c3383fbbfd8b5fcaf2237667021a333a982fb958d1813a720b0a660b14022337553ae1ca93ef2ee17c4ae628ac19cb.css" integrity="sha512-xa&#43;brpm0o9MVufOTBf//J&#43;nDOD&#43;7/YtfyvIjdmcCGjM6mC&#43;5WNGBOnILCmYLFAIjN1U64cqT7y7hfErmKKwZyw==" />
+  
+</head>
+<body a="auto">
+        <main class="page-content" aria-label="Content">
+            <div class="w">
+<a href="/">back</a>
+
+
+<article>
+    <p class="post-meta">
+        <time datetime="2022-01-11 00:00:00 &#43;0000 UTC">
+            2022-01-11
+        </time>
+    </p>
+
+    <h1>一个函数打印STL容器</h1>
+
+    
+
+    <p>满足range这个concept就可以使用该函数</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span>    <span style="color:#e5e5e5">#include</span> <span style="color:#e5e5e5">&lt;iostream&gt;</span><span style="color:#e5e5e5">
+</span></span></span><span style="display:flex;"><span><span style="color:#e5e5e5"></span>    <span style="color:#e5e5e5">#include</span> <span style="color:#e5e5e5">&lt;numeric&gt;</span><span style="color:#e5e5e5">
+</span></span></span><span style="display:flex;"><span><span style="color:#e5e5e5"></span>    <span style="color:#e5e5e5">#include</span> <span style="color:#e5e5e5">&lt;ranges&gt;</span><span style="color:#e5e5e5">
+</span></span></span><span style="display:flex;"><span><span style="color:#e5e5e5"></span>    <span style="color:#e5e5e5">#include</span> <span style="color:#e5e5e5">&lt;vector&gt;</span><span style="color:#e5e5e5">
+</span></span></span><span style="display:flex;"><span><span style="color:#e5e5e5"></span>    <span style="color:#e5e5e5">#include</span> <span style="color:#e5e5e5">&lt;array&gt;</span><span style="color:#e5e5e5">
+</span></span></span><span style="display:flex;"><span><span style="color:#e5e5e5"></span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f00">template</span> &lt;std::ranges::range T&gt;
+</span></span><span style="display:flex;"><span>    <span style="color:#ee82ee">void</span> println(<span style="color:#f00">const</span> T&amp; args)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#f00">for</span>(<span style="color:#f00">const</span> <span style="color:#f00">auto</span>&amp; v : args)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            std::cout &lt;&lt; v &lt;&lt; <span style="color:#87ceeb">&#39; &#39;</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        std::cout &lt;&lt; <span style="color:#87ceeb">&#39;\n&#39;</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f00">template</span> &lt;std::ranges::range... Ts&gt;
+</span></span><span style="display:flex;"><span>    <span style="color:#ee82ee">void</span> print(Ts... args)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        (println(args), ...);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ee82ee">int</span> <span style="color:#ff0">main</span>()
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        std::array&lt;<span style="color:#ee82ee">int</span>, <span style="color:#f60">10</span>&gt; arr;
+</span></span><span style="display:flex;"><span>        std::iota(arr.begin(), arr.end(), <span style="color:#f60">0</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        std::vector&lt;<span style="color:#ee82ee">int</span>&gt; vec(<span style="color:#f60">10</span>);
+</span></span><span style="display:flex;"><span>        std::iota(vec.begin(), vec.end(), -<span style="color:#f60">10</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        print(arr, vec);
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><p>输出</p>
+<pre><code>0 1 2 3 4 5 6 7 8 9
+-10 -9 -8 -7 -6 -5 -4 -3 -2 -1
+</code></pre>
+
+</article>
+
+            </div>
+        </main>
+    </body>
+</html>

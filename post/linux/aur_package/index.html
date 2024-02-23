@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="zh-cn"><head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+   <meta name="description" content="当发现了一个好软件，但aur上没有人打包，这很难受，所以不如自己来为社区做贡献
+这次我打的包是一个appimage，理所当然去参考一些现有的appimage打包PKGBUILD
+所以先设计再编码
+PKGBULID编写 下载最新版本的软件到本地 提取appimage，把软件icon放到/usr/share/icons 制作Desktop Entry，放到/usr/share/applications 最后将软件去掉版本号，安装到常见目录（我选择了放在/opt/appimages） 是不是看起来很简单，但由于不熟悉linux和一些常用工具，一顿操作下来，花了半天才写好PKGBUILD。
+首先是学会用sed，因为appimage里自带了一个Desktop Entry，所以要进行修改。
+其次就是安装到目录的时候需要给权限目录权限，不然复制不进去。
+当上游的包没有checksum的时候，还要自己download到本地生成然后加上PKGBULID。当然makepkg然后给了个便利的命令。
+# 如果有上一个版本的checksum,先用sed删除再执行该命令 sed -i &#34;$d&#34; PKGBULID makepkg -g &gt;&gt; PKGBULID 测试 写好PKGBULID，检查能不能用。
+# 检查PKGBUILD格式 namcap PKGBUILD # 生成包 makepkg -s # 检查包是否缺少依赖等等 namcap xxx.pkg.tar.zst 检查包的时候我弹了许多报错，不知道怎么修。然后我去用namcap检查一下我参考的那个appimage包，好家伙，他的报错跟我一样。既然他没修那我也就算了吧。
+然后尝试安装
+# 生成.SRCINFO给aur仓库的页面展示，如果第一次提交没有生成，aur仓库会拒绝你的包 makepkg -i &amp;&amp; makepkg --printsrcinfo &gt; .SRCINFO 上传 如果一切没问题，那就可以用git上传aur了（需要一个aur帐号）。
+如果会基本的git操作，下面应该都明白怎么操作。
+# 为aur创建ssh key touch ~/.ssh/config # 写入这些 Host aur.archlinux.org IdentityFile ~/.ssh/aur User aur # 生成 ssh-keygen -f ~/.ssh/aur # 首先创建一个aur项目 git clone ssh://aur@aur.">  
+
+  <title>
+    
+      AUR打包记录
+    
+  </title>
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/" />
+  
+  
+  
+  <link rel="stylesheet" href="/css/main.c5af9bae99b4a3d315b9f39305ffff27e9c3383fbbfd8b5fcaf2237667021a333a982fb958d1813a720b0a660b14022337553ae1ca93ef2ee17c4ae628ac19cb.css" integrity="sha512-xa&#43;brpm0o9MVufOTBf//J&#43;nDOD&#43;7/YtfyvIjdmcCGjM6mC&#43;5WNGBOnILCmYLFAIjN1U64cqT7y7hfErmKKwZyw==" />
+  
+</head>
+<body a="auto">
+        <main class="page-content" aria-label="Content">
+            <div class="w">
+<a href="/">back</a>
+
+
+<article>
+    <p class="post-meta">
+        <time datetime="2022-03-02 10:03:35 &#43;0800 CST">
+            2022-03-02
+        </time>
+    </p>
+
+    <h1>AUR打包记录</h1>
+
+    
+
+    <p>当发现了一个好软件，但aur上没有人打包，这很难受，所以不如自己来为社区做贡献</p>
+<p>这次我打的包是一个appimage，理所当然去参考一些现有的appimage打包PKGBUILD</p>
+<p>所以先<del>设计再编码</del></p>
+<h2 id="pkgbulid编写">PKGBULID编写</h2>
+<ol>
+<li>下载最新版本的软件到本地</li>
+<li>提取appimage，把软件icon放到/usr/share/icons</li>
+<li>制作Desktop Entry，放到/usr/share/applications</li>
+<li>最后将软件去掉版本号，安装到常见目录（我选择了放在/opt/appimages）</li>
+</ol>
+<p>是不是看起来很简单，但由于不熟悉linux和一些常用工具，一顿操作下来，花了半天才写好PKGBUILD。</p>
+<p>首先是学会用sed，因为appimage里自带了一个Desktop Entry，所以要进行修改。</p>
+<p>其次就是安装到目录的时候需要给权限目录权限，不然复制不进去。</p>
+<p>当上游的包没有checksum的时候，还要自己download到本地生成然后加上PKGBULID。当然makepkg然后给了个便利的命令。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span> <span style="color:#0f0"># 如果有上一个版本的checksum,先用sed删除再执行该命令</span>
+</span></span><span style="display:flex;"><span> sed -i <span style="color:#87ceeb">&#34;</span><span style="color:#eedd82">$d</span><span style="color:#87ceeb">&#34;</span> PKGBULID
+</span></span><span style="display:flex;"><span> makepkg -g &gt;&gt; PKGBULID
+</span></span></code></pre></div><h2 id="测试">测试</h2>
+<p>写好PKGBULID，检查能不能用。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#0f0"># 检查PKGBUILD格式</span>
+</span></span><span style="display:flex;"><span>namcap PKGBUILD
+</span></span><span style="display:flex;"><span><span style="color:#0f0"># 生成包</span>
+</span></span><span style="display:flex;"><span>makepkg -s
+</span></span><span style="display:flex;"><span><span style="color:#0f0"># 检查包是否缺少依赖等等</span>
+</span></span><span style="display:flex;"><span>namcap xxx.pkg.tar.zst
+</span></span></code></pre></div><p>检查包的时候我弹了许多报错，不知道怎么修。然后我去用namcap检查一下我参考的那个appimage包，好家伙，他的报错跟我一样。既然他没修那我也就算了吧。</p>
+<p>然后尝试安装</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#0f0"># 生成.SRCINFO给aur仓库的页面展示，如果第一次提交没有生成，aur仓库会拒绝你的包</span>
+</span></span><span style="display:flex;"><span>makepkg -i &amp;&amp; makepkg --printsrcinfo &gt; .SRCINFO
+</span></span></code></pre></div><h2 id="上传">上传</h2>
+<p>如果一切没问题，那就可以用git上传aur了（需要一个aur帐号）。</p>
+<p>如果会基本的git操作，下面应该都明白怎么操作。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#0f0"># 为aur创建ssh key</span>
+</span></span><span style="display:flex;"><span>touch ~/.ssh/config
+</span></span><span style="display:flex;"><span><span style="color:#0f0"># 写入这些</span>
+</span></span><span style="display:flex;"><span>Host aur.archlinux.org
+</span></span><span style="display:flex;"><span>    IdentityFile ~/.ssh/aur
+</span></span><span style="display:flex;"><span>    User aur
+</span></span><span style="display:flex;"><span><span style="color:#0f0"># 生成</span>
+</span></span><span style="display:flex;"><span>ssh-keygen -f ~/.ssh/aur
+</span></span><span style="display:flex;"><span><span style="color:#0f0"># 首先创建一个aur项目</span>
+</span></span><span style="display:flex;"><span>git clone ssh://aur@aur.archlinux.org/&lt;你的包名字&gt;.git
+</span></span><span style="display:flex;"><span>git add PKGBUILD .SRCINFO
+</span></span><span style="display:flex;"><span>git commit -m <span style="color:#87ceeb">&#34;init v1.x.x&#34;</span>
+</span></span><span style="display:flex;"><span>git push
+</span></span></code></pre></div><p>成功之后呢，你就可以尝试用<code>paru</code>/<code>yay</code>来下载了。</p>
+<h2 id="reference">Reference</h2>
+<p><a href="https://junyussh.github.io/p/arch-linux-package-quick-start/">Arch Linux 第一次打包就上手</a></p>
+
+</article>
+
+            </div>
+        </main>
+    </body>
+</html>

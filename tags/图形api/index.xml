@@ -1,35 +1,19 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>图形API on 恒星的小站</title>
+    <title>图形API on Heng Xing Blog</title>
     <link>https://star-hengxing.github.io/tags/%E5%9B%BE%E5%BD%A2api/</link>
-    <description>Recent content in 图形API on 恒星的小站</description>
+    <description>Recent content in 图形API on Heng Xing Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Mon, 20 Jun 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://star-hengxing.github.io/tags/%E5%9B%BE%E5%BD%A2api/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 20 Oct 2022 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://star-hengxing.github.io/tags/%E5%9B%BE%E5%BD%A2api/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>在 Windows 上使用 Xmake 配置 Vulkan 开发环境</title>
-      <link>https://star-hengxing.github.io/p/%E5%9C%A8-windows-%E4%B8%8A%E4%BD%BF%E7%94%A8-xmake-%E9%85%8D%E7%BD%AE-vulkan-%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/</link>
+      <link>https://star-hengxing.github.io/post/cg/vulkan_setup/</link>
       <pubDate>Mon, 20 Jun 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://star-hengxing.github.io/p/%E5%9C%A8-windows-%E4%B8%8A%E4%BD%BF%E7%94%A8-xmake-%E9%85%8D%E7%BD%AE-vulkan-%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/</guid>
-      <description>也可以是C++小项目的配置
-开发环境构建 vscode+xmake+clang+clangd
-如果在配置过程中有问题，可以先看一下文末的FQA
-C++编译工具链 Visual Studio 2022 clang 构建系统 xmake
-Vulkan SDK https://www.lunarg.com/vulkan-sdk/
-假装IDE的文本编辑器 Visual Studio Code
-安装插件
-clangd XMake Getting started 上面列出来的工具下载完成后，新建一个目录，在目录下新建xmake.lua，写入下面内容
-set_project(&amp;#34;vulkan&amp;#34;) set_arch(&amp;#34;x64&amp;#34;) set_warnings(&amp;#34;all&amp;#34;) set_languages(&amp;#34;c++20&amp;#34;) set_toolchains(&amp;#34;clang&amp;#34;) add_rules(&amp;#34;mode.debug&amp;#34;, &amp;#34;mode.releasedbg&amp;#34;, &amp;#34;mode.release&amp;#34;, &amp;#34;mode.minsizerel&amp;#34;) add_requires(&amp;#34;vulkansdk&amp;#34;, &amp;#34;glfw&amp;#34;, &amp;#34;glm&amp;#34;) target(&amp;#34;main&amp;#34;) set_default(true) set_kind(&amp;#34;binary&amp;#34;) add_files(&amp;#34;src/main.cpp&amp;#34;) add_packages(&amp;#34;vulkansdk&amp;#34;, &amp;#34;glfw&amp;#34;, &amp;#34;glm&amp;#34;) 依赖的 vulkansdk 在上面已经下载，如果用他的 installer 安装会自动设置环境变量，xmake 会根据环境变量自动探测编译器、vulkansdk 的正确位置，glm 和 glfw 由 xmake 的包管理处理
-编译 测试代码来自vulkan tutorial
-直接新建一个main.cpp，把代码复制下来
-一切配置好后，可以测试一下了
-xmake xmake run 出现窗口代表环境配置成功
-Intellisense xmake会在.vscode目录自动生成compile_commands.json
-所以我们在.vscode/settings.json给clangd加上参数
-{ &amp;#34;clangd.arguments&amp;#34;: [ &amp;#34;--compile-commands-dir=.</description>
+      <guid>https://star-hengxing.github.io/post/cg/vulkan_setup/</guid>
+      <description>也可以是C++小项目的配置&#xA;开发环境构建 vscode+xmake+clang+clangd&#xA;如果在配置过程中有问题，可以先看一下文末的FQA&#xA;C++编译工具链 Visual Studio 2022 clang 构建系统 xmake&#xA;Vulkan SDK https://www.lunarg.com/vulkan-sdk/&#xA;假装IDE的文本编辑器 Visual Studio Code&#xA;安装插件&#xA;clangd XMake Getting started 上面列出来的工具下载完成后，新建一个目录，在目录下新建xmake.lua，写入下面内容&#xA;set_project(&amp;#34;vulkan&amp;#34;) set_arch(&amp;#34;x64&amp;#34;) set_warnings(&amp;#34;all&amp;#34;) set_languages(&amp;#34;c++20&amp;#34;) set_toolchains(&amp;#34;clang&amp;#34;) add_rules(&amp;#34;mode.debug&amp;#34;, &amp;#34;mode.releasedbg&amp;#34;, &amp;#34;mode.release&amp;#34;, &amp;#34;mode.minsizerel&amp;#34;) add_requires(&amp;#34;vulkansdk&amp;#34;, &amp;#34;glfw&amp;#34;, &amp;#34;glm&amp;#34;) target(&amp;#34;main&amp;#34;) set_default(true) set_kind(&amp;#34;binary&amp;#34;) add_files(&amp;#34;src/main.cpp&amp;#34;) add_packages(&amp;#34;vulkansdk&amp;#34;, &amp;#34;glfw&amp;#34;, &amp;#34;glm&amp;#34;) 依赖的 vulkansdk 在上面已经下载，如果用他的 installer 安装会自动设置环境变量，xmake 会根据环境变量自动探测编译器、vulkansdk 的正确位置，glm 和 glfw 由 xmake 的包管理处理&#xA;编译 测试代码来自vulkan tutorial&#xA;直接新建一个main.cpp，把代码复制下来&#xA;一切配置好后，可以测试一下了&#xA;xmake xmake run 出现窗口代表环境配置成功&#xA;Intellisense xmake会在.vscode目录自动生成compile_commands.json&#xA;所以我们在.vscode/settings.json给clangd加上参数&#xA;{ &amp;#34;clangd.arguments&amp;#34;: [ &amp;#34;--compile-commands-dir=.</description>
     </item>
-    
   </channel>
 </rss>

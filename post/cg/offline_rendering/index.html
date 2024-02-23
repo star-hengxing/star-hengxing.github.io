@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="zh-cn"><head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+   <meta name="description" content="GAMES101:现代计算机图形学入门 网课，可在b站上观看
+assignment 5-7 是光线追踪的作业
+如果对光栅化，几何，动画与模拟，不感兴趣，可以只看Lecture 13-20（个人建议：把整套课看完也是不错的）
+Taichi课程 课程主页
+网课，其中6-7讲涉及光线追踪
+Peter Shirley写的光线追踪三部曲 Ray Tracing in One Weekend Ray Tracing: The Next Week Ray Tracing: The Rest of Your Life 书中配套代码，在网上能搜到这三本的笔记和翻译版本
+我认为这是光线追踪入门的最好教程
+Daily Pathtracer Aras Pranckevičius大佬写的教程
+介绍 博客
+Nori an educational ray tracer
+主页
+5个assignment
+PBRT Physically Based Rendering:From Theory To Implementation
+这本书是学习离线渲染系统书（离线渲染圣经），配套代码在github上
+网上在线阅读
+此为光线追踪进阶书籍
+书 Ray Tracing Gems Advanced global illumination Fundamentals of Computer Graphics Real-Time Rendering 全局光照技术 杂类 github上收集的图形学资料 milo yip的用JavaScript玩转计算机图形学-光线追踪入门 scratchapixel，图形学网站，对细节讲解很详细，配套代码 99行代码写出路径追踪-smallpt real-time-rendering，网站内附带很多图形学资料 mitsuba,一个开源渲染器 stackexchange的计算机图形学板块 ">  
+
+  <title>
+    
+      离线渲染-光线追踪框架学习资料
+    
+  </title>
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/" />
+  
+  
+  
+  <link rel="stylesheet" href="/css/main.c5af9bae99b4a3d315b9f39305ffff27e9c3383fbbfd8b5fcaf2237667021a333a982fb958d1813a720b0a660b14022337553ae1ca93ef2ee17c4ae628ac19cb.css" integrity="sha512-xa&#43;brpm0o9MVufOTBf//J&#43;nDOD&#43;7/YtfyvIjdmcCGjM6mC&#43;5WNGBOnILCmYLFAIjN1U64cqT7y7hfErmKKwZyw==" />
+   <script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$','$$'], ['\\[', '\\]']],
+      processEscapes: true,
+      processEnvironments: true
+    },
+    options: {
+      skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+    }
+  };
+
+  window.addEventListener('load', (event) => {
+      document.querySelectorAll("mjx-container").forEach(function(x){
+        x.parentElement.classList += 'has-jax'})
+    });
+
+</script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+ 
+</head>
+<body a="auto">
+        <main class="page-content" aria-label="Content">
+            <div class="w">
+<a href="/">back</a>
+
+
+<article>
+    <p class="post-meta">
+        <time datetime="2020-12-16 00:00:00 &#43;0000 UTC">
+            2020-12-16
+        </time>
+    </p>
+
+    <h1>离线渲染-光线追踪框架学习资料</h1>
+
+    
+
+    <h2 id="games101现代计算机图形学入门">GAMES101:现代计算机图形学入门</h2>
+<p>网课，可在<a href="https://link.zhihu.com/?target=https%3A//www.bilibili.com/video/av90798049/">b站</a>上观看</p>
+<p>assignment 5-7 是光线追踪的作业<br>
+如果对光栅化，几何，动画与模拟，不感兴趣，可以只看Lecture 13-20（个人建议：把整套课看完也是不错的）</p>
+<h2 id="taichi课程">Taichi课程</h2>
+<p><a href="https://github.com/taichiCourse01/taichiCourse01">课程主页</a></p>
+<p>网课，其中6-7讲涉及光线追踪</p>
+<h2 id="peter-shirley写的光线追踪三部曲">Peter Shirley写的光线追踪三部曲</h2>
+<ul>
+<li>Ray Tracing in One Weekend</li>
+<li>Ray Tracing: The Next Week</li>
+<li>Ray Tracing: The Rest of Your Life</li>
+</ul>
+<p>书中配套代码，在网上能搜到这三本的笔记和翻译版本<br>
+<em>我认为这是光线追踪入门的最好教程</em></p>
+<h2 id="daily-pathtracer">Daily Pathtracer</h2>
+<p>Aras Pranckevičius大佬写的教程</p>
+<p><a href="https://zhuanlan.zhihu.com/p/37462611">介绍</a>
+<a href="https://aras-p.info/blog/2018/03/28/Daily-Pathtracer-Part-0-Intro/">博客</a></p>
+<h2 id="nori">Nori</h2>
+<p>an educational ray tracer<br>
+<a href="https://wjakob.github.io/nori/##guidelines">主页</a><br>
+5个assignment</p>
+<h2 id="pbrt">PBRT</h2>
+<p>Physically Based Rendering:From Theory To Implementation<br>
+这本书是学习离线渲染系统书（离线渲染圣经），配套代码在github上<br>
+<a href="https://www.pbrt.org/">网上在线阅读</a></p>
+<p><em>此为光线追踪进阶书籍</em></p>
+<h2 id="书">书</h2>
+<ul>
+<li>Ray Tracing Gems</li>
+<li>Advanced global illumination</li>
+<li>Fundamentals of Computer Graphics</li>
+<li>Real-Time Rendering</li>
+<li>全局光照技术</li>
+</ul>
+<h2 id="杂类">杂类</h2>
+<ul>
+<li><a href="https://github.com/zheng95z/fun-with-graphics##cg">github</a>上收集的图形学资料</li>
+<li>milo yip的<a href="https://www.cnblogs.com/miloyip/archive/2010/03/29/1698953.html">用JavaScript玩转计算机图形学-光线追踪入门</a></li>
+<li><a href="https://www.scratchapixel.com/">scratchapixel</a>，图形学网站，对细节讲解很详细，配套代码</li>
+<li>99行代码写出路径追踪-<a href="http://www.kevinbeason.com/smallpt/">smallpt</a></li>
+<li><a href="http://www.realtimerendering.com/">real-time-rendering</a>，网站内附带很多图形学资料</li>
+<li>mitsuba,一个开源渲染器</li>
+<li><a href="https://computergraphics.stackexchange.com/">stackexchange</a>的计算机图形学板块</li>
+</ul>
+
+</article>
+
+            </div>
+        </main>
+    </body>
+</html>
