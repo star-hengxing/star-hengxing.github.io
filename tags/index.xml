@@ -6,12 +6,12 @@
     <description>Recent content in Tags on Heng Xing Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Fri, 25 Aug 2023 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 29 Mar 2024 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://star-hengxing.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>C&#43;&#43;</title>
       <link>https://star-hengxing.github.io/tags/c&#43;&#43;/</link>
-      <pubDate>Sat, 19 Aug 2023 00:00:00 +0000</pubDate>
+      <pubDate>Fri, 29 Mar 2024 00:00:00 +0000</pubDate>
       <guid>https://star-hengxing.github.io/tags/c&#43;&#43;/</guid>
       <description></description>
     </item>
@@ -23,6 +23,13 @@
       <description></description>
     </item>
     <item>
+      <title>C/C&#43;&#43;</title>
+      <link>https://star-hengxing.github.io/tags/c/c&#43;&#43;/</link>
+      <pubDate>Wed, 04 Jan 2023 00:00:00 +0000</pubDate>
+      <guid>https://star-hengxing.github.io/tags/c/c&#43;&#43;/</guid>
+      <description></description>
+    </item>
+    <item>
       <title>UE4</title>
       <link>https://star-hengxing.github.io/tags/ue4/</link>
       <pubDate>Fri, 25 Nov 2022 00:00:00 +0000</pubDate>
@@ -30,7 +37,7 @@
       <description></description>
     </item>
     <item>
-      <title>vscode</title>
+      <title>Vscode</title>
       <link>https://star-hengxing.github.io/tags/vscode/</link>
       <pubDate>Fri, 25 Nov 2022 00:00:00 +0000</pubDate>
       <guid>https://star-hengxing.github.io/tags/vscode/</guid>
@@ -104,13 +111,6 @@
       <link>https://star-hengxing.github.io/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/</link>
       <pubDate>Tue, 12 Oct 2021 00:00:00 +0000</pubDate>
       <guid>https://star-hengxing.github.io/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>C/C&#43;&#43;</title>
-      <link>https://star-hengxing.github.io/tags/c/c&#43;&#43;/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://star-hengxing.github.io/tags/c/c&#43;&#43;/</guid>
       <description></description>
     </item>
   </channel>

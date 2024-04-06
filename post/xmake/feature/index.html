@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh-cn"><head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+   <meta name="description" content="本文只会讲一些比较实用的插件，其余插件请看文档。
+生成工程文件 除了 cmake，其他构建系统（构建后端）支持力度一般，不保证能构建成功。
+如果 ide 不支持 xmake 而支持 cmake，可以生成 cmakelists 来使用。
+$ xmake project -k cmakelists $ xmake project -k makefile $ xmake project -k ninja 当然你也可以参考这些文件来学习 cmake/makefile/ninja 怎么写。
+xmake 有两种生成 Visual Studio 工程文件的方式。
+$ xmake project -k vsxmake -m &#34;debug,release&#34; $ xmake project -k vs2022 -m &#34;debug,release&#34; 前者依然使用 xmake 构建，但可以用 vs 作为编辑器和调试器。后者则是生成 msbuild 文件，该方式已经不再维护。
+运行 lua 脚本 查找系统包和 hash 文件。
+$ xmake l find_package pkgconfig::xxx $ xmake l find_package pacman::xxx $ xmake l find_package brew::xxx $ xmake l hash.">  
+
+  <title>
+    
+      Xmake 插件介绍
+    
+  </title>
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/" />
+  
+  
+  
+  <link rel="stylesheet" href="/css/main.c5af9bae99b4a3d315b9f39305ffff27e9c3383fbbfd8b5fcaf2237667021a333a982fb958d1813a720b0a660b14022337553ae1ca93ef2ee17c4ae628ac19cb.css" integrity="sha512-xa&#43;brpm0o9MVufOTBf//J&#43;nDOD&#43;7/YtfyvIjdmcCGjM6mC&#43;5WNGBOnILCmYLFAIjN1U64cqT7y7hfErmKKwZyw==" />
+  
+</head>
+<body a="auto">
+        <main class="page-content" aria-label="Content">
+            <div class="w">
+<a href="/">back</a>
+
+
+<article>
+    <p class="post-meta">
+        <time datetime="2024-03-05 00:00:00 &#43;0000 UTC">
+            2024-03-05
+        </time>
+    </p>
+
+    <h1>Xmake 插件介绍</h1>
+
+    
+
+    <p>本文只会讲一些比较实用的插件，其余插件请看<a href="https://xmake.io/#/zh-cn/plugin/builtin_plugins">文档</a>。</p>
+<h1 id="生成工程文件">生成工程文件</h1>
+<p>除了 cmake，其他构建系统（构建后端）支持力度一般，不保证能构建成功。</p>
+<p>如果 ide 不支持 xmake 而支持 cmake，可以生成 cmakelists 来使用。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>$ xmake project -k cmakelists
+</span></span><span style="display:flex;"><span>$ xmake project -k makefile
+</span></span><span style="display:flex;"><span>$ xmake project -k ninja
+</span></span></code></pre></div><blockquote>
+<p>当然你也可以参考这些文件来学习 cmake/makefile/ninja 怎么写。</p>
+</blockquote>
+<p>xmake 有两种生成 Visual Studio 工程文件的方式。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>$ xmake project -k vsxmake -m <span style="color:#87ceeb">&#34;debug,release&#34;</span>
+</span></span><span style="display:flex;"><span>$ xmake project -k vs2022 -m <span style="color:#87ceeb">&#34;debug,release&#34;</span>
+</span></span></code></pre></div><p>前者依然使用 xmake 构建，但可以用 vs 作为编辑器和调试器。后者则是生成 msbuild 文件，该方式已经不再维护。</p>
+<h1 id="运行-lua-脚本">运行 lua 脚本</h1>
+<p>查找系统包和 hash 文件。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>$ xmake l find_package pkgconfig::xxx
+</span></span><span style="display:flex;"><span>$ xmake l find_package pacman::xxx
+</span></span><span style="display:flex;"><span>$ xmake l find_package brew::xxx
+</span></span><span style="display:flex;"><span>$ xmake l hash.sha256 xxx
+</span></span></code></pre></div><p>有些比较大的项目可能会提供 setup.lua 脚本。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>$ xmake l setup.lua
+</span></span></code></pre></div><p>这是一种好的实践。因为 xmake 内部库种类丰富，完全可以不用写 sh/bat 来跨平台。</p>
+<h1 id="定位配置信息">定位配置信息</h1>
+<p>我们可以看到 target 的 cxflags/ldflags/includedirs 等配置信息在哪个 xmake.lua:行。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>$ xmake show -t &lt;target&gt;
+</span></span></code></pre></div><h1 id="自动编译运行">自动编译运行</h1>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>$ xmake f --policies=run.autobuild
+</span></span><span style="display:flex;"><span>$ xmake watch
+</span></span></code></pre></div><p>使用该插件，当写好代码，保存文件，就会自动触发编译运行，比手动 <code>gcc main.cpp -o main &amp;&amp; ./main</code> 舒服多了。</p>
+<h1 id="调试-xmakelua">调试 xmake.lua</h1>
+<p>xmake 即使用了 lua，但大部分配置还是基于字符串，很容易出现 typo 导致构建失败，于是提供了该插件。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>$ xmake check
+</span></span></code></pre></div><h1 id="宏">宏</h1>
+<p>某种意义上的 <code>CMakePresets.json</code>。</p>
+
+</article>
+
+            </div>
+        </main>
+    </body>
+</html>

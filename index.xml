@@ -6,14 +6,28 @@
     <description>Recent content on Heng Xing Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Fri, 25 Aug 2023 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 29 Mar 2024 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://star-hengxing.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>如何给 Xmake 打包</title>
+      <title>漫谈 C/C&#43;&#43; 包管理</title>
+      <link>https://star-hengxing.github.io/post/cpp/pm/</link>
+      <pubDate>Fri, 29 Mar 2024 00:00:00 +0000</pubDate>
+      <guid>https://star-hengxing.github.io/post/cpp/pm/</guid>
+      <description>在 r/cpp 一篇帖子里，投票选择用什么包管理。出乎意料，但又情理之中：不用包管理的人占大多数。&#xA;但既然都是写代码的，相信没人不喜欢自动化吧，难道很喜欢手动拉取源码编译吗。&#xA;本文主要面向开源项目，像类似于公司项目，依赖基本上是固定或定制（魔改源码），有完善的自动化脚本，不在此讨论列表。&#xA;什么是包管理 系统包管理 ≠ C/C++ 包管理 Windows 上 scoop/winget 不算系统包管理，因为打包的库很少。&#xA;众所周知，我们用的是 native 语言。那么问题来了，不同的编译参数都会影响最终编译二进制的结果。&#xA;而系统包管理的包，编译参数是固定的，下载包都是拉取的预编译二进制。当然也有一些发行版，都是用源码分发软件，但你也不一定能随意定制自己想要的包。&#xA;如果想静态链接所有依赖库，不好意思，发行版打包基本都是动态库。&#xA;选择版本？大包可能可以，比如 arch 打包的 openjdk，不过也只能选几个出名的版本罢了，但大部分包肯定没这个待遇。&#xA;想看崩溃的堆栈？现在有一些发行版确实考虑分发调试信息，但既然是调试了，能直接看到源码不更好吗。&#xA;有时候写个小玩具验证一下，用系统包管理也可，毕竟是预编译二进制。&#xA;git submodule 只是下载依赖的工具 和 cmake 的 fetch content 一样，自己写一个 sh/bat 脚本来下载依赖也差不多。&#xA;而且 git submodule 也有机率用出 bug，比如 eastl 的 submodule clone 永远是失败的，需要手动去目录一个个 clone。&#xA;为什么需要包管理 自动化，爽 避免来自依赖库的污染 众所周知，cmake 除了用 find_package 引入依赖，就是 add_subdirectory 了。但他有个很大的缺点，会引入依赖库的各种逻辑，比如 enable_testing。&#xA;所以引入依赖库，最好先编译安装到指定目录，只留下 bin/lib/include，lib 目录下有 .pc/.cmake 等文件来让构建系统获取信息。&#xA;依赖分析 依赖数量多起来后，就很容易出现循环（菱形）依赖。&#xA;这是很常见的现象，而包管理要做的就是报错，然后由用户来选择是否打平依赖。&#xA;如果手动去处理这些事情，就会出现这种情况：&#xA;杂谈：一个 C++ Header-only 版本冲突的案例分析 assimp 库使用宏来重命名依赖库 stb 的 api，避免符号冲突。 定制包的构建 大部分开发者遇到的常见需求：</description>
+    </item>
+    <item>
+      <title>Xmake 插件介绍</title>
+      <link>https://star-hengxing.github.io/post/xmake/feature/</link>
+      <pubDate>Tue, 05 Mar 2024 00:00:00 +0000</pubDate>
+      <guid>https://star-hengxing.github.io/post/xmake/feature/</guid>
+      <description>本文只会讲一些比较实用的插件，其余插件请看文档。&#xA;生成工程文件 除了 cmake，其他构建系统（构建后端）支持力度一般，不保证能构建成功。&#xA;如果 ide 不支持 xmake 而支持 cmake，可以生成 cmakelists 来使用。&#xA;$ xmake project -k cmakelists $ xmake project -k makefile $ xmake project -k ninja 当然你也可以参考这些文件来学习 cmake/makefile/ninja 怎么写。&#xA;xmake 有两种生成 Visual Studio 工程文件的方式。&#xA;$ xmake project -k vsxmake -m &amp;#34;debug,release&amp;#34; $ xmake project -k vs2022 -m &amp;#34;debug,release&amp;#34; 前者依然使用 xmake 构建，但可以用 vs 作为编辑器和调试器。后者则是生成 msbuild 文件，该方式已经不再维护。&#xA;运行 lua 脚本 查找系统包和 hash 文件。&#xA;$ xmake l find_package pkgconfig::xxx $ xmake l find_package pacman::xxx $ xmake l find_package brew::xxx $ xmake l hash.</description>
+    </item>
+    <item>
+      <title>如何写 Xmake 包描述</title>
       <link>https://star-hengxing.github.io/post/xmake/xmake-package/</link>
       <pubDate>Sat, 19 Aug 2023 00:00:00 +0000</pubDate>
       <guid>https://star-hengxing.github.io/post/xmake/xmake-package/</guid>
-      <description>先来展示个 cmake 包模板。&#xA;package(&amp;#34;xxx&amp;#34;) set_homepage(&amp;#34;https://github.com/xxx/yyy&amp;#34;) set_description(&amp;#34;&amp;#34;) set_license(&amp;#34;&amp;#34;) add_urls(&amp;#34;https://github.com/xxx/yyy/archive/refs/tags/$(version).tar.gz&amp;#34;, &amp;#34;https://github.com/xxx/yyy.git&amp;#34;) add_versions(&amp;#34;v1.0.0&amp;#34;, &amp;#34;sha256&amp;#34;) add_deps(&amp;#34;cmake&amp;#34;, &amp;#34;ninja&amp;#34;) on_install(function (package) local configs = {} table.insert(configs, &amp;#34;-DCMAKE_BUILD_TYPE=&amp;#34; .. (package:is_debug() and &amp;#34;Debug&amp;#34; or &amp;#34;Release&amp;#34;)) table.insert(configs, &amp;#34;-DBUILD_SHARED_LIBS=&amp;#34; .. (package:config(&amp;#34;shared&amp;#34;) and &amp;#34;ON&amp;#34; or &amp;#34;OFF&amp;#34;)) if package:is_plat(&amp;#34;windows&amp;#34;) and package:config(&amp;#34;shared&amp;#34;) then table.insert(configs, &amp;#34;-DCMAKE_WINDOWS_EXPORT_ALL_SYMBOLS=ON&amp;#34;) end io.replace(&amp;#34;CMakeLists.txt&amp;#34;, &amp;#34;xxx&amp;#34;, &amp;#34;&amp;#34;, {plain = true}) import(&amp;#34;package.tools.cmake&amp;#34;).install(package, configs, {cmake_generator = &amp;#34;Ninja&amp;#34;}) end) on_test(function (package) assert(package:has_cxxfuncs(&amp;#34;xxx&amp;#34;, {includes = &amp;#34;yyy.h&amp;#34;})) end) 观察发现，这其实和写 target 差不多，不过 api 的语义不一样而已。&#xA;git clone https://github.com/xmake-io/xmake-repo # 使用脚本生成模板 xmake l scripts/new.</description>
+      <description>无论你是否将包提交至官方包管理，本文都可以作为编写包描述的参考。&#xA;先来展示个 cmake 包模板。&#xA;package(&amp;#34;xxx&amp;#34;) set_homepage(&amp;#34;https://github.com/xxx/yyy&amp;#34;) set_description(&amp;#34;&amp;#34;) set_license(&amp;#34;&amp;#34;) add_urls(&amp;#34;https://github.com/xxx/yyy/archive/refs/tags/$(version).tar.gz&amp;#34;, &amp;#34;https://github.com/xxx/yyy.git&amp;#34;) add_versions(&amp;#34;v1.0.0&amp;#34;, &amp;#34;sha256&amp;#34;) add_defines(&amp;#34;Hello&amp;#34;) add_cxflags(&amp;#34;-DWorld&amp;#34;) if is_plat(&amp;#34;linux&amp;#34;) then add_syslinks(&amp;#34;pthread&amp;#34;) elseif is_plat(&amp;#34;windows&amp;#34;) then add_syslinks(&amp;#34;user32&amp;#34;) end add_deps(&amp;#34;cmake&amp;#34;, &amp;#34;ninja&amp;#34;) on_install(function (package) local configs = {} table.insert(configs, &amp;#34;-DCMAKE_BUILD_TYPE=&amp;#34; .. (package:is_debug() and &amp;#34;Debug&amp;#34; or &amp;#34;Release&amp;#34;)) table.insert(configs, &amp;#34;-DBUILD_SHARED_LIBS=&amp;#34; .. (package:config(&amp;#34;shared&amp;#34;) and &amp;#34;ON&amp;#34; or &amp;#34;OFF&amp;#34;)) if package:is_plat(&amp;#34;windows&amp;#34;) and package:config(&amp;#34;shared&amp;#34;) then table.insert(configs, &amp;#34;-DCMAKE_WINDOWS_EXPORT_ALL_SYMBOLS=ON&amp;#34;) end io.replace(&amp;#34;CMakeLists.txt&amp;#34;, &amp;#34;xxx&amp;#34;, &amp;#34;&amp;#34;, {plain = true}) import(&amp;#34;package.tools.cmake&amp;#34;).install(package, configs, {cmake_generator = &amp;#34;Ninja&amp;#34;}) end) on_test(function (package) assert(package:has_cxxfuncs(&amp;#34;xxx&amp;#34;, {includes = &amp;#34;yyy.</description>
     </item>
     <item>
       <title>C&#43;&#43; 胡言乱语X3</title>

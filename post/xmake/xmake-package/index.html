@@ -3,13 +3,13 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-   <meta name="description" content="先来展示个 cmake 包模板。
-package(&#34;xxx&#34;) set_homepage(&#34;https://github.com/xxx/yyy&#34;) set_description(&#34;&#34;) set_license(&#34;&#34;) add_urls(&#34;https://github.com/xxx/yyy/archive/refs/tags/$(version).tar.gz&#34;, &#34;https://github.com/xxx/yyy.git&#34;) add_versions(&#34;v1.0.0&#34;, &#34;sha256&#34;) add_deps(&#34;cmake&#34;, &#34;ninja&#34;) on_install(function (package) local configs = {} table.insert(configs, &#34;-DCMAKE_BUILD_TYPE=&#34; .. (package:is_debug() and &#34;Debug&#34; or &#34;Release&#34;)) table.insert(configs, &#34;-DBUILD_SHARED_LIBS=&#34; .. (package:config(&#34;shared&#34;) and &#34;ON&#34; or &#34;OFF&#34;)) if package:is_plat(&#34;windows&#34;) and package:config(&#34;shared&#34;) then table.insert(configs, &#34;-DCMAKE_WINDOWS_EXPORT_ALL_SYMBOLS=ON&#34;) end io.replace(&#34;CMakeLists.txt&#34;, &#34;xxx&#34;, &#34;&#34;, {plain = true}) import(&#34;package.tools.cmake&#34;).install(package, configs, {cmake_generator = &#34;Ninja&#34;}) end) on_test(function (package) assert(package:has_cxxfuncs(&#34;xxx&#34;, {includes = &#34;yyy.h&#34;})) end) 观察发现，这其实和写 target 差不多，不过 api 的语义不一样而已。
-git clone https://github.com/xmake-io/xmake-repo # 使用脚本生成模板 xmake l scripts/new.">  
+   <meta name="description" content="无论你是否将包提交至官方包管理，本文都可以作为编写包描述的参考。
+先来展示个 cmake 包模板。
+package(&#34;xxx&#34;) set_homepage(&#34;https://github.com/xxx/yyy&#34;) set_description(&#34;&#34;) set_license(&#34;&#34;) add_urls(&#34;https://github.com/xxx/yyy/archive/refs/tags/$(version).tar.gz&#34;, &#34;https://github.com/xxx/yyy.git&#34;) add_versions(&#34;v1.0.0&#34;, &#34;sha256&#34;) add_defines(&#34;Hello&#34;) add_cxflags(&#34;-DWorld&#34;) if is_plat(&#34;linux&#34;) then add_syslinks(&#34;pthread&#34;) elseif is_plat(&#34;windows&#34;) then add_syslinks(&#34;user32&#34;) end add_deps(&#34;cmake&#34;, &#34;ninja&#34;) on_install(function (package) local configs = {} table.insert(configs, &#34;-DCMAKE_BUILD_TYPE=&#34; .. (package:is_debug() and &#34;Debug&#34; or &#34;Release&#34;)) table.insert(configs, &#34;-DBUILD_SHARED_LIBS=&#34; .. (package:config(&#34;shared&#34;) and &#34;ON&#34; or &#34;OFF&#34;)) if package:is_plat(&#34;windows&#34;) and package:config(&#34;shared&#34;) then table.insert(configs, &#34;-DCMAKE_WINDOWS_EXPORT_ALL_SYMBOLS=ON&#34;) end io.replace(&#34;CMakeLists.txt&#34;, &#34;xxx&#34;, &#34;&#34;, {plain = true}) import(&#34;package.tools.cmake&#34;).install(package, configs, {cmake_generator = &#34;Ninja&#34;}) end) on_test(function (package) assert(package:has_cxxfuncs(&#34;xxx&#34;, {includes = &#34;yyy.">  
 
   <title>
     
-      如何给 Xmake 打包
+      如何写 Xmake 包描述
     
   </title>
 
@@ -34,11 +34,12 @@ git clone https://github.com/xmake-io/xmake-repo # 使用脚本生成模板 xmak
         </time>
     </p>
 
-    <h1>如何给 Xmake 打包</h1>
+    <h1>如何写 Xmake 包描述</h1>
 
     
 
-    <p>先来展示个 cmake 包模板。</p>
+    <p>无论你是否将包提交至官方包管理，本文都可以作为编写包描述的参考。</p>
+<p>先来展示个 cmake 包模板。</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lua" data-lang="lua"><span style="display:flex;"><span>package(<span style="color:#87ceeb">&#34;xxx&#34;</span>)
 </span></span><span style="display:flex;"><span>    set_homepage(<span style="color:#87ceeb">&#34;https://github.com/xxx/yyy&#34;</span>)
 </span></span><span style="display:flex;"><span>    set_description(<span style="color:#87ceeb">&#34;&#34;</span>)
@@ -48,6 +49,16 @@ git clone https://github.com/xmake-io/xmake-repo # 使用脚本生成模板 xmak
 </span></span><span style="display:flex;"><span>             <span style="color:#87ceeb">&#34;https://github.com/xxx/yyy.git&#34;</span>)
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>    add_versions(<span style="color:#87ceeb">&#34;v1.0.0&#34;</span>, <span style="color:#87ceeb">&#34;sha256&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    add_defines(<span style="color:#87ceeb">&#34;Hello&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    add_cxflags(<span style="color:#87ceeb">&#34;-DWorld&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f00">if</span> is_plat(<span style="color:#87ceeb">&#34;linux&#34;</span>) <span style="color:#f00">then</span>
+</span></span><span style="display:flex;"><span>        add_syslinks(<span style="color:#87ceeb">&#34;pthread&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#f00">elseif</span> is_plat(<span style="color:#87ceeb">&#34;windows&#34;</span>) <span style="color:#f00">then</span>
+</span></span><span style="display:flex;"><span>        add_syslinks(<span style="color:#87ceeb">&#34;user32&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#f00">end</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>    add_deps(<span style="color:#87ceeb">&#34;cmake&#34;</span>, <span style="color:#87ceeb">&#34;ninja&#34;</span>)
 </span></span><span style="display:flex;"><span>
@@ -77,9 +88,9 @@ git clone https://github.com/xmake-io/xmake-repo # 使用脚本生成模板 xmak
 <p>其实选错分支也没关系，可以重新选择，然后先 close pr 再 open 来触发 ci。</p>
 </blockquote>
 <h2 id="api-解读">API 解读</h2>
-<h2 id="名字">名字</h2>
+<h3 id="名字">名字</h3>
 <p>包名一律统一为<strong>小写</strong>，为了适配不同系统环境下，不同包管理管理的系统库查找，统一全平台。</p>
-<h2 id="外部源">外部源</h2>
+<h3 id="外部源">外部源</h3>
 <p>使用了 <code>add_extsources</code>， 会主动去查找 apt/pacman 等包管理管理的包。</p>
 <h3 id="version">version</h3>
 <p>通常情况下，使用 git tag 作为包的版本号。如果下载 <code>tar.gz</code> 压缩包失败，只要 url 中添加了库的 git 地址，xmake 就可以使用 git clone 并根据 tag 号切换。</p>
@@ -93,10 +104,23 @@ git clone https://github.com/xmake-io/xmake-repo # 使用脚本生成模板 xmak
 </span></span><span style="display:flex;"><span><span style="color:#f00">local</span> version = <span style="color:#f00">function</span> (version) <span style="color:#f00">return</span> tag[tostring(version)] <span style="color:#f00">end</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>add_versions(<span style="color:#87ceeb">&#34;2023.06&#34;</span>, <span style="color:#87ceeb">&#34;sha256&#34;</span>)
+</span></span></code></pre></div><p>如果一些包没有 release 包，可以选择使用 commit 日期作为版本号，sha256 替换为 commit hash。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lua" data-lang="lua"><span style="display:flex;"><span>add_versions(<span style="color:#87ceeb">&#34;2024.01.01&#34;</span>, <span style="color:#87ceeb">&#34;commit hash&#34;</span>)
 </span></span></code></pre></div><h3 id="configs">configs</h3>
 <p>对应库的构建选项。如果一些内置选项支持不完善，比如 <code>shared</code>，就会打上 <code>readonly</code>，表示不可修改，只能使用默认配置。</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lua" data-lang="lua"><span style="display:flex;"><span>add_configs(<span style="color:#87ceeb">&#34;shared&#34;</span>, {description = <span style="color:#87ceeb">&#34;Build shared library.&#34;</span>, default = <span style="color:#f00">true</span>, type = <span style="color:#87ceeb">&#34;boolean&#34;</span>, readonly = <span style="color:#f00">true</span>})
 </span></span></code></pre></div><p>需要打上 <code>readonly</code> 的情况各有不同，比如库根本就不支持，或构建的时候有问题，打包者处理不了。</p>
+<h3 id="需要继承的编译配置">需要继承的编译配置</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lua" data-lang="lua"><span style="display:flex;"><span>add_defines(<span style="color:#87ceeb">&#34;Hello&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>add_cxflags(<span style="color:#87ceeb">&#34;-DWorld&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f00">if</span> is_plat(<span style="color:#87ceeb">&#34;linux&#34;</span>) <span style="color:#f00">then</span>
+</span></span><span style="display:flex;"><span>    add_syslinks(<span style="color:#87ceeb">&#34;pthread&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#f00">elseif</span> is_plat(<span style="color:#87ceeb">&#34;windows&#34;</span>) <span style="color:#f00">then</span>
+</span></span><span style="display:flex;"><span>    add_syslinks(<span style="color:#87ceeb">&#34;user32&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#f00">end</span>
+</span></span></code></pre></div><p>当 target add_package 后，这些配置都会被自动加上。</p>
 <h3 id="on_install">on_install</h3>
 <p>这一步需要调用构建系统对库 配置 -&gt; 构建 -&gt; 安装。</p>
 <p>最简单的，直接把 debug/release 和 shared/static 等选项传给构建系统。如果库在 Windows 上没支持动态库，我们可以尝试使用 cmake 的导出符号来支持。</p>
@@ -105,7 +129,7 @@ git clone https://github.com/xmake-io/xmake-repo # 使用脚本生成模板 xmak
 </span></span><span style="display:flex;"><span><span style="color:#f00">end</span>
 </span></span></code></pre></div><p>xmake 包默认是不保留例子和测试的，所以需要打包者添加构建选项取消。然而有些库根本没有这些选项，我们可以适当优化，比如使用 <code>io.replace</code> 修改 cmakelists，把 <code>add_subdirectory(test)</code> 等删掉，或者直接打个 patch 修改。</p>
 <h3 id="on_test">on_test</h3>
-<p>平时用 <code>has_cxxfuncs</code> 系列既可以保持简洁，又可以检测到依赖的<strong>静态库</strong>/<strong>动态库</strong>有没有被正常链接上。</p>
+<p>平时用 <code>has_cxxfuncs</code> 系列既可以保持简洁，又可以检测到符号有没有链接上。</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lua" data-lang="lua"><span style="display:flex;"><span>on_test(<span style="color:#f00">function</span> (package)
 </span></span><span style="display:flex;"><span>    assert(package:has_cxxfuncs(<span style="color:#87ceeb">&#34;xxx&#34;</span>, {includes = <span style="color:#87ceeb">&#34;yyy.h&#34;</span>}))
 </span></span><span style="display:flex;"><span><span style="color:#f00">end</span>)
@@ -118,10 +142,62 @@ git clone https://github.com/xmake-io/xmake-repo # 使用脚本生成模板 xmak
 </span></span></span><span style="display:flex;"><span><span style="color:#87ceeb">        }
 </span></span></span><span style="display:flex;"><span><span style="color:#87ceeb">    ]]</span>}, {configs = {languages = <span style="color:#87ceeb">&#34;c++17&#34;</span>}}))
 </span></span><span style="display:flex;"><span><span style="color:#f00">end</span>)
+</span></span></code></pre></div><h2 id="预编译二进制需要本地查找的库">预编译二进制（需要本地查找的库）</h2>
+<p>直接拷贝即可。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lua" data-lang="lua"><span style="display:flex;"><span>package(<span style="color:#87ceeb">&#34;precompiled_binary&#34;</span>)
+</span></span><span style="display:flex;"><span>    add_urls(<span style="color:#87ceeb">&#34;https://github.com/xxx/yyy/archive/refs/tags/$(version).7z&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    add_versions(<span style="color:#87ceeb">&#34;1.0&#34;</span>, <span style="color:#87ceeb">&#34;sha256&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    on_install(<span style="color:#f00">function</span> (package)
+</span></span><span style="display:flex;"><span>        os.cp(<span style="color:#87ceeb">&#34;*.h&#34;</span>, package:installdir(<span style="color:#87ceeb">&#34;include&#34;</span>))
+</span></span><span style="display:flex;"><span>        os.cp(<span style="color:#87ceeb">&#34;*.lib&#34;</span>, package:installdir(<span style="color:#87ceeb">&#34;lib&#34;</span>))
+</span></span><span style="display:flex;"><span>        os.trycp(<span style="color:#87ceeb">&#34;*.so&#34;</span>, package:installdir(<span style="color:#87ceeb">&#34;lib&#34;</span>))
+</span></span><span style="display:flex;"><span>        os.trycp(<span style="color:#87ceeb">&#34;*.dll&#34;</span>, package:installdir(<span style="color:#87ceeb">&#34;bin&#34;</span>))
+</span></span><span style="display:flex;"><span>    <span style="color:#f00">end</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    on_test(<span style="color:#f00">function</span> (package)
+</span></span><span style="display:flex;"><span>        assert(package:has_cxxfuncs(<span style="color:#87ceeb">&#34;xxx&#34;</span>, {includes = <span style="color:#87ceeb">&#34;yyy.h&#34;</span>}))
+</span></span><span style="display:flex;"><span>    <span style="color:#f00">end</span>)
+</span></span></code></pre></div><p>如果想引用本地的二进制。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lua" data-lang="lua"><span style="display:flex;"><span>package(<span style="color:#87ceeb">&#34;precompiled_binary&#34;</span>)
+</span></span><span style="display:flex;"><span>    on_load(<span style="color:#f00">function</span> (package)
+</span></span><span style="display:flex;"><span>        package:set(<span style="color:#87ceeb">&#34;installdir&#34;</span>, path.join(os.scriptdir(), <span style="color:#87ceeb">&#34;precompiled_binary_dir&#34;</span>))
+</span></span><span style="display:flex;"><span>    <span style="color:#f00">end</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    on_fetch(<span style="color:#f00">function</span> (package)
+</span></span><span style="display:flex;"><span>        <span style="color:#f00">local</span> result = {}
+</span></span><span style="display:flex;"><span>        <span style="color:#f00">if</span> is_plat(<span style="color:#87ceeb">&#34;windows&#34;</span>) <span style="color:#f00">then</span>
+</span></span><span style="display:flex;"><span>            result.linkdirs = package:installdir(<span style="color:#87ceeb">&#34;lib-windows&#34;</span>)
+</span></span><span style="display:flex;"><span>            package:addenv(<span style="color:#87ceeb">&#34;PATH&#34;</span>, package:installdir(<span style="color:#87ceeb">&#34;bin&#34;</span>))
+</span></span><span style="display:flex;"><span>        <span style="color:#f00">elseif</span> is_plat(<span style="color:#87ceeb">&#34;linux&#34;</span>) <span style="color:#f00">then</span>
+</span></span><span style="display:flex;"><span>            package:addenv(<span style="color:#87ceeb">&#34;LD_LIBRARY_PATH&#34;</span>, package:installdir(<span style="color:#87ceeb">&#34;lib-linux&#34;</span>))
+</span></span><span style="display:flex;"><span>            result.linkdirs = package:installdir(<span style="color:#87ceeb">&#34;lib-linux&#34;</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#f00">elseif</span> is_plat(<span style="color:#87ceeb">&#34;macosx&#34;</span>) <span style="color:#f00">then</span>
+</span></span><span style="display:flex;"><span>            package:addenv(<span style="color:#87ceeb">&#34;DYLD_LIBRARY_PATH&#34;</span>, package:installdir(<span style="color:#87ceeb">&#34;lib-macos&#34;</span>))
+</span></span><span style="display:flex;"><span>            result.linkdirs = package:installdir(<span style="color:#87ceeb">&#34;lib-macos&#34;</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#f00">else</span>
+</span></span><span style="display:flex;"><span>            package:addenv(<span style="color:#87ceeb">&#34;LD_LIBRARY_PATH&#34;</span>, package:installdir(<span style="color:#87ceeb">&#34;lib-linux&#34;</span>))
+</span></span><span style="display:flex;"><span>            result.linkdirs = package:installdir(<span style="color:#87ceeb">&#34;lib-linux&#34;</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#f00">end</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        result.links = {<span style="color:#87ceeb">&#34;xxx&#34;</span>, <span style="color:#87ceeb">&#34;yyy&#34;</span>}
+</span></span><span style="display:flex;"><span>        result.includedirs = package:installdir(<span style="color:#87ceeb">&#34;include&#34;</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#f00">return</span> result
+</span></span><span style="display:flex;"><span>    <span style="color:#f00">end</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    on_test(<span style="color:#f00">function</span> (package)
+</span></span><span style="display:flex;"><span>        assert(package:has_cxxfuncs(<span style="color:#87ceeb">&#34;xxx&#34;</span>, {includes = <span style="color:#87ceeb">&#34;yyy.h&#34;</span>}))
+</span></span><span style="display:flex;"><span>    <span style="color:#f00">end</span>)
 </span></span></code></pre></div><h2 id="优化库的构建">优化库的构建</h2>
 <h3 id="本地测试">本地测试</h3>
-<p>因为要保持 xmake 包最小化依赖原则，实际上 cmake 包只使用系统默认的构建系统，而不是 ninja。但打包者依然可以在测试中使用 ninja 加速编译。</p>
-<h3 id="头文件库">头文件库</h3>
+<p>因为要保持 xmake 包最小化依赖原则，实际上 cmake 包只使用系统默认的构建系统，而不是 ninja。但打包者依然可以在测试中使用 ninja 加速编译，我们可以使用 policy 来启用。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>$ xmake g --policies=package.cmake_generator.ninja
+</span></span></code></pre></div><p>或者在包描述写：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lua" data-lang="lua"><span style="display:flex;"><span><span style="color:#0f0">-- add_deps(&#34;ninja&#34;)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>import(<span style="color:#87ceeb">&#34;package.tools.cmake&#34;</span>).install(package, configs, {cmake_generator = <span style="color:#87ceeb">&#34;Nnija&#34;</span>})
+</span></span></code></pre></div><h3 id="头文件库">头文件库</h3>
 <p>设置 <code>headeronly</code> 类型后，build hash 会唯一，避免浪费硬盘。</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lua" data-lang="lua"><span style="display:flex;"><span>set_kind(<span style="color:#87ceeb">&#34;library&#34;</span>, {headeronly = <span style="color:#f00">true</span>})
 </span></span></code></pre></div><p>有些库可能支持非头文件模式编译，通常使用 <code>header_only</code> 来命名 config，然后 <code>on_load</code> 和 <code>on_install</code> 需要做对应处理。</p>
