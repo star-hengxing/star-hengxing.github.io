@@ -240,6 +240,166 @@ package(&#34;xxx&#34;) set_homepage(&#34;https://github.com/xxx/yyy&#34;) set_de
 </span></span><span style="display:flex;"><span>    os.cp(path.join(package:scriptdir(), <span style="color:#87ceeb">&#34;port&#34;</span>, <span style="color:#87ceeb">&#34;xmake.lua&#34;</span>), <span style="color:#87ceeb">&#34;xmake.lua&#34;</span>)
 </span></span><span style="display:flex;"><span>    import(<span style="color:#87ceeb">&#34;package.tools.xmake&#34;</span>).install(package)
 </span></span><span style="display:flex;"><span><span style="color:#f00">end</span>)
+</span></span></code></pre></div><h2 id="实战">实战</h2>
+<p>这里拿一位新手打包写的包描述进行 code review。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lua" data-lang="lua"><span style="display:flex;"><span>package(<span style="color:#87ceeb">&#34;reflex&#34;</span>)
+</span></span><span style="display:flex;"><span>    set_description(<span style="color:#87ceeb">&#34;The reflex package&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    add_urls(<span style="color:#87ceeb">&#34;https://github.com/Genivia/RE-flex/archive/refs/tags/v$(version).tar.gz&#34;</span>,<span style="color:#87ceeb">&#34;https://github.com/Genivia/RE-flex.git&#34;</span>)
+</span></span><span style="display:flex;"><span>    add_versions(<span style="color:#87ceeb">&#34;3.5.1&#34;</span>, <span style="color:#87ceeb">&#34;e08ed24a6799a6976f6e32312be1ee059b4b6b55f8af3b433a3016d63250c0e4&#34;</span>)
+</span></span><span style="display:flex;"><span>    add_versions(<span style="color:#87ceeb">&#34;4.3.0&#34;</span>, <span style="color:#87ceeb">&#34;1658c1be9fa95bf948a657d75d2cef0df81b614bc6052284935774d4d8551d95&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    add_includedirs(<span style="color:#87ceeb">&#34;include&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    on_load(<span style="color:#f00">function</span> (package)
+</span></span><span style="display:flex;"><span>        package:addenv(<span style="color:#87ceeb">&#34;PATH&#34;</span>, <span style="color:#87ceeb">&#34;bin&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#f00">end</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    on_install(<span style="color:#f00">function</span> (package)
+</span></span><span style="display:flex;"><span>        io.writefile(<span style="color:#87ceeb">&#34;xmake.lua&#34;</span>,<span style="color:#87ceeb">[[
+</span></span></span><span style="display:flex;"><span><span style="color:#87ceeb">set_languages(&#34;cxx11&#34;)
+</span></span></span><span style="display:flex;"><span><span style="color:#87ceeb">
+</span></span></span><span style="display:flex;"><span><span style="color:#87ceeb">target(&#34;ReflexLib&#34;)
+</span></span></span><span style="display:flex;"><span><span style="color:#87ceeb">    set_kind(&#34;shared&#34;)
+</span></span></span><span style="display:flex;"><span><span style="color:#87ceeb">    add_includedirs(&#34;include&#34;)
+</span></span></span><span style="display:flex;"><span><span style="color:#87ceeb">    add_headerfiles(&#34;include/reflex/*.h&#34;, {prefixdir = &#34;reflex&#34;})
+</span></span></span><span style="display:flex;"><span><span style="color:#87ceeb">    add_files(&#34;lib/*.cpp&#34;)
+</span></span></span><span style="display:flex;"><span><span style="color:#87ceeb">    add_files(&#34;unicode/*.cpp&#34;)
+</span></span></span><span style="display:flex;"><span><span style="color:#87ceeb">    add_vectorexts(&#34;all&#34;)
+</span></span></span><span style="display:flex;"><span><span style="color:#87ceeb">target_end()
+</span></span></span><span style="display:flex;"><span><span style="color:#87ceeb">
+</span></span></span><span style="display:flex;"><span><span style="color:#87ceeb">target(&#34;ReflexLibStatic&#34;)
+</span></span></span><span style="display:flex;"><span><span style="color:#87ceeb">    set_kind(&#34;static&#34;)
+</span></span></span><span style="display:flex;"><span><span style="color:#87ceeb">    add_includedirs(&#34;include&#34;)
+</span></span></span><span style="display:flex;"><span><span style="color:#87ceeb">    add_headerfiles(&#34;include/reflex/*.h&#34;, {prefixdir = &#34;reflex&#34;})
+</span></span></span><span style="display:flex;"><span><span style="color:#87ceeb">    add_files(&#34;lib/*.cpp&#34;)
+</span></span></span><span style="display:flex;"><span><span style="color:#87ceeb">    add_files(&#34;unicode/*.cpp&#34;)
+</span></span></span><span style="display:flex;"><span><span style="color:#87ceeb">    add_vectorexts(&#34;all&#34;)
+</span></span></span><span style="display:flex;"><span><span style="color:#87ceeb">target_end()
+</span></span></span><span style="display:flex;"><span><span style="color:#87ceeb">
+</span></span></span><span style="display:flex;"><span><span style="color:#87ceeb">target(&#34;Reflex&#34;)
+</span></span></span><span style="display:flex;"><span><span style="color:#87ceeb">    set_kind(&#34;binary&#34;)
+</span></span></span><span style="display:flex;"><span><span style="color:#87ceeb">    add_includedirs(&#34;include&#34;)
+</span></span></span><span style="display:flex;"><span><span style="color:#87ceeb">    add_files(&#34;src/*.cpp&#34;)
+</span></span></span><span style="display:flex;"><span><span style="color:#87ceeb">    add_deps(&#34;ReflexLibStatic&#34;)
+</span></span></span><span style="display:flex;"><span><span style="color:#87ceeb">    add_vectorexts(&#34;all&#34;)
+</span></span></span><span style="display:flex;"><span><span style="color:#87ceeb">target_end()
+</span></span></span><span style="display:flex;"><span><span style="color:#87ceeb">        ]]</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#f00">local</span> configs = {}
+</span></span><span style="display:flex;"><span>        import(<span style="color:#87ceeb">&#34;package.tools.xmake&#34;</span>).install(package, configs)
+</span></span><span style="display:flex;"><span>    <span style="color:#f00">end</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    on_test(<span style="color:#f00">function</span> (package)
+</span></span><span style="display:flex;"><span>        assert(package:check_cxxsnippets({test = <span style="color:#87ceeb">[[
+</span></span></span><span style="display:flex;"><span><span style="color:#87ceeb">            #include &lt;reflex/matcher.h&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#87ceeb">            void test()
+</span></span></span><span style="display:flex;"><span><span style="color:#87ceeb">            {
+</span></span></span><span style="display:flex;"><span><span style="color:#87ceeb">                reflex::Matcher matcher(&#34;\w+&#34;,&#34;114 514 1919 810&#34;);
+</span></span></span><span style="display:flex;"><span><span style="color:#87ceeb">            }
+</span></span></span><span style="display:flex;"><span><span style="color:#87ceeb">        ]]</span>}, {configs = {languages = <span style="color:#87ceeb">&#34;cxx11&#34;</span>}}))
+</span></span><span style="display:flex;"><span>    <span style="color:#f00">end</span>)
+</span></span><span style="display:flex;"><span>package_end()
+</span></span></code></pre></div><p>一看开头，就知道没有用脚本（<code>xmake l scripts/new.lua Genivia/RE-flex</code>）生成模板。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lua" data-lang="lua"><span style="display:flex;"><span>add_urls(<span style="color:#87ceeb">&#34;https://github.com/Genivia/RE-flex/archive/refs/tags/v$(version).tar.gz&#34;</span>,<span style="color:#87ceeb">&#34;https://github.com/Genivia/RE-flex.git&#34;</span>)
+</span></span><span style="display:flex;"><span>    add_versions(<span style="color:#87ceeb">&#34;3.5.1&#34;</span>, <span style="color:#87ceeb">&#34;e08ed24a6799a6976f6e32312be1ee059b4b6b55f8af3b433a3016d63250c0e4&#34;</span>)
+</span></span><span style="display:flex;"><span>    add_versions(<span style="color:#87ceeb">&#34;4.3.0&#34;</span>, <span style="color:#87ceeb">&#34;1658c1be9fa95bf948a657d75d2cef0df81b614bc6052284935774d4d8551d95&#34;</span>)
+</span></span></code></pre></div><ul>
+<li><code>add_urls</code> 正常情况下不需要加 <code>v</code>，放在 <code>add_versions(&quot;v4.3.0&quot;</code> 就行。</li>
+<li>因为资源所限（没有 conan 那么多 ci 一次性测试多个版本），xmake-repo ci 只会测试最新版本，所以先提交 <code>add_versions(&quot;3.5.1&quot;</code>，等 ci 通过后，再提交新的版本。</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lua" data-lang="lua"><span style="display:flex;"><span>add_includedirs(<span style="color:#87ceeb">&#34;include&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>on_load(<span style="color:#f00">function</span> (package)
+</span></span><span style="display:flex;"><span>    package:addenv(<span style="color:#87ceeb">&#34;PATH&#34;</span>, <span style="color:#87ceeb">&#34;bin&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#f00">end</span>)
+</span></span></code></pre></div><ul>
+<li><code>add_includedirs(&quot;include&quot;)</code> 多余的，xmake 会默认添加 <code>package:installdir(&quot;include&quot;)</code>。</li>
+<li><code>package:addenv(&quot;PATH&quot;, &quot;bin&quot;)</code> 放在 <code>on_install</code> 结尾就行，没必要用 <code>on_load</code>。</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lua" data-lang="lua"><span style="display:flex;"><span>    on_install(<span style="color:#f00">function</span> (package)
+</span></span><span style="display:flex;"><span>        io.writefile(<span style="color:#87ceeb">&#34;xmake.lua&#34;</span>,<span style="color:#87ceeb">[[
+</span></span></span><span style="display:flex;"><span><span style="color:#87ceeb">set_languages(&#34;cxx11&#34;)
+</span></span></span><span style="display:flex;"><span><span style="color:#87ceeb">
+</span></span></span><span style="display:flex;"><span><span style="color:#87ceeb">target(&#34;ReflexLib&#34;)
+</span></span></span><span style="display:flex;"><span><span style="color:#87ceeb">    set_kind(&#34;shared&#34;)
+</span></span></span><span style="display:flex;"><span><span style="color:#87ceeb">    add_includedirs(&#34;include&#34;)
+</span></span></span><span style="display:flex;"><span><span style="color:#87ceeb">    add_headerfiles(&#34;include/reflex/*.h&#34;, {prefixdir = &#34;reflex&#34;})
+</span></span></span><span style="display:flex;"><span><span style="color:#87ceeb">    add_files(&#34;lib/*.cpp&#34;)
+</span></span></span><span style="display:flex;"><span><span style="color:#87ceeb">    add_files(&#34;unicode/*.cpp&#34;)
+</span></span></span><span style="display:flex;"><span><span style="color:#87ceeb">    add_vectorexts(&#34;all&#34;)
+</span></span></span><span style="display:flex;"><span><span style="color:#87ceeb">target_end()
+</span></span></span><span style="display:flex;"><span><span style="color:#87ceeb">
+</span></span></span><span style="display:flex;"><span><span style="color:#87ceeb">target(&#34;ReflexLibStatic&#34;)
+</span></span></span><span style="display:flex;"><span><span style="color:#87ceeb">    set_kind(&#34;static&#34;)
+</span></span></span><span style="display:flex;"><span><span style="color:#87ceeb">    add_includedirs(&#34;include&#34;)
+</span></span></span><span style="display:flex;"><span><span style="color:#87ceeb">    add_headerfiles(&#34;include/reflex/*.h&#34;, {prefixdir = &#34;reflex&#34;})
+</span></span></span><span style="display:flex;"><span><span style="color:#87ceeb">    add_files(&#34;lib/*.cpp&#34;)
+</span></span></span><span style="display:flex;"><span><span style="color:#87ceeb">    add_files(&#34;unicode/*.cpp&#34;)
+</span></span></span><span style="display:flex;"><span><span style="color:#87ceeb">    add_vectorexts(&#34;all&#34;)
+</span></span></span><span style="display:flex;"><span><span style="color:#87ceeb">target_end()
+</span></span></span><span style="display:flex;"><span><span style="color:#87ceeb">
+</span></span></span><span style="display:flex;"><span><span style="color:#87ceeb">target(&#34;Reflex&#34;)
+</span></span></span><span style="display:flex;"><span><span style="color:#87ceeb">    set_kind(&#34;binary&#34;)
+</span></span></span><span style="display:flex;"><span><span style="color:#87ceeb">    add_includedirs(&#34;include&#34;)
+</span></span></span><span style="display:flex;"><span><span style="color:#87ceeb">    add_files(&#34;src/*.cpp&#34;)
+</span></span></span><span style="display:flex;"><span><span style="color:#87ceeb">    add_deps(&#34;ReflexLibStatic&#34;)
+</span></span></span><span style="display:flex;"><span><span style="color:#87ceeb">    add_vectorexts(&#34;all&#34;)
+</span></span></span><span style="display:flex;"><span><span style="color:#87ceeb">target_end()
+</span></span></span><span style="display:flex;"><span><span style="color:#87ceeb">        ]]</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#f00">local</span> configs = {}
+</span></span><span style="display:flex;"><span>        import(<span style="color:#87ceeb">&#34;package.tools.xmake&#34;</span>).install(package, configs)
+</span></span><span style="display:flex;"><span>    <span style="color:#f00">end</span>)
+</span></span></code></pre></div><p>这里有一个很大的问题，因为 xmake 自带包管理，所以我们根本没必要照抄 cmake 同时构建动态和静态库，所以这里应该只留一个 lib target。</p>
+<p>很多库没有考虑 Windows 上的动态库导出（开源社区日常嫌弃 Windows），所以我们要手动加上，一般情况下，都能正常导出符号（正常写代码不推荐用）。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lua" data-lang="lua"><span style="display:flex;"><span><span style="color:#f00">if</span> is_plat(<span style="color:#87ceeb">&#34;windows&#34;</span>) and is_kind(<span style="color:#87ceeb">&#34;shared&#34;</span>) <span style="color:#f00">then</span>
+</span></span><span style="display:flex;"><span>    add_rules(<span style="color:#87ceeb">&#34;utils.symbols.export_all&#34;</span>, {export_classes = <span style="color:#f00">true</span>})
+</span></span><span style="display:flex;"><span><span style="color:#f00">end</span>
+</span></span></code></pre></div><p>另外还有些重复配置，可以移到全局域里，更优雅。</p>
+<p>改良后：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lua" data-lang="lua"><span style="display:flex;"><span>package(<span style="color:#87ceeb">&#34;re-flex&#34;</span>)
+</span></span><span style="display:flex;"><span>    set_homepage(<span style="color:#87ceeb">&#34;https://www.genivia.com/doc/reflex/html&#34;</span>)
+</span></span><span style="display:flex;"><span>    set_description(<span style="color:#87ceeb">&#34;A high-performance C++ regex library and lexical analyzer generator with Unicode support. Extends Flex++ with Unicode support, indent/dedent anchors, lazy quantifiers, functions for lex and syntax error reporting and more. Seamlessly integrates with Bison and other parsers.&#34;</span>)
+</span></span><span style="display:flex;"><span>    set_license(<span style="color:#87ceeb">&#34;BSD-3-Clause&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    add_urls(<span style="color:#87ceeb">&#34;https://github.com/Genivia/RE-flex/archive/refs/tags/$(version).tar.gz&#34;</span>,
+</span></span><span style="display:flex;"><span>             <span style="color:#87ceeb">&#34;https://github.com/Genivia/RE-flex.git&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    add_versions(<span style="color:#87ceeb">&#34;v4.3.0&#34;</span>, <span style="color:#87ceeb">&#34;1658c1be9fa95bf948a657d75d2cef0df81b614bc6052284935774d4d8551d95&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    on_install(<span style="color:#f00">function</span> (package)
+</span></span><span style="display:flex;"><span>        io.writefile(<span style="color:#87ceeb">&#34;xmake.lua&#34;</span>,<span style="color:#87ceeb">[[
+</span></span></span><span style="display:flex;"><span><span style="color:#87ceeb">            add_rules(&#34;mode.debug&#34;, &#34;mode.release&#34;)
+</span></span></span><span style="display:flex;"><span><span style="color:#87ceeb">            set_languages(&#34;cxx11&#34;)
+</span></span></span><span style="display:flex;"><span><span style="color:#87ceeb">            add_includedirs(&#34;include&#34;)
+</span></span></span><span style="display:flex;"><span><span style="color:#87ceeb">            set_encodings(&#34;utf-8&#34;)
+</span></span></span><span style="display:flex;"><span><span style="color:#87ceeb">            add_vectorexts(&#34;all&#34;)
+</span></span></span><span style="display:flex;"><span><span style="color:#87ceeb">
+</span></span></span><span style="display:flex;"><span><span style="color:#87ceeb">            target(&#34;re-flex&#34;)
+</span></span></span><span style="display:flex;"><span><span style="color:#87ceeb">                set_kind(&#34;$(kind)&#34;)
+</span></span></span><span style="display:flex;"><span><span style="color:#87ceeb">                add_headerfiles(&#34;include/reflex/*.h&#34;, {prefixdir = &#34;reflex&#34;})
+</span></span></span><span style="display:flex;"><span><span style="color:#87ceeb">                add_files(&#34;lib/*.cpp&#34;)
+</span></span></span><span style="display:flex;"><span><span style="color:#87ceeb">                add_files(&#34;unicode/*.cpp&#34;)
+</span></span></span><span style="display:flex;"><span><span style="color:#87ceeb">                if is_plat(&#34;windows&#34;) and is_kind(&#34;shared&#34;) then
+</span></span></span><span style="display:flex;"><span><span style="color:#87ceeb">                    add_rules(&#34;utils.symbols.export_all&#34;, {export_classes = true})
+</span></span></span><span style="display:flex;"><span><span style="color:#87ceeb">                end
+</span></span></span><span style="display:flex;"><span><span style="color:#87ceeb">
+</span></span></span><span style="display:flex;"><span><span style="color:#87ceeb">            target(&#34;reflex&#34;)
+</span></span></span><span style="display:flex;"><span><span style="color:#87ceeb">                set_kind(&#34;binary&#34;)
+</span></span></span><span style="display:flex;"><span><span style="color:#87ceeb">                add_files(&#34;src/*.cpp&#34;)
+</span></span></span><span style="display:flex;"><span><span style="color:#87ceeb">                add_deps(&#34;re-flex&#34;)
+</span></span></span><span style="display:flex;"><span><span style="color:#87ceeb">        ]]</span>)
+</span></span><span style="display:flex;"><span>        import(<span style="color:#87ceeb">&#34;package.tools.xmake&#34;</span>).install(package, configs)
+</span></span><span style="display:flex;"><span>        package:addenv(<span style="color:#87ceeb">&#34;PATH&#34;</span>, <span style="color:#87ceeb">&#34;bin&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#f00">end</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    on_test(<span style="color:#f00">function</span> (package)
+</span></span><span style="display:flex;"><span>        assert(package:check_cxxsnippets({test = <span style="color:#87ceeb">[[
+</span></span></span><span style="display:flex;"><span><span style="color:#87ceeb">            #include &lt;reflex/matcher.h&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#87ceeb">            void test() {
+</span></span></span><span style="display:flex;"><span><span style="color:#87ceeb">                reflex::Matcher matcher(&#34;\w+&#34;,&#34;114 514 1919 810&#34;);
+</span></span></span><span style="display:flex;"><span><span style="color:#87ceeb">            }
+</span></span></span><span style="display:flex;"><span><span style="color:#87ceeb">        ]]</span>}, {configs = {languages = <span style="color:#87ceeb">&#34;cxx11&#34;</span>}}))
+</span></span><span style="display:flex;"><span>    <span style="color:#f00">end</span>)
 </span></span></code></pre></div>
 </article>
 

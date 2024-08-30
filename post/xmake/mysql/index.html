@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="zh-cn"><head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+   <meta name="description" content="前言 本文基于 mysql-8.0.39 (git tag) 版本。
+部署 随手写下包描述。
+package(&#34;mysql&#34;) set_homepage(&#34;http://www.mysql.com&#34;) set_description(&#34;A real-time, open source transactional database.&#34;) set_license(&#34;GPL-2.0&#34;) -- add_urls(&#34;https://github.com/mysql/mysql-server/archive/refs/tags/mysql-$(version).tar.gz&#34;) -- add_versions(&#34;8.0.39&#34;, &#34;3a72e6af758236374764b7a1d682f7ab94c70ed0d00bf0cb0f7dd728352b6d96&#34;) set_sourcedir([[A:\tmp\repo\mysql]]) add_deps(&#34;cmake&#34;) on_install(function (package) local configs = {} table.insert(configs, &#34;-DCMAKE_BUILD_TYPE=&#34; .. (package:is_debug() and &#34;Debug&#34; or &#34;Release&#34;)) table.insert(configs, &#34;-DBUILD_SHARED_LIBS=&#34; .. (package:config(&#34;shared&#34;) and &#34;ON&#34; or &#34;OFF&#34;)) import(&#34;package.tools.cmake&#34;).install(package, configs) end) 为什么还自己下源码？主要是方便修改 cmake，毕竟大型库一行不改大概率是不可能的。
+但在国内的网络环境下，直接 git clone https://github.com/mysql/mysql-server.git 必定 clone 失败，没得玩。
+那只能手动挡了，自己下载 https://github.com/mysql/mysql-server/archive/refs/tags/mysql-8.0.39.tar.gz，找个地方解压，但用 7z 解压慢得要死，因为要先解压 tar 然后再解 gz。
+幸好我发现了个工具 busybox ，可以直接用 tar 命令。直接 scoop install main/busybox 安装然后 tar -xf mysql-8.">  
+
+  <title>
+    
+      MySQL 编译（打包）
+    
+  </title>
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/" />
+  
+  
+  
+  <link rel="stylesheet" href="/css/main.c5af9bae99b4a3d315b9f39305ffff27e9c3383fbbfd8b5fcaf2237667021a333a982fb958d1813a720b0a660b14022337553ae1ca93ef2ee17c4ae628ac19cb.css" integrity="sha512-xa&#43;brpm0o9MVufOTBf//J&#43;nDOD&#43;7/YtfyvIjdmcCGjM6mC&#43;5WNGBOnILCmYLFAIjN1U64cqT7y7hfErmKKwZyw==" />
+  
+</head>
+<body a="auto">
+        <main class="page-content" aria-label="Content">
+            <div class="w">
+<a href="/">back</a>
+
+
+<article>
+    <p class="post-meta">
+        <time datetime="2024-08-29 00:00:00 &#43;0000 UTC">
+            2024-08-29
+        </time>
+    </p>
+
+    <h1>MySQL 编译（打包）</h1>
+
+    
+
+    <h2 id="前言">前言</h2>
+<p>本文基于 mysql-8.0.39 (git tag) 版本。</p>
+<h2 id="部署">部署</h2>
+<p>随手写下包描述。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lua" data-lang="lua"><span style="display:flex;"><span>package(<span style="color:#87ceeb">&#34;mysql&#34;</span>)
+</span></span><span style="display:flex;"><span>    set_homepage(<span style="color:#87ceeb">&#34;http://www.mysql.com&#34;</span>)
+</span></span><span style="display:flex;"><span>    set_description(<span style="color:#87ceeb">&#34;A real-time, open source transactional database.&#34;</span>)
+</span></span><span style="display:flex;"><span>    set_license(<span style="color:#87ceeb">&#34;GPL-2.0&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0f0">-- add_urls(&#34;https://github.com/mysql/mysql-server/archive/refs/tags/mysql-$(version).tar.gz&#34;)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0f0">-- add_versions(&#34;8.0.39&#34;, &#34;3a72e6af758236374764b7a1d682f7ab94c70ed0d00bf0cb0f7dd728352b6d96&#34;)</span>
+</span></span><span style="display:flex;"><span>    set_sourcedir(<span style="color:#87ceeb">[[A:\tmp\repo\mysql]]</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    add_deps(<span style="color:#87ceeb">&#34;cmake&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    on_install(<span style="color:#f00">function</span> (package)
+</span></span><span style="display:flex;"><span>        <span style="color:#f00">local</span> configs = {}
+</span></span><span style="display:flex;"><span>        table.insert(configs, <span style="color:#87ceeb">&#34;-DCMAKE_BUILD_TYPE=&#34;</span> .. (package:is_debug() and <span style="color:#87ceeb">&#34;Debug&#34;</span> or <span style="color:#87ceeb">&#34;Release&#34;</span>))
+</span></span><span style="display:flex;"><span>        table.insert(configs, <span style="color:#87ceeb">&#34;-DBUILD_SHARED_LIBS=&#34;</span> .. (package:config(<span style="color:#87ceeb">&#34;shared&#34;</span>) and <span style="color:#87ceeb">&#34;ON&#34;</span> or <span style="color:#87ceeb">&#34;OFF&#34;</span>))
+</span></span><span style="display:flex;"><span>        import(<span style="color:#87ceeb">&#34;package.tools.cmake&#34;</span>).install(package, configs)
+</span></span><span style="display:flex;"><span>    <span style="color:#f00">end</span>)
+</span></span></code></pre></div><p>为什么还自己下源码？主要是方便修改 cmake，毕竟大型库一行不改大概率是不可能的。</p>
+<p>但在国内的网络环境下，直接 <code>git clone https://github.com/mysql/mysql-server.git</code> 必定 clone 失败，没得玩。</p>
+<p>那只能手动挡了，自己下载 <code>https://github.com/mysql/mysql-server/archive/refs/tags/mysql-8.0.39.tar.gz</code>，找个地方解压，但用 7z 解压慢得要死，因为要先解压 tar 然后再解 gz。</p>
+<p>幸好我发现了个工具 busybox ，可以直接用 tar 命令。直接 <code>scoop install main/busybox</code> 安装然后 <code>tar -xf mysql-8.0.39.tar.gz</code>，完美。</p>
+<blockquote>
+<p>xmake 也许以后也会支持这个工具：https://github.com/xmake-io/xmake/issues/5538</p>
+</blockquote>
+<p>不过为了导出 patch，我们还需要给这个源码目录配个 .git 。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>$ git init
+</span></span><span style="display:flex;"><span>$ git add .
+</span></span><span style="display:flex;"><span>$ git commit -m <span style="color:#87ceeb">&#34;init&#34;</span>
+</span></span></code></pre></div><p>A Few Moments Later.</p>
+<p>好慢啊，毕竟大型项目的目录和文件是数不清的。</p>
+<p>最终询问群友，学到了 git 新的操作：partial clone。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>$ git clone --filter=tree:0 --no-checkout https://github.com/mysql/mysql-server.git mysql
+</span></span><span style="display:flex;"><span>$ cd mysql
+</span></span><span style="display:flex;"><span>$ git checkout mysql-8.0.39
+</span></span></code></pre></div><p>这是 <code>depth 1</code> 的加强版，我们可以只 clone tag/branch 等信息，文件和目录一个都不下载，然后只有 checkout 的时候才真正向服务器请求，爽。</p>
+<blockquote>
+<p>xmake 2.9.5 版本支持 <a href="https://github.com/xmake-io/xmake/issues/5507">treeless</a>，git clone 第三方库用到的时候，可以达到 &ldquo;按需&rdquo; 下载。</p>
+</blockquote>
+<h2 id="级联依赖">级联依赖</h2>
+<p>先直接执行 xmake 的包本地测试看看最有啥信息。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>$ xmake l scripts<span style="color:#87ceeb">\t</span>est.lua --shallow -vD mysql
+</span></span></code></pre></div><p>迎面而来的是一个大报错。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-console" data-lang="console"><span style="display:flex;"><span>-- Looked for boost/version.hpp in  and
+</span></span><span style="display:flex;"><span>-- BOOST_INCLUDE_DIR BOOST_INCLUDE_DIR-NOTFOUND
+</span></span><span style="display:flex;"><span>-- LOCAL_BOOST_DIR
+</span></span><span style="display:flex;"><span>-- LOCAL_BOOST_ZIP
+</span></span><span style="display:flex;"><span>-- Could not find (the correct version of) boost.
+</span></span><span style="display:flex;"><span>-- MySQL currently requires boost_1_77_0
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>CMake Error at cmake/boost.cmake:109 (MESSAGE):
+</span></span><span style="display:flex;"><span>  You can download it with -DDOWNLOAD_BOOST=1 -DWITH_BOOST=&lt;directory&gt;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  This CMake script will look for boost in &lt;directory&gt;.  If it is not there,
+</span></span><span style="display:flex;"><span>  it will download and unpack it (in that directory) for you.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  You can also download boost manually, from
+</span></span><span style="display:flex;"><span>  https://archives.boost.io/release/1.77.0/source/boost_1_77_0.tar.bz2
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  If you are inside a firewall, you may need to use an https proxy:
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  export https_proxy=http://example.com:80
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Call Stack (most recent call first):
+</span></span><span style="display:flex;"><span>  cmake/boost.cmake:278 (COULD_NOT_FIND_BOOST)
+</span></span><span style="display:flex;"><span>  CMakeLists.txt:1564 (INCLUDE)
+</span></span></code></pre></div><p>好吧先用 <code>add_deps(&quot;boost&quot;)</code> 配置一下。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-console" data-lang="console"><span style="display:flex;"><span>-- BOOST_INCLUDE_DIR C:/Users/star/AppData/Local/.xmake/packages/b/boost/1.86.0/f1b18bc4ca114f2c9ac8606d97867946/include
+</span></span><span style="display:flex;"><span>-- LOCAL_BOOST_DIR
+</span></span><span style="display:flex;"><span>-- LOCAL_BOOST_ZIP
+</span></span><span style="display:flex;"><span>-- Could not find (the correct version of) boost.
+</span></span><span style="display:flex;"><span>-- MySQL currently requires boost_1_77_0
+</span></span></code></pre></div><p>怒了，强制要求 <code>boost 1.77</code> ，但 xrepo 默认使用最新的 boost，突然来一个指定某个版本，维护压力++。</p>
+<p>但大库很少会修改 api，估计是里面硬编码判断版本，我们把它去掉，如果因为版本影响编译，那就报错再说。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cmake" data-lang="cmake"><span style="display:flex;"><span><span style="color:#0f0"># cmake/boost.cmake:305
+</span></span></span><span style="display:flex;"><span><span style="color:#0f0"></span>
+</span></span><span style="display:flex;"><span>IF(<span style="color:#87ceeb">NOT</span> <span style="color:#87ceeb">BOOST_MINOR_VERSION</span> <span style="color:#87ceeb">EQUAL</span> <span style="color:#87ceeb">77</span>)
+</span></span><span style="display:flex;"><span>  MESSAGE(<span style="color:#87ceeb">WARNING</span> <span style="color:#87ceeb">&#34;Boost minor version found is ${BOOST_MINOR_VERSION} &#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#87ceeb">&#34;we need 77&#34;</span>
+</span></span><span style="display:flex;"><span>    )
+</span></span><span style="display:flex;"><span>  COULD_NOT_FIND_BOOST()
+</span></span><span style="display:flex;"><span>ENDIF()
+</span></span></code></pre></div><p>直接 <code>IF(NOT BOOST_MINOR_VERSION EQUAL 77)</code> -&gt; <code>IF(FALSE)</code></p>
+<p>看起来效果不错，boost 成功找到没有报错。但接下来的 log 开始信息量大了起来。</p>
+<pre tabindex="0"><code>-- ZLIB_VERSION (bundled) is 1.2.13
+-- ZLIB_INCLUDE_DIR A:/tmp/repo/mysql/extra/zlib/zlib-1.2.13
+-- Check size of off64_t
+-- Check size of off64_t - failed
+-- Looking for fseeko
+-- Looking for fseeko - not found
+-- Looking for unistd.h
+-- Looking for unistd.h - not found
+-- ZSTD_VERSION (bundled) is 1.5.5
+-- ZSTD_INCLUDE_DIR A:/tmp/repo/mysql/extra/zstd/zstd-1.5.5/lib
+-- ZSTD_LEGACY_SUPPORT not defined!
+-- OPENSSL_WIN32 OPENSSL_WIN32-NOTFOUND
+-- OPENSSL_WIN64 OPENSSL_WIN64-NOTFOUND
+-- Could NOT find OpenSSL, try to set the path to OpenSSL root folder in the system variable OPENSSL_ROOT_DIR (missing: OPENSSL_CRYPTO_LIBRARY OPENSSL_INCLUDE_DIR)
+--
+Could not find system OpenSSL
+Make sure you have specified a supported SSL version.
+Valid options are :
+openssl[0-9]+ (use alternative system library)
+yes (synonym for system)
+&lt;/path/to/custom/openssl/installation&gt;
+
+CMake Error at cmake/ssl.cmake:88 (MESSAGE):
+  Please see https://wiki.openssl.org/index.php/Binaries
+
+Call Stack (most recent call first):
+  cmake/ssl.cmake:332 (FATAL_SSL_NOT_FOUND_ERROR)
+  CMakeLists.txt:1797 (MYSQL_CHECK_SSL)
+</code></pre><p>老规矩，先 <code>add_deps(&quot;zlib&quot;, &quot;zstd&quot;, &quot;openssl&quot;)</code> 试试看。</p>
+<pre tabindex="0"><code>-- ZLIB_VERSION (bundled) is 1.2.13
+-- ZLIB_INCLUDE_DIR A:/tmp/repo/mysql/extra/zlib/zlib-1.2.13
+-- ZSTD_VERSION (bundled) is 1.5.5
+-- ZSTD_INCLUDE_DIR A:/tmp/repo/mysql/extra/zstd/zstd-1.5.5/lib
+-- ZSTD_LEGACY_SUPPORT not defined!
+</code></pre><p>huh？看来内有玄机，直接翻源码。</p>
+<p>看到行注释。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cmake" data-lang="cmake"><span style="display:flex;"><span><span style="color:#0f0"># Usage:
+</span></span></span><span style="display:flex;"><span><span style="color:#0f0">#  cmake -DWITH_ZLIB=&#34;bundled&#34;|&#34;system&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#0f0">#
+</span></span></span><span style="display:flex;"><span><span style="color:#0f0"># Default is &#34;bundled&#34;.
+</span></span></span><span style="display:flex;"><span><span style="color:#0f0"># The default should be &#34;system&#34; on non-windows platforms,
+</span></span></span><span style="display:flex;"><span><span style="color:#0f0"># but we need at least version 1.2.13, and that&#39;s not available on
+</span></span></span><span style="display:flex;"><span><span style="color:#0f0"># all the platforms we need to support.
+</span></span></span></code></pre></div><p>好，我们试试给 cmake 添加新参数。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lua" data-lang="lua"><span style="display:flex;"><span><span style="color:#f00">local</span> configs = {
+</span></span><span style="display:flex;"><span>    <span style="color:#87ceeb">&#34;-DWITH_ZLIB=system&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#87ceeb">&#34;-DWITH_ZSTD=system&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#87ceeb">&#34;-DWITH_SSL=system&#34;</span>,
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>还行，zlib/zstd 都成功找到，但 openssl 这个啥意思。</p>
+<pre tabindex="0"><code>-- Found ZLIB: C:/Users/star/AppData/Local/.xmake/packages/z/zlib/v1.3.1/95786712bac941e795afa187a68143a4/lib/zlib.lib (found version &#34;1.3.1&#34;)
+-- ZLIB_VERSION (system) is 1.3.1
+-- ZLIB_INCLUDE_DIR C:/Users/star/AppData/Local/.xmake/packages/z/zlib/v1.3.1/95786712bac941e795afa187a68143a4/include
+-- ZSTD_VERSION (system) is 1.5.6
+-- ZSTD_INCLUDE_DIR C:/Users/star/AppData/Local/.xmake/packages/z/zstd/v1.5.6/557e528272704581b94182e01c1dcd2b/include
+-- OPENSSL_WIN32 C:/Users/star/AppData/Local/.xmake/packages/o/openssl/1.1.1-w/290075b839ee412e80953472c36e007b
+-- OPENSSL_WIN64 C:/Users/star/AppData/Local/.xmake/packages/o/openssl/1.1.1-w/290075b839ee412e80953472c36e007b
+-- Found both 32bit and 64bit
+-- OPENSSL_ROOT_DIR C:/Users/star/AppData/Local/.xmake/packages/o/openssl/1.1.1-w/290075b839ee412e80953472c36e007b
+-- OPENSSL_APPLINK_C OPENSSL_APPLINK_C-NOTFOUND
+--
+Cannot find applink.c for WITH_SSL=system.
+Make sure you have specified a supported SSL version.
+</code></pre><p>不知道去掉这个有没有问题，但我们可以看一下 &ldquo;参考答案&rdquo;。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cmake" data-lang="cmake"><span style="display:flex;"><span>IF(<span style="color:#87ceeb">NOT</span> <span style="color:#87ceeb">OPENSSL_APPLINK_C</span>)
+</span></span><span style="display:flex;"><span>RESET_SSL_VARIABLES()
+</span></span><span style="display:flex;"><span>FATAL_SSL_NOT_FOUND_ERROR(
+</span></span><span style="display:flex;"><span>    <span style="color:#87ceeb">&#34;Cannot find applink.c for WITH_SSL=${WITH_SSL}.&#34;</span>)
+</span></span><span style="display:flex;"><span>ENDIF()
+</span></span></code></pre></div><p><a href="https://github.com/conan-io/conan-center-index/blob/7fdbb2410f2b8e682bfc26aee7b6a0a53ad93bed/recipes/libmysqlclient/all/conanfile.py#L163-L166">https://github.com/conan-io/conan-center-index/blob/7fdbb2410f2b8e682bfc26aee7b6a0a53ad93bed/recipes/libmysqlclient/all/conanfile.py#L163-L166</a></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>replace_in_file(self, ssl_cmake,
+</span></span><span style="display:flex;"><span>                <span style="color:#87ceeb">&#34;IF(NOT OPENSSL_APPLINK_C)</span><span style="color:#87ceeb">\n</span><span style="color:#87ceeb">&#34;</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#87ceeb">&#34;IF(FALSE AND NOT OPENSSL_APPLINK_C)</span><span style="color:#87ceeb">\n</span><span style="color:#87ceeb">&#34;</span>,
+</span></span><span style="display:flex;"><span>                strict=<span style="color:#f00">False</span>)
+</span></span></code></pre></div><p>看起来 conan 直接去掉了这个判断，既然它们 reviewer 觉得没问题，那我们也如法炮制。</p>
+<p>最后发现还有三个依赖（lz4/rapidjson/libevent），也同上做法。</p>
+<pre tabindex="0"><code>-- KERBEROS path is none, disabling kerberos support.
+-- HAVE_KRB5_KRB5_H
+-- KERBEROS_LIBRARIES
+CMake Warning at cmake/sasl.cmake:273 (MESSAGE):
+  Could not find SASL
+Call Stack (most recent call first):
+  CMakeLists.txt:1817 (MYSQL_CHECK_SASL)
+</code></pre><pre tabindex="0"><code>-- Could NOT find BISON (missing: BISON_EXECUTABLE)
+CMake Warning at cmake/bison.cmake:119 (MESSAGE):
+  No bison found!!
+Call Stack (most recent call first):
+  CMakeLists.txt:1938 (INCLUDE)
+
+
+CMake Warning at cmake/bison.cmake:120 (MESSAGE):
+  If you have bison in a non-standard location, you can do &#39;cmake
+  -DBISON_EXECUTABLE=&lt;/path/to/bison-executable&gt;
+Call Stack (most recent call first):
+  CMakeLists.txt:1938 (INCLUDE)
+
+
+-- WITH_CURL=none, not using any curl library.
+</code></pre><p>一路上去飘来了各种 warning ，看起来有一些依赖，但不是强制要求，而是可选，那就好，不是 error 那就直接无视！</p>
+<p>但最终还是报错了，而且和依赖貌似没啥关系。</p>
+<pre tabindex="0"><code>CMake Error at sql/CMakeLists.txt:1323 (MESSAGE):
+  Cannot find A:/tmp/repo/mysql/sql/sql_yacc.h
+</code></pre><h2 id="构建选项">构建选项</h2>
+<p>我陷入深思，因为直接定位到报错位置，但一点都看不懂哎。那就先逃避战术吧。</p>
+<p>sql 是子目录，看一下主 cmakelists 是怎么使用这个目录吧。</p>
+<p>开始搜索 <code>add_sub</code> ，很快就定位到这里。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cmake" data-lang="cmake"><span style="display:flex;"><span>IF(<span style="color:#87ceeb">NOT</span> <span style="color:#87ceeb">WITHOUT_SERVER</span>)
+</span></span><span style="display:flex;"><span>  ADD_SUBDIRECTORY(<span style="color:#87ceeb">testclients</span>)
+</span></span><span style="display:flex;"><span>  ADD_SUBDIRECTORY(<span style="color:#87ceeb">sql</span>)
+</span></span><span style="display:flex;"><span>ENDIF()
+</span></span></code></pre></div><p>这个信息很关键，再想一下，conan 包名叫 libmysqlclient。那么，这个选项明显是用来构建 mysql 服务器的，既然搞不定，那就强制关闭这个选项不构建！mysql server, さようなら。</p>
+<pre tabindex="0"><code>CMake Error at unittest/gunit/xplugin/CMakeLists.txt:34 (GET_DIRECTORY_PROPERTY):
+  GET_DIRECTORY_PROPERTY DIRECTORY argument provided but requested directory
+  not found.  This could be because the directory argument was invalid or, it
+  is valid but has not been processed yet.
+
+
+CMake Error at unittest/gunit/xplugin/CMakeLists.txt:39 (GET_DIRECTORY_PROPERTY):
+  GET_DIRECTORY_PROPERTY DIRECTORY argument provided but requested directory
+  not found.  This could be because the directory argument was invalid or, it
+  is valid but has not been processed yet.
+
+
+CMake Error at unittest/gunit/xplugin/xpl/CMakeLists.txt:25 (GET_DIRECTORY_PROPERTY):
+  GET_DIRECTORY_PROPERTY DIRECTORY argument provided but requested directory
+  not found.  This could be because the directory argument was invalid or, it
+  is valid but has not been processed yet.
+
+
+CMake Error at unittest/gunit/xplugin/xcl/CMakeLists.txt:25 (GET_DIRECTORY_PROPERTY):
+  GET_DIRECTORY_PROPERTY DIRECTORY argument provided but requested directory
+  not found.  This could be because the directory argument was invalid or, it
+  is valid but has not been processed yet.
+
+
+CMake Error at unittest/gunit/xplugin/xcl/CMakeLists.txt:30 (GET_DIRECTORY_PROPERTY):
+  GET_DIRECTORY_PROPERTY DIRECTORY argument provided but requested directory
+  not found.  This could be because the directory argument was invalid or, it
+  is valid but has not been processed yet.
+</code></pre><p>好吧，我忘记了打包的第一件事，先搜一下哪里有选项控制关闭<strong>测试</strong>/<strong>例子</strong>/<strong>文档</strong>的构建。</p>
+<pre tabindex="0"><code>ninja install -C build -v -j 18
+[1/494] C:\PROGRA~1\MICROS~2\2022\COMMUN~1\VC\Tools\MSVC\1441~1.341\bin\Hostx64\x64\cl.exe
+</code></pre><p>ninja ，启动！好吧终于到这一步，看看能不能完整编译到最后吧。</p>
+<pre tabindex="0"><code>{
+  sysincludedirs = {
+    &#34;prefix\include&#34;
+  },
+  libfiles = {
+    &#34;prefix\lib\libmysql.lib&#34;,
+    &#34;prefix\lib\mysqlclient.lib&#34;,
+    &#34;prefix\lib\libmysql.dll&#34;
+  },
+  license = &#34;GPL-2.0&#34;,
+  shared = true,
+  links = {
+    &#34;libmysql&#34;,
+    &#34;mysqlclient&#34;
+  },
+  static = true,
+  version = &#34;latest&#34;,
+  linkdirs = {
+    &#34;prefix\lib&#34;
+  }
+}
+</code></pre><p>很好，成功编译了，但为啥 build type 是静态，却有个 dll。</p>
+<p>没关系，继续去 conan 抄作业。</p>
+<p><a href="https://github.com/conan-io/conan-center-index/blob/7fdbb2410f2b8e682bfc26aee7b6a0a53ad93bed/recipes/libmysqlclient/all/conanfile.py#L273">https://github.com/conan-io/conan-center-index/blob/7fdbb2410f2b8e682bfc26aee7b6a0a53ad93bed/recipes/libmysqlclient/all/conanfile.py#L273</a></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>self.cpp_info.libs = [<span style="color:#87ceeb">&#34;libmysql&#34;</span> <span style="color:#f00">if</span> self.settings.os == <span style="color:#87ceeb">&#34;Windows&#34;</span> and self.options.shared <span style="color:#f00">else</span> <span style="color:#87ceeb">&#34;mysqlclient&#34;</span>]
+</span></span></code></pre></div><p>改成 xmake 写法。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lua" data-lang="lua"><span style="display:flex;"><span><span style="color:#f00">if</span> package:is_plat(<span style="color:#87ceeb">&#34;windows&#34;</span>) <span style="color:#f00">then</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f00">if</span> package:config(<span style="color:#87ceeb">&#34;shared&#34;</span>) <span style="color:#f00">then</span>
+</span></span><span style="display:flex;"><span>        os.tryrm(package:installdir(<span style="color:#87ceeb">&#34;lib/mysqlclient.lib&#34;</span>))
+</span></span><span style="display:flex;"><span>        os.trymv(package:installdir(<span style="color:#87ceeb">&#34;lib/libmysql.dll&#34;</span>), package:installdir(<span style="color:#87ceeb">&#34;bin&#34;</span>))
+</span></span><span style="display:flex;"><span>    <span style="color:#f00">else</span>
+</span></span><span style="display:flex;"><span>        os.tryrm(package:installdir(<span style="color:#87ceeb">&#34;lib/libmysql.lib&#34;</span>))
+</span></span><span style="display:flex;"><span>        os.tryrm(package:installdir(<span style="color:#87ceeb">&#34;lib/libmysql.dll&#34;</span>))
+</span></span><span style="display:flex;"><span>    <span style="color:#f00">end</span>
+</span></span><span style="display:flex;"><span><span style="color:#f00">else</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f00">if</span> package:config(<span style="color:#87ceeb">&#34;shared&#34;</span>) <span style="color:#f00">then</span>
+</span></span><span style="display:flex;"><span>        os.tryrm(package:installdir(<span style="color:#87ceeb">&#34;lib/*.a&#34;</span>))
+</span></span><span style="display:flex;"><span>    <span style="color:#f00">else</span>
+</span></span><span style="display:flex;"><span>        os.tryrm(package:installdir(<span style="color:#87ceeb">&#34;lib/*.so*&#34;</span>))
+</span></span><span style="display:flex;"><span>    <span style="color:#f00">end</span>
+</span></span><span style="display:flex;"><span><span style="color:#f00">end</span>
+</span></span></code></pre></div><h2 id="linux">Linux</h2>
+<p>目前只是 Windows 构建成功，其他平台，ci 见分晓。虽然大概率是失败的。</p>
+<pre tabindex="0"><code>CMake Error at cmake/readline.cmake:93 (MESSAGE):
+  Curses library not found.  Please install appropriate package,
+
+      remove CMakeCache.txt and rerun cmake.On Debian/Ubuntu, package name is libncurses5-dev, on Redhat and derivates it is ncurses-devel.
+Call Stack (most recent call first):
+  cmake/readline.cmake:127 (FIND_CURSES)
+  cmake/readline.cmake:221 (MYSQL_USE_BUNDLED_EDITLINE)
+  CMakeLists.txt:1904 (MYSQL_CHECK_EDITLINE)
+</code></pre><p>果不其然。。而且只有一些 linux ci 报错，部分是成功的，猜测找到了 ci 上的系统库。</p>
+<p>根据报错信息，翻一下 cmake。</p>
+<p>看来 linux 下 libedit 库和它的级联依赖 ncurses ，但目录树内置了 editline 源码却没有 ncurses，搞心态这不是。</p>
+<p>好吧继续 <code>add_deps(&quot;libedit&quot;, {configs = {terminal_db = &quot;ncurses&quot;}})</code></p>
+<p>但恶心的是，报错依旧。</p>
+<pre tabindex="0"><code>-- Could NOT find Curses (missing: CURSES_LIBRARY CURSES_INCLUDE_PATH) 
+</code></pre><p>我又陷入了沉思。这波思考了很久，明明有 find_package 命令为啥找不到呢。最我去翻了 cmake FindCurses 文档和源码，看完后，我理解了一切！</p>
+<p>首先观察 pacman 的 <a href="https://archlinux.org/packages/core/x86_64/ncurses">ncurse</a> 包信息，可以看到。</p>
+<pre tabindex="0"><code>libc.so.6
+libformw.so.6
+libgcc_s.so.1
+libmenuw.so.6
+libncursesw.so.6
+libpanelw.so.6
+libstdc++.so.6
+</code></pre><p>ncurses 相关的库有 w 结尾。</p>
+<p>然后看 xrepo 里 ncurses 的包描述。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lua" data-lang="lua"><span style="display:flex;"><span>add_configs(<span style="color:#87ceeb">&#34;widec&#34;</span>, {description = <span style="color:#87ceeb">&#34;Compile with wide-char/UTF-8 code.&#34;</span>, default = <span style="color:#f00">true</span>, type = <span style="color:#87ceeb">&#34;boolean&#34;</span>})
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>on_load(<span style="color:#f00">function</span> (package)
+</span></span><span style="display:flex;"><span>    <span style="color:#f00">if</span> package:config(<span style="color:#87ceeb">&#34;widec&#34;</span>) <span style="color:#f00">then</span>
+</span></span><span style="display:flex;"><span>        package:add(<span style="color:#87ceeb">&#34;links&#34;</span>, <span style="color:#87ceeb">&#34;ncursesw&#34;</span>, <span style="color:#87ceeb">&#34;formw&#34;</span>, <span style="color:#87ceeb">&#34;panelw&#34;</span>, <span style="color:#87ceeb">&#34;menuw&#34;</span>)
+</span></span><span style="display:flex;"><span>        package:add(<span style="color:#87ceeb">&#34;includedirs&#34;</span>, <span style="color:#87ceeb">&#34;include/ncursesw&#34;</span>, <span style="color:#87ceeb">&#34;include&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#f00">else</span>
+</span></span><span style="display:flex;"><span>        package:add(<span style="color:#87ceeb">&#34;links&#34;</span>, <span style="color:#87ceeb">&#34;ncurses&#34;</span>, <span style="color:#87ceeb">&#34;form&#34;</span>, <span style="color:#87ceeb">&#34;panel&#34;</span>, <span style="color:#87ceeb">&#34;menu&#34;</span>)
+</span></span><span style="display:flex;"><span>        package:add(<span style="color:#87ceeb">&#34;includedirs&#34;</span>, <span style="color:#87ceeb">&#34;include/ncurses&#34;</span>, <span style="color:#87ceeb">&#34;include&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#f00">end</span>
+</span></span><span style="display:flex;"><span><span style="color:#f00">end</span>)
+</span></span></code></pre></div><p>这个库默认开启 unicode，所以库名结尾会不一样。</p>
+<p>而 cmake 文档有行小字。</p>
+<p><a href="https://cmake.org/cmake/help/latest/module/FindCurses.html">https://cmake.org/cmake/help/latest/module/FindCurses.html</a></p>
+<blockquote>
+<p>New in version 3.10: Set CURSES_NEED_WIDE to TRUE before the find_package(Curses) call if unicode functionality is required.</p>
+</blockquote>
+<p><a href="https://github.com/Kitware/CMake/blob/master/Modules/FindCurses.cmake">https://github.com/Kitware/CMake/blob/master/Modules/FindCurses.cmake</a></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cmake" data-lang="cmake"><span style="display:flex;"><span><span style="color:#0f0"># we don&#39;t know anything about cursesw, so only ncurses
+</span></span></span><span style="display:flex;"><span><span style="color:#0f0"># may be ncursesw
+</span></span></span><span style="display:flex;"><span><span style="color:#0f0"></span>if(<span style="color:#87ceeb">NOT</span> <span style="color:#87ceeb">CURSES_NEED_WIDE</span>)
+</span></span><span style="display:flex;"><span>  set(<span style="color:#87ceeb">NCURSES_LIBRARY_NAME</span> <span style="color:#87ceeb">&#34;ncurses&#34;</span>)
+</span></span><span style="display:flex;"><span>  set(<span style="color:#87ceeb">CURSES_FORM_LIBRARY_NAME</span> <span style="color:#87ceeb">&#34;form&#34;</span>)
+</span></span><span style="display:flex;"><span>else()
+</span></span><span style="display:flex;"><span>  set(<span style="color:#87ceeb">NCURSES_LIBRARY_NAME</span> <span style="color:#87ceeb">&#34;ncursesw&#34;</span>)
+</span></span><span style="display:flex;"><span>  set(<span style="color:#87ceeb">CURSES_FORM_LIBRARY_NAME</span> <span style="color:#87ceeb">&#34;formw&#34;</span>)
+</span></span><span style="display:flex;"><span>  <span style="color:#0f0"># Also, if we are searching for wide curses - we are actually searching
+</span></span></span><span style="display:flex;"><span><span style="color:#0f0"></span>  <span style="color:#0f0"># for ncurses, we don&#39;t know about any other unicode version.
+</span></span></span><span style="display:flex;"><span><span style="color:#0f0"></span>  set(<span style="color:#87ceeb">CURSES_NEED_NCURSES</span> <span style="color:#87ceeb">TRUE</span>)
+</span></span><span style="display:flex;"><span>endif()
+</span></span></code></pre></div><p>最后加上修改，根据 ncurses 包配置来适配 cmake。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lua" data-lang="lua"><span style="display:flex;"><span><span style="color:#f00">if</span> package:is_plat(<span style="color:#87ceeb">&#34;linux&#34;</span>) <span style="color:#f00">then</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f00">local</span> widec = package:dep(<span style="color:#87ceeb">&#34;ncurses&#34;</span>):config(<span style="color:#87ceeb">&#34;widec&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#0f0">-- From FindCurses.cmake</span>
+</span></span><span style="display:flex;"><span>    table.insert(configs, <span style="color:#87ceeb">&#34;-DCURSES_NEED_WIDE=&#34;</span> .. (widec and <span style="color:#87ceeb">&#34;ON&#34;</span> or <span style="color:#87ceeb">&#34;OFF&#34;</span>))
+</span></span><span style="display:flex;"><span>    table.insert(configs, <span style="color:#87ceeb">&#34;-DWITH_EDITLINE=system&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#f00">end</span>
+</span></span></code></pre></div><p>然而事情还没结束。。</p>
+<pre tabindex="0"><code>-- EDITLINE_INCLUDE_DIR /github/home/.xmake/packages/l/libedit/3.1/0fa7ba91e7cf4451977c4509d788cad2/include/editline
+-- EDITLINE_LIBRARY /github/home/.xmake/packages/l/libedit/3.1/0fa7ba91e7cf4451977c4509d788cad2/lib/libedit.a
+-- Performing Test EDITLINE_HAVE_HIST_ENTRY
+-- Performing Test EDITLINE_HAVE_HIST_ENTRY - Success
+-- Performing Test EDITLINE_HAVE_COMPLETION_INT
+-- Performing Test EDITLINE_HAVE_COMPLETION_INT - Failed
+-- Performing Test EDITLINE_HAVE_COMPLETION_CHAR
+-- Performing Test EDITLINE_HAVE_COMPLETION_CHAR - Failed
+-- Configuring incomplete, errors occurred!
+</code></pre><p>最头大的一集。不过老规矩，先用 <code>EDITLINE_HAVE_COMPLETION_INT</code> 定位吧。</p>
+<p>可以看到 mysql 这里用了 <code>CHECK_CXX_SOURCE_COMPILES</code> 检查我们的 editline 库有没有效。但我忘记了怎么让 cmake 输出完整的报错信息，可恶。</p>
+<p>我灵机一动，想起来 xrepo 包默认都是静态库，那把 editline 构建成 shared 试一下呢。</p>
+<p>果然成功了，和我预想中的没错。分析一下，mysql 源码里是这样写的。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cmake" data-lang="cmake"><span style="display:flex;"><span>LIST(<span style="color:#87ceeb">APPEND</span> <span style="color:#87ceeb">CMAKE_REQUIRED_LIBRARIES</span> ${<span style="color:#eedd82">EDITLINE_LIBRARY</span>})
+</span></span></code></pre></div><p>如果用静态库，可以看到 <code>EDITLINE_LIBRARY</code> 只有 <code>libedit.a</code>，缺失了它的级联依赖 ncurses ，那么编译肯定报错。</p>
+<p>如果用动态库，那么 ncurses.a 的东西已经在 libedit.so 里，所以链接成功！</p>
+<p>怎么改呢，加上 ncurses 咯。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lua" data-lang="lua"><span style="display:flex;"><span><span style="color:#f00">local</span> editline = package:dep(<span style="color:#87ceeb">&#34;libedit&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#f00">if</span> not editline:config(<span style="color:#87ceeb">&#34;shared&#34;</span>) <span style="color:#f00">then</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f00">local</span> strings = <span style="color:#87ceeb">&#34;</span><span style="color:#87ceeb">\n</span><span style="color:#87ceeb">FIND_PACKAGE(Curses)</span><span style="color:#87ceeb">\n</span><span style="color:#87ceeb">list(APPEND EDITLINE_LIBRARY ${CURSES_LIBRARIES})</span><span style="color:#87ceeb">\n</span><span style="color:#87ceeb">&#34;</span>
+</span></span><span style="display:flex;"><span>    io.replace(<span style="color:#87ceeb">&#34;cmake/readline.cmake&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#87ceeb">&#34;MARK_AS_ADVANCED(EDITLINE_INCLUDE_DIR EDITLINE_LIBRARY)&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#87ceeb">&#34;MARK_AS_ADVANCED(EDITLINE_INCLUDE_DIR EDITLINE_LIBRARY)&#34;</span> .. strings,
+</span></span><span style="display:flex;"><span>        {plain = <span style="color:#f00">true</span>})
+</span></span><span style="display:flex;"><span><span style="color:#f00">end</span>
+</span></span></code></pre></div><p>至此，macosx/linux/windows 上只构建 mysql client，ci 终于都通过了。</p>
+<blockquote>
+<p>macosx: 什么，居然没在想我的事情。</p>
+</blockquote>
+<h2 id="交叉编译">交叉编译</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>$ xmake l scripts<span style="color:#87ceeb">\t</span>est.lua --shallow -vD -a arm64 mysql
+</span></span></code></pre></div><p>当想试试不一样的东西，cmake 总是给我当头一棒。</p>
+<pre tabindex="0"><code>CMake Error at cmake/libevent.cmake:181 (MESSAGE):
+  LIBEVENT version must be at least 2.1, found unknown error.
+
+  Please use -DWITH_LIBEVENT=bundled
+Call Stack (most recent call first):
+  CMakeLists.txt:1912 (MYSQL_CHECK_LIBEVENT)
+</code></pre><p>而获取版本的手法，只能说很_</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cmake" data-lang="cmake"><span style="display:flex;"><span>  SET(<span style="color:#87ceeb">TEST_SRC</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#87ceeb">&#34;#include &lt;event.h&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#87ceeb">     #include &lt;stdio.h&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#87ceeb">    int main()
+</span></span></span><span style="display:flex;"><span><span style="color:#87ceeb">    {
+</span></span></span><span style="display:flex;"><span><span style="color:#87ceeb">      fprintf(stdout, \&#34;</span><span style="color:#87ceeb">%s\</span><span style="color:#87ceeb">&#34;, LIBEVENT_VERSION);
+</span></span></span><span style="display:flex;"><span><span style="color:#87ceeb">    }
+</span></span></span><span style="display:flex;"><span><span style="color:#87ceeb">    &#34;</span>
+</span></span><span style="display:flex;"><span>    )
+</span></span><span style="display:flex;"><span>  FILE(<span style="color:#87ceeb">WRITE</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#87ceeb">&#34;${CMAKE_BINARY_DIR}/find_libevent_version.c&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#87ceeb">&#34;${TEST_SRC}&#34;</span>
+</span></span><span style="display:flex;"><span>    )
+</span></span><span style="display:flex;"><span>  TRY_RUN(<span style="color:#87ceeb">TEST_RUN_RESULT</span> <span style="color:#87ceeb">COMPILE_TEST_RESULT</span>
+</span></span><span style="display:flex;"><span>    ${<span style="color:#eedd82">CMAKE_BINARY_DIR</span>}
+</span></span><span style="display:flex;"><span>    <span style="color:#87ceeb">&#34;${CMAKE_BINARY_DIR}/find_libevent_version.c&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#87ceeb">CMAKE_FLAGS</span> <span style="color:#87ceeb">&#34;-DINCLUDE_DIRECTORIES=${LIBEVENT_INCLUDE_DIRS}&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#87ceeb">COMPILE_OUTPUT_VARIABLE</span> <span style="color:#87ceeb">OUTPUT</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#87ceeb">RUN_OUTPUT_VARIABLE</span> <span style="color:#87ceeb">RUN_OUTPUT</span>
+</span></span><span style="display:flex;"><span>    )
+</span></span></code></pre></div><p>有 <code>TRY_RUN</code> 你还想交叉编译？</p>
+<p>无所谓，失败就失败，可以直接改 cmake 硬编码版本号上去。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lua" data-lang="lua"><span style="display:flex;"><span><span style="color:#f00">if</span> package:is_cross() <span style="color:#f00">then</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f00">local</span> libevent_version = package:dep(<span style="color:#87ceeb">&#34;libevent&#34;</span>):version()
+</span></span><span style="display:flex;"><span>    <span style="color:#f00">if</span> not libevent_version <span style="color:#f00">then</span>
+</span></span><span style="display:flex;"><span>        version = <span style="color:#87ceeb">&#34;2.1.12&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f00">end</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0f0">-- skip try_run</span>
+</span></span><span style="display:flex;"><span>    io.replace(<span style="color:#87ceeb">&#34;cmake/libevent.cmake&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#87ceeb">[[SET(LIBEVENT_VERSION_STRING &#34;${RUN_OUTPUT}&#34;)]]</span>,
+</span></span><span style="display:flex;"><span>        format(<span style="color:#87ceeb">[[SET(LIBEVENT_VERSION_STRING &#34;%s&#34;)]]</span>, libevent_version), {plain = <span style="color:#f00">true</span>})
+</span></span><span style="display:flex;"><span><span style="color:#f00">end</span>
+</span></span></code></pre></div><p>除此之外 rapidjson 库也有 <code>TRY_RUN</code> ，同上解决掉。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lua" data-lang="lua"><span style="display:flex;"><span><span style="color:#f00">if</span> package:is_cross() <span style="color:#f00">then</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0f0">-- skip try_run</span>
+</span></span><span style="display:flex;"><span>    io.replace(<span style="color:#87ceeb">&#34;cmake/rapidjson.cmake&#34;</span>, <span style="color:#87ceeb">&#34;IF (NOT HAVE_RAPIDJSON_WITH_STD_REGEX)&#34;</span>, <span style="color:#87ceeb">&#34;if(FALSE)&#34;</span>, {plain = <span style="color:#f00">true</span>})
+</span></span><span style="display:flex;"><span><span style="color:#f00">end</span>
+</span></span></code></pre></div><p>终于看到熟悉的 ninja 字眼，这代表离成功不远了，但这可是交叉编译！</p>
+<pre tabindex="0"><code>该版本的 runtime_output_directory\uca9dump.exe 与你运行的 Windows 版本不兼容。请查看计算机的系统信息，然后联系软件发布者。
+</code></pre><p>看了都头大，这种情况其他包也见过（icu），交叉编译需要 host 版本的工具做各种事情（探测/代码生成）。</p>
+<p>先判断这几种情况。</p>
+<p>Round 1: mysql 有一堆 deps 这些 tools 依赖么。如果不依赖，可以直接用 xmake 单独构建塞回给 cmake 用。</p>
+<p>Round 2: 观察源码，依赖了一部分，比如 openssl，那永远只能用 cmake 去构建这些了。换个思路，xmake 可以给单个 target 设置 host arch，其余都是 target arch，那 cmake 可不可以改呢。</p>
+<p>Round 3: 令人绝望的是，可以，但要写大量代码。</p>
+<p><a href="https://discourse.cmake.org/t/building-compile-time-tools-when-cross-compiling/601">https://discourse.cmake.org/t/building-compile-time-tools-when-cross-compiling/601</a></p>
+<p>Ben Boeckel (Kitware)ben.boeckel</p>
+<blockquote>
+<p>VTK handles it this way:</p>
+<p>Create an option which makes just the tools used on the host during a build (<a href="https://gitlab.kitware.com/vtk/vtk/blob/a5f938b2fdfefa522439065e040cb42f65d88444/CMakeLists.txt#L231">https://gitlab.kitware.com/vtk/vtk/blob/a5f938b2fdfefa522439065e040cb42f65d88444/CMakeLists.txt#L231</a> 83) and install a package with a different namespace than normal builds</p>
+<p>If cross compiling without an emulator, require that host tools package (<a href="https://gitlab.kitware.com/vtk/vtk/blob/master/CMake/vtkCrossCompiling.cmake">https://gitlab.kitware.com/vtk/vtk/blob/master/CMake/vtkCrossCompiling.cmake</a> 56)</p>
+<p>If the host tools are found, use them in the add_custom_command call (<a href="https://gitlab.kitware.com/vtk/vtk/blob/a5f938b2fdfefa522439065e040cb42f65d88444/CMake/vtkModule.cmake#L3047">https://gitlab.kitware.com/vtk/vtk/blob/a5f938b2fdfefa522439065e040cb42f65d88444/CMake/vtkModule.cmake#L3047</a> 45), using CMAKE_CROSSCOMPILING_EMULATOR if available</p>
+</blockquote>
+<p>Craig Scott</p>
+<blockquote>
+<p>Yes, I’ve used ExternalProject to mix different compilers in the one project (firmware for an embedded device that gets included in a software package for the host platform). The stackoverflow Q&amp;A I linked to mentions this is possible in its question, but was explicitly out of scope for that particular situation. For the question posted here, it could probably be made to work, but you may have a bit of fiddling to do in order to have your main build know where the build tool’s executable will be. Once you put something out into an ExternalProject, you become responsible for telling your main build where all its build artefacts are. In a true super build, you can usually do that by installing to a staging area and telling later ExternalProjects to look there in find_package(), etc. calls using CMAKE_PREFIX_PATH. Not sure this fits the use case here though.</p>
+</blockquote>
+<p>于是我决定开一个新包命名为 <code>mysql-build-tools</code>，专门用于构建 host tools 给 mysql 交叉编译用。</p>
+<p>完整的交叉编译流程变为：</p>
+<ol>
+<li>构建 boost 等依赖的 host 版本。</li>
+<li>构建 mysql-build-tools。</li>
+<li>构建 boost 等依赖的 target arch 版本。</li>
+<li>构建 mysql。</li>
+</ol>
+<p>然后根据每次构建的报错信息，总结出要构建的 host tools。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lua" data-lang="lua"><span style="display:flex;"><span><span style="color:#f00">local</span> tool_list = {
+</span></span><span style="display:flex;"><span>    <span style="color:#87ceeb">&#34;uca9dump&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#87ceeb">&#34;comp_sql&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#87ceeb">&#34;comp_err&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#87ceeb">&#34;comp_client_err&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#87ceeb">&#34;libmysql_api_test&#34;</span>,
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>mysql 会把用到的 tools 放在 <code>build/runtime_output_directory</code> 目录里。那么在 cmake 执行前，先 mkdir 然后把构建好的 host tools 拷贝进去。</p>
+<p>不愉快的是，ninja 还是把构建了这些 tools。理论上这些 host tools 不会被重新构建，因为 mtime 永远是大于源码时间的。</p>
+<p>但现代构建系统除了检测 mtime，还会生成一些 <code>.d/.dep</code> 文件来确保增量编译的稳定性。</p>
+<p>所以只能用暴力一点的方法，大范围 patch cmake，比如：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-diff" data-lang="diff"><span style="display:flex;"><span>diff --git a/strings/CMakeLists.txt b/strings/CMakeLists.txt
+</span></span><span style="display:flex;"><span>index f4cd85e786..99dbd5f811 100644
+</span></span><span style="display:flex;"><span>--- a/strings/CMakeLists.txt
+</span></span><span style="display:flex;"><span>+++ b/strings/CMakeLists.txt
+</span></span><span style="display:flex;"><span>@@ -59,7 +59,7 @@ SET(STRINGS_SOURCES
+</span></span><span style="display:flex;"><span>   xml.cc
+</span></span><span style="display:flex;"><span> )
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>-MYSQL_ADD_EXECUTABLE(uca9dump uca9-dump.cc SKIP_INSTALL)
+</span></span><span style="display:flex;"><span>+# MYSQL_ADD_EXECUTABLE(uca9dump uca9-dump.cc SKIP_INSTALL)
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span> MY_CHECK_CXX_COMPILER_WARNING(&#34;-Wmissing-profile&#34; HAS_MISSING_PROFILE)
+</span></span><span style="display:flex;"><span> IF(HAS_MISSING_PROFILE)
+</span></span><span style="display:flex;"><span>@@ -78,7 +78,7 @@ ADD_CUSTOM_COMMAND(OUTPUT ${ZH_HANS_DST_FILE}
+</span></span><span style="display:flex;"><span>                    COMMAND uca9dump ja
+</span></span><span style="display:flex;"><span>                      --in_file=${JA_HANS_SRC_FILE}
+</span></span><span style="display:flex;"><span>                      --out_file=${JA_HANS_DST_FILE}
+</span></span><span style="display:flex;"><span>-                   DEPENDS uca9dump ${ZH_HANS_SRC_FILE} ${JA_HANS_SRC_FILE}
+</span></span><span style="display:flex;"><span>+                   DEPENDS ${ZH_HANS_SRC_FILE} ${JA_HANS_SRC_FILE}
+</span></span><span style="display:flex;"><span>                   )
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span> SET_SOURCE_FILES_PROPERTIES(
+</span></span></code></pre></div><p>这里去掉了 mysql 封装的 <code>MYSQL_ADD_EXECUTABLE</code>。因为 <code>DEPENDS</code> 指定的是 target，但此时没了这个 target，也要删掉。</p>
+<p>这时可以把 <code>mysql-build-tools</code> 设置为 binary 包，这样 mysql 包 <code>add_deps(&quot;mysql-build-tools&quot;)</code> 后，xmake 会把自己编译的 tools 所在路径加入到 PATH 里，让 ninja 可以成功执行 <code>uca9dump</code> 命令。</p>
+<p>其他 tools 也同上。</p>
+<h2 id="serverwip">Server（WIP）</h2>
+
+</article>
+
+            </div>
+        </main>
+    </body>
+</html>

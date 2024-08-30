@@ -4,10 +4,17 @@
     <title>Posts on Heng Xing Blog</title>
     <link>https://star-hengxing.github.io/post/</link>
     <description>Recent content in Posts on Heng Xing Blog</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo</generator>
     <language>zh-cn</language>
     <lastBuildDate>Fri, 29 Mar 2024 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://star-hengxing.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>MySQL 编译（打包）</title>
+      <link>https://star-hengxing.github.io/post/xmake/mysql/</link>
+      <pubDate>Thu, 29 Aug 2024 00:00:00 +0000</pubDate>
+      <guid>https://star-hengxing.github.io/post/xmake/mysql/</guid>
+      <description>前言 本文基于 mysql-8.0.39 (git tag) 版本。&#xA;部署 随手写下包描述。&#xA;package(&amp;#34;mysql&amp;#34;) set_homepage(&amp;#34;http://www.mysql.com&amp;#34;) set_description(&amp;#34;A real-time, open source transactional database.&amp;#34;) set_license(&amp;#34;GPL-2.0&amp;#34;) -- add_urls(&amp;#34;https://github.com/mysql/mysql-server/archive/refs/tags/mysql-$(version).tar.gz&amp;#34;) -- add_versions(&amp;#34;8.0.39&amp;#34;, &amp;#34;3a72e6af758236374764b7a1d682f7ab94c70ed0d00bf0cb0f7dd728352b6d96&amp;#34;) set_sourcedir([[A:\tmp\repo\mysql]]) add_deps(&amp;#34;cmake&amp;#34;) on_install(function (package) local configs = {} table.insert(configs, &amp;#34;-DCMAKE_BUILD_TYPE=&amp;#34; .. (package:is_debug() and &amp;#34;Debug&amp;#34; or &amp;#34;Release&amp;#34;)) table.insert(configs, &amp;#34;-DBUILD_SHARED_LIBS=&amp;#34; .. (package:config(&amp;#34;shared&amp;#34;) and &amp;#34;ON&amp;#34; or &amp;#34;OFF&amp;#34;)) import(&amp;#34;package.tools.cmake&amp;#34;).install(package, configs) end) 为什么还自己下源码？主要是方便修改 cmake，毕竟大型库一行不改大概率是不可能的。&#xA;但在国内的网络环境下，直接 git clone https://github.com/mysql/mysql-server.git 必定 clone 失败，没得玩。&#xA;那只能手动挡了，自己下载 https://github.com/mysql/mysql-server/archive/refs/tags/mysql-8.0.39.tar.gz，找个地方解压，但用 7z 解压慢得要死，因为要先解压 tar 然后再解 gz。&#xA;幸好我发现了个工具 busybox ，可以直接用 tar 命令。直接 scoop install main/busybox 安装然后 tar -xf mysql-8.</description>
+    </item>
     <item>
       <title>漫谈 C/C&#43;&#43; 包管理</title>
       <link>https://star-hengxing.github.io/post/cpp/pm/</link>

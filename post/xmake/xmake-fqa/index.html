@@ -89,6 +89,8 @@ add_ldflags(&#34;/subsystem:console&#34;) xmake 的 qt rule 里会检测 ldflags
 </ul>
 <h3 id="指定-vs-版本">指定 vs 版本</h3>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>xmake f --vs=<span style="color:#f60">2017</span> --vs_toolset=14.0 --vs_sdkver=10.0.15063.0
+</span></span></code></pre></div><p>如果想给单个 target 指定版本：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lua" data-lang="lua"><span style="display:flex;"><span>set_toolchains(<span style="color:#87ceeb">&#34;msvc&#34;</span>, {vs_toolset = <span style="color:#87ceeb">&#34;14.29.30133&#34;</span>})
 </span></span></code></pre></div><h3 id="idevscodevs不显示头文件">IDE(vscode/vs)不显示头文件</h3>
 <p>给 target 加上<code>add_headerfiles(&quot;**.h&quot;)</code></p>
 <h3 id="终端不支持色彩输出">终端不支持色彩输出</h3>
